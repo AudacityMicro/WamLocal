@@ -1,0 +1,223 @@
+{
+  "wamVersion": "2.5.0",
+  "machine": "Pro",
+  "capturedDate": "2026-11-08",
+  "materials": [
+    {
+      "category": "Metals",
+      "name": "Aluminum - 6061",
+      "disabled": false,
+      "max": 0.95,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Metals",
+      "name": "Brass - 260",
+      "disabled": false,
+      "max": 0.818,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Metals",
+      "name": "Copper - 110",
+      "disabled": false,
+      "max": 0.564,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Metals",
+      "name": "Stainless Steel - 304",
+      "disabled": false,
+      "max": 0.493,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Metals",
+      "name": "Stainless Steel - 316",
+      "disabled": false,
+      "max": 0.444,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Metals",
+      "name": "Steel - 1018",
+      "disabled": false,
+      "max": 0.468,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Metals",
+      "name": "Steel - A2",
+      "disabled": false,
+      "max": 0.348,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Metals",
+      "name": "Steel - 1095",
+      "disabled": false,
+      "max": 0.457,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Metals",
+      "name": "Titanium - Grade 2",
+      "disabled": false,
+      "max": 0.477,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Plastics & Rubbers",
+      "name": "Acrylic - Acrylic",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Plastics & Rubbers",
+      "name": "EPDM - EPDM",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Plastics & Rubbers",
+      "name": "HDPE - HDPE",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Plastics & Rubbers",
+      "name": "Neoprene - 50A",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Plastics & Rubbers",
+      "name": "Polycarbonate - Polycarbonate",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Plastics & Rubbers",
+      "name": "Polyethylene Foam - 4lb",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Plastics & Rubbers",
+      "name": "Silicone - 50A",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Ceramics & Stone",
+      "name": "Glass - Borosilicate",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Ceramics & Stone",
+      "name": "Glass - Soda Lime",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Ceramics & Stone",
+      "name": "Granite - Granite",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Ceramics & Stone",
+      "name": "Graphite - Graphite",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Ceramics & Stone",
+      "name": "Marble - Marble",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Ceramics & Stone",
+      "name": "Tile - Ceramic",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Other",
+      "name": "Carbon Fiber - Carbon Fiber",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    },
+    {
+      "category": "Other",
+      "name": "Garolite - G-10/FR4",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in"
+    }
+  ]
+}

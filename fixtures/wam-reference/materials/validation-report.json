@@ -1,0 +1,2526 @@
+{
+  "source": "WAM workspace exports through normal browser UI",
+  "wamVersion": "2.5.0",
+  "machine": "Pro",
+  "capturedDate": "2026-11-08",
+  "materials": 24,
+  "captures": 449,
+  "training": 203,
+  "holdouts": 246,
+  "parameterValues": 4939,
+  "integrityErrors": [],
+  "outOfBedTabDefaults": [
+    {
+      "name": "Steel - 1018",
+      "thicknessIn": 0.001,
+      "tabWidthMm": 477.63
+    },
+    {
+      "name": "Neoprene - 50A",
+      "thicknessIn": 0.001,
+      "tabWidthMm": 20077.73
+    },
+    {
+      "name": "Neoprene - 50A",
+      "thicknessIn": 0.01,
+      "tabWidthMm": 594.5
+    },
+    {
+      "name": "Silicone - 50A",
+      "thicknessIn": 0.001,
+      "tabWidthMm": 798.54
+    },
+    {
+      "name": "Glass - Borosilicate",
+      "thicknessIn": 0.001,
+      "tabWidthMm": 1311.2
+    },
+    {
+      "name": "Granite - Granite",
+      "thicknessIn": 0.001,
+      "tabWidthMm": 2684341.03
+    },
+    {
+      "name": "Granite - Granite",
+      "thicknessIn": 0.01,
+      "tabWidthMm": 2255.81
+    },
+    {
+      "name": "Marble - Marble",
+      "thicknessIn": 0.001,
+      "tabWidthMm": 78870.1
+    },
+    {
+      "name": "Marble - Marble",
+      "thicknessIn": 0.01,
+      "tabWidthMm": 1735.56
+    }
+  ],
+  "profiles": [
+    {
+      "category": "Metals",
+      "name": "Aluminum - 6061",
+      "disabled": false,
+      "max": 0.95,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 24.13,
+      "captures": 20,
+      "training": 9,
+      "holdout": 11,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        0.95
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 4.72267090400419,
+          "maxRelativeError": 0.023192244267275026
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 4.194475403076069,
+          "maxRelativeError": 0.022962689855047926
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 3.6649759169274603,
+          "maxRelativeError": 0.02333294618867891
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.3696669390188898,
+          "maxRelativeError": 0.13484855492591194
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.023323564102959438,
+          "maxRelativeError": 0.017857142857142898
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Metals",
+      "name": "Brass - 260",
+      "disabled": false,
+      "max": 0.818,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 20.777199999999997,
+      "captures": 19,
+      "training": 9,
+      "holdout": 10,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.818
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 2.259685592294602,
+          "maxRelativeError": 0.015137064994781213
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 2.005389727872597,
+          "maxRelativeError": 0.015604218031940434
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 1.752212055582902,
+          "maxRelativeError": 0.01544746300513125
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 10,
+          "maxAbsoluteError": 14.93967924557279,
+          "maxRelativeError": 1.3202854781222224
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 10,
+          "maxAbsoluteError": 0.006094013660030484,
+          "maxRelativeError": 0.004387430774354875
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 10,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Metals",
+      "name": "Copper - 110",
+      "disabled": false,
+      "max": 0.564,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 14.325599999999998,
+      "captures": 17,
+      "training": 8,
+      "holdout": 9,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.564
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 1.9751217880530305,
+          "maxRelativeError": 0.01577174196341569
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 1.7580137102545734,
+          "maxRelativeError": 0.015618113507169493
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 1.541723579199413,
+          "maxRelativeError": 0.015657684502742526
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 9,
+          "maxAbsoluteError": 7.154896884249382,
+          "maxRelativeError": 1.247784739879692
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 9,
+          "maxAbsoluteError": 0.015564832601786094,
+          "maxRelativeError": 0.006947456278493953
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 9,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Metals",
+      "name": "Stainless Steel - 304",
+      "disabled": false,
+      "max": 0.493,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 12.5222,
+      "captures": 16,
+      "training": 7,
+      "holdout": 9,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.493
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 1.3349938613939116,
+          "maxRelativeError": 0.008139274410790306
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 1.1929640816824474,
+          "maxRelativeError": 0.007945359446848255
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 1.0315511331312166,
+          "maxRelativeError": 0.008101909462578542
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 9,
+          "maxAbsoluteError": 45.997756294284954,
+          "maxRelativeError": 3.9788797843898136
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 9,
+          "maxAbsoluteError": 0.007146025883975504,
+          "maxRelativeError": 0.007250186923012458
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 9,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Metals",
+      "name": "Stainless Steel - 316",
+      "disabled": false,
+      "max": 0.444,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 11.2776,
+      "captures": 16,
+      "training": 7,
+      "holdout": 9,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.444
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.288854148353522,
+          "maxRelativeError": 0.018700835105754886
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.0389332784288285,
+          "maxRelativeError": 0.018628229811577635
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 1.7769821853187295,
+          "maxRelativeError": 0.01853486812045179
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.119569627831112,
+          "maxRelativeError": 0.11754758284233534
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 9,
+          "maxAbsoluteError": 0.00758000982902271,
+          "maxRelativeError": 0.0505333988601514
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 9,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Metals",
+      "name": "Steel - 1018",
+      "disabled": false,
+      "max": 0.468,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 11.8872,
+      "captures": 16,
+      "training": 7,
+      "holdout": 9,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.468
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.240889983825838,
+          "maxRelativeError": 0.03370679778208045
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 1.9991082225105714,
+          "maxRelativeError": 0.03376964126230607
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 1.7469135558432356,
+          "maxRelativeError": 0.03385043100479929
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 9,
+          "maxAbsoluteError": 1.7705900053898915,
+          "maxRelativeError": 0.29661438983885696
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 9,
+          "maxAbsoluteError": 0.03350523327333654,
+          "maxRelativeError": 0.021730691859240224
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 9,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Metals",
+      "name": "Steel - A2",
+      "disabled": false,
+      "max": 0.348,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 8.839199999999998,
+      "captures": 13,
+      "training": 6,
+      "holdout": 7,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.348
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 7,
+          "maxAbsoluteError": 2.0853218888050122,
+          "maxRelativeError": 0.043438976158006896
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 7,
+          "maxAbsoluteError": 1.8401123575465448,
+          "maxRelativeError": 0.04324559068058594
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 7,
+          "maxAbsoluteError": 1.6155828664001604,
+          "maxRelativeError": 0.04288810386167947
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 7,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 7,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 7,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 7,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 7,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 7,
+          "maxAbsoluteError": 6.007182884428346,
+          "maxRelativeError": 0.1274912222102276
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 7,
+          "maxAbsoluteError": 0.010050591820698784,
+          "maxRelativeError": 0.0052897851687888344
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 7,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Metals",
+      "name": "Steel - 1095",
+      "disabled": false,
+      "max": 0.457,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 11.6078,
+      "captures": 16,
+      "training": 7,
+      "holdout": 9,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.457
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 1.879925096839429,
+          "maxRelativeError": 0.020717874128182736
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 1.6734273003046667,
+          "maxRelativeError": 0.021005848901799514
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 1.4693473306576124,
+          "maxRelativeError": 0.020468295043828248
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 9,
+          "maxAbsoluteError": 8.524371683653783,
+          "maxRelativeError": 1.194750799023967
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 9,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 9,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Metals",
+      "name": "Titanium - Grade 2",
+      "disabled": false,
+      "max": 0.477,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 12.115799999999998,
+      "captures": 16,
+      "training": 7,
+      "holdout": 9,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.477
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.3772250718253645,
+          "maxRelativeError": 0.026551843006536412
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.1189999713396332,
+          "maxRelativeError": 0.02652875914002194
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 1.8482749220951291,
+          "maxRelativeError": 0.026499079957499
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 5.684341886080802e-14,
+          "maxRelativeError": 9.022764898540956e-16
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 9,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 9,
+          "maxAbsoluteError": 1.0964257051522424,
+          "maxRelativeError": 0.12126466291616912
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 9,
+          "maxAbsoluteError": 0.006240825250237503,
+          "maxRelativeError": 0.0024905682238598897
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 9,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Plastics & Rubbers",
+      "name": "Acrylic - Acrylic",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 25.4,
+      "captures": 20,
+      "training": 9,
+      "holdout": 11,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 136.00329599826784,
+          "maxRelativeError": 0.12447902762110587
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 120.89307376393322,
+          "maxRelativeError": 0.12448060479409917
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 105.79285154885315,
+          "maxRelativeError": 0.12449293537091888
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.458259903568222,
+          "maxRelativeError": 0.23028135857699597
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.00715422202582261,
+          "maxRelativeError": 0.05385300560439589
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Plastics & Rubbers",
+      "name": "EPDM - EPDM",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 25.4,
+      "captures": 20,
+      "training": 9,
+      "holdout": 11,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 1.7763568394002505e-15,
+          "maxRelativeError": 1.5541179697290032e-16
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 3.552713678800501e-15,
+          "maxRelativeError": 3.4967654318902565e-16
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 3.552713678800501e-15,
+          "maxRelativeError": 3.9963033507317216e-16
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Plastics & Rubbers",
+      "name": "HDPE - HDPE",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 25.4,
+      "captures": 20,
+      "training": 9,
+      "holdout": 11,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 347.22507378397154,
+          "maxRelativeError": 0.23143709510362698
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 308.6445100301971,
+          "maxRelativeError": 0.23143709510362714
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 270.0639462764228,
+          "maxRelativeError": 0.2314370951036274
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.315775062560874,
+          "maxRelativeError": 0.29062171278145177
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.02300018688617289,
+          "maxRelativeError": 0.015384615384615398
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Plastics & Rubbers",
+      "name": "Neoprene - 50A",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 25.4,
+      "captures": 20,
+      "training": 9,
+      "holdout": 11,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 314.84204795045343,
+          "maxRelativeError": 0.20985272808801803
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 279.85833424300904,
+          "maxRelativeError": 0.20985178032619156
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 244.88030825485703,
+          "maxRelativeError": 0.20985543598839404
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 11,
+          "maxAbsoluteError": 1.43557426491701,
+          "maxRelativeError": 1.43557426491701
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.7932959840480862,
+          "maxRelativeError": 0.013990500454362603
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Plastics & Rubbers",
+      "name": "Polycarbonate - Polycarbonate",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 25.4,
+      "captures": 20,
+      "training": 9,
+      "holdout": 11,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 21.27921790241203,
+          "maxRelativeError": 0.014183308606553376
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 18.91890400414718,
+          "maxRelativeError": 0.014186340734963393
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 16.55252463532588,
+          "maxRelativeError": 0.014185041250600633
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 11,
+          "maxAbsoluteError": 9.64518965925464,
+          "maxRelativeError": 0.8938785774578324
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.013304980841794212,
+          "maxRelativeError": 0.007104320220882833
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Plastics & Rubbers",
+      "name": "Polyethylene Foam - 4lb",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 25.4,
+      "captures": 20,
+      "training": 9,
+      "holdout": 11,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 1.7763568394002505e-15,
+          "maxRelativeError": 1.5541179697290032e-16
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 3.552713678800501e-15,
+          "maxRelativeError": 3.4967654318902565e-16
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 3.552713678800501e-15,
+          "maxRelativeError": 3.9963033507317216e-16
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.005962757324711632,
+          "maxRelativeError": 0.002685926722843077
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Plastics & Rubbers",
+      "name": "Silicone - 50A",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 25.4,
+      "captures": 20,
+      "training": 9,
+      "holdout": 11,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 178.24251874929655,
+          "maxRelativeError": 0.14483490058123002
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 158.44219793901618,
+          "maxRelativeError": 0.14483892600831522
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 138.63395083655917,
+          "maxRelativeError": 0.14483582067799075
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 11,
+          "maxAbsoluteError": 33.28444858424214,
+          "maxRelativeError": 1.843853642096846
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.06752700500291375,
+          "maxRelativeError": 0.01221435236266541
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Ceramics & Stone",
+      "name": "Glass - Borosilicate",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 25.4,
+      "captures": 20,
+      "training": 9,
+      "holdout": 11,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 236.80685487904088,
+          "maxRelativeError": 0.17254441351100294
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 210.4896015665979,
+          "maxRelativeError": 0.17254094592078126
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 184.17656073726732,
+          "maxRelativeError": 0.17253881749708871
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.39938079563679807,
+          "maxRelativeError": 0.39938079563679807
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.0886379523352332,
+          "maxRelativeError": 0.03562435432883093
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Ceramics & Stone",
+      "name": "Glass - Soda Lime",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 25.4,
+      "captures": 20,
+      "training": 9,
+      "holdout": 11,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 109.71733091494048,
+          "maxRelativeError": 0.07313026122438211
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 97.52575731714433,
+          "maxRelativeError": 0.07312969204944836
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 85.33418371966059,
+          "maxRelativeError": 0.07312896025337268
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.9382064011103148,
+          "maxRelativeError": 0.9382064011103148
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.005578970724686716,
+          "maxRelativeError": 0.003806786062405733
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Ceramics & Stone",
+      "name": "Granite - Granite",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 25.4,
+      "captures": 20,
+      "training": 9,
+      "holdout": 11,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 135.43018953158162,
+          "maxRelativeError": 0.12298642322924645
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 120.3766286712563,
+          "maxRelativeError": 0.12298137417631057
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 105.33306781351371,
+          "maxRelativeError": 0.12298512243687894
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 11,
+          "maxAbsoluteError": 14.463924628687964,
+          "maxRelativeError": 0.8144101705342321
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 11,
+          "maxAbsoluteError": 1.4703166589710577,
+          "maxRelativeError": 0.6606480762555407
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Ceramics & Stone",
+      "name": "Graphite - Graphite",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 25.4,
+      "captures": 20,
+      "training": 9,
+      "holdout": 11,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 102.02202581817505,
+          "maxRelativeError": 0.07515157881343233
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 90.6816567882961,
+          "maxRelativeError": 0.07514784562015403
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 79.34650366512301,
+          "maxRelativeError": 0.07514798570384898
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.0618175819512556,
+          "maxRelativeError": 0.6118153062169898
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.03198046943348487,
+          "maxRelativeError": 0.0047846514899987655
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Ceramics & Stone",
+      "name": "Marble - Marble",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 25.4,
+      "captures": 20,
+      "training": 9,
+      "holdout": 11,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 331.15102424105726,
+          "maxRelativeError": 0.22072320485306757
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 294.35949022764817,
+          "maxRelativeError": 0.22072547257622088
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 257.5625125887335,
+          "maxRelativeError": 0.22072372318856243
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.6711216037613834,
+          "maxRelativeError": 1.3113193548967006
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.2172061494749755,
+          "maxRelativeError": 0.0075950677776963705
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Ceramics & Stone",
+      "name": "Tile - Ceramic",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 25.4,
+      "captures": 20,
+      "training": 9,
+      "holdout": 11,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 255.00382046173263,
+          "maxRelativeError": 0.16996855326383567
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 226.67167095331524,
+          "maxRelativeError": 0.16996975926313382
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 198.33228400780195,
+          "maxRelativeError": 0.16996510755660463
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.6182258484112924,
+          "maxRelativeError": 0.6182258484112924
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.005349900270637198,
+          "maxRelativeError": 0.004129410573274303
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "name": "Carbon Fiber - Carbon Fiber",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 25.4,
+      "captures": 20,
+      "training": 9,
+      "holdout": 11,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 29.196604829139915,
+          "maxRelativeError": 0.06490579959011611
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 25.9491558884788,
+          "maxRelativeError": 0.0647421904060022
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 22.707794074732192,
+          "maxRelativeError": 0.06477774418045984
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 11,
+          "maxAbsoluteError": 2.3317971346455098,
+          "maxRelativeError": 2.3317971346455098
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.010715706999848695,
+          "maxRelativeError": 0.027762884416714248
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 11,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "name": "Garolite - G-10/FR4",
+      "disabled": false,
+      "max": 1,
+      "min": 0,
+      "step": 0.001,
+      "unit": "in",
+      "maxMm": 25.4,
+      "captures": 20,
+      "training": 10,
+      "holdout": 10,
+      "thicknessesIn": [
+        0.001,
+        0.01,
+        0.023,
+        0.04,
+        0.0625,
+        0.073,
+        0.1,
+        0.125,
+        0.1875,
+        0.2,
+        0.25,
+        0.283,
+        0.35,
+        0.375,
+        0.443,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1
+      ],
+      "allThicknessParityVerified": false,
+      "interpolationBaseline": [
+        {
+          "path": "speedMode.roughRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 103.50086579078675,
+          "maxRelativeError": 0.08742070188589518
+        },
+        {
+          "path": "speedMode.mediumRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 92.00118788936129,
+          "maxRelativeError": 0.08742119165837882
+        },
+        {
+          "path": "speedMode.fineRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 80.49462766132353,
+          "maxRelativeError": 0.08741434740163713
+        },
+        {
+          "path": "speedMode.abrasiveRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "ecoMode.roughRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 4.0602442043434295e-16
+        },
+        {
+          "path": "ecoMode.mediumRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 0,
+          "maxRelativeError": 0
+        },
+        {
+          "path": "ecoMode.fineRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 2.1316282072803006e-14,
+          "maxRelativeError": 3.806478941571965e-16
+        },
+        {
+          "path": "ecoMode.abrasiveRate",
+          "comparisons": 10,
+          "maxAbsoluteError": 2.842170943040401e-14,
+          "maxRelativeError": 1.8947806286936006e-16
+        },
+        {
+          "path": "pierceTime",
+          "comparisons": 10,
+          "maxAbsoluteError": 5.2791635869505456,
+          "maxRelativeError": 0.7425419534016346
+        },
+        {
+          "path": "defaultTabWidth",
+          "comparisons": 10,
+          "maxAbsoluteError": 0.007281208852087051,
+          "maxRelativeError": 0.0037352556284288925
+        },
+        {
+          "path": "defaultLeadDist",
+          "comparisons": 10,
+          "maxAbsoluteError": 0.008306895454893715,
+          "maxRelativeError": 0.010515057537840145
+        }
+      ]
+    }
+  ]
+}

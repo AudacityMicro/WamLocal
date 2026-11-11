@@ -1,0 +1,194 @@
+[
+  {
+    "name": "Aluminum - 6061",
+    "attemptedIn": 0.951,
+    "displayedIn": 0.95,
+    "maximumIn": 0.95,
+    "rangeOverflow": false,
+    "valid": true
+  },
+  {
+    "name": "Brass - 260",
+    "attemptedIn": 0.819,
+    "displayedIn": 0.818,
+    "maximumIn": 0.818,
+    "rangeOverflow": false,
+    "valid": true
+  },
+  {
+    "name": "Copper - 110",
+    "attemptedIn": 0.565,
+    "displayedIn": 0.564,
+    "maximumIn": 0.564,
+    "rangeOverflow": false,
+    "valid": true
+  },
+  {
+    "name": "Stainless Steel - 304",
+    "attemptedIn": 0.494,
+    "displayedIn": 0.493,
+    "maximumIn": 0.493,
+    "rangeOverflow": false,
+    "valid": true
+  },
+  {
+    "name": "Stainless Steel - 316",
+    "attemptedIn": 0.445,
+    "displayedIn": 0.444,
+    "maximumIn": 0.444,
+    "rangeOverflow": false,
+    "valid": true
+  },
+  {
+    "name": "Steel - 1018",
+    "attemptedIn": 0.469,
+    "displayedIn": 0.468,
+    "maximumIn": 0.468,
+    "rangeOverflow": false,
+    "valid": true
+  },
+  {
+    "name": "Steel - A2",
+    "attemptedIn": 0.349,
+    "displayedIn": 0.348,
+    "maximumIn": 0.348,
+    "rangeOverflow": false,
+    "valid": true
+  },
+  {
+    "name": "Steel - 1095",
+    "attemptedIn": 0.458,
+    "displayedIn": 0.457,
+    "maximumIn": 0.457,
+    "rangeOverflow": false,
+    "valid": true
+  },
+  {
+    "name": "Titanium - Grade 2",
+    "attemptedIn": 0.478,
+    "displayedIn": 0.477,
+    "maximumIn": 0.477,
+    "rangeOverflow": false,
+    "valid": true
+  },
+  {
+    "name": "Acrylic - Acrylic",
+    "attemptedIn": 1.001,
+    "displayedIn": 1,
+    "maximumIn": 1,
+    "rangeOverflow": false,
+    "valid": true
+  },
+  {
+    "name": "EPDM - EPDM",
+    "attemptedIn": 1.001,
+    "displayedIn": 1.001,
+    "maximumIn": 1,
+    "rangeOverflow": true,
+    "valid": false
+  },
+  {
+    "name": "HDPE - HDPE",
+    "attemptedIn": 1.001,
+    "displayedIn": 1.001,
+    "maximumIn": 1,
+    "rangeOverflow": true,
+    "valid": false
+  },
+  {
+    "name": "Neoprene - 50A",
+    "attemptedIn": 1.001,
+    "displayedIn": 1.001,
+    "maximumIn": 1,
+    "rangeOverflow": true,
+    "valid": false
+  },
+  {
+    "name": "Polycarbonate - Polycarbonate",
+    "attemptedIn": 1.001,
+    "displayedIn": 1.001,
+    "maximumIn": 1,
+    "rangeOverflow": true,
+    "valid": false
+  },
+  {
+    "name": "Polyethylene Foam - 4lb",
+    "attemptedIn": 1.001,
+    "displayedIn": 1.001,
+    "maximumIn": 1,
+    "rangeOverflow": true,
+    "valid": false
+  },
+  {
+    "name": "Silicone - 50A",
+    "attemptedIn": 1.001,
+    "displayedIn": 1.001,
+    "maximumIn": 1,
+    "rangeOverflow": true,
+    "valid": false
+  },
+  {
+    "name": "Glass - Borosilicate",
+    "attemptedIn": 1.001,
+    "displayedIn": 1.001,
+    "maximumIn": 1,
+    "rangeOverflow": true,
+    "valid": false
+  },
+  {
+    "name": "Glass - Soda Lime",
+    "attemptedIn": 1.001,
+    "displayedIn": 1.001,
+    "maximumIn": 1,
+    "rangeOverflow": true,
+    "valid": false
+  },
+  {
+    "name": "Granite - Granite",
+    "attemptedIn": 1.001,
+    "displayedIn": 1.001,
+    "maximumIn": 1,
+    "rangeOverflow": true,
+    "valid": false
+  },
+  {
+    "name": "Graphite - Graphite",
+    "attemptedIn": 1.001,
+    "displayedIn": 1.001,
+    "maximumIn": 1,
+    "rangeOverflow": true,
+    "valid": false
+  },
+  {
+    "name": "Marble - Marble",
+    "attemptedIn": 1.001,
+    "displayedIn": 1.001,
+    "maximumIn": 1,
+    "rangeOverflow": true,
+    "valid": false
+  },
+  {
+    "name": "Tile - Ceramic",
+    "attemptedIn": 1.001,
+    "displayedIn": 1.001,
+    "maximumIn": 1,
+    "rangeOverflow": true,
+    "valid": false
+  },
+  {
+    "name": "Carbon Fiber - Carbon Fiber",
+    "attemptedIn": 1.001,
+    "displayedIn": 1.001,
+    "maximumIn": 1,
+    "rangeOverflow": true,
+    "valid": false
+  },
+  {
+    "name": "Garolite - G-10/FR4",
+    "attemptedIn": 1.001,
+    "displayedIn": 1.001,
+    "maximumIn": 1,
+    "rangeOverflow": true,
+    "valid": false
+  }
+]

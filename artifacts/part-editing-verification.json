@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-10",
+  "environment": "Packaged Windows Electron app, isolated temporary user profile",
+  "executable": "release/part-editing/win-unpacked/Wam Local.exe",
+  "automatedTestsPreviouslyPassed": 79,
+  "checks": {
+    "copyButton": "passed: Part copied status",
+    "pasteButton": "passed: 4 to 5 parts, copied plate with holes, position 30/32 to 38/40 mm",
+    "repeatPaste": "passed: 5 to 6 parts, position 46/48 mm",
+    "undoPaste": "passed: 6 to 5 parts",
+    "doubleClickControls": "passed: four rotation handles, Duplicate and Delete buttons",
+    "mouseRotation": "passed: drag changed rotation from 0 to 44.59 degrees",
+    "onPartDuplicate": "passed: 5 to 6 parts, preserved rotated geometry",
+    "onPartDelete": "passed: removed duplicate, 6 to 5 parts"
+  },
+  "notes": [
+    "Initial accessible-element clicks on SVG foreignObject buttons missed their visual targets; clicks at the observed button coordinates worked.",
+    "Shift snapping, text-field clipboard behavior, rotation undo and payload validation were covered by earlier preview or automated checks, not repeated in this Windows pass."
+  ],
+  "screenshot": "part-editing-windows.png"
+}
