@@ -1,0 +1,8 @@
+node_modules/
+dist/
+dist-mcp/
+dist-electron/
+release/
+projects/
+*.log
+.DS_Store
