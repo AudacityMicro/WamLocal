@@ -1,0 +1,7635 @@
+[
+  {
+    "id": "pro-9-0.001",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 32.86,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-9-0.01",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 4.98,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-9-0.023",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.35,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-9-0.04",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.42,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-9-0.0625",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 1092.58,
+      "medium": 971.1799999999998,
+      "fine": 849.79
+    },
+    "pierce": 1.99,
+    "abrasive": 150,
+    "tabWidth": 0.96,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-9-0.073",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 898.15,
+      "medium": 798.3499999999999,
+      "fine": 698.56
+    },
+    "pierce": 2.05,
+    "abrasive": 150,
+    "tabWidth": 0.84,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-9-0.1",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 595.49,
+      "medium": 529.3199999999999,
+      "fine": 463.15
+    },
+    "pierce": 2.4,
+    "abrasive": 150,
+    "tabWidth": 0.63,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-9-0.125",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 446.41,
+      "medium": 396.80999999999995,
+      "fine": 347.21
+    },
+    "pierce": 2.96,
+    "abrasive": 150,
+    "tabWidth": 0.52,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-9-0.1875",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 262.36999999999995,
+      "medium": 233.22,
+      "fine": 204.06000000000003
+    },
+    "pierce": 5.4,
+    "abrasive": 150,
+    "tabWidth": 0.36,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-9-0.2",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 240.85999999999999,
+      "medium": 214.1,
+      "fine": 187.33000000000004
+    },
+    "pierce": 6.07,
+    "abrasive": 150,
+    "tabWidth": 0.34,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-9-0.25",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 179.39,
+      "medium": 159.46000000000004,
+      "fine": 139.52
+    },
+    "pierce": 9.3,
+    "abrasive": 150,
+    "tabWidth": 0.28,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-9-0.283",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 152.09,
+      "medium": 135.19,
+      "fine": 118.29
+    },
+    "pierce": 11.94,
+    "abrasive": 150,
+    "tabWidth": 0.25,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-9-0.35",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 114.44,
+      "medium": 101.73,
+      "fine": 89.01
+    },
+    "pierce": 18.55,
+    "abrasive": 150,
+    "tabWidth": 0.21,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-9-0.375",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 104.34,
+      "medium": 92.74000000000001,
+      "fine": 81.15000000000002
+    },
+    "pierce": 21.42,
+    "abrasive": 150,
+    "tabWidth": 0.2,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-9-0.443",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 83.12,
+      "medium": 73.89,
+      "fine": 64.65
+    },
+    "pierce": 30.48,
+    "abrasive": 150,
+    "tabWidth": 0.17,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-9-0.5",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 70.34,
+      "medium": 62.52000000000002,
+      "fine": 54.7
+    },
+    "pierce": 39.4,
+    "abrasive": 150,
+    "tabWidth": 0.15,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-9-0.625",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 51.41,
+      "medium": 45.7,
+      "fine": 39.98
+    },
+    "pierce": 63.23,
+    "abrasive": 150,
+    "tabWidth": 0.12,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-9-0.75",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 39.55,
+      "medium": 35.150000000000006,
+      "fine": 30.76
+    },
+    "pierce": 92.79,
+    "abrasive": 150,
+    "tabWidth": 0.11,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-9-0.875",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 31.46,
+      "medium": 27.97,
+      "fine": 24.469999999999995
+    },
+    "pierce": 128.15,
+    "abrasive": 150,
+    "tabWidth": 0.09,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-9-1",
+    "machine": "pro",
+    "name": "Acrylic - Acrylic",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 1,
+    "thicknessMm": 25.4,
+    "feeds": {
+      "coarse": 25.64,
+      "medium": 22.790000000000003,
+      "fine": 19.94
+    },
+    "pierce": 169.44,
+    "abrasive": 150,
+    "tabWidth": 0.08,
+    "lead": 1.37
+  },
+  {
+    "id": "pro-0-0.001",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 178.13,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-0-0.01",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 1033.4199999999998,
+      "medium": 918.59,
+      "fine": 803.77
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 18.82,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-0-0.023",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 548.67,
+      "medium": 487.69999999999993,
+      "fine": 426.74
+    },
+    "pierce": 1.23,
+    "abrasive": 150,
+    "tabWidth": 7.71,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-0-0.04",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 355.12,
+      "medium": 315.6600000000001,
+      "fine": 276.21
+    },
+    "pierce": 1.56,
+    "abrasive": 150,
+    "tabWidth": 4.24,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-0-0.0625",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 249.85,
+      "medium": 222.09,
+      "fine": 194.32999999999998
+    },
+    "pierce": 2.45,
+    "abrasive": 150,
+    "tabWidth": 2.65,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-0-0.073",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 221.03,
+      "medium": 196.47000000000003,
+      "fine": 171.91
+    },
+    "pierce": 3.03,
+    "abrasive": 150,
+    "tabWidth": 2.26,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-0-0.1",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 170.04999999999998,
+      "medium": 151.15000000000003,
+      "fine": 132.26000000000002
+    },
+    "pierce": 5.11,
+    "abrasive": 150,
+    "tabWidth": 1.61,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-0-0.125",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 140.76999999999998,
+      "medium": 125.12999999999998,
+      "fine": 109.49000000000001
+    },
+    "pierce": 7.69,
+    "abrasive": 150,
+    "tabWidth": 1.27,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-0-0.1875",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 97.89999999999999,
+      "medium": 87.02000000000001,
+      "fine": 76.15
+    },
+    "pierce": 17.08,
+    "abrasive": 150,
+    "tabWidth": 0.83,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-0-0.2",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 92.14,
+      "medium": 81.89999999999999,
+      "fine": 71.67
+    },
+    "pierce": 19.47,
+    "abrasive": 150,
+    "tabWidth": 0.77,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-0-0.25",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 74.32,
+      "medium": 66.06000000000002,
+      "fine": 57.809999999999995
+    },
+    "pierce": 30.6,
+    "abrasive": 150,
+    "tabWidth": 0.61,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-0-0.283",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 65.58,
+      "medium": 58.3,
+      "fine": 51.01
+    },
+    "pierce": 39.41,
+    "abrasive": 150,
+    "tabWidth": 0.54,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-0-0.35",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 52.36,
+      "medium": 46.54,
+      "fine": 40.73
+    },
+    "pierce": 60.76,
+    "abrasive": 150,
+    "tabWidth": 0.43,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-0-0.375",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 48.52,
+      "medium": 43.13,
+      "fine": 37.74
+    },
+    "pierce": 69.88,
+    "abrasive": 150,
+    "tabWidth": 0.4,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-0-0.443",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 39.900000000000006,
+      "medium": 35.46,
+      "fine": 31.03
+    },
+    "pierce": 98.24,
+    "abrasive": 150,
+    "tabWidth": 0.33,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-0-0.5",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 34.26,
+      "medium": 30.460000000000004,
+      "fine": 26.65
+    },
+    "pierce": 125.77,
+    "abrasive": 150,
+    "tabWidth": 0.29,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-0-0.625",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 25.09,
+      "medium": 22.3,
+      "fine": 19.52
+    },
+    "pierce": 198.18,
+    "abrasive": 150,
+    "tabWidth": 0.23,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-0-0.75",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 18.64,
+      "medium": 16.57,
+      "fine": 14.5
+    },
+    "pierce": 286.81,
+    "abrasive": 150,
+    "tabWidth": 0.19,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-0-0.875",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 13.81,
+      "medium": 12.28,
+      "fine": 10.740000000000002
+    },
+    "pierce": 391.84,
+    "abrasive": 150,
+    "tabWidth": 0.16,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-0-0.95",
+    "machine": "pro",
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.95,
+    "thicknessMm": 24.13,
+    "feeds": {
+      "coarse": 11.45,
+      "medium": 10.18,
+      "fine": 8.899999999999999
+    },
+    "pierce": 463.06,
+    "abrasive": 150,
+    "tabWidth": 0.15,
+    "lead": 1.36
+  },
+  {
+    "id": "pro-1-0.001",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 28.04,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-1-0.01",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 496.72999999999996,
+      "medium": 441.5400000000001,
+      "fine": 386.34
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 7.86,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-1-0.023",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 276.59,
+      "medium": 245.86,
+      "fine": 215.12
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 4.74,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-1-0.04",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 184.90999999999997,
+      "medium": 164.37,
+      "fine": 143.82
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.38,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-1-0.0625",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 133.54999999999998,
+      "medium": 118.70999999999998,
+      "fine": 103.86999999999999
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.59,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-1-0.073",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 119.22999999999999,
+      "medium": 105.98,
+      "fine": 92.74000000000001
+    },
+    "pierce": 3.03,
+    "abrasive": 150,
+    "tabWidth": 2.36,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-1-0.1",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 93.56,
+      "medium": 83.17,
+      "fine": 72.77
+    },
+    "pierce": 5.63,
+    "abrasive": 150,
+    "tabWidth": 1.95,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-1-0.125",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 78.59,
+      "medium": 69.86000000000001,
+      "fine": 61.12
+    },
+    "pierce": 9.88,
+    "abrasive": 150,
+    "tabWidth": 1.71,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-1-0.1875",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 56.27000000000001,
+      "medium": 50.02,
+      "fine": 43.760000000000005
+    },
+    "pierce": 26.33,
+    "abrasive": 150,
+    "tabWidth": 1.34,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-1-0.2",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 53.23,
+      "medium": 47.31,
+      "fine": 41.4
+    },
+    "pierce": 30.34,
+    "abrasive": 150,
+    "tabWidth": 1.29,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-1-0.25",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 43.74,
+      "medium": 38.88,
+      "fine": 34.019999999999996
+    },
+    "pierce": 47.55,
+    "abrasive": 150,
+    "tabWidth": 1.13,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-1-0.283",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 39.04,
+      "medium": 34.7,
+      "fine": 30.37
+    },
+    "pierce": 59.56,
+    "abrasive": 150,
+    "tabWidth": 1.05,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-1-0.35",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 31.860000000000003,
+      "medium": 28.320000000000004,
+      "fine": 24.779999999999998
+    },
+    "pierce": 84,
+    "abrasive": 150,
+    "tabWidth": 0.92,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-1-0.375",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 29.75,
+      "medium": 26.45,
+      "fine": 23.140000000000004
+    },
+    "pierce": 92.88,
+    "abrasive": 150,
+    "tabWidth": 0.88,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-1-0.443",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 24.99,
+      "medium": 22.220000000000002,
+      "fine": 19.44
+    },
+    "pierce": 116.68,
+    "abrasive": 150,
+    "tabWidth": 0.8,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-1-0.5",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 21.86,
+      "medium": 19.43,
+      "fine": 17
+    },
+    "pierce": 136.72,
+    "abrasive": 150,
+    "tabWidth": 0.74,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-1-0.625",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 16.71,
+      "medium": 14.86,
+      "fine": 13
+    },
+    "pierce": 190.54,
+    "abrasive": 150,
+    "tabWidth": 0.65,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-1-0.75",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 13.05,
+      "medium": 11.599999999999998,
+      "fine": 10.150000000000002
+    },
+    "pierce": 286.64,
+    "abrasive": 150,
+    "tabWidth": 0.58,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-1-0.818",
+    "machine": "pro",
+    "name": "Brass - 260",
+    "category": "Metals",
+    "thicknessIn": 0.818,
+    "thicknessMm": 20.777199999999997,
+    "feeds": {
+      "coarse": 11.45,
+      "medium": 10.18,
+      "fine": 8.899999999999999
+    },
+    "pierce": 375.2,
+    "abrasive": 150,
+    "tabWidth": 0.55,
+    "lead": 1.33
+  },
+  {
+    "id": "pro-22-0.001",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 50.55,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-22-0.01",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 7.82,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-22-0.023",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.73,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-22-0.04",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 1452.02,
+      "medium": 1290.69,
+      "fine": 1129.35
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.27,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-22-0.0625",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 1041.84,
+      "medium": 926.0799999999999,
+      "fine": 810.32
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.54,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-22-0.073",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 927.24,
+      "medium": 824.22,
+      "fine": 721.19
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.34,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-22-0.1",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 721.4900000000001,
+      "medium": 641.3200000000002,
+      "fine": 561.15
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.02,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-22-0.125",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 601.2,
+      "medium": 534.4,
+      "fine": 467.59999999999997
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 0.84,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-22-0.1875",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 421.49,
+      "medium": 374.6600000000001,
+      "fine": 327.82
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 0.59,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-22-0.2",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 396.93999999999994,
+      "medium": 352.8399999999999,
+      "fine": 308.73999999999995
+    },
+    "pierce": 3.77,
+    "abrasive": 150,
+    "tabWidth": 0.55,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-22-0.25",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 320.35,
+      "medium": 284.75,
+      "fine": 249.16
+    },
+    "pierce": 4.17,
+    "abrasive": 150,
+    "tabWidth": 0.45,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-22-0.283",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 282.3500000000001,
+      "medium": 250.97999999999993,
+      "fine": 219.6
+    },
+    "pierce": 4.87,
+    "abrasive": 150,
+    "tabWidth": 0.41,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-22-0.35",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 224.23,
+      "medium": 199.31,
+      "fine": 174.4
+    },
+    "pierce": 7.3,
+    "abrasive": 150,
+    "tabWidth": 0.34,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-22-0.375",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 207.14,
+      "medium": 184.13,
+      "fine": 161.11
+    },
+    "pierce": 8.56,
+    "abrasive": 150,
+    "tabWidth": 0.32,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-22-0.443",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 168.6,
+      "medium": 149.86,
+      "fine": 131.13
+    },
+    "pierce": 12.98,
+    "abrasive": 150,
+    "tabWidth": 0.27,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-22-0.5",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 143.16,
+      "medium": 127.26,
+      "fine": 111.35
+    },
+    "pierce": 17.79,
+    "abrasive": 150,
+    "tabWidth": 0.25,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-22-0.625",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 101.29,
+      "medium": 90.03,
+      "fine": 78.78
+    },
+    "pierce": 31.87,
+    "abrasive": 150,
+    "tabWidth": 0.2,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-22-0.75",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 71.46000000000001,
+      "medium": 63.519999999999996,
+      "fine": 55.57999999999999
+    },
+    "pierce": 50.72,
+    "abrasive": 150,
+    "tabWidth": 0.17,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-22-0.875",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 48.9,
+      "medium": 43.459999999999994,
+      "fine": 38.03
+    },
+    "pierce": 74.38,
+    "abrasive": 150,
+    "tabWidth": 0.15,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-22-1",
+    "machine": "pro",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "category": "Other",
+    "thicknessIn": 1,
+    "thicknessMm": 25.4,
+    "feeds": {
+      "coarse": 31.060000000000002,
+      "medium": 27.61,
+      "fine": 24.16
+    },
+    "pierce": 102.96,
+    "abrasive": 150,
+    "tabWidth": 0.13,
+    "lead": 1.37
+  },
+  {
+    "id": "pro-2-0.001",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 877.4099999999999,
+      "medium": 779.92,
+      "fine": 682.43
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 76.53,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-2-0.01",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 269.86999999999995,
+      "medium": 239.89,
+      "fine": 209.89999999999998
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 11.35,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-2-0.023",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 164.57,
+      "medium": 146.29,
+      "fine": 128
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 5.32,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-2-0.04",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 116.12,
+      "medium": 103.22000000000001,
+      "fine": 90.30999999999999
+    },
+    "pierce": 3.85,
+    "abrasive": 150,
+    "tabWidth": 3.2,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-2-0.0625",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 86.99,
+      "medium": 77.33,
+      "fine": 67.66
+    },
+    "pierce": 4.89,
+    "abrasive": 150,
+    "tabWidth": 2.15,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-2-0.073",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 78.53,
+      "medium": 69.81,
+      "fine": 61.08
+    },
+    "pierce": 5.84,
+    "abrasive": 150,
+    "tabWidth": 1.87,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-2-0.1",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 62.85999999999999,
+      "medium": 55.87,
+      "fine": 48.89
+    },
+    "pierce": 9.97,
+    "abrasive": 150,
+    "tabWidth": 1.41,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-2-0.125",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 53.37,
+      "medium": 47.44,
+      "fine": 41.50999999999999
+    },
+    "pierce": 15.92,
+    "abrasive": 150,
+    "tabWidth": 1.15,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-2-0.1875",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 38.6,
+      "medium": 34.31,
+      "fine": 30.02
+    },
+    "pierce": 40.76,
+    "abrasive": 150,
+    "tabWidth": 0.8,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-2-0.2",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 36.52,
+      "medium": 32.46,
+      "fine": 28.410000000000004
+    },
+    "pierce": 47.5,
+    "abrasive": 150,
+    "tabWidth": 0.75,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-2-0.25",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 29.91,
+      "medium": 26.58,
+      "fine": 23.26
+    },
+    "pierce": 79.78,
+    "abrasive": 150,
+    "tabWidth": 0.62,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-2-0.283",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 26.55,
+      "medium": 23.6,
+      "fine": 20.65
+    },
+    "pierce": 105.63,
+    "abrasive": 150,
+    "tabWidth": 0.55,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-2-0.35",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 21.289999999999996,
+      "medium": 18.929999999999996,
+      "fine": 16.56
+    },
+    "pierce": 166.67,
+    "abrasive": 150,
+    "tabWidth": 0.46,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-2-0.375",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 19.73,
+      "medium": 17.54,
+      "fine": 15.339999999999996
+    },
+    "pierce": 191.33,
+    "abrasive": 150,
+    "tabWidth": 0.43,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-2-0.443",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 16.120000000000005,
+      "medium": 14.329999999999998,
+      "fine": 12.54
+    },
+    "pierce": 260.43,
+    "abrasive": 150,
+    "tabWidth": 0.37,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-2-0.5",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 13.7,
+      "medium": 12.18,
+      "fine": 10.65
+    },
+    "pierce": 314.01,
+    "abrasive": 150,
+    "tabWidth": 0.33,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-2-0.564",
+    "machine": "pro",
+    "name": "Copper - 110",
+    "category": "Metals",
+    "thicknessIn": 0.564,
+    "thicknessMm": 14.325599999999998,
+    "feeds": {
+      "coarse": 11.440000000000001,
+      "medium": 10.17,
+      "fine": 8.899999999999999
+    },
+    "pierce": 359.75,
+    "abrasive": 150,
+    "tabWidth": 0.3,
+    "lead": 1.25
+  },
+  {
+    "id": "pro-10-0.001",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-10-0.01",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-10-0.023",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-10-0.04",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-10-0.0625",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-10-0.073",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-10-0.1",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-10-0.125",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-10-0.1875",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-10-0.2",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-10-0.25",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-10-0.283",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-10-0.35",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-10-0.375",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-10-0.443",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-10-0.5",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-10-0.625",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-10-0.75",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-10-0.875",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-10-1",
+    "machine": "pro",
+    "name": "EPDM - EPDM",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 1,
+    "thicknessMm": 25.4,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 1.37
+  },
+  {
+    "id": "pro-23-0.001",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 8.85,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-23-0.01",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 4.68,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-23-0.023",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.64,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-23-0.04",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.07,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-23-0.0625",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 1183.94,
+      "medium": 1052.39,
+      "fine": 920.84
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.69,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-23-0.073",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 1029.84,
+      "medium": 915.42,
+      "fine": 800.99
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.57,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-23-0.1",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 764.6199999999999,
+      "medium": 679.6599999999999,
+      "fine": 594.71
+    },
+    "pierce": 2.33,
+    "abrasive": 150,
+    "tabWidth": 2.34,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-23-0.125",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 617.1800000000001,
+      "medium": 548.61,
+      "fine": 480.0299999999999
+    },
+    "pierce": 2.73,
+    "abrasive": 150,
+    "tabWidth": 2.19,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-23-0.1875",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 409.00000000000006,
+      "medium": 363.55,
+      "fine": 318.11
+    },
+    "pierce": 3.21,
+    "abrasive": 150,
+    "tabWidth": 1.93,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-23-0.2",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 381.82000000000005,
+      "medium": 339.4,
+      "fine": 296.96999999999997
+    },
+    "pierce": 3.28,
+    "abrasive": 150,
+    "tabWidth": 1.9,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-23-0.25",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 299.20000000000005,
+      "medium": 265.96,
+      "fine": 232.70999999999998
+    },
+    "pierce": 3.75,
+    "abrasive": 150,
+    "tabWidth": 1.77,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-23-0.283",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 259.52,
+      "medium": 230.69,
+      "fine": 201.85
+    },
+    "pierce": 4.35,
+    "abrasive": 150,
+    "tabWidth": 1.71,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-23-0.35",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 200.66,
+      "medium": 178.37,
+      "fine": 156.07
+    },
+    "pierce": 6.69,
+    "abrasive": 150,
+    "tabWidth": 1.6,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-23-0.375",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 183.83,
+      "medium": 163.4,
+      "fine": 142.97000000000003
+    },
+    "pierce": 8.04,
+    "abrasive": 150,
+    "tabWidth": 1.57,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-23-0.443",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 146.61,
+      "medium": 130.32,
+      "fine": 114.03
+    },
+    "pierce": 13.35,
+    "abrasive": 150,
+    "tabWidth": 1.49,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-23-0.5",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 122.7,
+      "medium": 109.05999999999999,
+      "fine": 95.43
+    },
+    "pierce": 19.73,
+    "abrasive": 150,
+    "tabWidth": 1.44,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-23-0.625",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 84.56,
+      "medium": 75.16,
+      "fine": 65.77
+    },
+    "pierce": 39.75,
+    "abrasive": 150,
+    "tabWidth": 1.35,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-23-0.75",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 58.39000000000001,
+      "medium": 51.9,
+      "fine": 45.42
+    },
+    "pierce": 65.74,
+    "abrasive": 150,
+    "tabWidth": 1.28,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-23-0.875",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 39.20000000000001,
+      "medium": 34.84,
+      "fine": 30.48
+    },
+    "pierce": 92.38,
+    "abrasive": 150,
+    "tabWidth": 1.22,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-23-1",
+    "machine": "pro",
+    "name": "Garolite - G-10/FR4",
+    "category": "Other",
+    "thicknessIn": 1,
+    "thicknessMm": 25.4,
+    "feeds": {
+      "coarse": 24.43,
+      "medium": 21.72,
+      "fine": 19
+    },
+    "pierce": 111.14,
+    "abrasive": 150,
+    "tabWidth": 1.17,
+    "lead": 1.37
+  },
+  {
+    "id": "pro-16-0.001",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1311.2,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-16-0.01",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 68.82,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-16-0.023",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 21.36,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-16-0.04",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 9.75,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-16-0.0625",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 5.26,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-16-0.073",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 4.26,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-16-0.1",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.74,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-16-0.125",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 1372.44,
+      "medium": 1219.94,
+      "fine": 1067.4499999999998
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.02,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-16-0.1875",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 703.07,
+      "medium": 624.9499999999999,
+      "fine": 546.8299999999999
+    },
+    "pierce": 2.65,
+    "abrasive": 150,
+    "tabWidth": 1.15,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-16-0.2",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 631.69,
+      "medium": 561.5,
+      "fine": 491.32
+    },
+    "pierce": 2.84,
+    "abrasive": 150,
+    "tabWidth": 1.05,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-16-0.25",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 437.57,
+      "medium": 388.95,
+      "fine": 340.3299999999999
+    },
+    "pierce": 3.96,
+    "abrasive": 150,
+    "tabWidth": 0.77,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-16-0.283",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 356.68,
+      "medium": 317.04999999999995,
+      "fine": 277.42
+    },
+    "pierce": 5.02,
+    "abrasive": 150,
+    "tabWidth": 0.65,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-16-0.35",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 251.53999999999994,
+      "medium": 223.59,
+      "fine": 195.64
+    },
+    "pierce": 7.91,
+    "abrasive": 150,
+    "tabWidth": 0.48,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-16-0.375",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 224.74000000000004,
+      "medium": 199.77,
+      "fine": 174.79999999999998
+    },
+    "pierce": 9.25,
+    "abrasive": 150,
+    "tabWidth": 0.44,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-16-0.443",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 170.76000000000002,
+      "medium": 151.78,
+      "fine": 132.81000000000003
+    },
+    "pierce": 13.63,
+    "abrasive": 150,
+    "tabWidth": 0.35,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-16-0.5",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 139.88,
+      "medium": 124.34,
+      "fine": 108.79
+    },
+    "pierce": 18.13,
+    "abrasive": 150,
+    "tabWidth": 0.29,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-16-0.625",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 96.84,
+      "medium": 86.08000000000001,
+      "fine": 75.32000000000001
+    },
+    "pierce": 30.58,
+    "abrasive": 150,
+    "tabWidth": 0.21,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-16-0.75",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 71.78,
+      "medium": 63.8,
+      "fine": 55.82
+    },
+    "pierce": 46.56,
+    "abrasive": 150,
+    "tabWidth": 0.17,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-16-0.875",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 55.72,
+      "medium": 49.53,
+      "fine": 43.34
+    },
+    "pierce": 66.09,
+    "abrasive": 150,
+    "tabWidth": 0.13,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-16-1",
+    "machine": "pro",
+    "name": "Glass - Borosilicate",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 1,
+    "thicknessMm": 25.4,
+    "feeds": {
+      "coarse": 44.71,
+      "medium": 39.74,
+      "fine": 34.779999999999994
+    },
+    "pierce": 89.25,
+    "abrasive": 150,
+    "tabWidth": 0.11,
+    "lead": 1.37
+  },
+  {
+    "id": "pro-17-0.001",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 9.67,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-17-0.01",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 4.91,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-17-0.023",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.75,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-17-0.04",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.13,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-17-0.0625",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.72,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-17-0.073",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.59,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-17-0.1",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 1336.4200000000003,
+      "medium": 1187.93,
+      "fine": 1039.44
+    },
+    "pierce": 2.74,
+    "abrasive": 150,
+    "tabWidth": 2.34,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-17-0.125",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 990.47,
+      "medium": 880.42,
+      "fine": 770.36
+    },
+    "pierce": 2.79,
+    "abrasive": 150,
+    "tabWidth": 2.18,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-17-0.1875",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 565.16,
+      "medium": 502.36999999999995,
+      "fine": 439.57
+    },
+    "pierce": 3.36,
+    "abrasive": 150,
+    "tabWidth": 1.91,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-17-0.2",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 515.6499999999999,
+      "medium": 458.35,
+      "fine": 401.06000000000006
+    },
+    "pierce": 3.55,
+    "abrasive": 150,
+    "tabWidth": 1.87,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-17-0.25",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 374.38,
+      "medium": 332.78,
+      "fine": 291.19
+    },
+    "pierce": 4.56,
+    "abrasive": 150,
+    "tabWidth": 1.74,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-17-0.283",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 311.78999999999996,
+      "medium": 277.14,
+      "fine": 242.49999999999997
+    },
+    "pierce": 5.44,
+    "abrasive": 150,
+    "tabWidth": 1.68,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-17-0.35",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 225.7,
+      "medium": 200.62000000000003,
+      "fine": 175.55000000000004
+    },
+    "pierce": 7.78,
+    "abrasive": 150,
+    "tabWidth": 1.57,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-17-0.375",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 202.63999999999996,
+      "medium": 180.11999999999998,
+      "fine": 157.6
+    },
+    "pierce": 8.82,
+    "abrasive": 150,
+    "tabWidth": 1.53,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-17-0.443",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 154.28,
+      "medium": 137.14,
+      "fine": 119.99000000000001
+    },
+    "pierce": 12.21,
+    "abrasive": 150,
+    "tabWidth": 1.45,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-17-0.5",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 125.20000000000002,
+      "medium": 111.29000000000002,
+      "fine": 97.37999999999998
+    },
+    "pierce": 15.62,
+    "abrasive": 150,
+    "tabWidth": 1.4,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-17-0.625",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 82.27,
+      "medium": 73.13,
+      "fine": 63.990000000000016
+    },
+    "pierce": 24.93,
+    "abrasive": 150,
+    "tabWidth": 1.3,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-17-0.75",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 55.43000000000001,
+      "medium": 49.269999999999996,
+      "fine": 43.11
+    },
+    "pierce": 36.72,
+    "abrasive": 150,
+    "tabWidth": 1.23,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-17-0.875",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 37.21,
+      "medium": 33.07,
+      "fine": 28.939999999999998
+    },
+    "pierce": 51.01,
+    "abrasive": 150,
+    "tabWidth": 1.17,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-17-1",
+    "machine": "pro",
+    "name": "Glass - Soda Lime",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 1,
+    "thicknessMm": 25.4,
+    "feeds": {
+      "coarse": 24.07,
+      "medium": 21.4,
+      "fine": 18.72
+    },
+    "pierce": 67.87,
+    "abrasive": 150,
+    "tabWidth": 1.12,
+    "lead": 1.37
+  },
+  {
+    "id": "pro-18-0.001",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2684341.03,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-18-0.01",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2255.81,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-18-0.023",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 135.7,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-18-0.04",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 20.59,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-18-0.0625",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 4.67,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-18-0.073",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.82,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-18-0.1",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 0.98,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-18-0.125",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 1101.18,
+      "medium": 978.8199999999999,
+      "fine": 856.47
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 0.47,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-18-0.1875",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 441.60999999999996,
+      "medium": 392.54,
+      "fine": 343.48
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 0.12,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-18-0.2",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 381.86,
+      "medium": 339.43,
+      "fine": 296.99999999999994
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 0.1,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-18-0.25",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 232.66000000000003,
+      "medium": 206.80999999999997,
+      "fine": 180.96
+    },
+    "pierce": 17.76,
+    "abrasive": 150,
+    "tabWidth": 0.05,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-18-0.283",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 177.06,
+      "medium": 157.38,
+      "fine": 137.71
+    },
+    "pierce": 18.19,
+    "abrasive": 150,
+    "tabWidth": 0.03,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-18-0.35",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 111.79999999999998,
+      "medium": 99.38,
+      "fine": 86.95
+    },
+    "pierce": 19.91,
+    "abrasive": 150,
+    "tabWidth": 0.01,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-18-0.375",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 96.62,
+      "medium": 85.89,
+      "fine": 75.15
+    },
+    "pierce": 20.84,
+    "abrasive": 150,
+    "tabWidth": 0.01,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-18-0.443",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 68.14000000000001,
+      "medium": 60.57000000000001,
+      "fine": 53
+    },
+    "pierce": 24.16,
+    "abrasive": 150,
+    "tabWidth": 0.01,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-18-0.5",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 53.27,
+      "medium": 47.35,
+      "fine": 41.43
+    },
+    "pierce": 27.85,
+    "abrasive": 150,
+    "tabWidth": 0,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-18-0.625",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 34.59000000000001,
+      "medium": 30.74,
+      "fine": 26.900000000000002
+    },
+    "pierce": 38.79,
+    "abrasive": 150,
+    "tabWidth": 0,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-18-0.75",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 25.02,
+      "medium": 22.24,
+      "fine": 19.46
+    },
+    "pierce": 53.61,
+    "abrasive": 150,
+    "tabWidth": 0,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-18-0.875",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 19.499999999999996,
+      "medium": 17.340000000000003,
+      "fine": 15.169999999999998
+    },
+    "pierce": 72.34,
+    "abrasive": 150,
+    "tabWidth": 0,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-18-1",
+    "machine": "pro",
+    "name": "Granite - Granite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 1,
+    "thicknessMm": 25.4,
+    "feeds": {
+      "coarse": 16.050000000000004,
+      "medium": 14.259999999999998,
+      "fine": 12.48
+    },
+    "pierce": 95.05,
+    "abrasive": 150,
+    "tabWidth": 0,
+    "lead": 1.37
+  },
+  {
+    "id": "pro-19-0.001",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 75.89,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-19-0.01",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 20.38,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-19-0.023",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 12.1,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-19-0.04",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 8.52,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-19-0.0625",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 6.47,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-19-0.073",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 5.89,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-19-0.1",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 4.84,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-19-0.125",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 4.22,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-19-0.1875",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.28,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-19-0.2",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.15,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-19-0.25",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 1357.55,
+      "medium": 1206.7100000000003,
+      "fine": 1055.87
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.74,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-19-0.283",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 1201.06,
+      "medium": 1067.6100000000001,
+      "fine": 934.16
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.54,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-19-0.35",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 959.82,
+      "medium": 853.18,
+      "fine": 746.5300000000001
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.23,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-19-0.375",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 888.4599999999999,
+      "medium": 789.74,
+      "fine": 691.03
+    },
+    "pierce": 3.37,
+    "abrasive": 150,
+    "tabWidth": 2.13,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-19-0.443",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 726.5000000000001,
+      "medium": 645.78,
+      "fine": 565.05
+    },
+    "pierce": 3.58,
+    "abrasive": 150,
+    "tabWidth": 1.92,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-19-0.5",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 618.87,
+      "medium": 550.1,
+      "fine": 481.3399999999999
+    },
+    "pierce": 4.01,
+    "abrasive": 150,
+    "tabWidth": 1.79,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-19-0.625",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 440.28000000000003,
+      "medium": 391.36,
+      "fine": 342.44
+    },
+    "pierce": 5.72,
+    "abrasive": 150,
+    "tabWidth": 1.55,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-19-0.75",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 311.84999999999997,
+      "medium": 277.2,
+      "fine": 242.55000000000004
+    },
+    "pierce": 8.48,
+    "abrasive": 150,
+    "tabWidth": 1.39,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-19-0.875",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 213.89,
+      "medium": 190.12999999999997,
+      "fine": 166.36
+    },
+    "pierce": 12.3,
+    "abrasive": 150,
+    "tabWidth": 1.26,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-19-1",
+    "machine": "pro",
+    "name": "Graphite - Graphite",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 1,
+    "thicknessMm": 25.4,
+    "feeds": {
+      "coarse": 135.95,
+      "medium": 120.85,
+      "fine": 105.74
+    },
+    "pierce": 17.2,
+    "abrasive": 150,
+    "tabWidth": 1.16,
+    "lead": 1.37
+  },
+  {
+    "id": "pro-11-0.001",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 108.64,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-11-0.01",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 14.19,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-11-0.023",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 6.33,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-11-0.04",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.68,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-11-0.0625",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.4,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-11-0.073",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 1322.5700000000002,
+      "medium": 1175.62,
+      "fine": 1028.66
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.08,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-11-0.1",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 873.9,
+      "medium": 776.8,
+      "fine": 679.7000000000002
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.53,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-11-0.125",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 652.18,
+      "medium": 579.72,
+      "fine": 507.24999999999994
+    },
+    "pierce": 2.88,
+    "abrasive": 150,
+    "tabWidth": 1.24,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-11-0.1875",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 377.48,
+      "medium": 335.54,
+      "fine": 293.59000000000003
+    },
+    "pierce": 8.11,
+    "abrasive": 150,
+    "tabWidth": 0.84,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-11-0.2",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 345.28,
+      "medium": 306.91,
+      "fine": 268.55
+    },
+    "pierce": 9.2,
+    "abrasive": 150,
+    "tabWidth": 0.79,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-11-0.25",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 253.10000000000002,
+      "medium": 224.98,
+      "fine": 196.84999999999997
+    },
+    "pierce": 13.8,
+    "abrasive": 150,
+    "tabWidth": 0.64,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-11-0.283",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 212.06,
+      "medium": 188.5,
+      "fine": 164.93000000000004
+    },
+    "pierce": 17.2,
+    "abrasive": 150,
+    "tabWidth": 0.56,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-11-0.35",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 155.39000000000001,
+      "medium": 138.12,
+      "fine": 120.85
+    },
+    "pierce": 25.34,
+    "abrasive": 150,
+    "tabWidth": 0.46,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-11-0.375",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 140.14,
+      "medium": 124.57,
+      "fine": 109
+    },
+    "pierce": 28.86,
+    "abrasive": 150,
+    "tabWidth": 0.43,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-11-0.443",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 108.09,
+      "medium": 96.08,
+      "fine": 84.07
+    },
+    "pierce": 40.15,
+    "abrasive": 150,
+    "tabWidth": 0.37,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-11-0.5",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 88.74000000000001,
+      "medium": 78.87999999999998,
+      "fine": 69.02
+    },
+    "pierce": 51.64,
+    "abrasive": 150,
+    "tabWidth": 0.33,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-11-0.625",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 60.05000000000001,
+      "medium": 53.38,
+      "fine": 46.70000000000001
+    },
+    "pierce": 83.64,
+    "abrasive": 150,
+    "tabWidth": 0.26,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-11-0.75",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 42.02,
+      "medium": 37.349999999999994,
+      "fine": 32.68000000000001
+    },
+    "pierce": 124.29,
+    "abrasive": 150,
+    "tabWidth": 0.22,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-11-0.875",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 29.72,
+      "medium": 26.42,
+      "fine": 23.109999999999996
+    },
+    "pierce": 171.32,
+    "abrasive": 150,
+    "tabWidth": 0.19,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-11-1",
+    "machine": "pro",
+    "name": "HDPE - HDPE",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 1,
+    "thicknessMm": 25.4,
+    "feeds": {
+      "coarse": 20.83,
+      "medium": 18.51,
+      "fine": 16.200000000000003
+    },
+    "pierce": 220.55,
+    "abrasive": 150,
+    "tabWidth": 0.17,
+    "lead": 1.37
+  },
+  {
+    "id": "pro-20-0.001",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 78870.1,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-20-0.01",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1735.56,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-20-0.023",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 381.56,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-20-0.04",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 138.12,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-20-0.0625",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 62.12,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-20-0.073",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 47.3,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-20-0.1",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 26.73,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-20-0.125",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 17.94,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-20-0.1875",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 792.57,
+      "medium": 704.5,
+      "fine": 616.44
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 8.63,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-20-0.2",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 691.4199999999998,
+      "medium": 614.59,
+      "fine": 537.77
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 7.68,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-20-0.25",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 433.61,
+      "medium": 385.43,
+      "fine": 337.25
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 5.14,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-20-0.283",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 334.92,
+      "medium": 297.70000000000005,
+      "fine": 260.49
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 4.11,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-20-0.35",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 216.21999999999997,
+      "medium": 192.19,
+      "fine": 168.17
+    },
+    "pierce": 3.86,
+    "abrasive": 150,
+    "tabWidth": 2.8,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-20-0.375",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 187.98,
+      "medium": 167.10000000000002,
+      "fine": 146.21
+    },
+    "pierce": 6.68,
+    "abrasive": 150,
+    "tabWidth": 2.48,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-20-0.443",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 134.10999999999999,
+      "medium": 119.20999999999998,
+      "fine": 104.31
+    },
+    "pierce": 13.22,
+    "abrasive": 150,
+    "tabWidth": 1.84,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-20-0.5",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 105.35,
+      "medium": 93.65,
+      "fine": 81.94
+    },
+    "pierce": 17.68,
+    "abrasive": 150,
+    "tabWidth": 1.48,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-20-0.625",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 68.33,
+      "medium": 60.74,
+      "fine": 53.13999999999999
+    },
+    "pierce": 25.64,
+    "abrasive": 150,
+    "tabWidth": 0.99,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-20-0.75",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 48.77,
+      "medium": 43.349999999999994,
+      "fine": 37.93
+    },
+    "pierce": 33.31,
+    "abrasive": 150,
+    "tabWidth": 0.71,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-20-0.875",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 37.20000000000001,
+      "medium": 33.06,
+      "fine": 28.93
+    },
+    "pierce": 42.98,
+    "abrasive": 150,
+    "tabWidth": 0.54,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-20-1",
+    "machine": "pro",
+    "name": "Marble - Marble",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 1,
+    "thicknessMm": 25.4,
+    "feeds": {
+      "coarse": 29.8,
+      "medium": 26.490000000000002,
+      "fine": 23.18
+    },
+    "pierce": 56.47,
+    "abrasive": 150,
+    "tabWidth": 0.42,
+    "lead": 1.37
+  },
+  {
+    "id": "pro-12-0.001",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 20077.73,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-12-0.01",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 594.5,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-12-0.023",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 147.04,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-12-0.04",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 57.6,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-12-0.0625",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 27.57,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-12-0.073",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 21.44,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-12-0.1",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 12.67,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-12-0.125",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 8.77,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-12-0.1875",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 4.47,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-12-0.2",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 4.01,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-12-0.25",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.77,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-12-0.283",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 1307.7400000000002,
+      "medium": 1162.44,
+      "fine": 1017.13
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.25,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-12-0.35",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 831.0799999999999,
+      "medium": 738.7400000000001,
+      "fine": 646.39
+    },
+    "pierce": 4.2,
+    "abrasive": 150,
+    "tabWidth": 1.58,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-12-0.375",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 715.81,
+      "medium": 636.27,
+      "fine": 556.74
+    },
+    "pierce": 4.3,
+    "abrasive": 150,
+    "tabWidth": 1.41,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-12-0.443",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 492.93,
+      "medium": 438.16,
+      "fine": 383.39
+    },
+    "pierce": 4.87,
+    "abrasive": 150,
+    "tabWidth": 1.07,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-12-0.5",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 371.99000000000007,
+      "medium": 330.66,
+      "fine": 289.32
+    },
+    "pierce": 5.68,
+    "abrasive": 150,
+    "tabWidth": 0.88,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-12-0.625",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 213.26,
+      "medium": 189.56999999999996,
+      "fine": 165.87000000000003
+    },
+    "pierce": 8.51,
+    "abrasive": 150,
+    "tabWidth": 0.6,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-12-0.75",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 127.41,
+      "medium": 113.26,
+      "fine": 99.09999999999998
+    },
+    "pierce": 12.77,
+    "abrasive": 150,
+    "tabWidth": 0.45,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-12-0.875",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 75.65,
+      "medium": 67.25000000000001,
+      "fine": 58.84000000000001
+    },
+    "pierce": 18.47,
+    "abrasive": 150,
+    "tabWidth": 0.35,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-12-1",
+    "machine": "pro",
+    "name": "Neoprene - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 1,
+    "thicknessMm": 25.4,
+    "feeds": {
+      "coarse": 41.98,
+      "medium": 37.31,
+      "fine": 32.65
+    },
+    "pierce": 25.63,
+    "abrasive": 150,
+    "tabWidth": 0.28,
+    "lead": 1.37
+  },
+  {
+    "id": "pro-13-0.001",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 70.22,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-13-0.01",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 12.34,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-13-0.023",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 6.19,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-13-0.04",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 1465.0499999999997,
+      "medium": 1302.2599999999998,
+      "fine": 1139.48
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.9,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-13-0.0625",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 809.87,
+      "medium": 719.88,
+      "fine": 629.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.71,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-13-0.073",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 661.16,
+      "medium": 587.7000000000002,
+      "fine": 514.23
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.39,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-13-0.1",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 431.75000000000006,
+      "medium": 383.78,
+      "fine": 335.80000000000007
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.84,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-13-0.125",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 319.9800000000001,
+      "medium": 284.42,
+      "fine": 248.86999999999998
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.54,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-13-0.1875",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 183.62,
+      "medium": 163.22,
+      "fine": 142.81
+    },
+    "pierce": 4.95,
+    "abrasive": 150,
+    "tabWidth": 1.1,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-13-0.2",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 167.84,
+      "medium": 149.19,
+      "fine": 130.54
+    },
+    "pierce": 7.27,
+    "abrasive": 150,
+    "tabWidth": 1.04,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-13-0.25",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 122.98999999999998,
+      "medium": 109.32999999999998,
+      "fine": 95.66
+    },
+    "pierce": 19.4,
+    "abrasive": 150,
+    "tabWidth": 0.87,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-13-0.283",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 103.20999999999998,
+      "medium": 91.74,
+      "fine": 80.28
+    },
+    "pierce": 29.48,
+    "abrasive": 150,
+    "tabWidth": 0.79,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-13-0.35",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 76.12,
+      "medium": 67.66,
+      "fine": 59.209999999999994
+    },
+    "pierce": 53.1,
+    "abrasive": 150,
+    "tabWidth": 0.66,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-13-0.375",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 68.89000000000001,
+      "medium": 61.23,
+      "fine": 53.58
+    },
+    "pierce": 62.52,
+    "abrasive": 150,
+    "tabWidth": 0.62,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-13-0.443",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 53.77000000000001,
+      "medium": 47.79999999999999,
+      "fine": 41.82000000000001
+    },
+    "pierce": 89.07,
+    "abrasive": 150,
+    "tabWidth": 0.54,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-13-0.5",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 44.71,
+      "medium": 39.74,
+      "fine": 34.779999999999994
+    },
+    "pierce": 111.14,
+    "abrasive": 150,
+    "tabWidth": 0.49,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-13-0.625",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 31.4,
+      "medium": 27.91,
+      "fine": 24.42
+    },
+    "pierce": 156.48,
+    "abrasive": 150,
+    "tabWidth": 0.41,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-13-0.75",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 23.119999999999997,
+      "medium": 20.55,
+      "fine": 17.979999999999997
+    },
+    "pierce": 198.84,
+    "abrasive": 150,
+    "tabWidth": 0.35,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-13-0.875",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 17.52,
+      "medium": 15.58,
+      "fine": 13.63
+    },
+    "pierce": 247.76,
+    "abrasive": 150,
+    "tabWidth": 0.31,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-13-1",
+    "machine": "pro",
+    "name": "Polycarbonate - Polycarbonate",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 1,
+    "thicknessMm": 25.4,
+    "feeds": {
+      "coarse": 13.499999999999998,
+      "medium": 12,
+      "fine": 10.5
+    },
+    "pierce": 321.91,
+    "abrasive": 150,
+    "tabWidth": 0.28,
+    "lead": 1.37
+  },
+  {
+    "id": "pro-14-0.001",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 7.59,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-14-0.01",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 4.66,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-14-0.023",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.84,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-14-0.04",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.37,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-14-0.0625",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.05,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-14-0.073",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.94,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-14-0.1",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.74,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-14-0.125",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.6,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-14-0.1875",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.37,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-14-0.2",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.33,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-14-0.25",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.22,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-14-0.283",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.15,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-14-0.35",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.05,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-14-0.375",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.02,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-14-0.443",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.94,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-14-0.5",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.89,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-14-0.625",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.79,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-14-0.75",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.72,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-14-0.875",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.66,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-14-1",
+    "machine": "pro",
+    "name": "Polyethylene Foam - 4lb",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 1,
+    "thicknessMm": 25.4,
+    "feeds": {
+      "coarse": 11.43,
+      "medium": 10.16,
+      "fine": 8.89
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.61,
+    "lead": 1.37
+  },
+  {
+    "id": "pro-15-0.001",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 798.54,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-15-0.01",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 48.62,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-15-0.023",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 16.01,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-15-0.04",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 7.6,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-15-0.0625",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 4.23,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-15-0.073",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.46,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-15-0.1",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.28,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-15-0.125",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.7,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-15-0.1875",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 0.99,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-15-0.2",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 0.91,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-15-0.25",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 0.68,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-15-0.283",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 0.58,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-15-0.35",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 0.44,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-15-0.375",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 0.4,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-15-0.443",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 1230.66,
+      "medium": 1093.92,
+      "fine": 957.1799999999998
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 0.32,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-15-0.5",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 877.18,
+      "medium": 779.7099999999999,
+      "fine": 682.25
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 0.27,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-15-0.625",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 457.59,
+      "medium": 406.73999999999995,
+      "fine": 355.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 0.2,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-15-0.75",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 257.26,
+      "medium": 228.67,
+      "fine": 200.09
+    },
+    "pierce": 6.68,
+    "abrasive": 150,
+    "tabWidth": 0.16,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-15-0.875",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 148.27999999999997,
+      "medium": 131.81000000000003,
+      "fine": 115.33
+    },
+    "pierce": 66.58,
+    "abrasive": 150,
+    "tabWidth": 0.13,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-15-1",
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "category": "Plastics & Rubbers",
+    "thicknessIn": 1,
+    "thicknessMm": 25.4,
+    "feeds": {
+      "coarse": 83.35,
+      "medium": 74.09,
+      "fine": 64.82999999999998
+    },
+    "pierce": 133.87,
+    "abrasive": 150,
+    "tabWidth": 0.11,
+    "lead": 1.37
+  },
+  {
+    "id": "pro-3-0.001",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 18.6,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-3-0.01",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 353.8,
+      "medium": 314.48999999999995,
+      "fine": 275.18000000000006
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 5.67,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-3-0.023",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 182.2,
+      "medium": 161.96,
+      "fine": 141.71
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.54,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-3-0.04",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 115.81000000000002,
+      "medium": 102.94,
+      "fine": 90.08
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.58,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-3-0.0625",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 80.50000000000001,
+      "medium": 71.55,
+      "fine": 62.60999999999999
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.01,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-3-0.073",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 70.94999999999999,
+      "medium": 63.06000000000001,
+      "fine": 55.18
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.85,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-3-0.1",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 54.23,
+      "medium": 48.21000000000001,
+      "fine": 42.18000000000001
+    },
+    "pierce": 11.53,
+    "abrasive": 150,
+    "tabWidth": 1.55,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-3-0.125",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 44.74999999999999,
+      "medium": 39.78,
+      "fine": 34.8
+    },
+    "pierce": 27.19,
+    "abrasive": 150,
+    "tabWidth": 1.37,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-3-0.1875",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 31.04,
+      "medium": 27.59,
+      "fine": 24.140000000000004
+    },
+    "pierce": 70.22,
+    "abrasive": 150,
+    "tabWidth": 1.09,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-3-0.2",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 29.219999999999995,
+      "medium": 25.98,
+      "fine": 22.73
+    },
+    "pierce": 77.77,
+    "abrasive": 150,
+    "tabWidth": 1.05,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-3-0.25",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 23.62,
+      "medium": 20.99,
+      "fine": 18.369999999999997
+    },
+    "pierce": 101,
+    "abrasive": 150,
+    "tabWidth": 0.93,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-3-0.283",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 20.89,
+      "medium": 18.57,
+      "fine": 16.25
+    },
+    "pierce": 111.28,
+    "abrasive": 150,
+    "tabWidth": 0.86,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-3-0.35",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 16.79,
+      "medium": 14.93,
+      "fine": 13.06
+    },
+    "pierce": 134.13,
+    "abrasive": 150,
+    "tabWidth": 0.77,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-3-0.375",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 15.62,
+      "medium": 13.880000000000003,
+      "fine": 12.140000000000002
+    },
+    "pierce": 150.8,
+    "abrasive": 150,
+    "tabWidth": 0.74,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-3-0.443",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 12.97,
+      "medium": 11.53,
+      "fine": 10.09
+    },
+    "pierce": 259.6,
+    "abrasive": 150,
+    "tabWidth": 0.67,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-3-0.493",
+    "machine": "pro",
+    "name": "Stainless Steel - 304",
+    "category": "Metals",
+    "thicknessIn": 0.493,
+    "thicknessMm": 12.5222,
+    "feeds": {
+      "coarse": 11.45,
+      "medium": 10.18,
+      "fine": 8.899999999999999
+    },
+    "pierce": 444.07,
+    "abrasive": 150,
+    "tabWidth": 0.63,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-4-0.001",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 47.72,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-4-0.01",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 419.5299999999999,
+      "medium": 372.91,
+      "fine": 326.30000000000007
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 4.94,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-4-0.023",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 215.66,
+      "medium": 191.69999999999996,
+      "fine": 167.73
+    },
+    "pierce": 1.9,
+    "abrasive": 150,
+    "tabWidth": 2.01,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-4-0.04",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 136.16,
+      "medium": 121.03,
+      "fine": 105.9
+    },
+    "pierce": 3,
+    "abrasive": 150,
+    "tabWidth": 1.1,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-4-0.0625",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 93.64,
+      "medium": 83.23,
+      "fine": 72.83000000000001
+    },
+    "pierce": 4.59,
+    "abrasive": 150,
+    "tabWidth": 0.68,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-4-0.073",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 82.10999999999999,
+      "medium": 72.98,
+      "fine": 63.86
+    },
+    "pierce": 5.51,
+    "abrasive": 150,
+    "tabWidth": 0.58,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-4-0.1",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 61.879999999999995,
+      "medium": 55,
+      "fine": 48.13
+    },
+    "pierce": 8.97,
+    "abrasive": 150,
+    "tabWidth": 0.41,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-4-0.125",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 50.36,
+      "medium": 44.76,
+      "fine": 39.16
+    },
+    "pierce": 13.91,
+    "abrasive": 150,
+    "tabWidth": 0.33,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-4-0.1875",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 33.65,
+      "medium": 29.91,
+      "fine": 26.169999999999998
+    },
+    "pierce": 36.71,
+    "abrasive": 150,
+    "tabWidth": 0.21,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-4-0.2",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 31.420000000000005,
+      "medium": 27.93,
+      "fine": 24.440000000000005
+    },
+    "pierce": 43.38,
+    "abrasive": 150,
+    "tabWidth": 0.2,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-4-0.25",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 24.570000000000004,
+      "medium": 21.84,
+      "fine": 19.11
+    },
+    "pierce": 77.24,
+    "abrasive": 150,
+    "tabWidth": 0.15,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-4-0.283",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 21.230000000000004,
+      "medium": 18.87,
+      "fine": 16.51
+    },
+    "pierce": 105.99,
+    "abrasive": 150,
+    "tabWidth": 0.14,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-4-0.35",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 16.200000000000003,
+      "medium": 14.4,
+      "fine": 12.6
+    },
+    "pierce": 177.26,
+    "abrasive": 150,
+    "tabWidth": 0.11,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-4-0.375",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 14.740000000000002,
+      "medium": 13.100000000000001,
+      "fine": 11.47
+    },
+    "pierce": 206.86,
+    "abrasive": 150,
+    "tabWidth": 0.1,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-4-0.443",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 11.489999999999998,
+      "medium": 10.220000000000002,
+      "fine": 8.94
+    },
+    "pierce": 290.31,
+    "abrasive": 150,
+    "tabWidth": 0.08,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-4-0.444",
+    "machine": "pro",
+    "name": "Stainless Steel - 316",
+    "category": "Metals",
+    "thicknessIn": 0.444,
+    "thicknessMm": 11.2776,
+    "feeds": {
+      "coarse": 11.440000000000001,
+      "medium": 10.17,
+      "fine": 8.899999999999999
+    },
+    "pierce": 291.71,
+    "abrasive": 150,
+    "tabWidth": 0.08,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-5-0.001",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 353.55,
+      "medium": 314.26,
+      "fine": 274.98
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 477.63,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-5-0.01",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 170.67,
+      "medium": 151.7,
+      "fine": 132.74
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 25.07,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-5-0.023",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 121.51,
+      "medium": 108.01,
+      "fine": 94.51
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 7.78,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-5-0.04",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 94,
+      "medium": 83.55000000000001,
+      "fine": 73.11
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.55,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-5-0.0625",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 74.99,
+      "medium": 66.66,
+      "fine": 58.32000000000001
+    },
+    "pierce": 4.51,
+    "abrasive": 150,
+    "tabWidth": 1.92,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-5-0.073",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 68.99,
+      "medium": 61.319999999999986,
+      "fine": 53.66
+    },
+    "pierce": 5.58,
+    "abrasive": 150,
+    "tabWidth": 1.55,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-5-0.1",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 57.14,
+      "medium": 50.79,
+      "fine": 44.440000000000005
+    },
+    "pierce": 10.7,
+    "abrasive": 150,
+    "tabWidth": 1,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-5-0.125",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 49.42000000000001,
+      "medium": 43.93000000000001,
+      "fine": 38.44
+    },
+    "pierce": 18.11,
+    "abrasive": 150,
+    "tabWidth": 0.73,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-5-0.1875",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 36.34,
+      "medium": 32.3,
+      "fine": 28.27
+    },
+    "pierce": 47.49,
+    "abrasive": 150,
+    "tabWidth": 0.42,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-5-0.2",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 34.37,
+      "medium": 30.55,
+      "fine": 26.729999999999997
+    },
+    "pierce": 55.13,
+    "abrasive": 150,
+    "tabWidth": 0.38,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-5-0.25",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 27.86,
+      "medium": 24.77,
+      "fine": 21.67
+    },
+    "pierce": 90.66,
+    "abrasive": 150,
+    "tabWidth": 0.28,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-5-0.283",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 24.4,
+      "medium": 21.69,
+      "fine": 18.98
+    },
+    "pierce": 118.52,
+    "abrasive": 150,
+    "tabWidth": 0.24,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-5-0.35",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 18.72,
+      "medium": 16.640000000000004,
+      "fine": 14.56
+    },
+    "pierce": 184.81,
+    "abrasive": 150,
+    "tabWidth": 0.18,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-5-0.375",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 16.96,
+      "medium": 15.069999999999999,
+      "fine": 13.19
+    },
+    "pierce": 212.62,
+    "abrasive": 150,
+    "tabWidth": 0.16,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-5-0.443",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 12.78,
+      "medium": 11.360000000000001,
+      "fine": 9.94
+    },
+    "pierce": 297.8,
+    "abrasive": 150,
+    "tabWidth": 0.13,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-5-0.468",
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "category": "Metals",
+    "thicknessIn": 0.468,
+    "thicknessMm": 11.8872,
+    "feeds": {
+      "coarse": 11.440000000000001,
+      "medium": 10.17,
+      "fine": 8.899999999999999
+    },
+    "pierce": 332.61,
+    "abrasive": 150,
+    "tabWidth": 0.12,
+    "lead": 1.21
+  },
+  {
+    "id": "pro-7-0.001",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 708.2,
+      "medium": 629.5100000000001,
+      "fine": 550.8200000000002
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-7-0.01",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 224.24000000000004,
+      "medium": 199.33,
+      "fine": 174.41
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-7-0.023",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 137.69999999999996,
+      "medium": 122.4,
+      "fine": 107.1
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-7-0.04",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 97.34,
+      "medium": 86.52,
+      "fine": 75.7
+    },
+    "pierce": 3.7,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-7-0.0625",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 72.84,
+      "medium": 64.74,
+      "fine": 56.65
+    },
+    "pierce": 4.59,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-7-0.073",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 65.67,
+      "medium": 58.38,
+      "fine": 51.08
+    },
+    "pierce": 5.45,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-7-0.1",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 52.349999999999994,
+      "medium": 46.54,
+      "fine": 40.72
+    },
+    "pierce": 8.99,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-7-0.125",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 44.239999999999995,
+      "medium": 39.33,
+      "fine": 34.41
+    },
+    "pierce": 13.84,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-7-0.1875",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 31.560000000000002,
+      "medium": 28.06,
+      "fine": 24.55
+    },
+    "pierce": 35.28,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-7-0.2",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 29.76,
+      "medium": 26.46,
+      "fine": 23.150000000000002
+    },
+    "pierce": 41.82,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-7-0.25",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 24.039999999999996,
+      "medium": 21.37,
+      "fine": 18.700000000000003
+    },
+    "pierce": 79.38,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-7-0.283",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 21.11,
+      "medium": 18.77,
+      "fine": 16.42
+    },
+    "pierce": 118.23,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-7-0.35",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 16.539999999999996,
+      "medium": 14.7,
+      "fine": 12.869999999999997
+    },
+    "pierce": 249.89,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-7-0.375",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 15.169999999999998,
+      "medium": 13.49,
+      "fine": 11.8
+    },
+    "pierce": 323.33,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-7-0.443",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 12.019999999999998,
+      "medium": 10.68,
+      "fine": 9.34
+    },
+    "pierce": 622.05,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-7-0.457",
+    "machine": "pro",
+    "name": "Steel - 1095",
+    "category": "Metals",
+    "thicknessIn": 0.457,
+    "thicknessMm": 11.6078,
+    "feeds": {
+      "coarse": 11.45,
+      "medium": 10.18,
+      "fine": 8.899999999999999
+    },
+    "pierce": 706.17,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 1.21
+  },
+  {
+    "id": "pro-6-0.001",
+    "machine": "pro",
+    "name": "Steel - A2",
+    "category": "Metals",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 475.93000000000006,
+      "medium": 423.05,
+      "fine": 370.16999999999996
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 11.16,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-6-0.01",
+    "machine": "pro",
+    "name": "Steel - A2",
+    "category": "Metals",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 174.92,
+      "medium": 155.49,
+      "fine": 136.05
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 4.48,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-6-0.023",
+    "machine": "pro",
+    "name": "Steel - A2",
+    "category": "Metals",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 112.35,
+      "medium": 99.86000000000001,
+      "fine": 87.38
+    },
+    "pierce": 2.93,
+    "abrasive": 150,
+    "tabWidth": 3.12,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-6-0.04",
+    "machine": "pro",
+    "name": "Steel - A2",
+    "category": "Metals",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 81.15000000000002,
+      "medium": 72.14,
+      "fine": 63.120000000000005
+    },
+    "pierce": 4.91,
+    "abrasive": 150,
+    "tabWidth": 2.45,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-6-0.0625",
+    "machine": "pro",
+    "name": "Steel - A2",
+    "category": "Metals",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 61.29999999999999,
+      "medium": 54.49,
+      "fine": 47.68
+    },
+    "pierce": 6.75,
+    "abrasive": 150,
+    "tabWidth": 2.02,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-6-0.073",
+    "machine": "pro",
+    "name": "Steel - A2",
+    "category": "Metals",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 55.33,
+      "medium": 49.18,
+      "fine": 43.040000000000006
+    },
+    "pierce": 7.62,
+    "abrasive": 150,
+    "tabWidth": 1.9,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-6-0.1",
+    "machine": "pro",
+    "name": "Steel - A2",
+    "category": "Metals",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 43.99,
+      "medium": 39.1,
+      "fine": 34.22
+    },
+    "pierce": 10.97,
+    "abrasive": 150,
+    "tabWidth": 1.65,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-6-0.125",
+    "machine": "pro",
+    "name": "Steel - A2",
+    "category": "Metals",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 36.91,
+      "medium": 32.81,
+      "fine": 28.71
+    },
+    "pierce": 16.43,
+    "abrasive": 150,
+    "tabWidth": 1.5,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-6-0.1875",
+    "machine": "pro",
+    "name": "Steel - A2",
+    "category": "Metals",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 25.52,
+      "medium": 22.679999999999996,
+      "fine": 19.84
+    },
+    "pierce": 46.43,
+    "abrasive": 150,
+    "tabWidth": 1.26,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-6-0.2",
+    "machine": "pro",
+    "name": "Steel - A2",
+    "category": "Metals",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 23.86,
+      "medium": 21.21,
+      "fine": 18.560000000000002
+    },
+    "pierce": 55.85,
+    "abrasive": 150,
+    "tabWidth": 1.23,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-6-0.25",
+    "machine": "pro",
+    "name": "Steel - A2",
+    "category": "Metals",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 18.53,
+      "medium": 16.47,
+      "fine": 14.41
+    },
+    "pierce": 105.08,
+    "abrasive": 150,
+    "tabWidth": 1.12,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-6-0.283",
+    "machine": "pro",
+    "name": "Steel - A2",
+    "category": "Metals",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 15.770000000000001,
+      "medium": 14.02,
+      "fine": 12.26
+    },
+    "pierce": 147.3,
+    "abrasive": 150,
+    "tabWidth": 1.06,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-6-0.348",
+    "machine": "pro",
+    "name": "Steel - A2",
+    "category": "Metals",
+    "thicknessIn": 0.348,
+    "thicknessMm": 8.839199999999998,
+    "feeds": {
+      "coarse": 11.48,
+      "medium": 10.209999999999999,
+      "fine": 8.930000000000001
+    },
+    "pierce": 245.59,
+    "abrasive": 150,
+    "tabWidth": 0.97,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-21-0.001",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 11.31,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-21-0.01",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 5.16,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-21-0.023",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.78,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-21-0.04",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 3.07,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-21-0.0625",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.6,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-21-0.073",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 1500.3,
+      "medium": 1333.6,
+      "fine": 1166.9
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.46,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-21-0.1",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 1129.66,
+      "medium": 1004.14,
+      "fine": 878.63
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.19,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-21-0.125",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 771.62,
+      "medium": 685.89,
+      "fine": 600.15
+    },
+    "pierce": 1,
+    "abrasive": 150,
+    "tabWidth": 2.02,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-21-0.1875",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 383.42,
+      "medium": 340.82,
+      "fine": 298.2099999999999
+    },
+    "pierce": 4.2,
+    "abrasive": 150,
+    "tabWidth": 1.73,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-21-0.2",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 342.81,
+      "medium": 304.72,
+      "fine": 266.62999999999994
+    },
+    "pierce": 4.46,
+    "abrasive": 150,
+    "tabWidth": 1.69,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-21-0.25",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 233.52,
+      "medium": 207.58,
+      "fine": 181.62999999999997
+    },
+    "pierce": 5.99,
+    "abrasive": 150,
+    "tabWidth": 1.56,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-21-0.283",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 188.59,
+      "medium": 167.63000000000002,
+      "fine": 146.68
+    },
+    "pierce": 7.45,
+    "abrasive": 150,
+    "tabWidth": 1.49,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-21-0.35",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 130.9,
+      "medium": 116.35,
+      "fine": 101.80999999999999
+    },
+    "pierce": 11.5,
+    "abrasive": 150,
+    "tabWidth": 1.38,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-21-0.375",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 116.35,
+      "medium": 103.41999999999999,
+      "fine": 90.5
+    },
+    "pierce": 13.37,
+    "abrasive": 150,
+    "tabWidth": 1.34,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-21-0.443",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 87.30000000000001,
+      "medium": 77.60000000000001,
+      "fine": 67.89999999999999
+    },
+    "pierce": 19.56,
+    "abrasive": 150,
+    "tabWidth": 1.26,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-21-0.5",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.5,
+    "thicknessMm": 12.7,
+    "feeds": {
+      "coarse": 70.87,
+      "medium": 62.99,
+      "fine": 55.11999999999999
+    },
+    "pierce": 25.91,
+    "abrasive": 150,
+    "tabWidth": 1.21,
+    "lead": 1.23
+  },
+  {
+    "id": "pro-21-0.625",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.625,
+    "thicknessMm": 15.875,
+    "feeds": {
+      "coarse": 48.25,
+      "medium": 42.89,
+      "fine": 37.529999999999994
+    },
+    "pierce": 43.57,
+    "abrasive": 150,
+    "tabWidth": 1.11,
+    "lead": 1.28
+  },
+  {
+    "id": "pro-21-0.75",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.75,
+    "thicknessMm": 19.049999999999997,
+    "feeds": {
+      "coarse": 35.28,
+      "medium": 31.359999999999996,
+      "fine": 27.44
+    },
+    "pierce": 66.28,
+    "abrasive": 150,
+    "tabWidth": 1.04,
+    "lead": 1.31
+  },
+  {
+    "id": "pro-21-0.875",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 0.875,
+    "thicknessMm": 22.224999999999998,
+    "feeds": {
+      "coarse": 27.07,
+      "medium": 24.059999999999995,
+      "fine": 21.06
+    },
+    "pierce": 94.08,
+    "abrasive": 150,
+    "tabWidth": 0.98,
+    "lead": 1.35
+  },
+  {
+    "id": "pro-21-1",
+    "machine": "pro",
+    "name": "Tile - Ceramic",
+    "category": "Ceramics & Stone",
+    "thicknessIn": 1,
+    "thicknessMm": 25.4,
+    "feeds": {
+      "coarse": 21.51,
+      "medium": 19.120000000000005,
+      "fine": 16.73
+    },
+    "pierce": 127.1,
+    "abrasive": 150,
+    "tabWidth": 0.93,
+    "lead": 1.37
+  },
+  {
+    "id": "pro-8-0.001",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.001,
+    "thicknessMm": 0.0254,
+    "feeds": {
+      "coarse": 685.41,
+      "medium": 609.2599999999999,
+      "fine": 533.1
+    },
+    "pierce": 1.93,
+    "abrasive": 150,
+    "tabWidth": 12.12,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-8-0.01",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.01,
+    "thicknessMm": 0.254,
+    "feeds": {
+      "coarse": 241,
+      "medium": 214.22,
+      "fine": 187.45
+    },
+    "pierce": 2.04,
+    "abrasive": 150,
+    "tabWidth": 5.19,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-8-0.023",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.023,
+    "thicknessMm": 0.5841999999999999,
+    "feeds": {
+      "coarse": 153.31,
+      "medium": 136.28000000000003,
+      "fine": 119.24
+    },
+    "pierce": 2.38,
+    "abrasive": 150,
+    "tabWidth": 3.71,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-8-0.04",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.04,
+    "thicknessMm": 1.016,
+    "feeds": {
+      "coarse": 110.59999999999998,
+      "medium": 98.31,
+      "fine": 86.02
+    },
+    "pierce": 3.19,
+    "abrasive": 150,
+    "tabWidth": 2.96,
+    "lead": 0.72
+  },
+  {
+    "id": "pro-8-0.0625",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.0625,
+    "thicknessMm": 1.5875,
+    "feeds": {
+      "coarse": 83.86,
+      "medium": 74.54,
+      "fine": 65.23000000000002
+    },
+    "pierce": 4.9,
+    "abrasive": 150,
+    "tabWidth": 2.48,
+    "lead": 0.79
+  },
+  {
+    "id": "pro-8-0.073",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.073,
+    "thicknessMm": 1.8541999999999998,
+    "feeds": {
+      "coarse": 75.9,
+      "medium": 67.45999999999998,
+      "fine": 59.03
+    },
+    "pierce": 5.96,
+    "abrasive": 150,
+    "tabWidth": 2.33,
+    "lead": 0.82
+  },
+  {
+    "id": "pro-8-0.1",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.1,
+    "thicknessMm": 2.54,
+    "feeds": {
+      "coarse": 60.88999999999999,
+      "medium": 54.120000000000005,
+      "fine": 47.36
+    },
+    "pierce": 9.66,
+    "abrasive": 150,
+    "tabWidth": 2.05,
+    "lead": 0.89
+  },
+  {
+    "id": "pro-8-0.125",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.125,
+    "thicknessMm": 3.175,
+    "feeds": {
+      "coarse": 51.6,
+      "medium": 45.86,
+      "fine": 40.13
+    },
+    "pierce": 14.28,
+    "abrasive": 150,
+    "tabWidth": 1.88,
+    "lead": 0.93
+  },
+  {
+    "id": "pro-8-0.1875",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.1875,
+    "thicknessMm": 4.762499999999999,
+    "feeds": {
+      "coarse": 36.79,
+      "medium": 32.70000000000001,
+      "fine": 28.62
+    },
+    "pierce": 31.96,
+    "abrasive": 150,
+    "tabWidth": 1.6,
+    "lead": 1.02
+  },
+  {
+    "id": "pro-8-0.2",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.2,
+    "thicknessMm": 5.08,
+    "feeds": {
+      "coarse": 34.660000000000004,
+      "medium": 30.81,
+      "fine": 26.959999999999997
+    },
+    "pierce": 36.68,
+    "abrasive": 150,
+    "tabWidth": 1.56,
+    "lead": 1.03
+  },
+  {
+    "id": "pro-8-0.25",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.25,
+    "thicknessMm": 6.35,
+    "feeds": {
+      "coarse": 27.82,
+      "medium": 24.73,
+      "fine": 21.639999999999997
+    },
+    "pierce": 59.69,
+    "abrasive": 150,
+    "tabWidth": 1.42,
+    "lead": 1.08
+  },
+  {
+    "id": "pro-8-0.283",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.283,
+    "thicknessMm": 7.188199999999999,
+    "feeds": {
+      "coarse": 24.29,
+      "medium": 21.59,
+      "fine": 18.89
+    },
+    "pierce": 78.98,
+    "abrasive": 150,
+    "tabWidth": 1.35,
+    "lead": 1.11
+  },
+  {
+    "id": "pro-8-0.35",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.35,
+    "thicknessMm": 8.889999999999999,
+    "feeds": {
+      "coarse": 18.71,
+      "medium": 16.63,
+      "fine": 14.55
+    },
+    "pierce": 129.14,
+    "abrasive": 150,
+    "tabWidth": 1.24,
+    "lead": 1.15
+  },
+  {
+    "id": "pro-8-0.375",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.375,
+    "thicknessMm": 9.524999999999999,
+    "feeds": {
+      "coarse": 17.03,
+      "medium": 15.14,
+      "fine": 13.24
+    },
+    "pierce": 151.83,
+    "abrasive": 150,
+    "tabWidth": 1.21,
+    "lead": 1.17
+  },
+  {
+    "id": "pro-8-0.443",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.443,
+    "thicknessMm": 11.2522,
+    "feeds": {
+      "coarse": 13.12,
+      "medium": 11.66,
+      "fine": 10.209999999999999
+    },
+    "pierce": 226.7,
+    "abrasive": 150,
+    "tabWidth": 1.13,
+    "lead": 1.2
+  },
+  {
+    "id": "pro-8-0.477",
+    "machine": "pro",
+    "name": "Titanium - Grade 2",
+    "category": "Metals",
+    "thicknessIn": 0.477,
+    "thicknessMm": 12.115799999999998,
+    "feeds": {
+      "coarse": 11.47,
+      "medium": 10.19,
+      "fine": 8.92
+    },
+    "pierce": 271.8,
+    "abrasive": 150,
+    "tabWidth": 1.1,
+    "lead": 1.22
+  }
+]

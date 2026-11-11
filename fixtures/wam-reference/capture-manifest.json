@@ -1,0 +1,59 @@
+{
+  "captureDate": "2026-11-08",
+  "wamVersion": "2.5.0",
+  "machine": "Pro",
+  "desktopCaptured": false,
+  "physicalMachineOperated": false,
+  "files": [
+    {
+      "file": "open-centerline.gcode",
+      "bytes": 1042,
+      "sha256": "c1c156dfee1dc61a1d61ca1584fefd3bdeafaa67b80298b42c89dae3f169eac5"
+    },
+    {
+      "file": "open-centerline.wzr",
+      "bytes": 3253,
+      "sha256": "2ac5834c274de10a950cee55021c8399d7e253e97b4c2351b964ee75c8da9ad0"
+    },
+    {
+      "file": "plate-hole-valid.gcode",
+      "bytes": 4849,
+      "sha256": "f7d77f9b1d41e50fc8c98b7626d9301efa85dbc22f98542c0cc48d031dd32f10"
+    },
+    {
+      "file": "plate-hole-valid.wzr",
+      "bytes": 11033,
+      "sha256": "09c30a39090305a4871720dfa0e793a578db36287bd3ec72ac7f2c12dca48d90"
+    },
+    {
+      "file": "sq-centerline.gcode",
+      "bytes": 1709,
+      "sha256": "3b3fd698097826f98dcf44293d1ba4e500586f875d3fb17f3289c1de7ad42480"
+    },
+    {
+      "file": "sq-centerline.wzr",
+      "bytes": 3241,
+      "sha256": "7637d47b8911899e0c0a1fad0bff71282ae66a5224747575f1f4f60252b6f42e"
+    },
+    {
+      "file": "sq-outside.gcode",
+      "bytes": 1929,
+      "sha256": "03edfd299935d066c78c57514de73bffec4e05fbc935f6572c72935ac2240a78"
+    },
+    {
+      "file": "sq-outside.wzr",
+      "bytes": 3242,
+      "sha256": "0e03d23d27257403badeb4eee3a7fcb5d6efe28280c29331eb7f101aa22845b5"
+    },
+    {
+      "file": "sq-tabs-leads.gcode",
+      "bytes": 2173,
+      "sha256": "d7963f5002de2f7286c348e6d440d2c8170f11bf4eb18fead64586dc701fdd5a"
+    },
+    {
+      "file": "sq-tabs-leads.wzr",
+      "bytes": 7080,
+      "sha256": "cc25587420d90426579220bb587e9196e9ecdc9560c275ebc97f01d5a91ee7dc"
+    }
+  ]
+}

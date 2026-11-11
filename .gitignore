@@ -6,3 +6,6 @@ release/
 projects/
 *.log
 .DS_Store
+.env
+.env.*
+artifacts/wam-login.png

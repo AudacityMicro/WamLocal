@@ -1,0 +1,153 @@
+{
+  "capturedDate": "2026-11-08",
+  "wamVersion": "2.5.0",
+  "machine": "Pro",
+  "desktopStatus": "Not captured: account lists only one Pro machine",
+  "results": [
+    {
+      "name": "sq-centerline",
+      "machine": "pro",
+      "sourceFile": "square.svg",
+      "feed": 131.22000000000003,
+      "pierceSeconds": 6.93,
+      "kerf": 0.9652,
+      "wamCutLength": 200,
+      "localCutLength": 199.99999999999994,
+      "cutLengthDifference": -5.684341886080802e-14,
+      "wamBounds": {
+        "x": 20,
+        "y": 20,
+        "width": 50,
+        "height": 50
+      },
+      "localBounds": {
+        "x": 19.999959999999994,
+        "y": 19.999959999999994,
+        "width": 49.99999999999999,
+        "height": 49.99999999999999
+      },
+      "wamDeclaredSeconds": 117,
+      "wamLinearPlusDwellSeconds": 122.61757876843538,
+      "localEstimatedSeconds": 98.3794741655235,
+      "wamSegments": 1,
+      "localTabLength": 0,
+      "localIssues": []
+    },
+    {
+      "name": "sq-outside",
+      "machine": "pro",
+      "sourceFile": "square.svg",
+      "feed": 131.22000000000003,
+      "pierceSeconds": 6.93,
+      "kerf": 0.9652,
+      "wamCutLength": 203.18391918985782,
+      "localCutLength": 202.95275477509512,
+      "cutLengthDifference": -0.2311644147627021,
+      "wamBounds": {
+        "x": 19.52,
+        "y": 19.52,
+        "width": 50.96000000000001,
+        "height": 50.96000000000001
+      },
+      "localBounds": {
+        "x": 19.5174,
+        "y": 19.5174,
+        "width": 50.96520000000001,
+        "height": 50.96520000000001
+      },
+      "wamDeclaredSeconds": 104,
+      "wamLinearPlusDwellSeconds": 110.16874308701583,
+      "localEstimatedSeconds": 99.72961352313446,
+      "wamSegments": 1,
+      "localTabLength": 0,
+      "localIssues": []
+    },
+    {
+      "name": "sq-tabs-leads",
+      "machine": "pro",
+      "sourceFile": "square.svg",
+      "feed": 131.22000000000003,
+      "pierceSeconds": 6.93,
+      "kerf": 0.9652,
+      "wamCutLength": 201.78986137865974,
+      "localCutLength": 202.5227547750951,
+      "cutLengthDifference": 0.7328933964353723,
+      "wamBounds": {
+        "x": 19.52,
+        "y": 19.52,
+        "width": 51.55,
+        "height": 50.96000000000001
+      },
+      "localBounds": {
+        "x": 19.5174,
+        "y": 18.797803897595553,
+        "width": 50.96520000000001,
+        "height": 51.68479610240445
+      },
+      "wamDeclaredSeconds": 107,
+      "wamLinearPlusDwellSeconds": 110.34927686785113,
+      "localEstimatedSeconds": 99.53299715367858,
+      "wamSegments": 1,
+      "localTabLength": 1.35,
+      "localIssues": []
+    },
+    {
+      "name": "plate-hole-valid",
+      "machine": "pro",
+      "sourceFile": "plate-with-hole.svg",
+      "feed": 131.22000000000003,
+      "pierceSeconds": 6.93,
+      "kerf": 0.9652,
+      "wamCutLength": 260.18243055458134,
+      "localCutLength": 263.2300313344812,
+      "cutLengthDifference": 3.0476007798998808,
+      "wamBounds": {
+        "x": 19.52,
+        "y": 19.52,
+        "width": 61.55,
+        "height": 40.959999999999994
+      },
+      "localBounds": {
+        "x": 19.5174,
+        "y": 18.797803897595553,
+        "width": 60.96520000000001,
+        "height": 41.68479610240445
+      },
+      "wamDeclaredSeconds": 153,
+      "wamLinearPlusDwellSeconds": 158.46962794960615,
+      "localEstimatedSeconds": 134.22123975056294,
+      "wamSegments": 2,
+      "localTabLength": 1.3499999999999872,
+      "localIssues": []
+    },
+    {
+      "name": "open-centerline",
+      "machine": "pro",
+      "sourceFile": "open-centerline.svg",
+      "feed": 131.22000000000003,
+      "pierceSeconds": 6.93,
+      "kerf": 0.9652,
+      "wamCutLength": 70,
+      "localCutLength": 70,
+      "cutLengthDifference": 0,
+      "wamBounds": {
+        "x": 20,
+        "y": 20,
+        "width": 50,
+        "height": 20
+      },
+      "localBounds": {
+        "x": 19.99995999999999,
+        "y": 19.999959999999994,
+        "width": 50,
+        "height": 20
+      },
+      "wamDeclaredSeconds": 47,
+      "wamLinearPlusDwellSeconds": 52.93164708821178,
+      "localEstimatedSeconds": 38.93731595793324,
+      "wamSegments": 1,
+      "localTabLength": 0,
+      "localIssues": []
+    }
+  ]
+}
