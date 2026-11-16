@@ -44,7 +44,8 @@ export function qualityProfiles(
   const group = materialCatalog(records, current).filter(
     (m) =>
       materialName(m) === materialName(current) &&
-      thicknessKey(m.thickness) === thicknessKey(current.thickness),
+      thicknessKey(m.thickness) === thicknessKey(current.thickness) &&
+      (allMachines || m.machine === machine),
   );
   const names = (m: JobMaterial) =>
     materialName({ ...m, stockKey: undefined }) === materialName(m)
@@ -56,7 +57,12 @@ export function qualityProfiles(
       (b.id === current.id ? -10 : b.machine === machine ? -1 : 0),
   );
   const key = (m: JobMaterial) =>
-    [materialQuality(m), names(m), allMachines ? m.machine : ""].join("|");
+    [
+      materialQuality(m),
+      names(m),
+      allMachines ? m.machine : "",
+      m.requiresVerification ? "pending" : "ready",
+    ].join("|");
   return ordered
     .filter((m, i, a) => a.findIndex((x) => key(x) === key(m)) === i)
     .sort(
@@ -81,15 +87,25 @@ export function selectMaterialProfile(
   candidates = candidates.filter(
     (m) => thicknessKey(m.thickness) === thicknessKey(nearest),
   );
+  const quality = materialQuality(current);
+  const recordedReplacement = candidates.some(
+    (m) =>
+      m.machine === machine &&
+      materialQuality(m) === quality &&
+      !m.requiresVerification,
+  );
   return [...candidates].sort((a, b) => {
     const score = (m: JobMaterial) =>
-      (m.id === current.id ? 100 : 0) +
+      (m.id === current.id && !(m.requiresVerification && recordedReplacement)
+        ? 100
+        : 0) +
       (materialQuality(m) === materialQuality(current)
         ? 20
         : materialQuality(m) === "medium"
           ? 10
           : 0) +
-      (m.machine === machine ? 5 : 0);
+      (m.machine === machine ? 50 : 0) +
+      (!m.requiresVerification ? 5 : 0);
     return score(b) - score(a);
   })[0];
 }

@@ -4,6 +4,12 @@ An independent, offline waterjet design and CAM workbench for power users. Elect
 
 ![Job setup](artifacts/jobs-inline-sheets.png)
 
+## Version 0.6.2 gauge captures and saved profile selection
+
+The recorded catalog now contains 560 Pro material/thickness records across all 24 materials, including every 7-26 gauge for Aluminum 6061, Stainless 304/316, and Steel 1018/1095/A2. All three quality feeds are captured for each. Of these records, 526 have usable captured tab/lead defaults (1,578 complete quality profiles); 34 retain flagged tab-default outliers. Desktop requires its own captures.
+
+When a saved job contains an older unverified profile, its Quality list now also offers the complete **WAM reference** of the same quality. Choosing that entry, or reselecting the material/thickness, applies the recorded settings. Existing embedded values remain until that explicit choice. Quality menus in jobs and part editors filter to the active machine; the presets database can still show both machines.
+
 ## Version 0.6.1 profiles and hole leads
 
 All recorded thicknesses now appear in the global presets database with Coarse, Medium and Fine choices. The first expansion has 450 Pro thickness captures, including a new 0.020-inch Aluminum 6061 capture on 2026-11-16 (605 / 537.78 / 470.55 mm/min and 1.21 seconds pierce). Exact quality feeds are preserved. Records with invalid tab/lead defaults retain the captured process rates but use an explicitly flagged application tab/lead default. Uncaptured gauge and Desktop profiles are marked **Needs settings**, with no interpolation or reuse of another machine's feed. Library upgrades preserve edited defaults and embedded jobs.

@@ -15,7 +15,7 @@ The 0.3 alpha adds jobs, reusable parts and quantities, multiple sheets with X/Y
 | Tabs | Automatic tabs or manual per-contour positions and widths | Corner avoidance, process-specific lift behavior |
 | Leads | Scrap-side straight entries, length limiting within the same contour, manual entry position | Other-part and fixture collision avoidance, arc leads |
 | Order | Holes first then area | Full containment graph, travel optimization constrained by support, per-operation ordering, manual reorder |
-| Material library | 449 Pro reference records, editable defaults database with import/export, per-part process snapshots; 34 tab outliers blocked | Verified arbitrary-thickness calculation (interpolation failed holdouts), Desktop captures |
+| Material library | 560 Pro reference records, editable defaults database with import/export, per-part process snapshots; 34 tab outliers blocked | Verified arbitrary-thickness calculation (interpolation failed holdouts), Desktop captures |
 | Preflight | Bounds/open contour/shape overlap, pierce footprint, quantities, material and WCS checks | Lead collisions, fixture avoidance, fully validated machine envelope, unsupported parameter errors |
 | Simulation | Cut/rapid/tab overlay and scrubber | Distance/time-based motion playback, pierce/dwell visualization, postprocessed NC parsing and comparison |
 | Export | Project JSON and SVG layout | Validated WAZER cut files, export report and regression fixtures |
@@ -36,7 +36,7 @@ Jobs now combines parts, nesting options, and interactive sheet previews. Advanc
 
 ## WAZER postprocessor validation
 
-**Material status:** [449 Pro reference records across 24 materials](fixtures/wam-reference/materials/README.md) preserve 4,939 numerical values. The 246 independent points reject the diagnostic interpolation baseline. Exact recorded lookup is tested; universal thickness parity, executable Eco behavior, and Desktop values remain unverified. Thin-material tab outliers require explicit handling before preset integration.
+**Material status:** [560 Pro reference records across 24 materials](fixtures/wam-reference/materials/README.md) preserve 6,160 numerical values. The 357 independent points reject the diagnostic interpolation baseline. Exact recorded lookup is tested; universal thickness parity, executable Eco behavior, and Desktop values remain unverified. Thin-material tab outliers require explicit handling before preset integration.
 
 **Reference-capture status:** five WAM 2.5.0 Pro jobs and their editable workspaces are available in `fixtures/wam-reference/pro/`, with comparisons in [the test results](fixtures/wam-reference/RESULTS.md). Desktop remains pending because the account lists only a registered Pro machine. Curved leads, kerf-aware tab gaps, tabs on holes, variable feed and timing remain explicit implementation gaps. The existing source files below are still needed for Desktop and for additional modes/firmware coverage.
 

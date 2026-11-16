@@ -117,7 +117,9 @@ export function PresetSelector({
                     {qualities.filter(
                       (x) => materialQuality(x) === materialQuality(m),
                     ).length > 1
-                      ? ` - ${m.name}`
+                      ? m.preset
+                        ? " - WAM reference"
+                        : ` - ${m.name}`
                       : ""}
                   </option>
                 ))}
