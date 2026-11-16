@@ -1,3 +1,4 @@
+import { useDisplayUnits } from "./display-units";
 import { useState } from "react";
 import { type Project } from "../core/model";
 import {
@@ -16,6 +17,7 @@ export function MaterialPresets({
   project: Project;
   onApply: (p: Project) => void;
 }) {
+  const u = useDisplayUnits();
   const active = activeMaterialPreset(project);
   const [name, setName] = useState(active?.name ?? "Aluminum - 6061");
   const [thickness, setThickness] = useState(active?.id ?? "pro-0-0.125");
@@ -88,7 +90,7 @@ export function MaterialPresets({
               >
                 {choices.map((p) => (
                   <option key={p.id} value={p.id}>
-                    {p.thicknessIn} in / {Number(p.thicknessMm.toFixed(5))} mm
+                    {u.length(p.thicknessMm)}
                     {presetIssue(p) ? " · outlier" : ""}
                   </option>
                 ))}
@@ -107,11 +109,11 @@ export function MaterialPresets({
             </label>
           </div>
           <p className="preset-values">
-            {Number(selected.feeds[quality].toFixed(2))} mm/min ·{" "}
-            {selected.pierce} s pierce
+            {u.number(selected.feeds[quality])} {u.unit}/min · {selected.pierce}{" "}
+            s pierce
             <br />
-            {selected.abrasive} g/min abrasive · {selected.tabWidth} mm tabs ·{" "}
-            {selected.lead} mm leads
+            {selected.abrasive} g/min abrasive · {u.length(selected.tabWidth)}{" "}
+            tabs · {u.length(selected.lead)} leads
           </p>
           {issue ? (
             <p className="preset-warning" role="alert">
@@ -141,7 +143,7 @@ export function MaterialPresets({
       )}
       <p className="preset-status">
         {active
-          ? `Applied: ${active.name} · ${active.thicknessIn} in · ${project.material.preset!.quality}`
+          ? `Applied: ${active.name} · ${u.length(active.thicknessMm)} · ${project.material.preset!.quality}`
           : "Current settings: custom"}
       </p>
     </section>

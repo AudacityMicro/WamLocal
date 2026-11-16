@@ -42653,5 +42653,100 @@
       "maxTab": 3,
       "maxThicknessMM": 25.4
     }
+  },
+  {
+    "materialIndex": 0,
+    "name": "Aluminum - 6061",
+    "category": "Metals",
+    "thicknessIn": 0.02,
+    "thicknessMm": 0.508,
+    "data": {
+      "userDef": false,
+      "uId": null,
+      "name": "Aluminum - 6061",
+      "units": "mm",
+      "category": "Metals",
+      "thickness": {
+        "mathjs": "Unit",
+        "value": 0.02,
+        "unit": "in",
+        "fixPrefix": false
+      },
+      "speedMode": {
+        "name": "Speed Mode",
+        "abrasiveRate": {
+          "mathjs": "Unit",
+          "value": 150,
+          "unit": "g / min",
+          "fixPrefix": false
+        },
+        "roughRate": {
+          "mathjs": "Unit",
+          "value": 604.9999999999999,
+          "unit": "mm / min",
+          "fixPrefix": false
+        },
+        "mediumRate": {
+          "mathjs": "Unit",
+          "value": 537.7800000000001,
+          "unit": "mm / min",
+          "fixPrefix": false
+        },
+        "fineRate": {
+          "mathjs": "Unit",
+          "value": 470.55,
+          "unit": "mm / min",
+          "fixPrefix": false
+        }
+      },
+      "ecoMode": {
+        "name": "Eco Mode",
+        "abrasiveRate": {
+          "mathjs": "Unit",
+          "value": 150,
+          "unit": "g / min",
+          "fixPrefix": false
+        },
+        "roughRate": {
+          "mathjs": "Unit",
+          "value": 70,
+          "unit": "mm / min",
+          "fixPrefix": false
+        },
+        "mediumRate": {
+          "mathjs": "Unit",
+          "value": 62.99999999999999,
+          "unit": "mm / min",
+          "fixPrefix": false
+        },
+        "fineRate": {
+          "mathjs": "Unit",
+          "value": 56,
+          "unit": "mm / min",
+          "fixPrefix": false
+        }
+      },
+      "pierceTime": {
+        "mathjs": "Unit",
+        "value": 1.21,
+        "unit": "s",
+        "fixPrefix": false
+      },
+      "defaultTabWidth": {
+        "mathjs": "Unit",
+        "value": 8.84,
+        "unit": "mm",
+        "fixPrefix": false
+      },
+      "defaultLeadDist": {
+        "mathjs": "Unit",
+        "value": 0.72,
+        "unit": "mm",
+        "fixPrefix": false
+      },
+      "machineType": "pro",
+      "maxTab": 3,
+      "maxThicknessMM": 24.143201873038954
+    }
   }
 ]

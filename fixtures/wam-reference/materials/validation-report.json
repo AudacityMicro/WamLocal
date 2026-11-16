@@ -4,10 +4,10 @@
   "machine": "Pro",
   "capturedDate": "2026-11-08",
   "materials": 24,
-  "captures": 449,
+  "captures": 450,
   "training": 203,
-  "holdouts": 246,
-  "parameterValues": 4939,
+  "holdouts": 247,
+  "parameterValues": 4950,
   "integrityErrors": [],
   "outOfBedTabDefaults": [
     {
@@ -66,12 +66,13 @@
       "step": 0.001,
       "unit": "in",
       "maxMm": 24.13,
-      "captures": 20,
+      "captures": 21,
       "training": 9,
-      "holdout": 11,
+      "holdout": 12,
       "thicknessesIn": [
         0.001,
         0.01,
+        0.02,
         0.023,
         0.04,
         0.0625,
@@ -95,67 +96,67 @@
       "interpolationBaseline": [
         {
           "path": "speedMode.roughRate",
-          "comparisons": 11,
+          "comparisons": 12,
           "maxAbsoluteError": 4.72267090400419,
           "maxRelativeError": 0.023192244267275026
         },
         {
           "path": "speedMode.mediumRate",
-          "comparisons": 11,
+          "comparisons": 12,
           "maxAbsoluteError": 4.194475403076069,
           "maxRelativeError": 0.022962689855047926
         },
         {
           "path": "speedMode.fineRate",
-          "comparisons": 11,
+          "comparisons": 12,
           "maxAbsoluteError": 3.6649759169274603,
           "maxRelativeError": 0.02333294618867891
         },
         {
           "path": "speedMode.abrasiveRate",
-          "comparisons": 11,
+          "comparisons": 12,
           "maxAbsoluteError": 2.842170943040401e-14,
           "maxRelativeError": 1.8947806286936006e-16
         },
         {
           "path": "ecoMode.roughRate",
-          "comparisons": 11,
+          "comparisons": 12,
           "maxAbsoluteError": 2.842170943040401e-14,
           "maxRelativeError": 4.0602442043434295e-16
         },
         {
           "path": "ecoMode.mediumRate",
-          "comparisons": 11,
+          "comparisons": 12,
           "maxAbsoluteError": 0,
           "maxRelativeError": 0
         },
         {
           "path": "ecoMode.fineRate",
-          "comparisons": 11,
+          "comparisons": 12,
           "maxAbsoluteError": 2.1316282072803006e-14,
           "maxRelativeError": 3.806478941571965e-16
         },
         {
           "path": "ecoMode.abrasiveRate",
-          "comparisons": 11,
+          "comparisons": 12,
           "maxAbsoluteError": 2.842170943040401e-14,
           "maxRelativeError": 1.8947806286936006e-16
         },
         {
           "path": "pierceTime",
-          "comparisons": 11,
+          "comparisons": 12,
           "maxAbsoluteError": 0.3696669390188898,
           "maxRelativeError": 0.13484855492591194
         },
         {
           "path": "defaultTabWidth",
-          "comparisons": 11,
-          "maxAbsoluteError": 0.023323564102959438,
+          "comparisons": 12,
+          "maxAbsoluteError": 0.09290546239016884,
           "maxRelativeError": 0.017857142857142898
         },
         {
           "path": "defaultLeadDist",
-          "comparisons": 11,
+          "comparisons": 12,
           "maxAbsoluteError": 0.008306895454893715,
           "maxRelativeError": 0.010515057537840145
         }

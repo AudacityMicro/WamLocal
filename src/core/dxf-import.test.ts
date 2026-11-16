@@ -39,6 +39,53 @@ const curveLength = (points: Vertex[], closed = false) =>
   );
 
 describe("DXF bulged polyline import", () => {
+  it("ignores construction points without changing the outlines, holes or bounds", () => {
+    const drawing =
+      polyline(
+        "LWPOLYLINE",
+        [
+          { x: 0, y: 0 },
+          { x: 40, y: 0 },
+          { x: 40, y: 30 },
+          { x: 0, y: 30 },
+        ],
+        true,
+      ) + "0\nCIRCLE\n8\n0\n10\n20\n20\n15\n40\n5\n";
+    const points =
+      "0\nPOINT\n8\n0\n10\n10000\n20\n-10000\n30\n0\n0\nPOINT\n8\n0\n10\n20\n20\n15\n30\n0\n";
+    const notices: string[] = [];
+    const baseline = importDxf(document(drawing), "baseline");
+    const result = importDxf(
+      document(points + drawing),
+      "with points",
+      "mm",
+      (message) => notices.push(message),
+    );
+    expect(result.contours).toEqual(baseline.contours);
+    expect(result.contours.map((c) => c.hole)).toEqual([false, true]);
+    expect(bounds(result.contours.flatMap((c) => c.points))).toMatchObject({
+      width: 40,
+      height: 30,
+    });
+    expect(notices).toEqual([
+      "Skipped 2 DXF POINT markers; cut paths were retained.",
+    ]);
+  });
+  it("explains when a drawing has point markers but no paths", () => {
+    expect(() =>
+      importDxf(
+        document("0\nPOINT\n8\n0\n10\n2\n20\n3\n30\n0\n"),
+        "points only",
+      ),
+    ).toThrow(/only point markers and no cuttable paths/);
+  });
+  it("still rejects unsupported cut geometry when point markers are present", () => {
+    const entities =
+      "0\nPOINT\n8\n0\n10\n2\n20\n3\n30\n0\n0\nELLIPSE\n8\n0\n10\n0\n20\n0\n11\n10\n21\n0\n40\n0.5\n41\n0\n42\n6.283185307\n";
+    expect(() => importDxf(document(entities), "unsupported")).toThrow(
+      /Unsupported DXF entities: ELLIPSE/,
+    );
+  });
   it("imports the rounded-plate fixture with quarter-circle corners and a two-vertex circular hole", () => {
     const source = readFileSync(
       new URL("../../fixtures/dxf/bulged-rounded-plate.dxf", import.meta.url),
@@ -118,7 +165,9 @@ describe("DXF bulged polyline import", () => {
       project.parts = [{ ...part, cut: "centerline" }];
       expect(() => projectSchema.parse(project)).not.toThrow();
       const preview = plan(project);
-      expect(preview.issues).toEqual([]);
+      expect(preview.issues).toEqual([
+        "plate with circular hole: pierce footprint may alter a finished cut profile. Increase lead length or move the entry point.",
+      ]);
       expect(Math.abs(preview.cutLength - (200 + 10 * Math.PI))).toBeLessThan(
         0.3,
       );

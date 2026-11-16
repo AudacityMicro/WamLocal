@@ -1,6 +1,6 @@
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, rm, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import assert from "node:assert/strict";
@@ -90,7 +90,11 @@ try {
     machine: "pro",
     name: "Aluminum - 6061",
   });
-  assert.equal(catalog.presets.length, 20);
+  const bundledPresets = JSON.parse(await readFile(new URL("../src/core/material-presets.json", import.meta.url), "utf8"));
+  assert.equal(catalog.presets.length, bundledPresets.filter((p) => p.name === "Aluminum - 6061").length);
+  const thinAluminum = catalog.presets.find((p) => p.thicknessIn === 0.02);
+  assert.ok(thinAluminum);
+  assert.ok(Math.abs(thinAluminum.feeds.fine - 470.55) < 1e-8);
   assert.equal(
     (await call("list_material_presets", { machine: "desktop" })).presets
       .length,
@@ -153,13 +157,19 @@ try {
   job.parts = (await call("read_job", { file: "multi.job.json" })).parts;
   job.sheets[0].stock = { width: 100, height: 70, margin: 3, spacing: 2 };
   await call("write_job", { file: "multi.job.json", job });
-  const multi = await call("nest_job", { file: "multi.job.json" });
+  const { nestingResult, ...multi } = await call("nest_job", {
+    file: "multi.job.json",
+  });
+  assert.equal(nestingResult.reason, "complete");
+  assert.equal(nestingResult.unplaced.length, 0);
   assert.equal(multi.sheets.length, 3);
   assert.equal(
     multi.sheets.reduce((sum, s) => sum + s.placements.length, 0),
     3,
   );
   const inspected = await call("inspect_job", { file: "multi.job.json" });
+  await call("write_job", { file: "transfer.wam", job: multi });
+  assert.deepEqual(await call("read_job", { file: "transfer.wam" }), multi);
   assert.equal(inspected.sheets.length, 3);
   assert.ok(inspected.sheets[0].pierces.length);
   const library = await call("read_material_library", {});

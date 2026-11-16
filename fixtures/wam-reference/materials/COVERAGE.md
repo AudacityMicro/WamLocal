@@ -4,7 +4,7 @@ Captured WAM 2.5.0 Pro values; arbitrary-thickness parity is **not verified**.
 
 | Material | Maximum (in) | Maximum (mm) | Captures | Independent checks |
 | --- | ---: | ---: | ---: | ---: |
-| Aluminum - 6061 | 0.950 | 24.1300 | 20 | 11 |
+| Aluminum - 6061 | 0.950 | 24.1300 | 21 | 12 |
 | Brass - 260 | 0.818 | 20.7772 | 19 | 10 |
 | Copper - 110 | 0.564 | 14.3256 | 17 | 9 |
 | Stainless Steel - 304 | 0.493 | 12.5222 | 16 | 9 |
@@ -29,4 +29,4 @@ Captured WAM 2.5.0 Pro values; arbitrary-thickness parity is **not verified**.
 | Carbon Fiber - Carbon Fiber | 1.000 | 25.4000 | 20 | 11 |
 | Garolite - G-10/FR4 | 1.000 | 25.4000 | 20 | 10 |
 
-449 captured thickness points; 4939 individual parameter values. Integrity errors: 0. Tab defaults exceeding 460 mm: 9. See validation-report.json for per-field interpolation errors and the outliers.
+450 captured thickness points; 4950 individual parameter values. Integrity errors: 0. Tab defaults exceeding 460 mm: 9. See validation-report.json for per-field interpolation errors and the outliers.

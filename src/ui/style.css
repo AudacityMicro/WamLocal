@@ -6,6 +6,62 @@
   font-size: 13px;
   color-scheme: dark;
 }
+.part-editor-context {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.part-editor-context > b {
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.part-editor-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px;
+  margin: 12px 0 18px;
+}
+.part-editor-tabs button {
+  padding: 8px 4px;
+  font-size: 11px;
+}
+.part-editor-tabs button[aria-selected="true"] {
+  color: #f4b780;
+  border-color: #b58a65;
+  background: #332d27;
+}
+.setup-columns {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+.setup-row {
+  grid-template-columns:
+    minmax(150px, 1.4fr) 60px minmax(130px, 1fr)
+    110px 110px 72px 65px;
+}
+.row-part-actions {
+  display: flex;
+  gap: 5px;
+}
+.row-part-actions button {
+  padding: 6px;
+}
+.job-sheets {
+  margin-top: 30px;
+}
+.job-sheets .job-card {
+  display: inline-block;
+  vertical-align: top;
+  width: calc(50% - 14px);
+  margin: 7px;
+}
+.job-sheets section > h3 {
+  font-size: 16px;
+}
+.toast {
+  max-height: 250px;
+  overflow: auto;
+}
 .job-sidebar {
   width: 225px;
   flex-basis: 225px;
@@ -324,86 +380,6 @@ small {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-}
-.topbar {
-  height: 66px;
-  flex-shrink: 0;
-  border-bottom: 1px solid #30383e;
-  background: #1b2227;
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  padding: 0 22px;
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 255px;
-}
-.brand-mark {
-  background: #e8aa79;
-  color: #171f23;
-  border-radius: 7px;
-  width: 32px;
-  height: 32px;
-  font-size: 28px;
-  line-height: 27px;
-  font-weight: 800;
-  padding-left: 3px;
-  letter-spacing: -5px;
-}
-.brand-mark span {
-  font-size: 20px;
-}
-.brand b {
-  font-size: 17px;
-  letter-spacing: 1.3px;
-}
-.brand b > span {
-  font-weight: 400;
-  margin-left: 5px;
-  color: #87979d;
-  font-size: 14px;
-}
-.brand i {
-  font-size: 8px;
-  font-style: normal;
-  color: #b7a18e;
-  border: 1px solid #685345;
-  padding: 3px 5px;
-  border-radius: 3px;
-}
-.project-name {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  flex: 1;
-}
-.project-name small {
-  margin-left: 8px;
-  font-size: 10px;
-  color: #6f8289;
-}
-.green-dot {
-  width: 5px;
-  height: 5px;
-  display: inline-block;
-  background: #85b89b;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.top-actions {
-  display: flex;
-  gap: 8px;
-}
-.top-actions button {
-  font-size: 11px;
-}
-.top-actions button:first-child {
-  background: transparent;
-  border-color: transparent;
 }
 .primary {
   background: #ecae7b;
@@ -1108,15 +1084,6 @@ section h3 {
   .inspector {
     width: 260px;
   }
-  .project-name small {
-    display: none;
-  }
-  .topbar {
-    gap: 15px;
-  }
-  .top-actions button:first-child {
-    display: none;
-  }
   .metrics {
     gap: 20px;
     padding: 0 20px;
@@ -1134,4 +1101,328 @@ section h3 {
   .canvas-help > span:last-child {
     display: none;
   }
+}
+
+/* Dependent stock/profile selectors and sheet-relative work origin. */
+.setup-table .setup-row {
+  grid-template-columns:
+    minmax(150px, 1.4fr) 60px minmax(130px, 1fr)
+    110px 110px 72px 65px;
+}
+.preset-select-cell {
+  min-width: 0;
+  display: block;
+}
+.preset-select-cell select {
+  width: 100%;
+  min-width: 0;
+}
+.work-origin-picker {
+  margin: 16px 0;
+  color: #abc4cf;
+  font-size: 11px;
+}
+.origin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  max-width: 180px;
+  margin: 8px 0;
+  padding: 6px;
+  border: 1px solid #53656c;
+  background: #122126;
+}
+.origin-grid button {
+  position: relative;
+  padding: 0;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+}
+.origin-grid button svg {
+  position: absolute;
+  inset: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  pointer-events: none;
+}
+.origin-dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: currentColor;
+  pointer-events: none;
+}
+.origin-grid button[aria-pressed="true"] {
+  background: #efad76;
+  color: #172125;
+  border-color: #efad76;
+}
+.context-page {
+  padding: 45px;
+  color: #aac0cb;
+}
+.context-page h1 {
+  font-size: 24px;
+  color: #e3edf1;
+}
+
+.machine-settings-page {
+  padding: 30px 48px;
+  overflow: auto;
+  display: block;
+}
+.machine-settings-page > * {
+  max-width: 560px;
+}
+.machine-settings-page section {
+  padding: 20px 0;
+  border-bottom: 1px solid #34434b;
+}
+.machine-settings-page h1 {
+  font-size: 24px;
+}
+.machine-settings-page h2 {
+  font-size: 16px;
+}
+.machine-settings-page p {
+  font-size: 12px;
+  color: #adc0c9;
+  line-height: 1.6;
+}
+
+.nesting-options {
+  padding: 0;
+  border: 0;
+  margin: 0;
+  min-width: 0;
+}
+.nesting-options .check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  margin: 12px 0;
+}
+.nesting-options input[type="checkbox"] {
+  width: auto;
+}
+.job-nesting-options {
+  margin: 20px 0;
+  padding: 16px 20px;
+  border: 1px solid #34434b;
+  border-radius: 6px;
+  background: #182328;
+}
+.job-nesting-options summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.job-nesting-options[open] summary {
+  margin-bottom: 18px;
+}
+.job-nesting-options .nesting-option-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px 20px;
+  align-items: start;
+}
+.nesting-progress {
+  padding: 14px;
+  border: 1px solid #74644f;
+  border-radius: 6px;
+  margin: 16px 0;
+  background: #2d302a;
+}
+.nesting-progress b {
+  font-size: 12px;
+}
+.nesting-progress p {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #c8c3ae;
+}
+.nesting-progress .button-row {
+  flex-wrap: wrap;
+}
+
+.nesting-controls-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+.nesting-controls-header button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.nesting-settings-dialog {
+  width: min(680px, calc(100vw - 48px));
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+  padding: 24px;
+  background: #1b292f;
+  border: 1px solid #53656c;
+  border-radius: 8px;
+  color: #d6dddf;
+  box-shadow: 0 20px 80px #0009;
+}
+.nesting-settings-dialog::backdrop {
+  background: #050b10b0;
+  backdrop-filter: blur(3px);
+}
+.nesting-settings-dialog header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+.nesting-settings-dialog h2 {
+  margin: 0;
+  font-size: 19px;
+}
+.nesting-settings-dialog header button {
+  padding: 6px;
+}
+.nesting-settings-dialog .nesting-option-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 20px;
+}
+.nesting-settings-dialog footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+.nesting-settings-dialog small {
+  display: block;
+  margin-top: 6px;
+  font-size: 10px;
+  color: #93aeb9;
+}
+.job-sheets .job-card.sheet-with-preview {
+  display: grid;
+  grid-template-columns: 260px minmax(350px, 1fr);
+  gap: 20px;
+  width: 100%;
+  margin: 14px 0;
+  padding: 16px;
+}
+.sheet-details {
+  min-width: 0;
+}
+.sheet-preview {
+  min-width: 0;
+  align-self: start;
+  background: #111c20;
+  border: 1px solid #3d5159;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.sheet-preview-toolbar {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 9px;
+  background: #1e2b31;
+  border-bottom: 1px solid #34454c;
+}
+.sheet-preview-toolbar > span {
+  flex: 1;
+}
+.sheet-preview-toolbar button {
+  padding: 6px;
+  font-size: 10px;
+}
+.sheet-preview-toolbar .check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  margin: 0 5px 0 0;
+}
+.sheet-preview input[type="checkbox"] {
+  width: auto;
+}
+.sheet-preview-toolbar button[aria-pressed="true"] {
+  border-color: #cf9b6a;
+  color: #f2b57f;
+}
+.sheet-preview-canvas {
+  height: 380px;
+  min-height: 250px;
+  max-height: 80vh;
+  resize: vertical;
+  overflow: hidden;
+}
+.sheet-preview-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  user-select: none;
+  background: #111a1e;
+}
+.sheet-preview-svg [data-placement-id] {
+  cursor: move;
+}
+.sheet-preview-help {
+  font-size: 10px;
+  color: #8da9b5;
+  padding: 9px 12px;
+  border-top: 1px solid #30424a;
+}
+.sheet-placement-controls {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px;
+  background: #1b282f;
+  border-top: 1px solid #34454c;
+}
+.sheet-placement-controls > b {
+  width: 100%;
+  font-size: 12px;
+  color: #e2c09b;
+}
+.sheet-placement-controls > label {
+  font-size: 10px;
+  color: #9bb6c2;
+  max-width: 100px;
+  flex: 1;
+}
+.sheet-placement-controls label input {
+  margin-top: 5px;
+  padding: 7px;
+}
+.sheet-placement-controls > .check {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  min-width: 130px;
+  max-width: none;
+  font-size: 11px;
+}
+.sheet-placement-controls > .check input {
+  margin: 0;
+}
+.sheet-preview-checks {
+  padding: 10px 12px;
+  font-size: 11px;
+  color: #b4c4c7;
+}
+.sheet-preview-checks summary {
+  cursor: pointer;
+}
+.sheet-preview-checks p {
+  font-size: 10px;
+  color: #d1bc96;
+  line-height: 1.5;
 }

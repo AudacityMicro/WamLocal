@@ -1,3 +1,4 @@
+import { workOriginPoint, toWorkPoint } from "../core/work-origin";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
@@ -14,7 +15,7 @@ import {
   materialLibrarySchema,
   type Job,
 } from "../core/job";
-import { nestJob, jobIssues } from "../core/job-ops";
+import { nestJobDetailed, jobIssues } from "../core/job-ops";
 import { readLibraryFile, writeLibraryFile } from "../desktop/material-library";
 import {
   projectSchema,
@@ -33,14 +34,16 @@ import {
 } from "../core/material-presets.js";
 const root = path.resolve(process.env.WAM_PROJECT_DIR || "projects");
 await mkdir(root, { recursive: true });
-const server = new McpServer({ name: "wam-local", version: "0.2.0" });
+const server = new McpServer({ name: "wam-local", version: "0.2.2" });
 let pending: Promise<unknown> = Promise.resolve();
 function serial<T>(operation: () => Promise<T>): Promise<T> {
   const result = pending.then(operation);
   pending = result.catch(() => {});
   return result;
 }
-const fileSchema = z.string().regex(/^[a-zA-Z0-9_-]+\.(wam|job)\.json$/);
+const fileSchema = z
+  .string()
+  .regex(/^[a-zA-Z0-9_-]+(?:\.wam|\.(?:wam|job)\.json)$/);
 const libraryFile = path.resolve(
   process.env.WAM_MATERIAL_LIBRARY ||
     path.join(
@@ -290,12 +293,22 @@ server.tool(
 );
 server.tool(
   "nest_job",
-  "Nest all requested part quantities across compatible sheets using SVGnest; create more sheets when required. Replaces current placements only after a complete successful search.",
-  { file: fileSchema, rotate: z.boolean().default(true) },
-  async ({ file, rotate }) =>
-    serial(async () =>
-      response(await saveJob(file, nestJob(await readSavedJob(file), rotate))),
-    ),
+  "Nest requested quantities in material-compatible batches with adaptive or fixed time limits. Saves the best validated layout, including partial results, and returns nestingResult with unplaced quantities and the stop reason. Locked placements remain fixed.",
+  {
+    file: fileSchema,
+    rotate: z.boolean().optional(),
+    settings: jobSchema.shape.nesting.optional(),
+  },
+  async ({ file, rotate, settings }) =>
+    serial(async () => {
+      const original = await readSavedJob(file);
+      const { job, ...nestingResult } = nestJobDetailed(
+        settings ? { ...original, nesting: settings } : original,
+        rotate,
+      );
+      const saved = await saveJob(file, job);
+      return response({ ...saved, nestingResult });
+    }),
 );
 server.tool(
   "inspect_job",

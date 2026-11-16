@@ -1,3 +1,10 @@
+import {
+  processClearance,
+  searchBudget,
+  searchSettings,
+  orderParts,
+  layoutScore,
+} from "./nesting-search";
 import ClipperLib from "clipper-lib";
 import { MaxRectsPacker } from "maxrects-packer";
 import {
@@ -6,6 +13,7 @@ import {
 } from "../vendor/svgnest/placementworker";
 import { area, bounds, transformed } from "./geometry";
 import type { Part, Point, Project } from "./model";
+import { advancedPack } from "./advanced-nesting";
 
 const S = 10000;
 type Path = Point[];
@@ -157,50 +165,76 @@ export type NestingResult = {
   parts: Part[];
   unplaced: Part[];
   provider: string;
+  timedOut: boolean;
 };
 export function packSheet(
   project: Project,
   allowRotation = true,
-  budgetMs = 15000,
+  budgetMs?: number,
 ): NestingResult {
+  budgetMs ??= searchBudget(project, allowRotation).initialMs;
+  if (project.machineSettings) {
+    const m = project.machineSettings,
+      o = project.bedOffset ?? { x: 0, y: 0 };
+    if (o.x < 0 || o.y < 0 || o.x >= m.width || o.y >= m.height)
+      throw Error("Sheet position is outside the maximum cutting area");
+    project = {
+      ...project,
+      stock: {
+        ...project.stock,
+        width: Math.min(project.stock.width, m.width - o.x),
+        height: Math.min(project.stock.height, m.height - o.y),
+      },
+    };
+  }
+  const cfg = searchSettings(project.nesting);
+  if (
+    cfg?.insideHoles ||
+    (cfg && cfg.rotationStep !== 90) ||
+    project.parts.some(
+      (p) => p.locked || (p.rotationPolicy && p.rotationPolicy !== "free"),
+    ) ||
+    project.stock.outline ||
+    project.stock.exclusions?.length
+  )
+    return advancedPack(project, allowRotation, budgetMs);
   if (!project.parts.length)
-    return { parts: [], unplaced: [], provider: "SVGnest" };
+    return { parts: [], unplaced: [], provider: "SVGnest", timedOut: false };
   const deadline = Date.now() + budgetMs;
-  const clearance =
-    Math.max(
-      ...project.parts.map((p) =>
-        Math.max(
-          (p.process ?? project.material).kerf / 2,
-          (p.process ?? project.material).lead,
-        ),
-      ),
-    ) +
-    project.stock.spacing / 2;
+  const clearance = (p: Part) => processClearance(p, project);
   const edge = project.stock.margin - project.stock.spacing / 2;
   const width = project.stock.width - 2 * edge,
     height = project.stock.height - 2 * edge;
   if (width <= 0 || height <= 0) throw Error("Margins leave no usable stock");
-  const shapes = project.parts.map((p) => ({
+  const shapes = orderParts(project.parts, cfg.order).map((p) => ({
     p,
-    polygon: nestingFootprint(p, clearance),
+    polygon: nestingFootprint(p, clearance(p)),
   }));
   const valid = (parts: Part[]) => {
     const footprints = parts.map((p) =>
-      nestingFootprint(p, clearance).map((v) => ({
+      nestingFootprint(p, clearance(p)).map((v) => ({
         x: v.x + p.x,
         y: v.y + p.y,
       })),
     );
+    const boxes = footprints.map(bounds);
     return footprints.every((f, i) => {
-      const b = bounds(f);
+      const b = boxes[i];
       return (
         b.x >= edge - 1e-4 &&
         b.y >= edge - 1e-4 &&
         b.x + b.width <= project.stock.width - edge + 1e-4 &&
         b.y + b.height <= project.stock.height - edge + 1e-4 &&
-        footprints
-          .slice(0, i)
-          .every((other) => polygonIntersectionArea([f], [other]) < 1e-5)
+        footprints.slice(0, i).every((other, j) => {
+          const q = boxes[j];
+          return (
+            b.x >= q.x + q.width - 1e-6 ||
+            q.x >= b.x + b.width - 1e-6 ||
+            b.y >= q.y + q.height - 1e-6 ||
+            q.y >= b.y + b.height - 1e-6 ||
+            polygonIntersectionArea([f], [other]) < 1e-5
+          );
+        })
       );
     });
   };
@@ -211,24 +245,47 @@ export function packSheet(
     square: false,
     allowRotation,
   });
-  packer.addArray(shapes.map((s) => ({ ...bounds(s.polygon), data: s.p.id })));
-  if (
-    packer.bins.length === 1 &&
-    !packer.bins[0].rects.some((r) => r.oversized)
-  ) {
-    const parts = shapes.map((s) => {
-      const r = packer.bins[0].rects.find((r) => r.data === s.p.id)!;
-      const p = { ...s.p, rotation: s.p.rotation + (r.rot ? 90 : 0) };
-      const b = bounds(nestingFootprint(p, clearance));
-      return { ...p, x: r.x + edge - b.x, y: r.y + edge - b.y };
-    });
-    if (valid(parts))
-      return {
-        parts,
-        unplaced: [],
-        provider: "MaxRects + outline verification",
-      };
+  for (const s of shapes) packer.add({ ...bounds(s.polygon), data: s.p.id });
+  let best: Part[] = [];
+  for (const bin of packer.bins.filter(
+    (b) => !b.rects.some((r) => r.oversized),
+  )) {
+    const parts = shapes
+      .filter((s) => bin.rects.some((r) => r.data === s.p.id))
+      .map((s) => {
+        const r = bin.rects.find((r) => r.data === s.p.id)!;
+        const p = { ...s.p, rotation: s.p.rotation + (r.rot ? 90 : 0) };
+        const b = bounds(nestingFootprint(p, clearance(p)));
+        return { ...p, x: r.x + edge - b.x, y: r.y + edge - b.y };
+      });
+    if (
+      valid(parts) &&
+      (parts.length > best.length ||
+        (parts.length === best.length &&
+          layoutScore(parts, cfg.objective) < layoutScore(best, cfg.objective)))
+    )
+      best = parts;
   }
+  const occupiedRatio =
+    best.reduce(
+      (n, p) => n + Math.abs(area(nestingFootprint(p, clearance(p)))),
+      0,
+    ) /
+    (width * height);
+  if (
+    (best.length === project.parts.length &&
+      !cfg.optimize &&
+      cfg.method !== "outline") ||
+    (cfg.method === "auto" && !cfg.optimize && occupiedRatio >= 0.82) ||
+    cfg.method === "bounds" ||
+    (cfg.effort === "fast" && cfg.method !== "outline")
+  )
+    return {
+      parts: best,
+      unplaced: project.parts.filter((p) => !best.some((b) => b.id === p.id)),
+      provider: "MaxRects + outline verification",
+      timedOut: false,
+    };
   const bin = [
     { x: edge, y: edge },
     { x: project.stock.width - edge, y: edge },
@@ -239,14 +296,17 @@ export function packSheet(
     memo = new Map<string, Path[]>();
   const shapeId = (p: Path) =>
     p.map((v) => `${v.x.toFixed(4)},${v.y.toFixed(4)}`).join(";");
-  let best: Part[] = [];
-  const ordered = [...shapes].sort(
-    (a, b) => Math.abs(area(b.polygon)) - Math.abs(area(a.polygon)),
-  );
-  const attempts = allowRotation ? 12 : 2;
+  const ordered = shapes;
+  const attempts = cfg.optimize ? cfg.restarts : allowRotation ? 12 : 2;
   for (let attempt = 0; attempt < attempts; attempt++) {
     if (Date.now() > deadline) break;
-    const order = attempt === attempts - 1 ? [...ordered].reverse() : ordered;
+    const ids = orderParts(
+      ordered.map((s) => s.p),
+      cfg.order,
+      cfg.optimize ? attempt : attempt === attempts - 1 ? 1 : 0,
+      cfg.seed,
+    ).map((p) => p.id);
+    const order = ids.map((id) => ordered.find((s) => s.p.id === id)!);
     const paths = order.map((s, index) => {
       const base = bounds(s.polygon),
         fits = (b: ReturnType<typeof bounds>) =>
@@ -254,7 +314,7 @@ export function packSheet(
       const angle = !allowRotation
         ? 0
         : attempt < 4
-          ? 90 * attempt
+          ? 90 * ((attempt + cfg.seed) % 4)
           : attempt < 8
             ? 90 * ((index + attempt) % 4)
             : 90 * ((index * 3 + attempt) % 4);
@@ -317,12 +377,20 @@ export function packSheet(
         rotation: original.rotation + r.rotation,
       };
     });
-    if (parts.length > best.length && valid(parts)) best = parts;
-    if (best.length === project.parts.length) break;
+    if (
+      (parts.length > best.length ||
+        (parts.length === best.length &&
+          layoutScore(parts, cfg.objective) <
+            layoutScore(best, cfg.objective))) &&
+      valid(parts)
+    )
+      best = parts;
+    if (best.length === project.parts.length && !cfg.optimize) break;
   }
   return {
     parts: best,
     unplaced: project.parts.filter((p) => !best.some((b) => b.id === p.id)),
     provider: "SVGnest placement worker + Clipper NFP",
+    timedOut: Date.now() >= deadline,
   };
 }

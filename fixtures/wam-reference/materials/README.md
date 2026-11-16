@@ -1,13 +1,13 @@
 # WAM material reference checks
 
-Captured through the signed-in WAM 2.5.0 browser UI on 2026-11-08, using the account's registered **Pro** machine. These are reference measurements, not a claim of complete machine compatibility.
+Captured through the signed-in WAM 2.5.0 browser UI on 2026-11-08, with 0.020-inch Aluminum 6061 added on 2026-11-16, using the account's registered **Pro** machine. These are reference measurements, not a claim of complete machine compatibility.
 
 ## Results
 
-- All 24 standard materials: **449 thickness points**, including each displayed maximum and thin, intermediate, and common fractional stock sizes.
-- **4,939 numerical fields** checked against the original workspace exports, with no mismatches. Each capture contains three quality feeds plus abrasive rate for each recorded mode, pierce time, default tab width, and default lead distance.
-- 203 initial points and **246 independent validation points**. The independent points were excluded from the diagnostic interpolation fit.
-- Exact recorded values are available through `lookupRecordedMaterial` in `src/core/material-reference.ts`. The editor and MCP use a compact Speed Mode preset library generated from these captures. It includes three quality feeds, pierce time, abrasive rate and tab/lead defaults. Thirty-four records exceed the editor's 20 mm tab limit and cannot be applied; 415 thickness records are applicable. Presets retain the job's kerf and tab count. Uncaptured thicknesses require custom parameters; no interpolation is used.
+- All 24 standard materials: **450 thickness points**, including each displayed maximum and thin, intermediate, and common fractional stock sizes.
+- **4,950 numerical fields** checked against the original workspace exports, with no mismatches. Each capture contains three quality feeds plus abrasive rate for each recorded mode, pierce time, default tab width, and default lead distance.
+- 203 initial points and **247 independent validation points**. The independent points were excluded from the diagnostic interpolation fit.
+- Exact recorded values are available through `lookupRecordedMaterial` in `src/core/material-reference.ts`. The editor and MCP use a compact Speed Mode preset library generated from these captures. It includes three quality feeds, pierce time, abrasive rate and tab/lead defaults. Thirty-four records exceed the editor's 20 mm tab limit and cannot be applied as exact presets; 416 thickness records are applicable. The global database retains captured process rates for those outliers but substitutes an explicitly flagged application tab/lead default pending verification. Presets retain the job's kerf and tab count. Uncaptured thicknesses require custom parameters; no interpolation is used.
 - **Arbitrary-thickness reproduction is not verified.** A log-log interpolation baseline fails the independent checks; its largest pierce-time relative error is approximately 398% for stainless steel 304. This rejects that baseline, not every possible numerical model. Experimental curve fits are also not production settings generators.
 - Desktop values remain untested: the account exposes only a registered Pro machine. Pro values must not be reused as Desktop values.
 

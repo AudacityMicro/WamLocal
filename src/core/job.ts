@@ -1,4 +1,9 @@
+import {
+  machineSettingsSchema,
+  type MachineSettings,
+} from "./machine-settings";
 import { z } from "zod";
+import { ORIGIN_ANCHORS } from "./work-origin";
 import {
   id,
   newProject,
@@ -24,7 +29,10 @@ export function materialsCompatible(
   return (
     !!a &&
     !!b &&
-    (a.stockKey ?? a.name) === (b.stockKey ?? b.name) &&
+    (a.stockKey ??
+      a.name.replace(/\s*[\u00b7-]\s*(coarse|medium|fine)$/i, "")) ===
+      (b.stockKey ??
+        b.name.replace(/\s*[\u00b7-]\s*(coarse|medium|fine)$/i, "")) &&
     Math.abs(a.thickness - b.thickness) < 1e-7 &&
     a.machine === b.machine
   );
@@ -35,6 +43,7 @@ export const partDefinitionSchema = partSchema.extend({
   quantity: z.number().int().min(1).max(2000),
 });
 export const placementSchema = z.object({
+  locked: z.boolean().optional(),
   id: z.string().min(1),
   partId: z.string().min(1),
   x: z.number().finite(),
@@ -48,6 +57,7 @@ export const sheetSchema = z.object({
   materialId: z.string().min(1),
   stock: projectSchema.shape.stock,
   wcs: pointSchema,
+  workOrigin: z.enum(ORIGIN_ANCHORS).optional(),
   placements: z.array(placementSchema).max(2000),
 });
 export const jobSchema = z
@@ -55,6 +65,8 @@ export const jobSchema = z
     version: z.literal(2),
     name: z.string().min(1),
     machine: z.enum(["desktop", "pro"]),
+    machineSettings: machineSettingsSchema.optional(),
+    nesting: projectSchema.shape.nesting,
     materials: z.array(jobMaterialSchema).min(1).max(5000),
     parts: z.array(partDefinitionSchema).max(2000),
     sheets: z.array(sheetSchema).min(1).max(500),
@@ -124,6 +136,15 @@ export const jobSchema = z
 export const materialLibrarySchema = z.object({
   version: z.literal(1),
   materials: z.array(jobMaterialSchema).max(5000),
+  machines: z
+    .object({ desktop: machineSettingsSchema, pro: machineSettingsSchema })
+    .optional(),
+  displayUnits: z.enum(["mm", "in"]).optional(),
+  showFileLabels: z.boolean().optional(),
+  layouts: z
+    .array(z.object({ id: z.string(), name: z.string(), job: jobSchema }))
+    .max(100)
+    .optional(),
 });
 export type Job = z.infer<typeof jobSchema>;
 export type JobMaterial = z.infer<typeof jobMaterialSchema>;
@@ -142,12 +163,16 @@ export function defaultMaterial(machine: Job["machine"]): JobMaterial {
     source: "User defaults",
   };
 }
-export function newJob(machine: Job["machine"] = "desktop"): Job {
+export function newJob(
+  machine: Job["machine"] = "desktop",
+  settings?: MachineSettings,
+): Job {
   const material = defaultMaterial(machine);
   return {
     version: 2,
     name: "Untitled job",
     machine,
+    machineSettings: settings,
     materials: [material],
     parts: [],
     sheets: [
@@ -223,17 +248,24 @@ export function sheetProject(job: Job, sheetId: string): Project {
     version: 1,
     name: job.name,
     machine: job.machine,
+    machineSettings: job.machineSettings,
+    nesting: job.nesting,
     stock: sheet.stock,
-    material,
+    bedOffset: sheet.wcs,
+    material: machineProcess(job, material),
     parts: sheet.placements.flatMap((i) => {
       const p = job.parts.find((p) => p.id === i.partId)!;
       if (!p.contours.length) return [];
       return [
         {
           ...p,
+          locked: i.locked,
           id: i.id,
           definitionId: p.id,
-          process: job.materials.find((m) => m.id === p.materialId),
+          process: machineProcess(
+            job,
+            job.materials.find((m) => m.id === p.materialId)!,
+          ),
           contours: definitionContours(p),
           x: i.x,
           y: i.y,
@@ -252,13 +284,20 @@ export function viewProject(job: Job, view: JobView): Project {
     version: 1,
     name: job.name,
     machine: job.machine,
+    machineSettings: job.machineSettings,
     stock: { ...newProject().stock },
-    material: job.materials.find((m) => m.id === part.materialId),
+    material: machineProcess(
+      job,
+      job.materials.find((m) => m.id === part.materialId)!,
+    ),
     parts: part.contours.length
       ? [
           {
             ...part,
-            process: job.materials.find((m) => m.id === part.materialId),
+            process: machineProcess(
+              job,
+              job.materials.find((m) => m.id === part.materialId)!,
+            ),
           },
         ]
       : [],
@@ -269,4 +308,14 @@ export function placedCount(job: Job, partId: string) {
     (sum, s) => sum + s.placements.filter((p) => p.partId === partId).length,
     0,
   );
+}
+
+function machineProcess(job: Job, material: JobMaterial) {
+  return job.machineSettings
+    ? {
+        ...material,
+        kerf: job.machineSettings.kerf,
+        abrasive: job.machineSettings.abrasive,
+      }
+    : material;
 }

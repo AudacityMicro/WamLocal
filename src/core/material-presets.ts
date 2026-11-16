@@ -4,7 +4,7 @@ import { projectSchema, type Project } from "./model";
 export type CutQuality = "coarse" | "medium" | "fine";
 export type MaterialPreset = (typeof records)[number];
 export const materialPresets: readonly MaterialPreset[] = records;
-export const presetSource = "WAM 2.5.0 Pro · captured 2026-11-08";
+export const presetSource = "WAM 2.5.0 Pro · recorded reference values";
 
 export function presetIssue(preset: MaterialPreset): string | null {
   if (preset.tabWidth > 20)
