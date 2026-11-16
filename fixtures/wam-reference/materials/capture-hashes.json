@@ -1794,5 +1794,9 @@
   {
     "file": "m23-t0p875.wzr",
     "sha256": "6bdab58f65c7ec92dafd4704ddd42f84dbd502c8cf5b15cb955118bbfa6fea8a"
+  },
+  {
+    "file": "m00-t0p02.wzr",
+    "sha256": "305222f6cb578ded3ea186f1ec4995d61cb48ec5b24f8dfe0394ad7fdd72eabd"
   }
 ]

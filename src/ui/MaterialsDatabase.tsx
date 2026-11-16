@@ -1,3 +1,7 @@
+import { PresetSelector } from "./PresetSelector";
+import { materialQuality } from "../core/material-selection";
+import { LengthInput, useDisplayUnits } from "./display-units";
+import { materialLabel, gaugesFor } from "../core/material-gauges";
 import { useState } from "react";
 import { id } from "../core/model";
 import {
@@ -22,6 +26,7 @@ export function MaterialsDatabase({
   onError: (s: string) => void;
   machine: "desktop" | "pro";
 }) {
+  const units = useDisplayUnits();
   const [selected, setSelected] = useState(
       library.materials.find((m) => m.machine === machine)?.id ??
         library.materials[0]?.id ??
@@ -34,6 +39,7 @@ export function MaterialsDatabase({
     try {
       const next = jobMaterialSchema.parse({
         ...current,
+        quality: materialQuality(current),
         ...change,
         preset: undefined,
         source: "User-edited defaults",
@@ -56,26 +62,16 @@ export function MaterialsDatabase({
         <span>Search materials</span>
         <input value={search} onChange={(e) => setSearch(e.target.value)} />
       </label>
-      <label className="field">
-        <span>Saved preset</span>
-        <select
-          value={current.id}
-          onChange={(e) => setSelected(e.target.value)}
-        >
-          {library.materials
-            .filter(
-              (m) =>
-                (m.name + " " + m.thickness)
-                  .toLowerCase()
-                  .includes(search.toLowerCase()) || m.id === current.id,
-            )
-            .map((m) => (
-              <option key={m.id} value={m.id}>
-                {m.machine} · {m.name} · {m.thickness} mm
-              </option>
-            ))}
-        </select>
-      </label>
+      <PresetSelector
+        labelSuffix="preset database"
+        records={library.materials.filter((m) =>
+          materialLabel(m).toLowerCase().includes(search.toLowerCase()),
+        )}
+        current={current}
+        machine={current.machine}
+        allMachines
+        onChange={(m) => setSelected(m.id)}
+      />
       <div className="button-row">
         <button
           onClick={() => {
@@ -84,6 +80,7 @@ export function MaterialsDatabase({
               id: id(),
               name: current.name + " copy",
               source: "User defaults",
+              quality: materialQuality(current),
               preset: undefined,
             };
             onChange({ ...library, materials: [...library.materials, copy] });
@@ -112,6 +109,23 @@ export function MaterialsDatabase({
         />
       </label>
       <label className="field">
+        <span>Profile quality</span>
+        <select
+          value={materialQuality(current)}
+          onChange={(e) =>
+            edit({
+              quality: e.target.value as
+                "coarse" | "medium" | "fine" | "custom",
+            })
+          }
+        >
+          <option value="coarse">Coarse</option>
+          <option value="medium">Medium</option>
+          <option value="fine">Fine</option>
+          <option value="custom">Custom</option>
+        </select>
+      </label>
+      <label className="field">
         <span>Physical stock material</span>
         <input
           value={current.stockKey ?? current.name}
@@ -136,6 +150,36 @@ export function MaterialsDatabase({
           <option value="pro">WAZER Pro</option>
         </select>
       </label>
+      {gaugesFor(current.stockKey ?? current.name).length > 0 && (
+        <label className="field">
+          <span>Standard gauge</span>
+          <select
+            value={
+              gaugesFor(current.stockKey ?? current.name).find(
+                (g) => Math.abs(g.mm - current.thickness) < 0.00001,
+              )?.gauge ?? "custom"
+            }
+            onChange={(e) => {
+              const g = gaugesFor(current.stockKey ?? current.name).find(
+                (g) => g.gauge === Number(e.target.value),
+              );
+              if (g) edit({ thickness: g.mm, requiresVerification: true });
+            }}
+          >
+            <option value="custom">Custom thickness</option>
+            {gaugesFor(current.stockKey ?? current.name).map((g) => (
+              <option key={g.gauge} value={g.gauge}>
+                {g.gauge} Ga - {units.length(g.mm)}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
+      {current.requiresVerification && (
+        <p className="preset-warning">
+          Verify cutting settings for this thickness and machine before use.
+        </p>
+      )}
       {(
         [
           ["thickness", "Thickness · mm"],
@@ -150,23 +194,47 @@ export function MaterialsDatabase({
         ] as const
       ).map(([key, label]) => (
         <label className="field" key={key}>
-          <span>{label}</span>
-          <input
-            type="number"
-            aria-label={label}
-            min={key === "feed" || key === "thickness" ? 0.001 : 0}
-            step={key === "tabCount" ? 1 : 0.01}
-            value={current[key] ?? 0}
-            onChange={(e) => {
-              const v = e.target.valueAsNumber;
-              if (Number.isFinite(v)) edit({ [key]: v });
-            }}
-          />
+          <span>{label.replace("mm", units.unit)}</span>
+          {[
+            "thickness",
+            "feed",
+            "pierceDiameter",
+            "kerf",
+            "tabWidth",
+            "lead",
+          ].includes(key) ? (
+            <LengthInput
+              aria-label={label.replace("mm", units.unit)}
+              min={key === "feed" || key === "thickness" ? 0.001 : 0}
+              value={current[key] ?? 0}
+              onChange={(v) => edit({ [key]: v })}
+            />
+          ) : (
+            <input
+              type="number"
+              aria-label={label}
+              min={0}
+              step={key === "tabCount" ? 1 : 0.01}
+              value={current[key] ?? 0}
+              onChange={(e) => {
+                const v = e.target.valueAsNumber;
+                if (Number.isFinite(v)) edit({ [key]: v });
+              }}
+            />
+          )}
         </label>
       ))}
+      <label className="check">
+        <input
+          type="checkbox"
+          checked={!current.requiresVerification}
+          onChange={(e) => edit({ requiresVerification: !e.target.checked })}
+        />
+        Cutting settings verified for this thickness and machine
+      </label>
       <p className="micro">
-        {current.source}. Pierce diameter must be measured or supplied for the
-        process; 0 means unknown.
+        {current.source}. Pierce diameter of 0 uses the kerf width
+        automatically.
       </p>
       <button className="primary wide" onClick={() => onUse(current)}>
         Use preset in this job

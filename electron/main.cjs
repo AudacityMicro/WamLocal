@@ -39,7 +39,16 @@ app.whenReady().then(() => {
   const {
     readLibraryFile,
     writeLibraryFile,
+    readJobFile,
+    writeJobFile,
   } = require("../dist-electron/library.cjs");
+  const fileCommand = require("./job-files.cjs").registerJobFiles({
+    ipcMain,
+    dialog,
+    win,
+    readJobFile,
+    writeJobFile,
+  });
   const materialFile =
     process.env.WAM_MATERIAL_LIBRARY ||
     path.join(app.getPath("userData"), "material-library.json");
@@ -58,6 +67,22 @@ app.whenReady().then(() => {
     checkLibrarySender(event);
     return writeLibraryFile(materialFile, value);
   });
+  ipcMain.on("wam:view-preferences", (event, value) => {
+    checkLibrarySender(event);
+    if (
+      !value ||
+      !["mm", "in"].includes(value.units) ||
+      typeof value.showFileLabels !== "boolean"
+    )
+      return;
+    const menu = Menu.getApplicationMenu();
+    for (const unit of ["mm", "in"]) {
+      const item = menu?.getMenuItemById(`units-${unit}`);
+      if (item) item.checked = value.units === unit;
+    }
+    const labels = menu?.getMenuItemById("file-labels");
+    if (labels) labels.checked = value.showFileLabels;
+  });
   const checkForUpdates = createUpdateAction({
     app,
     dialog,
@@ -75,11 +100,76 @@ app.whenReady().then(() => {
   });
   Menu.setApplicationMenu(
     Menu.buildFromTemplate([
-      { label: "File", submenu: [{ role: "quit" }] },
+      {
+        label: "File",
+        submenu: [
+          {
+            label: "New Job",
+            accelerator: "CmdOrCtrl+N",
+            click: () => fileCommand("new"),
+          },
+          {
+            label: "Open Job…",
+            accelerator: "CmdOrCtrl+O",
+            click: () => fileCommand("open"),
+          },
+          { type: "separator" },
+          {
+            label: "Save",
+            accelerator: "CmdOrCtrl+S",
+            click: () => fileCommand("save"),
+          },
+          {
+            label: "Save As…",
+            accelerator: "CmdOrCtrl+Shift+S",
+            click: () => fileCommand("save-as"),
+          },
+          { type: "separator" },
+          { label: "Export SVG…", click: () => fileCommand("export-svg") },
+          { type: "separator" },
+          { role: "quit" },
+        ],
+      },
       { label: "Edit", submenu: [{ role: "copy" }, { role: "paste" }] },
       {
         label: "View",
         submenu: [
+          {
+            label: "Commands…",
+            accelerator: "CmdOrCtrl+K",
+            click: () => fileCommand("commands"),
+          },
+          { type: "separator" },
+          {
+            label: "Machine settings...",
+            click: () => fileCommand("machine-settings"),
+          },
+          {
+            label: "Display units",
+            submenu: [
+              {
+                id: "units-mm",
+                label: "Millimeters (mm)",
+                type: "radio",
+                checked: true,
+                click: () => fileCommand("units-mm"),
+              },
+              {
+                id: "units-in",
+                label: "Inches (in)",
+                type: "radio",
+                click: () => fileCommand("units-in"),
+              },
+            ],
+          },
+          {
+            id: "file-labels",
+            label: "Show file labels",
+            type: "checkbox",
+            checked: true,
+            click: () => fileCommand("toggle-labels"),
+          },
+          { type: "separator" },
           { role: "resetZoom" },
           { role: "zoomIn" },
           { role: "zoomOut" },

@@ -20,4 +20,4 @@ Direct runtime components:
 
 Package sources and their notices are retained in dependencies. Electron also includes `LICENSE` and `LICENSES.chromium.html` in its distribution. Production bundling preserves legal comments; refer to the installed package notices for complete terms and transitive dependencies. No license has yet been selected for this repository's original code.
 
-SVGnest's placement worker is integrated with our no-fit-polygon cache, rotation attempts, validation and time budgets. The full upstream UI and genetic optimizer are not included. Deepnest and libnest2d are not included. See `src/vendor/svgnest/README.md` for the adaptation details.
+SVGnest's placement worker is integrated with our no-fit-polygon cache, rotation attempts, validation and time budgets. The full upstream UI and genetic optimizer are not included. Rotation/grain/locked-placement constraints and optional hole nesting use our bounded polygon candidate search alongside the default SVGnest worker. Deepnest and libnest2d are not included. See `src/vendor/svgnest/README.md` for the adaptation details.

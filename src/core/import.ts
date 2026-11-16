@@ -3,6 +3,8 @@ import DxfParser from "dxf-parser";
 import { makePart, type Contour, type Part, type Point } from "./model";
 import { bounds, distance } from "./geometry";
 import { flattenDxfPolyline } from "./dxf-polyline";
+import { prepareSvg } from "./svg-normalize";
+import ClipperLib from "clipper-lib";
 function contains(points: Point[], p: Point) {
   let inside = false;
   for (let i = 0, j = points.length - 1; i < points.length; j = i++) {
@@ -37,62 +39,45 @@ function finish(name: string, contours: Contour[]): Part {
   );
 }
 export function importSvg(source: string, name: string): Part {
-  if (/<!DOCTYPE|<!ENTITY/i.test(source))
-    throw Error("SVG document declarations are unsupported.");
-  const doc = new DOMParser().parseFromString(source, "image/svg+xml");
-  if (doc.querySelector("parsererror")) throw Error("Invalid SVG file.");
-  const svg = doc.documentElement;
-  if (svg.localName !== "svg") throw Error("Expected an SVG root.");
-  const allowed = new Set([
-    "svg",
-    "g",
-    "path",
-    "rect",
-    "circle",
-    "ellipse",
-    "polygon",
-    "polyline",
-    "line",
-    "title",
-    "desc",
-  ]);
-  for (const el of [svg, ...Array.from(svg.querySelectorAll("*"))]) {
-    if (!allowed.has(el.localName))
-      throw Error(
-        `SVG element <${el.localName}> is unsupported. Convert text and objects to paths; remove definitions and images.`,
-      );
-    for (const a of Array.from(el.attributes))
-      if (
-        /^on/i.test(a.name) ||
-        /href/i.test(a.name) ||
-        /url\s*\(/i.test(a.value)
-      )
-        throw Error(
-          "SVG active content and resource references are unsupported.",
-        );
-  }
+  const svg = prepareSvg(source);
   const vb = svg
     .getAttribute("viewBox")
     ?.trim()
     .split(/[\s,]+/)
     .map(Number);
-  const width = svg.getAttribute("width") || "";
-  const match = width.match(/^([\d.]+)\s*(mm|cm|in|px|pt)?$/);
   const units: Record<string, number> = {
     mm: 1,
     cm: 10,
     in: 25.4,
     px: 25.4 / 96,
     pt: 25.4 / 72,
+    pc: 25.4 / 6,
+    q: 0.25,
   };
-  const physical = match ? Number(match[1]) * units[match[2] || "px"] : 0;
-  const factor =
-    vb && vb.length === 4 && vb[2] > 0 && physical > 0
-      ? physical / vb[2]
-      : 25.4 / 96;
+  const physical = (name: string) => {
+    const m = (svg.getAttribute(name) ?? "").match(
+      /^([\d.eE+-]+)\s*(mm|cm|in|px|pt|pc|q)?$/i,
+    );
+    return m ? Number(m[1]) * units[(m[2] ?? "px").toLowerCase()] : 0;
+  };
+  const width = physical("width"),
+    height = physical("height");
+  let factorX = 25.4 / 96,
+    factorY = factorX;
+  if (vb?.length === 4 && vb[2] > 0 && vb[3] > 0) {
+    factorX = width > 0 ? width / vb[2] : height > 0 ? height / vb[3] : factorX;
+    factorY = height > 0 ? height / vb[3] : factorX;
+    if (!/none/.test(svg.getAttribute("preserveAspectRatio") ?? ""))
+      factorX = factorY = /slice/.test(
+        svg.getAttribute("preserveAspectRatio") ?? "",
+      )
+        ? Math.max(factorX, factorY)
+        : Math.min(factorX, factorY);
+  }
+  const factor = Math.max(factorX, factorY);
   if (vb && vb.length === 4) {
-    svg.setAttribute("width", String(vb[2]));
-    svg.setAttribute("height", String(vb[3]));
+    svg.setAttribute("width", String(width > 0 ? width / factorX : vb[2]));
+    svg.setAttribute("height", String(height > 0 ? height / factorY : vb[3]));
   }
   const scope = new paper.PaperScope();
   scope.setup(new scope.Size(1000, 1000));
@@ -103,21 +88,108 @@ export function importSvg(source: string, name: string): Part {
       expandShapes: true,
     });
     const contours: Contour[] = [];
-    const visit = (item: paper.Item) => {
-      if (item.className === "Path") {
-        const path = item as paper.Path;
-        path.flatten(0.08 / factor);
-        if (path.segments.length > 1)
-          contours.push({
+    const pointsOf = (path: paper.Path, space: paper.Item = path) => {
+      const copy = path.clone({ insert: false });
+      copy.flatten(0.08 / factor);
+      if (copy.segments.length > 20000)
+        throw Error("SVG contour exceeds 20,000 nodes.");
+      return copy.segments.map((s) => {
+        const p = space.localToGlobal(s.point);
+        return { x: p.x * factorX, y: p.y * factorY };
+      });
+    };
+    const visit = (
+      item: paper.Item,
+      clips: { paths: Point[][]; evenOdd: boolean }[] = [],
+    ) => {
+      if (item.opacity === 0) return;
+      if (item.className === "Shape") {
+        const path = (item as paper.Shape).toPath(false);
+        if (item.parent) path.transform(item.parent.globalMatrix);
+        visit(path, clips);
+        return;
+      }
+
+      if (item.className === "Path" || item.className === "CompoundPath") {
+        const raw =
+          item.className === "Path"
+            ? [item as paper.Path]
+            : ((item as paper.CompoundPath).children as paper.Path[]);
+        let paths = raw
+          .map((path) => ({
+            points: pointsOf(path),
             closed: path.closed,
             hole: false,
-            points: path.segments.map((s) => {
-              const p = path.localToGlobal(s.point);
-              return { x: p.x * factor, y: p.y * factor };
-            }),
-          });
-      } else if ((item as paper.Group).children)
-        for (const child of (item as paper.Group).children) visit(child);
+          }))
+          .filter((p) => p.points.length > 1);
+        if (!paths.length) return;
+        for (const clip of clips) {
+          const engine = new ClipperLib.Clipper(),
+            tree = new ClipperLib.PolyTree();
+          const scale = (p: Point[]) =>
+            p.map((v) => ({
+              X: Math.round(v.x * 100000),
+              Y: Math.round(v.y * 100000),
+            }));
+          for (const p of paths)
+            engine.AddPath(
+              scale(p.points),
+              ClipperLib.PolyType.ptSubject,
+              p.closed,
+            );
+          engine.AddPaths(
+            clip.paths.map(scale),
+            ClipperLib.PolyType.ptClip,
+            true,
+          );
+          engine.Execute(
+            ClipperLib.ClipType.ctIntersection,
+            tree,
+            ClipperLib.PolyFillType.pftEvenOdd,
+            clip.evenOdd
+              ? ClipperLib.PolyFillType.pftEvenOdd
+              : ClipperLib.PolyFillType.pftNonZero,
+          );
+          paths = [
+            ...ClipperLib.Clipper.ClosedPathsFromPolyTree(tree).map(
+              (p: any) => ({ p, closed: true }),
+            ),
+            ...ClipperLib.Clipper.OpenPathsFromPolyTree(tree).map((p: any) => ({
+              p,
+              closed: false,
+            })),
+          ].map(({ p, closed }: any) => ({
+            points: p.map((v: any) => ({ x: v.X / 100000, y: v.Y / 100000 })),
+            closed,
+            hole: false,
+          }));
+        }
+        contours.push(...paths);
+      } else if ((item as paper.Group).children) {
+        const group = item as paper.Group;
+        let next = clips;
+        if (group.clipped) {
+          const mask = group.children.find((c) => c.clipMask);
+          const paths: Point[][] = [];
+          const collect = (c: paper.Item) => {
+            if (c.className === "Path") paths.push(pointsOf(c as paper.Path));
+            else if (c.className === "Shape")
+              paths.push(
+                pointsOf((c as paper.Shape).toPath(false), c.parent ?? c),
+              );
+            else
+              for (const child of (c as paper.Group).children ?? [])
+                collect(child);
+          };
+          if (mask) collect(mask);
+          next = [
+            ...clips,
+            { paths, evenOdd: (mask as paper.Path)?.fillRule === "evenodd" },
+          ];
+        }
+        for (const child of group.children)
+          if (!child.clipMask) visit(child, next);
+      }
     };
     visit(root);
     return finish(name, contours);
@@ -129,6 +201,7 @@ export function importDxf(
   source: string,
   name: string,
   unit: "mm" | "in" = "mm",
+  onNotice: (message: string) => void = () => {},
 ): Part {
   const data = new DxfParser().parseSync(source);
   if (!data) throw Error("Invalid DXF.");
@@ -136,7 +209,13 @@ export function importDxf(
     unsupported = new Set<string>();
   const code = data.header?.$INSUNITS;
   const factor = code === 1 ? 25.4 : code === 4 ? 1 : unit === "in" ? 25.4 : 1;
+  let skippedPoints = 0;
   for (const entity of data.entities as any[]) {
+    // POINT is a location marker, not a line, arc or pierce operation.
+    if (entity.type === "POINT") {
+      skippedPoints++;
+      continue;
+    }
     let points: Point[] = [],
       closed = false;
     let ocsX = 1;
@@ -212,5 +291,14 @@ export function importDxf(
     throw Error(
       `Unsupported DXF entities: ${[...unsupported].join(", ")}. Convert these to lines/arcs before importing.`,
     );
-  return finish(name, contours);
+  if (!contours.length && skippedPoints)
+    throw Error(
+      "DXF contains only point markers and no cuttable paths. Export the part outlines as lines, arcs or polylines.",
+    );
+  const part = finish(name, contours);
+  if (skippedPoints)
+    onNotice(
+      `Skipped ${skippedPoints} DXF POINT marker${skippedPoints === 1 ? "" : "s"}; cut paths were retained.`,
+    );
+  return part;
 }

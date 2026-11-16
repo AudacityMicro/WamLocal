@@ -1,5 +1,5 @@
 import { id, type Part, type Project } from "./model";
-import { bounds, transformed, plan, nest } from "./geometry";
+import { bounds, transformed, plan } from "./geometry";
 import {
   BED,
   jobSchema,
@@ -8,7 +8,6 @@ import {
   sheetProject,
   type Job,
   type JobView,
-  type Sheet,
 } from "./job";
 
 export function newDefinition(job: Job, materialId: string) {
@@ -120,6 +119,7 @@ export function editView(job: Job, view: JobView, next: Project): Job {
   const updated = structuredClone(job);
   updated.name = next.name;
   updated.machine = next.machine;
+  updated.nesting = next.nesting;
   const materialId =
     view.kind === "sheet"
       ? updated.sheets.find((s) => s.id === view.id)!.materialId
@@ -162,6 +162,7 @@ export function editView(job: Job, view: JobView, next: Project): Job {
       if (old) {
         sheet.placements.push({
           ...old,
+          locked: p.locked,
           x: p.x,
           y: p.y,
           rotation: p.rotation,
@@ -242,10 +243,12 @@ export function jobIssues(job: Job): string[] {
     if (
       s.wcs.x < 0 ||
       s.wcs.y < 0 ||
-      s.wcs.x + s.stock.width > BED.width ||
-      s.wcs.y + s.stock.height > BED.height
+      s.wcs.x + s.stock.width > (job.machineSettings?.width ?? BED.width) ||
+      s.wcs.y + s.stock.height > (job.machineSettings?.height ?? BED.height)
     )
-      issues.push(`${s.name}: stock at this WCS extends beyond the WAZER bed.`);
+      issues.push(
+        `${s.name}: sheet position extends beyond the maximum cutting area.`,
+      );
     const material = job.materials.find((m) => m.id === s.materialId)!;
     if (material.machine !== job.machine)
       issues.push(`${s.name}: parameters belong to another machine profile.`);
@@ -256,77 +259,4 @@ export function jobIssues(job: Job): string[] {
   }
   return [...new Set(issues)];
 }
-export function nestJob(job: Job, rotate = true): Job {
-  const deadline = Date.now() + 30000;
-  const result = structuredClone(job);
-  for (const s of result.sheets) s.placements = [];
-  for (const part of result.parts) {
-    if (!part.contours.length) throw Error(`${part.name}: no geometry to nest`);
-    for (let copy = 0; copy < part.quantity; copy++) {
-      if (Date.now() > deadline)
-        throw Error(
-          "Job nesting reached its 30 second search budget. Reduce the batch size or nest sheets individually; the job was not changed.",
-        );
-      let fitted = false;
-      for (const sheet of result.sheets.filter((s) =>
-        materialsCompatible(
-          result.materials.find((m) => m.id === s.materialId),
-          result.materials.find((m) => m.id === part.materialId),
-        ),
-      )) {
-        const trial = placeDefinition(result, part.id, sheet.id);
-        try {
-          const packed = nest(sheetProject(trial, sheet.id), rotate),
-            target = trial.sheets.find((s) => s.id === sheet.id)!;
-          target.placements = target.placements.map((i) => {
-            const p = packed.parts.find((p) => p.id === i.id)!;
-            return {
-              ...i,
-              x: p.x,
-              y: p.y,
-              rotation: p.rotation,
-              scale: p.scale,
-            };
-          });
-          result.sheets = trial.sheets;
-          fitted = true;
-          break;
-        } catch {}
-      }
-      if (!fitted) {
-        const template =
-          result.sheets.find((s) => s.materialId === part.materialId) ??
-          result.sheets[0];
-        const sheet: Sheet = {
-          ...structuredClone(template),
-          id: id(),
-          name: `Sheet ${result.sheets.length + 1}`,
-          materialId: part.materialId,
-          placements: [],
-        };
-        result.sheets.push(sheet);
-        const trial = placeDefinition(result, part.id, sheet.id);
-        try {
-          const packed = nest(sheetProject(trial, sheet.id), rotate),
-            target = trial.sheets.find((s) => s.id === sheet.id)!;
-          target.placements = target.placements.map((i) => {
-            const p = packed.parts.find((p) => p.id === i.id)!;
-            return {
-              ...i,
-              x: p.x,
-              y: p.y,
-              rotation: p.rotation,
-              scale: p.scale,
-            };
-          });
-          result.sheets = trial.sheets;
-        } catch {
-          throw Error(
-            `${part.name}: no placement found on an empty ${sheet.stock.width} × ${sheet.stock.height} mm sheet. Check size and clearances.`,
-          );
-        }
-      }
-    }
-  }
-  return jobSchema.parse(result);
-}
+export { nestJob, nestJobDetailed } from "./job-nesting";

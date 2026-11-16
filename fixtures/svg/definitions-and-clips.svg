@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100mm" height="70mm" viewBox="0 0 100 70">
+  <defs>
+    <linearGradient id="paint"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient>
+    <g id="part"><path d="M0 0H40V30H0Z M10 10H20V20H10Z" fill-rule="evenodd"/></g>
+    <clipPath id="clip"><rect width="50" height="50"/></clipPath>
+    <path id="unused" d="M0 0H90V60H0Z"/>
+  </defs>
+  <style>.part { fill:url(#paint); }</style>
+  <g clip-path="url(#clip)"><use xlink:href="#part" class="part" x="5" y="5"/></g>
+</svg>

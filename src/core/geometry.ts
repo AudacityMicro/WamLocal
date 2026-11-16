@@ -1,3 +1,6 @@
+import { effectivePierceDiameter } from "./model";
+import { leadInStart } from "./lead-in";
+import { searchBudget } from "./nesting-search";
 import ClipperLib from "clipper-lib";
 import { packSheet, partsOverlap } from "./nesting";
 import {
@@ -59,7 +62,11 @@ export function offset(c: Contour, delta: number): Contour[] {
   }));
 }
 export function nest(project: Project, rotate = true): Project {
-  const result = packSheet(project, rotate);
+  const result = packSheet(
+    project,
+    rotate,
+    searchBudget(project, rotate).initialMs,
+  );
   if (result.unplaced.length)
     throw Error(
       "No fit found for all parts within the nesting search. Try another sheet, smaller clearances, or manual placement; this is not proof they cannot fit.",
@@ -80,6 +87,7 @@ export type Plan = {
   moves: Move[];
   cutLength: number;
   minutes: number;
+  abrasiveGrams: number;
   issues: string[];
   pierces: { point: Point; radius: number; partId: string; warning: boolean }[];
 };
@@ -87,11 +95,29 @@ export function plan(project: Project): Plan {
   const moves: Move[] = [],
     issues: string[] = [];
   const pierceMarkers: Plan["pierces"] = [];
-  const design = project.parts.map((p) => ({ p, contours: transformed(p) }));
+  for (const p of project.parts)
+    if ((p.process ?? project.material).requiresVerification)
+      issues.push(
+        `${p.name}: cutting settings require verification for this material, thickness and machine.`,
+      );
+  const design = project.parts.map((p) => ({
+    p,
+    contours: transformed(p).flatMap((c) =>
+      offset(c, c.closed ? (p.stockToLeave ?? 0) * (c.hole ? -1 : 1) : 0),
+    ),
+  }));
   const paths = project.parts
     .flatMap((p) =>
       transformed(p).flatMap((raw) => {
-        const process = p.process ?? project.material;
+        const stored = p.process ?? project.material;
+        const base = project.machineSettings
+          ? {
+              ...stored,
+              kerf: project.machineSettings.kerf,
+              abrasive: project.machineSettings.abrasive,
+            }
+          : stored;
+        const process = { ...base, lead: raw.lead ?? base.lead };
         const c = {
           ...raw,
           points: raw.points.filter(
@@ -128,7 +154,12 @@ export function plan(project: Project): Plan {
               (c.cut ? 1 : c.hole ? -1 : 1);
         if (!c.closed && cutMode !== "centerline")
           issues.push(`${p.name}: open contour requires centerline cutting.`);
-        const result = offset(c, delta);
+        const allowance = c.closed
+          ? (p.stockToLeave ?? 0) * (c.hole ? -1 : 1)
+          : 0;
+        if (!c.closed && p.stockToLeave)
+          issues.push(`${p.name}: stock to leave requires a closed contour.`);
+        const result = offset(c, delta + allowance);
         if (!result.length)
           issues.push(`${p.name}: kerf compensation removes a contour.`);
         return result.map((contour) => ({
@@ -145,12 +176,13 @@ export function plan(project: Project): Plan {
     )
     .sort(
       (a, b) =>
-        Number(b.c.hole) - Number(a.c.hole) ||
-        Math.abs(area(a.c.points)) - Math.abs(area(b.c.points)),
+        Math.abs(area(a.c.points)) - Math.abs(area(b.c.points)) ||
+        Number(b.c.hole) - Number(a.c.hole),
     );
   let cursor: Point = { x: 0, y: 0 },
     pierces = 0,
-    pierceSeconds = 0;
+    pierceSeconds = 0,
+    abrasiveGrams = 0;
   for (const { p, c, tabTargets, cutMode, process } of paths) {
     const pts = c.closed ? [...c.points, c.points[0]] : c.points;
     const total = pts.slice(1).reduce((s, v, i) => s + distance(pts[i], v), 0);
@@ -180,19 +212,15 @@ export function plan(project: Project): Plan {
             end: (total * (i + 0.5)) / n + tw / 2,
           }));
     if (n * tw >= total) issues.push(`${p.name}: tabs consume the contour.`);
-    const tangent = distance(pts[0], pts[1]);
     const lead = cutMode === "centerline" ? 0 : process.lead;
-    const start = {
-      x: pts[0].x - ((pts[1].x - pts[0].x) / tangent) * lead,
-      y: pts[0].y - ((pts[1].y - pts[0].y) / tangent) * lead,
-    };
-    moves.push({ from: cursor, to: start, kind: "rapid", partId: p.id });
-    const radius = (process.pierceDiameter ?? 0) / 2;
-    let pierceWarning = false;
-    if (process.pierceDiameter === 0)
+    const start = leadInStart(c, lead);
+    if (distance(start, pts[0]) < lead - 1e-4)
       issues.push(
-        "Pierce diameter is not set; pierce/profile interference has not been checked.",
+        `${p.name}: lead length reduced to remain on the scrap side of the profile.`,
       );
+    moves.push({ from: cursor, to: start, kind: "rapid", partId: p.id });
+    const radius = effectivePierceDiameter(process) / 2;
+    let pierceWarning = false;
     if (radius > 0) {
       pierceWarning = design.some(
         (d) =>
@@ -202,7 +230,8 @@ export function plan(project: Project): Plan {
           ) ||
           d.contours.some(
             (c) =>
-              closestOnPath(c.points, c.closed, start).distance < radius - 1e-6,
+              closestOnPath(c.points, c.closed, start).distance <
+              radius - 2 / S,
           ),
       );
       if (pierceWarning)
@@ -225,6 +254,7 @@ export function plan(project: Project): Plan {
     });
     pierces++;
     pierceSeconds += process.pierce;
+    abrasiveGrams += (process.pierce / 60) * (process.abrasive ?? 0);
     if (lead)
       moves.push({
         from: start,
@@ -279,7 +309,12 @@ export function plan(project: Project): Plan {
       issues.push("Compensated toolpath or lead extends outside the stock.");
       break;
     }
-  const boxes = project.parts.map((p) => ({ p, b: partBounds(p) }));
+  const boxes = design
+    .filter((d) => d.contours.length)
+    .map(({ p, contours }) => {
+      const finished = { ...p, contours, x: 0, y: 0, rotation: 0, scale: 1 };
+      return { p: finished, b: partBounds(finished) };
+    });
   for (let i = 0; i < boxes.length; i++)
     for (let j = i + 1; j < boxes.length; j++) {
       const a = boxes[i],
@@ -295,12 +330,36 @@ export function plan(project: Project): Plan {
           `${a.p.name} / ${b.p.name}: part material overlaps; inspect geometry.`,
         );
     }
+  if (
+    project.machineSettings &&
+    moves.some((m) =>
+      [m.from, m.to].some((p) => {
+        const x = p.x + (project.bedOffset?.x ?? 0),
+          y = p.y + (project.bedOffset?.y ?? 0);
+        return (
+          x < -0.0002 ||
+          y < -0.0002 ||
+          x > project.machineSettings!.width + 0.0002 ||
+          y > project.machineSettings!.height + 0.0002
+        );
+      }),
+    )
+  )
+    issues.push("Toolpath exceeds the machine maximum cutting area.");
+  for (const m of moves.filter((m) => m.kind === "cut")) {
+    const process =
+      project.parts.find((p) => p.id === m.partId)?.process ?? project.material;
+    abrasiveGrams +=
+      (distance(m.from, m.to) / (m.feed ?? process.feed)) *
+      (project.machineSettings?.abrasive ?? process.abrasive ?? 0);
+  }
   const cutLength = moves
     .filter((m) => m.kind === "cut")
     .reduce((s, m) => s + distance(m.from, m.to), 0);
   return {
     moves,
     cutLength,
+    abrasiveGrams,
     minutes:
       moves
         .filter((m) => m.kind === "cut")

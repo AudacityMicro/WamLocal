@@ -11,7 +11,17 @@ describe("captured WAM 2.5.0 Pro references", () => {
       expect(nc.unsupportedCodes).toEqual([]);
       expect(nc.mCodes[0]).toBe("M1403");
       expect(nc.mCodes.at(-1)).toBe("M1404");
-      expect(local.issues).toEqual([]);
+      // Centerline starts receive pierce checks using the session kerf.
+      // Closed hole leads now start in scrap and clear this warning.
+      const interference = ["sq-centerline", "open-centerline"].includes(name);
+      expect(local.issues).toEqual(
+        interference
+          ? [
+              `${name}: pierce footprint may alter a finished cut profile. Increase lead length or move the entry point.`,
+            ]
+          : [],
+      );
+      expect(local.pierces.every((p) => p.radius === 0.9652 / 2)).toBe(true);
     });
   for (const [name, length] of [
     ["sq-centerline", 200],

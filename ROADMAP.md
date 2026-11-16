@@ -1,19 +1,19 @@
 # Functional parity and development plan
 
-The 0.2 alpha adds jobs, reusable parts and quantities, multiple sheets with X/Y WCS origins, editable material defaults, manual contour tabs and entry positions, pierce footprint warnings, and SVGnest polygon placement. No claim of full WAM compatibility is made.
+The 0.3 alpha adds jobs, reusable parts and quantities, multiple sheets with X/Y WCS origins, editable material defaults, manual contour tabs and entry positions, pierce footprint warnings, and SVGnest polygon placement. No claim of full WAM compatibility is made.
 
 | Capability | Current state | Next work |
 | --- | --- | --- |
-| Offline Windows app | Electron runtime; installer and portable builds; manual GitHub update menu | Real two-version release upgrade validation, native file dialogs, recent files, multiple document tabs, recoverable autosaves, signed installer |
+| Windows app | Electron runtime; installer and portable builds; manual GitHub update menu; native job Open/Save/Save As and unsaved-change prompts | Real two-version release upgrade validation, recent files, multiple document tabs, recoverable autosaves, signed installer |
 | Desktop / Pro | Selectable profiles, common bed envelope | Verified per-model material libraries, firmware-specific postprocessors |
-| SVG | Physical units, curves, transforms, shapes, holes | More permissive safe definitions/use support, per-object grouping, explicit tolerance settings |
+| SVG | Physical units, curves, transforms, shapes, holes, definitions/use/symbols, styles and vector clips | Raster tracing, text outlining with font resolution, masks, explicit tolerance settings |
 | DXF | Lines, straight/bulged 2D polylines, arcs, circles; automatic bulge flattening at 0.08 mm tolerance | Ellipses, splines, INSERT transforms, layer mapping, broader units |
 | Geometry repair | Degenerate contour checks | Endpoint stitching, duplicate-line detection, self-intersection handling, gap healing with a repair report |
 | Vector editing | Shapes, polylines, transforms, node dragging, part clipboard, mouse rotation and on-part duplicate/delete | Multi-select, group/split, alignment, mirroring, dimension locks, Bézier handles, boolean union/difference, join/break |
-| Nesting | SVGnest placement worker with no-fit polygons, MaxRects fast candidate, quantities, multiple sheets and cancellable UI worker | Full genetic search, nesting in holes, locked parts, grain constraints, remnants and irregular stock |
+| Nesting | SVGnest placement worker plus constrained search, rotation steps, locks, grain rules, optional hole nesting, saved layouts, quantities, multiple sheets and cancellable UI worker | Full genetic search, remnant inventory and offcut editing (placeholder only) |
 | Compensation | Closed-path Clipper offsets and per-contour overrides | Containment tree, minimum feature checks, offset topology review |
 | Tabs | Automatic tabs or manual per-contour positions and widths | Corner avoidance, process-specific lift behavior |
-| Leads | Straight tangent previews, manual contour entry position | Scrap-side collision-free entry/exit and arc leads |
+| Leads | Scrap-side straight entries, length limiting within the same contour, manual entry position | Other-part and fixture collision avoidance, arc leads |
 | Order | Holes first then area | Full containment graph, travel optimization constrained by support, per-operation ordering, manual reorder |
 | Material library | 449 Pro reference records, editable defaults database with import/export, per-part process snapshots; 34 tab outliers blocked | Verified arbitrary-thickness calculation (interpolation failed holdouts), Desktop captures |
 | Preflight | Bounds/open contour/shape overlap, pierce footprint, quantities, material and WCS checks | Lead collisions, fixture avoidance, fully validated machine envelope, unsupported parameter errors |
@@ -21,10 +21,14 @@ The 0.2 alpha adds jobs, reusable parts and quantities, multiple sheets with X/Y
 | Export | Project JSON and SVG layout | Validated WAZER cut files, export report and regression fixtures |
 | MCP | 21 file-based stdio tools for jobs, sheets, parts, materials and legacy projects | Live editor session synchronization, conflict handling, operation history, cancellable jobs and richer resource/tool discovery |
 
+## Version 0.6 workspace and nesting
+
+Jobs now combines parts, nesting options, and interactive sheet previews. Advanced search controls live in Nesting Settings. Searches use fresh seeds, 1-90 degree rotation steps, contact-first constrained placement and same-sheet continuation after timed-out batches. Automatic gauge dimensions cover 7-26 including odd gauges. Empty default stock can adopt the requested material; explicit stock assignments remain fixed.
+
 ## Next release: geometry correctness and irregular nesting
 
 1. Implement an import repair pipeline and reviewable diagnostics. Preserve contour identity and source layers.
-2. Add locked placements to the version 2 job schema. Quantities and version 1 migration are implemented.
+2. Locked placements, quantities and version 1 migration are implemented. Add a dedicated remnant inventory after the placeholder workflow is designed.
 3. Extend the shared nesting provider's bounded search with progress reporting and reproducible optimization seeds. UI cancellation and worker execution are implemented.
 4. Extend the integrated [SVGnest](https://github.com/Jack000/SVGnest) placement worker with broader optimization. Our adapter uses no-fit polygons and bounded rotation attempts; it does not include the upstream genetic optimizer. Keep compound geometry and process metadata together.
 5. Compare with [libnest2d](https://github.com/tamasmeszaros/libnest2d) if native performance becomes necessary. It is C++ and LGPL-3.0, so distribution/linking choices need explicit review. It is not included in 0.1.
@@ -54,3 +58,11 @@ Implementation sequence:
 ## Design direction
 
 Keep an original, dense desktop workbench rather than a step-by-step browser wizard: a large bed view, direct geometry manipulation, numeric properties, keyboard commands, parts list, and visible preflight. Advanced controls should be available without hiding the geometry. Avoid UI state that differs from MCP state by placing all operations and validation rules in the shared application/core layer.
+
+## 0.4 settings update
+
+Implemented machine kerf/abrasive/travel limits with embedded job snapshots, signed per-side stock allowance, dynamic pierce fallback, contour selection by preview click, individual lead overrides, dependent material/thickness/quality selectors, nine sheet-origin anchors, persistent display units/file-label visibility, and contextual workspace controls. Physical cut verification and the WAZER machine postprocessor remain outstanding.
+
+## 0.5 nesting update
+
+Implemented batch job packing, complexity-based automatic time allocation with improvement-driven extensions, fixed shared limits, best-layout retention on budget expiration, progress and stop/keep controls, saved effort/method/order/objective/detail/pass/seed policies, sheet limits, preservation of existing placements, per-part process clearance, and consistent boundaries across SVGnest and constrained passes. Hole ordering, geometry validation and locks remain shared with the CAM model. Full optimal nesting and guaranteed-fit proofs remain outside this bounded heuristic search.

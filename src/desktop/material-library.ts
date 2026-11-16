@@ -1,12 +1,16 @@
 import { readFile, writeFile, mkdir, rename } from "node:fs/promises";
 import path from "node:path";
 import { materialLibrarySchema } from "../core/job";
-import { initialMaterialLibrary } from "../core/material-library";
+import {
+  initialMaterialLibrary,
+  extendMaterialLibrary,
+} from "../core/material-library";
+export { readJobFile, writeJobFile } from "./job-files";
 export async function readLibraryFile(file: string) {
   try {
     const raw = await readFile(file, "utf8");
     if (raw.length > 20_000_000) throw Error("Material library exceeds 20 MB");
-    return materialLibrarySchema.parse(JSON.parse(raw));
+    return extendMaterialLibrary(materialLibrarySchema.parse(JSON.parse(raw)));
   } catch (error: any) {
     if (error.code === "ENOENT") return initialMaterialLibrary();
     throw error;

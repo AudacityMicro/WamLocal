@@ -175,7 +175,7 @@ describe("job hierarchy and migration", () => {
       placeDefinition(created.job, created.partId, job.sheets[0].id),
     ).toThrow(/geometry/);
     job.sheets[0].wcs = { x: 25, y: 20 };
-    expect(jobIssues(job).join(" ")).toMatch(/WAZER bed/);
+    expect(jobIssues(job).join(" ")).toMatch(/maximum cutting area/);
   });
   it("nests requested copies across multiple matching sheets", () => {
     const job = readJob({
