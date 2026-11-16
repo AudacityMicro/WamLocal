@@ -4,10 +4,10 @@
   "machine": "Pro",
   "capturedDate": "2026-11-08",
   "materials": 24,
-  "captures": 450,
+  "captures": 560,
   "training": 203,
-  "holdouts": 247,
-  "parameterValues": 4950,
+  "holdouts": 357,
+  "parameterValues": 6160,
   "integrityErrors": [],
   "outOfBedTabDefaults": [
     {
@@ -66,19 +66,35 @@
       "step": 0.001,
       "unit": "in",
       "maxMm": 24.13,
-      "captures": 21,
+      "captures": 37,
       "training": 9,
-      "holdout": 12,
+      "holdout": 28,
       "thicknessesIn": [
         0.001,
         0.01,
+        0.016,
+        0.018,
         0.02,
+        0.022,
         0.023,
+        0.025,
+        0.028,
+        0.032,
+        0.036,
         0.04,
+        0.045,
+        0.05,
+        0.056,
         0.0625,
+        0.063,
+        0.071,
         0.073,
+        0.08,
+        0.09,
         0.1,
+        0.112,
         0.125,
+        0.14,
         0.1875,
         0.2,
         0.25,
@@ -96,69 +112,69 @@
       "interpolationBaseline": [
         {
           "path": "speedMode.roughRate",
-          "comparisons": 12,
-          "maxAbsoluteError": 4.72267090400419,
+          "comparisons": 28,
+          "maxAbsoluteError": 5.954832014611952,
           "maxRelativeError": 0.023192244267275026
         },
         {
           "path": "speedMode.mediumRate",
-          "comparisons": 12,
-          "maxAbsoluteError": 4.194475403076069,
+          "comparisons": 28,
+          "maxAbsoluteError": 5.282434607795153,
           "maxRelativeError": 0.022962689855047926
         },
         {
           "path": "speedMode.fineRate",
-          "comparisons": 12,
-          "maxAbsoluteError": 3.6649759169274603,
+          "comparisons": 28,
+          "maxAbsoluteError": 4.63150726036713,
           "maxRelativeError": 0.02333294618867891
         },
         {
           "path": "speedMode.abrasiveRate",
-          "comparisons": 12,
+          "comparisons": 28,
           "maxAbsoluteError": 2.842170943040401e-14,
           "maxRelativeError": 1.8947806286936006e-16
         },
         {
           "path": "ecoMode.roughRate",
-          "comparisons": 12,
-          "maxAbsoluteError": 2.842170943040401e-14,
-          "maxRelativeError": 4.0602442043434295e-16
+          "comparisons": 28,
+          "maxAbsoluteError": 8.526512829121202e-14,
+          "maxRelativeError": 1.2180732613030289e-15
         },
         {
           "path": "ecoMode.mediumRate",
-          "comparisons": 12,
-          "maxAbsoluteError": 0,
-          "maxRelativeError": 0
+          "comparisons": 28,
+          "maxAbsoluteError": 5.684341886080802e-14,
+          "maxRelativeError": 9.022764898540956e-16
         },
         {
           "path": "ecoMode.fineRate",
-          "comparisons": 12,
+          "comparisons": 28,
           "maxAbsoluteError": 2.1316282072803006e-14,
           "maxRelativeError": 3.806478941571965e-16
         },
         {
           "path": "ecoMode.abrasiveRate",
-          "comparisons": 12,
+          "comparisons": 28,
           "maxAbsoluteError": 2.842170943040401e-14,
           "maxRelativeError": 1.8947806286936006e-16
         },
         {
           "path": "pierceTime",
-          "comparisons": 12,
+          "comparisons": 28,
           "maxAbsoluteError": 0.3696669390188898,
-          "maxRelativeError": 0.13484855492591194
+          "maxRelativeError": 0.20749274761338765
         },
         {
           "path": "defaultTabWidth",
-          "comparisons": 12,
-          "maxAbsoluteError": 0.09290546239016884,
-          "maxRelativeError": 0.017857142857142898
+          "comparisons": 28,
+          "maxAbsoluteError": 0.21474337144007904,
+          "maxRelativeError": 0.019276783791748568
         },
         {
           "path": "defaultLeadDist",
-          "comparisons": 12,
-          "maxAbsoluteError": 0.008306895454893715,
-          "maxRelativeError": 0.010515057537840145
+          "comparisons": 28,
+          "maxAbsoluteError": 0.019887810906508818,
+          "maxRelativeError": 0.02762195959237336
         }
       ]
     },
@@ -375,18 +391,35 @@
       "step": 0.001,
       "unit": "in",
       "maxMm": 12.5222,
-      "captures": 16,
+      "captures": 33,
       "training": 7,
-      "holdout": 9,
+      "holdout": 26,
       "thicknessesIn": [
         0.001,
         0.01,
+        0.0187,
+        0.0219,
         0.023,
+        0.025,
+        0.0281,
+        0.0312,
+        0.0344,
+        0.0375,
         0.04,
+        0.0437,
+        0.05,
+        0.0562,
         0.0625,
+        0.0703,
         0.073,
+        0.0781,
+        0.0937,
         0.1,
+        0.1094,
         0.125,
+        0.1406,
+        0.1562,
+        0.1719,
         0.1875,
         0.2,
         0.25,
@@ -400,69 +433,69 @@
       "interpolationBaseline": [
         {
           "path": "speedMode.roughRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 1.3349938613939116,
+          "comparisons": 26,
+          "maxAbsoluteError": 1.6190848228259256,
           "maxRelativeError": 0.008139274410790306
         },
         {
           "path": "speedMode.mediumRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 1.1929640816824474,
+          "comparisons": 26,
+          "maxAbsoluteError": 1.4428920070330946,
           "maxRelativeError": 0.007945359446848255
         },
         {
           "path": "speedMode.fineRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 1.0315511331312166,
+          "comparisons": 26,
+          "maxAbsoluteError": 1.2483682456374936,
           "maxRelativeError": 0.008101909462578542
         },
         {
           "path": "speedMode.abrasiveRate",
-          "comparisons": 9,
+          "comparisons": 26,
           "maxAbsoluteError": 2.842170943040401e-14,
           "maxRelativeError": 1.8947806286936006e-16
         },
         {
           "path": "ecoMode.roughRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 2.842170943040401e-14,
-          "maxRelativeError": 4.0602442043434295e-16
+          "comparisons": 26,
+          "maxAbsoluteError": 4.263256414560601e-14,
+          "maxRelativeError": 6.0903663065151445e-16
         },
         {
           "path": "ecoMode.mediumRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 0,
-          "maxRelativeError": 0
+          "comparisons": 26,
+          "maxAbsoluteError": 5.684341886080802e-14,
+          "maxRelativeError": 9.022764898540956e-16
         },
         {
           "path": "ecoMode.fineRate",
-          "comparisons": 9,
+          "comparisons": 26,
           "maxAbsoluteError": 2.1316282072803006e-14,
           "maxRelativeError": 3.806478941571965e-16
         },
         {
           "path": "ecoMode.abrasiveRate",
-          "comparisons": 9,
+          "comparisons": 26,
           "maxAbsoluteError": 2.842170943040401e-14,
           "maxRelativeError": 1.8947806286936006e-16
         },
         {
           "path": "pierceTime",
-          "comparisons": 9,
+          "comparisons": 26,
           "maxAbsoluteError": 45.997756294284954,
           "maxRelativeError": 3.9788797843898136
         },
         {
           "path": "defaultTabWidth",
-          "comparisons": 9,
-          "maxAbsoluteError": 0.007146025883975504,
+          "comparisons": 26,
+          "maxAbsoluteError": 0.022575109369106894,
           "maxRelativeError": 0.007250186923012458
         },
         {
           "path": "defaultLeadDist",
-          "comparisons": 9,
-          "maxAbsoluteError": 0.008306895454893715,
-          "maxRelativeError": 0.010515057537840145
+          "comparisons": 26,
+          "maxAbsoluteError": 0.01814310306664635,
+          "maxRelativeError": 0.02451770684681939
         }
       ]
     },
@@ -475,18 +508,35 @@
       "step": 0.001,
       "unit": "in",
       "maxMm": 11.2776,
-      "captures": 16,
+      "captures": 33,
       "training": 7,
-      "holdout": 9,
+      "holdout": 26,
       "thicknessesIn": [
         0.001,
         0.01,
+        0.0187,
+        0.0219,
         0.023,
+        0.025,
+        0.0281,
+        0.0312,
+        0.0344,
+        0.0375,
         0.04,
+        0.0437,
+        0.05,
+        0.0562,
         0.0625,
+        0.0703,
         0.073,
+        0.0781,
+        0.0937,
         0.1,
+        0.1094,
         0.125,
+        0.1406,
+        0.1562,
+        0.1719,
         0.1875,
         0.2,
         0.25,
@@ -500,69 +550,69 @@
       "interpolationBaseline": [
         {
           "path": "speedMode.roughRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 2.288854148353522,
+          "comparisons": 26,
+          "maxAbsoluteError": 2.714081260507214,
           "maxRelativeError": 0.018700835105754886
         },
         {
           "path": "speedMode.mediumRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 2.0389332784288285,
+          "comparisons": 26,
+          "maxAbsoluteError": 2.4219466110848487,
           "maxRelativeError": 0.018628229811577635
         },
         {
           "path": "speedMode.fineRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 1.7769821853187295,
+          "comparisons": 26,
+          "maxAbsoluteError": 2.1165120885261786,
           "maxRelativeError": 0.01853486812045179
         },
         {
           "path": "speedMode.abrasiveRate",
-          "comparisons": 9,
+          "comparisons": 26,
           "maxAbsoluteError": 2.842170943040401e-14,
           "maxRelativeError": 1.8947806286936006e-16
         },
         {
           "path": "ecoMode.roughRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 2.842170943040401e-14,
-          "maxRelativeError": 4.0602442043434295e-16
+          "comparisons": 26,
+          "maxAbsoluteError": 4.263256414560601e-14,
+          "maxRelativeError": 6.0903663065151445e-16
         },
         {
           "path": "ecoMode.mediumRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 0,
-          "maxRelativeError": 0
+          "comparisons": 26,
+          "maxAbsoluteError": 5.684341886080802e-14,
+          "maxRelativeError": 9.022764898540956e-16
         },
         {
           "path": "ecoMode.fineRate",
-          "comparisons": 9,
+          "comparisons": 26,
           "maxAbsoluteError": 2.1316282072803006e-14,
           "maxRelativeError": 3.806478941571965e-16
         },
         {
           "path": "ecoMode.abrasiveRate",
-          "comparisons": 9,
+          "comparisons": 26,
           "maxAbsoluteError": 2.842170943040401e-14,
           "maxRelativeError": 1.8947806286936006e-16
         },
         {
           "path": "pierceTime",
-          "comparisons": 9,
+          "comparisons": 26,
           "maxAbsoluteError": 2.119569627831112,
           "maxRelativeError": 0.11754758284233534
         },
         {
           "path": "defaultTabWidth",
-          "comparisons": 9,
-          "maxAbsoluteError": 0.00758000982902271,
+          "comparisons": 26,
+          "maxAbsoluteError": 0.03278094210500093,
           "maxRelativeError": 0.0505333988601514
         },
         {
           "path": "defaultLeadDist",
-          "comparisons": 9,
-          "maxAbsoluteError": 0.008306895454893715,
-          "maxRelativeError": 0.010515057537840145
+          "comparisons": 26,
+          "maxAbsoluteError": 0.01814310306664635,
+          "maxRelativeError": 0.02451770684681939
         }
       ]
     },
@@ -575,18 +625,38 @@
       "step": 0.001,
       "unit": "in",
       "maxMm": 11.8872,
-      "captures": 16,
+      "captures": 36,
       "training": 7,
-      "holdout": 9,
+      "holdout": 29,
       "thicknessesIn": [
         0.001,
         0.01,
+        0.0179,
+        0.0209,
         0.023,
+        0.0239,
+        0.0269,
+        0.0299,
+        0.0329,
+        0.0359,
         0.04,
+        0.0418,
+        0.0478,
+        0.0538,
+        0.0598,
         0.0625,
+        0.0673,
         0.073,
+        0.0747,
+        0.0897,
         0.1,
+        0.1046,
+        0.1196,
         0.125,
+        0.1345,
+        0.1495,
+        0.1644,
+        0.1793,
         0.1875,
         0.2,
         0.25,
@@ -600,69 +670,69 @@
       "interpolationBaseline": [
         {
           "path": "speedMode.roughRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 2.240889983825838,
+          "comparisons": 29,
+          "maxAbsoluteError": 2.3773866530727616,
           "maxRelativeError": 0.03370679778208045
         },
         {
           "path": "speedMode.mediumRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 1.9991082225105714,
+          "comparisons": 29,
+          "maxAbsoluteError": 2.1250957327196005,
           "maxRelativeError": 0.03376964126230607
         },
         {
           "path": "speedMode.fineRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 1.7469135558432356,
+          "comparisons": 29,
+          "maxAbsoluteError": 1.8523541345903993,
           "maxRelativeError": 0.03385043100479929
         },
         {
           "path": "speedMode.abrasiveRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 2.842170943040401e-14,
-          "maxRelativeError": 1.8947806286936006e-16
+          "comparisons": 29,
+          "maxAbsoluteError": 1.7053025658242404e-13,
+          "maxRelativeError": 1.1368683772161603e-15
         },
         {
           "path": "ecoMode.roughRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 2.842170943040401e-14,
-          "maxRelativeError": 4.0602442043434295e-16
+          "comparisons": 29,
+          "maxAbsoluteError": 8.526512829121202e-14,
+          "maxRelativeError": 1.2180732613030289e-15
         },
         {
           "path": "ecoMode.mediumRate",
-          "comparisons": 9,
+          "comparisons": 29,
           "maxAbsoluteError": 0,
           "maxRelativeError": 0
         },
         {
           "path": "ecoMode.fineRate",
-          "comparisons": 9,
+          "comparisons": 29,
           "maxAbsoluteError": 2.1316282072803006e-14,
           "maxRelativeError": 3.806478941571965e-16
         },
         {
           "path": "ecoMode.abrasiveRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 2.842170943040401e-14,
-          "maxRelativeError": 1.8947806286936006e-16
+          "comparisons": 29,
+          "maxAbsoluteError": 1.7053025658242404e-13,
+          "maxRelativeError": 1.1368683772161603e-15
         },
         {
           "path": "pierceTime",
-          "comparisons": 9,
-          "maxAbsoluteError": 1.7705900053898915,
-          "maxRelativeError": 0.29661438983885696
+          "comparisons": 29,
+          "maxAbsoluteError": 2.2246182609868637,
+          "maxRelativeError": 0.5838893073456335
         },
         {
           "path": "defaultTabWidth",
-          "comparisons": 9,
-          "maxAbsoluteError": 0.03350523327333654,
+          "comparisons": 29,
+          "maxAbsoluteError": 0.07837410369061537,
           "maxRelativeError": 0.021730691859240224
         },
         {
           "path": "defaultLeadDist",
-          "comparisons": 9,
-          "maxAbsoluteError": 0.008306895454893715,
-          "maxRelativeError": 0.010515057537840145
+          "comparisons": 29,
+          "maxAbsoluteError": 0.020292166426209013,
+          "maxRelativeError": 0.02779748825508084
         }
       ]
     },
@@ -675,18 +745,38 @@
       "step": 0.001,
       "unit": "in",
       "maxMm": 8.839199999999998,
-      "captures": 13,
+      "captures": 33,
       "training": 6,
-      "holdout": 7,
+      "holdout": 27,
       "thicknessesIn": [
         0.001,
         0.01,
+        0.0179,
+        0.0209,
         0.023,
+        0.0239,
+        0.0269,
+        0.0299,
+        0.0329,
+        0.0359,
         0.04,
+        0.0418,
+        0.0478,
+        0.0538,
+        0.0598,
         0.0625,
+        0.0673,
         0.073,
+        0.0747,
+        0.0897,
         0.1,
+        0.1046,
+        0.1196,
         0.125,
+        0.1345,
+        0.1495,
+        0.1644,
+        0.1793,
         0.1875,
         0.2,
         0.25,
@@ -697,69 +787,69 @@
       "interpolationBaseline": [
         {
           "path": "speedMode.roughRate",
-          "comparisons": 7,
-          "maxAbsoluteError": 2.0853218888050122,
+          "comparisons": 27,
+          "maxAbsoluteError": 2.256360619853453,
           "maxRelativeError": 0.043438976158006896
         },
         {
           "path": "speedMode.mediumRate",
-          "comparisons": 7,
-          "maxAbsoluteError": 1.8401123575465448,
+          "comparisons": 27,
+          "maxAbsoluteError": 1.9967265585472234,
           "maxRelativeError": 0.04324559068058594
         },
         {
           "path": "speedMode.fineRate",
-          "comparisons": 7,
-          "maxAbsoluteError": 1.6155828664001604,
+          "comparisons": 27,
+          "maxAbsoluteError": 1.7578503304328734,
           "maxRelativeError": 0.04288810386167947
         },
         {
           "path": "speedMode.abrasiveRate",
-          "comparisons": 7,
-          "maxAbsoluteError": 2.842170943040401e-14,
-          "maxRelativeError": 1.8947806286936006e-16
+          "comparisons": 27,
+          "maxAbsoluteError": 1.7053025658242404e-13,
+          "maxRelativeError": 1.1368683772161603e-15
         },
         {
           "path": "ecoMode.roughRate",
-          "comparisons": 7,
-          "maxAbsoluteError": 2.842170943040401e-14,
-          "maxRelativeError": 4.0602442043434295e-16
+          "comparisons": 27,
+          "maxAbsoluteError": 8.526512829121202e-14,
+          "maxRelativeError": 1.2180732613030289e-15
         },
         {
           "path": "ecoMode.mediumRate",
-          "comparisons": 7,
+          "comparisons": 27,
           "maxAbsoluteError": 0,
           "maxRelativeError": 0
         },
         {
           "path": "ecoMode.fineRate",
-          "comparisons": 7,
+          "comparisons": 27,
           "maxAbsoluteError": 2.1316282072803006e-14,
           "maxRelativeError": 3.806478941571965e-16
         },
         {
           "path": "ecoMode.abrasiveRate",
-          "comparisons": 7,
-          "maxAbsoluteError": 2.842170943040401e-14,
-          "maxRelativeError": 1.8947806286936006e-16
+          "comparisons": 27,
+          "maxAbsoluteError": 1.7053025658242404e-13,
+          "maxRelativeError": 1.1368683772161603e-15
         },
         {
           "path": "pierceTime",
-          "comparisons": 7,
+          "comparisons": 27,
           "maxAbsoluteError": 6.007182884428346,
-          "maxRelativeError": 0.1274912222102276
+          "maxRelativeError": 0.13058419876602298
         },
         {
           "path": "defaultTabWidth",
-          "comparisons": 7,
-          "maxAbsoluteError": 0.010050591820698784,
+          "comparisons": 27,
+          "maxAbsoluteError": 0.01576791412428502,
           "maxRelativeError": 0.0052897851687888344
         },
         {
           "path": "defaultLeadDist",
-          "comparisons": 7,
-          "maxAbsoluteError": 0.008306895454893715,
-          "maxRelativeError": 0.010515057537840145
+          "comparisons": 27,
+          "maxAbsoluteError": 0.020292166426209013,
+          "maxRelativeError": 0.02779748825508084
         }
       ]
     },
@@ -772,18 +862,38 @@
       "step": 0.001,
       "unit": "in",
       "maxMm": 11.6078,
-      "captures": 16,
+      "captures": 36,
       "training": 7,
-      "holdout": 9,
+      "holdout": 29,
       "thicknessesIn": [
         0.001,
         0.01,
+        0.0179,
+        0.0209,
         0.023,
+        0.0239,
+        0.0269,
+        0.0299,
+        0.0329,
+        0.0359,
         0.04,
+        0.0418,
+        0.0478,
+        0.0538,
+        0.0598,
         0.0625,
+        0.0673,
         0.073,
+        0.0747,
+        0.0897,
         0.1,
+        0.1046,
+        0.1196,
         0.125,
+        0.1345,
+        0.1495,
+        0.1644,
+        0.1793,
         0.1875,
         0.2,
         0.25,
@@ -797,69 +907,69 @@
       "interpolationBaseline": [
         {
           "path": "speedMode.roughRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 1.879925096839429,
+          "comparisons": 29,
+          "maxAbsoluteError": 2.055947836686329,
           "maxRelativeError": 0.020717874128182736
         },
         {
           "path": "speedMode.mediumRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 1.6734273003046667,
+          "comparisons": 29,
+          "maxAbsoluteError": 1.8260461241194434,
           "maxRelativeError": 0.021005848901799514
         },
         {
           "path": "speedMode.fineRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 1.4693473306576124,
+          "comparisons": 29,
+          "maxAbsoluteError": 1.6102298141307614,
           "maxRelativeError": 0.020468295043828248
         },
         {
           "path": "speedMode.abrasiveRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 2.842170943040401e-14,
-          "maxRelativeError": 1.8947806286936006e-16
+          "comparisons": 29,
+          "maxAbsoluteError": 1.7053025658242404e-13,
+          "maxRelativeError": 1.1368683772161603e-15
         },
         {
           "path": "ecoMode.roughRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 2.842170943040401e-14,
-          "maxRelativeError": 4.0602442043434295e-16
+          "comparisons": 29,
+          "maxAbsoluteError": 8.526512829121202e-14,
+          "maxRelativeError": 1.2180732613030289e-15
         },
         {
           "path": "ecoMode.mediumRate",
-          "comparisons": 9,
+          "comparisons": 29,
           "maxAbsoluteError": 0,
           "maxRelativeError": 0
         },
         {
           "path": "ecoMode.fineRate",
-          "comparisons": 9,
+          "comparisons": 29,
           "maxAbsoluteError": 2.1316282072803006e-14,
           "maxRelativeError": 3.806478941571965e-16
         },
         {
           "path": "ecoMode.abrasiveRate",
-          "comparisons": 9,
-          "maxAbsoluteError": 2.842170943040401e-14,
-          "maxRelativeError": 1.8947806286936006e-16
+          "comparisons": 29,
+          "maxAbsoluteError": 1.7053025658242404e-13,
+          "maxRelativeError": 1.1368683772161603e-15
         },
         {
           "path": "pierceTime",
-          "comparisons": 9,
+          "comparisons": 29,
           "maxAbsoluteError": 8.524371683653783,
-          "maxRelativeError": 1.194750799023967
+          "maxRelativeError": 2.3410071085261106
         },
         {
           "path": "defaultTabWidth",
-          "comparisons": 9,
+          "comparisons": 29,
           "maxAbsoluteError": 0,
           "maxRelativeError": 0
         },
         {
           "path": "defaultLeadDist",
-          "comparisons": 9,
-          "maxAbsoluteError": 0.008306895454893715,
-          "maxRelativeError": 0.010515057537840145
+          "comparisons": 29,
+          "maxAbsoluteError": 0.020292166426209013,
+          "maxRelativeError": 0.02779748825508084
         }
       ]
     },

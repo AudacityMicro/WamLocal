@@ -9,14 +9,76 @@ import {
   materialName,
   materialQuality,
   thicknessKey,
+  qualityProfiles,
+  selectMaterialProfile,
 } from "./material-selection";
 import { defaultMaterial } from "./job";
+import { gaugesFor } from "./material-gauges";
 import { readLibraryFile, writeLibraryFile } from "../desktop/material-library";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
 describe("complete material quality catalog", () => {
+  it("has captured Pro settings for every 7-26 gauge of each standard metal stock", () => {
+    const library = initialMaterialLibrary();
+    for (const stock of new Set(materialPresets.map((p) => p.name)))
+      for (const gauge of gaugesFor(stock))
+        for (const quality of CUT_QUALITIES) {
+          const m = library.materials.find(
+            (m) =>
+              m.machine === "pro" &&
+              materialName(m) === stock &&
+              Math.abs(m.thickness - gauge.mm) < 1e-7 &&
+              materialQuality(m) === quality,
+          );
+          expect(m, `${stock} ${gauge.gauge} Ga ${quality}`).toBeDefined();
+          expect(m!.requiresVerification).toBe(false);
+          expect(m!.preset).toBeDefined();
+        }
+  });
+  it("lets an old saved placeholder select the recorded replacement without mixing machines", () => {
+    const records = initialMaterialLibrary().materials;
+    const recorded = records.find((m) => m.id === "pro-0-0.02-medium")!;
+    const old = {
+      ...recorded,
+      id: "old-gauge",
+      name: "Aluminum - 6061",
+      feed: 100,
+      requiresVerification: true,
+      preset: undefined,
+      source: "Nominal sheet gauge thickness",
+    };
+    const offered = qualityProfiles(records, old, "pro");
+    expect(offered.some((m) => m.id === old.id)).toBe(true);
+    expect(offered.some((m) => m.id === recorded.id)).toBe(true);
+    expect(offered.every((m) => m.machine === "pro")).toBe(true);
+    expect(
+      selectMaterialProfile(
+        [old, ...records],
+        old,
+        "pro",
+        "Aluminum - 6061",
+        0.508,
+      ).id,
+    ).toBe(recorded.id);
+    expect(old.feed).toBe(100);
+    const desktop = { ...old, machine: "desktop" as const };
+    expect(
+      qualityProfiles(records, desktop, "desktop").every(
+        (m) => m.machine === "desktop",
+      ),
+    ).toBe(true);
+    expect(
+      selectMaterialProfile(
+        records,
+        desktop,
+        "desktop",
+        "Aluminum - 6061",
+        0.508,
+      ).machine,
+    ).toBe("desktop");
+  });
   it("includes exact WAM 0.020 inch aluminum feeds for all three qualities", () => {
     const library = initialMaterialLibrary();
     for (const [quality, feed] of [
