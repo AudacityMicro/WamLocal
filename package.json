@@ -1,6 +1,6 @@
 {
   "name": "wam-local",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "private": true,
   "type": "module",
   "description": "Offline waterjet design and CAM workbench",
@@ -24,6 +24,7 @@
     "clipper-lib": "^6.4.2",
     "dxf-parser": "^1.1.2",
     "electron-updater": "^6.8.11",
+    "fflate": "^0.8.3",
     "lucide-react": "^0.468.0",
     "maxrects-packer": "^3.0.0",
     "paper": "^0.12.18",

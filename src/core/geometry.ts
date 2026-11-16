@@ -84,6 +84,12 @@ export type Move = {
   feed?: number;
 };
 export type Plan = {
+  contourPlans: {
+    partId: string;
+    contour: Contour;
+    process: Project["material"];
+    moves: Move[];
+  }[];
   moves: Move[];
   cutLength: number;
   minutes: number;
@@ -92,6 +98,7 @@ export type Plan = {
   pierces: { point: Point; radius: number; partId: string; warning: boolean }[];
 };
 export function plan(project: Project): Plan {
+  const contourPlans: Plan["contourPlans"] = [];
   const moves: Move[] = [],
     issues: string[] = [];
   const pierceMarkers: Plan["pierces"] = [];
@@ -184,6 +191,7 @@ export function plan(project: Project): Plan {
     pierceSeconds = 0,
     abrasiveGrams = 0;
   for (const { p, c, tabTargets, cutMode, process } of paths) {
+    const firstMove = moves.length;
     const pts = c.closed ? [...c.points, c.points[0]] : c.points;
     const total = pts.slice(1).reduce((s, v, i) => s + distance(pts[i], v), 0);
     if (total < 0.001) {
@@ -295,6 +303,12 @@ export function plan(project: Project): Plan {
       walked += len;
     }
     cursor = pts[pts.length - 1];
+    contourPlans.push({
+      partId: p.id,
+      contour: c,
+      process,
+      moves: moves.slice(firstMove),
+    });
   }
   for (const m of moves.filter((m) => m.kind !== "rapid"))
     if (
@@ -357,6 +371,7 @@ export function plan(project: Project): Plan {
     .filter((m) => m.kind === "cut")
     .reduce((s, m) => s + distance(m.from, m.to), 0);
   return {
+    contourPlans,
     moves,
     cutLength,
     abrasiveGrams,

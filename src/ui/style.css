@@ -1426,3 +1426,8 @@ section h3 {
   color: #d1bc96;
   line-height: 1.5;
 }
+
+.nesting-settings-dialog code {
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}

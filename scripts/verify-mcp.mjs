@@ -90,8 +90,16 @@ try {
     machine: "pro",
     name: "Aluminum - 6061",
   });
-  const bundledPresets = JSON.parse(await readFile(new URL("../src/core/material-presets.json", import.meta.url), "utf8"));
-  assert.equal(catalog.presets.length, bundledPresets.filter((p) => p.name === "Aluminum - 6061").length);
+  const bundledPresets = JSON.parse(
+    await readFile(
+      new URL("../src/core/material-presets.json", import.meta.url),
+      "utf8",
+    ),
+  );
+  assert.equal(
+    catalog.presets.length,
+    bundledPresets.filter((p) => p.name === "Aluminum - 6061").length,
+  );
   const thinAluminum = catalog.presets.find((p) => p.thicknessIn === 0.02);
   assert.ok(thinAluminum);
   assert.ok(Math.abs(thinAluminum.feeds.fine - 470.55) < 1e-8);
@@ -172,6 +180,19 @@ try {
   assert.deepEqual(await call("read_job", { file: "transfer.wam" }), multi);
   assert.equal(inspected.sheets.length, 3);
   assert.ok(inspected.sheets[0].pierces.length);
+  const posted = await call("post_all", { file: "multi.job.json" });
+  assert.equal(posted.paths.length, 3);
+  for (const output of posted.paths) {
+    const nc = await readFile(output, "utf8");
+    assert.match(nc, /G90\r?\nG21\r?\nM1403/);
+    assert.match(nc, /M1404\r?\n$/);
+  }
+  const overwritten = await call("post_sheet", {
+    file: "multi.job.json",
+    sheetId: multi.sheets[0].id,
+    replace: true,
+  });
+  assert.equal(overwritten.paths.length, 1);
   const library = await call("read_material_library", {});
   library.materials[0].feed = 321;
   await call("write_material_library", { library });
@@ -185,7 +206,7 @@ try {
   });
   assert.ok(bad.isError);
   console.log(
-    "MCP verified over stdio: tool discovery, project creation, shapes, nesting, planning, SVG export, filename validation.",
+    "MCP verified over stdio: discovery, jobs, nesting, planning, SVG, WAZER sheet/all posting and filename validation.",
   );
 } finally {
   await client.close();

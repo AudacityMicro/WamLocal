@@ -20,6 +20,7 @@ export function JobSetup({
   onUpload,
   onNewPart,
   onNest,
+  onPost,
   activeSheetId,
   renderSheetPreview,
   onClearSelection,
@@ -40,6 +41,7 @@ export function JobSetup({
   onUpload: () => void;
   onNewPart: () => void;
   onNest: () => void;
+  onPost: () => void;
 }) {
   const [selected, select] = useState<string>();
   const part = job.parts.find((p) => p.id === selected) ?? job.parts[0];
@@ -75,6 +77,14 @@ export function JobSetup({
         <div className="button-row">
           <button onClick={onUpload}>Upload parts</button>
           <button onClick={onNewPart}>New part</button>
+          <button
+            onClick={onPost}
+            disabled={
+              nestingBusy || !job.sheets.some((s) => s.placements.length)
+            }
+          >
+            Post all
+          </button>
           <button
             className="primary"
             onClick={onNest}

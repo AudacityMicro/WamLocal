@@ -1,8 +1,20 @@
 # Wam Local
 
-An independent, offline waterjet design and CAM workbench for power users. Electron + React + TypeScript, with a shared geometry engine and a local MCP server. This is a working **0.6 alpha**, not yet a WAM replacement for running a machine.
+An independent, offline waterjet design and CAM workbench for power users. Electron + React + TypeScript, with a shared geometry engine and a local MCP server. This is a working **0.7 alpha**, with independent WAZER posting pending physical-machine validation.
 
 ![Job setup](artifacts/jobs-inline-sheets.png)
+
+## Version 0.7 posting
+
+Each sheet preview has **Post sheet** and **Post all**, and Jobs has a **Post all** button. The File menu offers the same actions when context permits. Post sheet chooses one .gcode file; Post all chooses a folder and writes a separate file for every populated sheet. Empty sheets are skipped. Post all checks that every requested copy is placed; single-sheet posting can export a partial job. Existing files require replacement confirmation, and a failed batch restores replaced files. Exporting does not operate the machine.
+
+The independent postprocessor emits metric absolute WAZER motion (G90/G21), startup/shutdown metadata, high-pressure and abrasive on/off commands, per-part feed and pierce dwell, and three shutdown dwell seconds per cutting operation. Contours are compensated using the job's machine kerf and stock allowance. Tabs split contours into independent cutting spans: the jet is off for travel between spans, with a new scrap-side lead-in and pierce on each span, and a scrap-side lead-out before stopping. Preview toolpaths and posted operations share that plan. Configured feeds are constant; this does not reproduce WAM's adaptive feed scheduling or curved lead geometry.
+
+Coordinates map sheet placement back to the machine bed, with negative controller Y. The nine-point sheet origin remains a work-coordinate reference and is described in the header; it does not enable unsupported controller work offsets. Cut Extents include the jet footprint. Resume-after-pause uses the sheet's largest pierce time; differing per-part dwell values are reported. Time estimates include pierces and shutdown waits, but exclude rapid travel.
+
+Preflight blocks unverified material profiles, wrong-machine settings, missing geometry, invalid feed, overlaps, bounds, stock-outline/exclusion violations and leads crossing another part. Pierce/stop footprint interference and shortened leads are reported for review. Windows output uses short .gcode filenames and atomic staged batch writes. The browser development build downloads Post all as a ZIP. MCP has matching `post_sheet` and `post_all` tools, with replacement disabled unless explicitly requested.
+
+Protocol evidence: [manufacturer command documentation](https://support.wazer.com/resources/maintenance/wam-procedures/understanding-g-code-on-wazer), the captured WAM 2.5.0 Pro files, and public manufacturer Desktop/Pro welcome-cut files. Source URLs, hashes and control facts are in `fixtures/posting/protocol-sources.json`. The post uses the observed 2.5.0 Pro and 1.4 Desktop dialect metadata, while identifying Wam Local as the generator. Command replay, geometry, file output and UI downloads are tested. **Physical machine cutting and firmware-specific acceptance have not been verified.**
 
 ## Version 0.6.2 gauge captures and saved profile selection
 

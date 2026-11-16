@@ -1,0 +1,22 @@
+{
+  "version": "0.7.0",
+  "tests": 181,
+  "browserFiles": [
+    {
+      "filename": "JPO001.gcode",
+      "operations": 3,
+      "cutLength": 157.9697565470888,
+      "sha256": "361ba90203834cca2c804276197c3548950c6f7e4dda3777d7d7f9c8892b8a73"
+    },
+    {
+      "filename": "JPO002.gcode",
+      "operations": 3,
+      "cutLength": 157.96975654708885,
+      "sha256": "45973f55e91c900ef55dc841b70012c88e27ed9035a8fdfeac08ba6d3889b606"
+    }
+  ],
+  "nativeBridge": "compiler, writer, sender rejection, cancellation and overwrite tests passed",
+  "batchRollback": "simulated SD write failure restored original files",
+  "packagedMcp": "sheet/all posting verified over stdio",
+  "physicalMachineValidation": false
+}

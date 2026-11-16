@@ -18,8 +18,8 @@ The 0.3 alpha adds jobs, reusable parts and quantities, multiple sheets with X/Y
 | Material library | 560 Pro reference records, editable defaults database with import/export, per-part process snapshots; 34 tab outliers blocked | Verified arbitrary-thickness calculation (interpolation failed holdouts), Desktop captures |
 | Preflight | Bounds/open contour/shape overlap, pierce footprint, quantities, material and WCS checks | Lead collisions, fixture avoidance, fully validated machine envelope, unsupported parameter errors |
 | Simulation | Cut/rapid/tab overlay and scrubber | Distance/time-based motion playback, pierce/dwell visualization, postprocessed NC parsing and comparison |
-| Export | Project JSON and SVG layout | Validated WAZER cut files, export report and regression fixtures |
-| MCP | 21 file-based stdio tools for jobs, sheets, parts, materials and legacy projects | Live editor session synchronization, conflict handling, operation history, cancellable jobs and richer resource/tool discovery |
+| Export | Project JSON, SVG, per-sheet and batch WAZER G-code with preflight and output reports | Physical machine validation, broader firmware captures, adaptive feeds and arc leads |
+| MCP | 23 file-based stdio tools for jobs, sheets, parts, materials and legacy projects | Live editor session synchronization, conflict handling, operation history, cancellable jobs and richer resource/tool discovery |
 
 ## Version 0.6 workspace and nesting
 
@@ -40,7 +40,7 @@ Jobs now combines parts, nesting options, and interactive sheet previews. Advanc
 
 **Reference-capture status:** five WAM 2.5.0 Pro jobs and their editable workspaces are available in `fixtures/wam-reference/pro/`, with comparisons in [the test results](fixtures/wam-reference/RESULTS.md). Desktop remains pending because the account lists only a registered Pro machine. Curved leads, kerf-aware tab gaps, tabs on holes, variable feed and timing remain explicit implementation gaps. The existing source files below are still needed for Desktop and for additional modes/firmware coverage.
 
-Machine-ready export is the main missing requirement for practical WAM replacement. Build this as a distinct adapter from preview paths, with fixtures for both machine models.
+Independent WAZER posting is implemented in 0.7. The remaining release gate is physical cut and firmware-specific validation. Posted files share the compensated, tab-split operation plan with the preview.
 
 Required reference inputs from the owner:
 
@@ -61,7 +61,7 @@ Keep an original, dense desktop workbench rather than a step-by-step browser wiz
 
 ## 0.4 settings update
 
-Implemented machine kerf/abrasive/travel limits with embedded job snapshots, signed per-side stock allowance, dynamic pierce fallback, contour selection by preview click, individual lead overrides, dependent material/thickness/quality selectors, nine sheet-origin anchors, persistent display units/file-label visibility, and contextual workspace controls. Physical cut verification and the WAZER machine postprocessor remain outstanding.
+Implemented machine kerf/abrasive/travel limits with embedded job snapshots, signed per-side stock allowance, dynamic pierce fallback, contour selection by preview click, individual lead overrides, dependent material/thickness/quality selectors, nine sheet-origin anchors, persistent display units/file-label visibility, and contextual workspace controls. WAZER posting is implemented in 0.7; physical cut and firmware-specific verification remain outstanding.
 
 ## 0.5 nesting update
 

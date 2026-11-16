@@ -9,12 +9,27 @@ declare module "paper/dist/paper-core" {
 interface Window {
   jobFiles?: {
     open(): Promise<{ job: unknown; path: string } | null>;
+    post(
+      job: unknown,
+      sheetId?: string,
+    ): Promise<{
+      paths: string[];
+      sheets: {
+        filename: string;
+        sheetName: string;
+        operations: number;
+        seconds: number;
+        warnings: string[];
+      }[];
+    } | null>;
     save(job: unknown, saveAs?: boolean): Promise<{ path: string } | null>;
     reset(): Promise<void>;
     confirmDiscard(): Promise<"save" | "discard" | "cancel">;
     updateViewPreferences(value: {
       units: "mm" | "in";
       showFileLabels: boolean;
+      canPostSheet?: boolean;
+      canPostAll?: boolean;
     }): void;
     setDirty(dirty: boolean): void;
     close(): void;

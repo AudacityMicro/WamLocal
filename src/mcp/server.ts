@@ -25,7 +25,9 @@ import {
   rectangle,
   circle,
 } from "../core/model.js";
-import { nest, plan, svgExport } from "../core/geometry.js";
+import { nest, svgExport } from "../core/geometry.js";
+import { postJob, planForPosting } from "../core/postprocessor";
+import { writePostedFiles } from "../desktop/post-files";
 import {
   materialPresets,
   presetIssue,
@@ -34,7 +36,7 @@ import {
 } from "../core/material-presets.js";
 const root = path.resolve(process.env.WAM_PROJECT_DIR || "projects");
 await mkdir(root, { recursive: true });
-const server = new McpServer({ name: "wam-local", version: "0.2.2" });
+const server = new McpServer({ name: "wam-local", version: "0.7.0" });
 let pending: Promise<unknown> = Promise.resolve();
 function serial<T>(operation: () => Promise<T>): Promise<T> {
   const result = pending.then(operation);
@@ -158,9 +160,9 @@ server.tool(
 );
 server.tool(
   "inspect_toolpaths",
-  "Return preview cut moves, issues and approximate cut time. Not a validated WAZER postprocessor.",
+  "Return the posting cut operations, pierce footprints, issues and estimated time for a legacy single-sheet project.",
   { file: fileSchema },
-  async ({ file }) => response(plan(await read(file))),
+  async ({ file }) => response(planForPosting(await read(file))),
 );
 server.tool(
   "export_svg",
@@ -312,14 +314,14 @@ server.tool(
 );
 server.tool(
   "inspect_job",
-  "Return per-sheet preview paths, pierce footprints, WCS and job preflight. Bed coordinates are preview coordinates, not machine-ready NC.",
+  "Return per-sheet posting paths, separate pierces around tab gaps, WCS and preflight. post_sheet and post_all write WAZER NC files.",
   { file: fileSchema },
   async ({ file }) => {
     const job = await readSavedJob(file);
     return response({
-      issues: jobIssues(job),
+      issues: jobIssues(job, planForPosting),
       sheets: job.sheets.map((s) => {
-        const preview = plan(sheetProject(job, s.id));
+        const preview = planForPosting(sheetProject(job, s.id));
         return {
           id: s.id,
           name: s.name,
@@ -348,4 +350,27 @@ server.tool(
   async ({ library }) =>
     serial(async () => response(await writeLibraryFile(libraryFile, library))),
 );
+for (const all of [false, true])
+  server.tool(
+    all ? "post_all" : "post_sheet",
+    all
+      ? "Post every populated sheet as a separate WAZER .gcode file in the project folder. Validate the whole batch before writing. Does not operate the machine."
+      : "Post one sheet as a WAZER .gcode file in the project folder. Does not operate the machine.",
+    all
+      ? { file: fileSchema, replace: z.boolean().default(false) }
+      : {
+          file: fileSchema,
+          sheetId: z.string().min(1),
+          replace: z.boolean().default(false),
+        },
+    async (args) =>
+      serial(async () => {
+        const files = postJob(
+          await readSavedJob(args.file),
+          "sheetId" in args ? (args.sheetId as string) : undefined,
+        );
+        const paths = await writePostedFiles(root, files, args.replace);
+        return response({ paths, sheets: files.map(({ content, ...f }) => f) });
+      }),
+  );
 await server.connect(new StdioServerTransport());

@@ -17,7 +17,8 @@ import {
   Magnet,
 } from "lucide-react";
 import { sheetProject, BED, type Job, type Sheet } from "../core/job";
-import { transformed, partBounds, plan } from "../core/geometry";
+import { transformed, partBounds } from "../core/geometry";
+import { planForPosting as plan } from "../core/postprocessor";
 import type { Part, Point } from "../core/model";
 import type { PlacementChange } from "../core/sheet-placement";
 import { partCenter, rotatePartFromPointer } from "../core/part-transform";
@@ -38,6 +39,7 @@ export function SheetPreview({
   onDelete,
   onEdit,
   onNest,
+  onPost,
   showPaths,
   onShowPaths,
   disabled = false,
@@ -56,6 +58,7 @@ export function SheetPreview({
   onDelete: (sheetId: string, id: string) => void;
   onEdit: (id: string) => void;
   onNest: (id: string) => void;
+  onPost: (id?: string) => void;
   disabled?: boolean;
 }) {
   const u = useDisplayUnits(),
@@ -175,6 +178,20 @@ export function SheetPreview({
   return (
     <div className="sheet-preview" data-sheet-preview={sheet.id}>
       <div className="sheet-preview-toolbar">
+        <button
+          onClick={() => onPost(sheet.id)}
+          disabled={disabled || !project.parts.length}
+          aria-label={`Post sheet ${sheet.name}`}
+        >
+          Post sheet
+        </button>
+        <button
+          onClick={() => onPost()}
+          disabled={disabled || !job.sheets.some((s) => s.placements.length)}
+          aria-label={`Post all sheets from ${sheet.name}`}
+        >
+          Post all
+        </button>
         <label className="check">
           <input
             type="checkbox"

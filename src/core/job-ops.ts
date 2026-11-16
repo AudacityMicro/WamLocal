@@ -229,7 +229,7 @@ export function editView(job: Job, view: JobView, next: Project): Job {
   }
   return jobSchema.parse(updated);
 }
-export function jobIssues(job: Job): string[] {
+export function jobIssues(job: Job, planner: typeof plan = plan): string[] {
   const issues: string[] = [];
   for (const p of job.parts) {
     const left = p.quantity - placedCount(job, p.id);
@@ -254,7 +254,9 @@ export function jobIssues(job: Job): string[] {
       issues.push(`${s.name}: parameters belong to another machine profile.`);
     if (s.placements.length)
       issues.push(
-        ...plan(sheetProject(job, s.id)).issues.map((i) => `${s.name}: ${i}`),
+        ...planner(sheetProject(job, s.id)).issues.map(
+          (i) => `${s.name}: ${i}`,
+        ),
       );
   }
   return [...new Set(issues)];

@@ -41,7 +41,16 @@ app.whenReady().then(() => {
     writeLibraryFile,
     readJobFile,
     writeJobFile,
+    postJob,
+    writePostedFiles,
   } = require("../dist-electron/library.cjs");
+  require("./posting.cjs").registerPosting({
+    ipcMain,
+    dialog,
+    win,
+    postJob,
+    writePostedFiles,
+  });
   const fileCommand = require("./job-files.cjs").registerJobFiles({
     ipcMain,
     dialog,
@@ -82,6 +91,13 @@ app.whenReady().then(() => {
     }
     const labels = menu?.getMenuItemById("file-labels");
     if (labels) labels.checked = value.showFileLabels;
+    for (const [id, flag] of [
+      ["post-sheet", value.canPostSheet],
+      ["post-all", value.canPostAll],
+    ]) {
+      const item = menu?.getMenuItemById(id);
+      if (item && typeof flag === "boolean") item.enabled = flag;
+    }
   });
   const checkForUpdates = createUpdateAction({
     app,
@@ -126,6 +142,18 @@ app.whenReady().then(() => {
           },
           { type: "separator" },
           { label: "Export SVG…", click: () => fileCommand("export-svg") },
+          {
+            id: "post-sheet",
+            label: "Post sheet…",
+            enabled: false,
+            click: () => fileCommand("post-sheet"),
+          },
+          {
+            id: "post-all",
+            label: "Post all…",
+            enabled: false,
+            click: () => fileCommand("post-all"),
+          },
           { type: "separator" },
           { role: "quit" },
         ],

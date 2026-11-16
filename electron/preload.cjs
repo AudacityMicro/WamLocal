@@ -3,6 +3,7 @@ contextBridge.exposeInMainWorld(
   "jobFiles",
   Object.freeze({
     open: () => ipcRenderer.invoke("wam:job-open"),
+    post: (job, sheetId) => ipcRenderer.invoke("wam:post", job, sheetId),
     save: (job, saveAs = false) =>
       ipcRenderer.invoke("wam:job-save", job, saveAs),
     reset: () => ipcRenderer.invoke("wam:job-reset"),

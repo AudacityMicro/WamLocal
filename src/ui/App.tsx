@@ -1,4 +1,7 @@
 import { SheetPreview } from "./SheetPreview";
+import { postJob, planForPosting as plan } from "../core/postprocessor";
+import { PostReport, type PostReportData } from "./PostReport";
+import { zipSync, strToU8 } from "fflate";
 import {
   updateSheetPlacement,
   removeSheetPlacement,
@@ -58,13 +61,7 @@ import {
   type Part,
   type Point,
 } from "../core/model";
-import {
-  transformed,
-  partBounds,
-  plan,
-  nest,
-  svgExport,
-} from "../core/geometry";
+import { transformed, partBounds, nest, svgExport } from "../core/geometry";
 type Mode =
   | "job"
   | "sheets"
@@ -307,6 +304,8 @@ export default function App() {
     [pan, setPan] = useState({ x: 0, y: 0 }),
     [tab, setTab] = useState<"parts" | "issues">("parts"),
     [toast, setToast] = useState(""),
+    [postingBusy, setPostingBusy] = useState(false),
+    [postReport, setPostReport] = useState<PostReportData | null>(null),
     [palette, setPalette] = useState(false),
     [query, setQuery] = useState(""),
     [progress, setProgress] = useState(100),
@@ -409,6 +408,76 @@ export default function App() {
   };
   function notify(s: string) {
     setToast(s);
+  }
+  useEffect(() => {
+    window.jobFiles?.updateViewPreferences({
+      units: u.unit,
+      showFileLabels,
+      canPostSheet:
+        activeView.kind === "sheet" &&
+        !!activeSheet?.placements.length &&
+        !nestingBusy &&
+        !postingBusy,
+      canPostAll:
+        job.sheets.some((s) => s.placements.length) &&
+        !nestingBusy &&
+        !postingBusy,
+    });
+  }, [
+    activeView.kind,
+    activeSheet,
+    job.sheets,
+    nestingBusy,
+    postingBusy,
+    u.unit,
+    showFileLabels,
+  ]);
+  async function post(sheetId?: string) {
+    if (postingBusy || nestingBusy) return;
+    setPostingBusy(true);
+    try {
+      const files = postJob(job, sheetId);
+      let paths: string[];
+      if (window.jobFiles) {
+        const result = await window.jobFiles.post(job, sheetId);
+        if (!result) return;
+        paths = result.paths;
+      } else if (sheetId) {
+        download(files[0].filename, files[0].content, "text/plain");
+        paths = [files[0].filename];
+      } else {
+        const archive = zipSync(
+          Object.fromEntries(
+            files.map((f) => [f.filename, strToU8(f.content)]),
+          ),
+        );
+        const url = URL.createObjectURL(
+          new Blob([new Uint8Array(archive).buffer], {
+            type: "application/zip",
+          }),
+        );
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "wazer-sheets.zip";
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        paths = files.map((f) => f.filename + " (wazer-sheets.zip)");
+      }
+      setPostReport({
+        title: `Posted ${files.length} sheet${files.length === 1 ? "" : "s"}`,
+        files: paths,
+        issues: files.flatMap((f) =>
+          f.warnings.map((s) => `${f.sheetName}: ${s}`),
+        ),
+      });
+    } catch (error) {
+      setPostReport({
+        title: "Cannot post job",
+        issues: (error as Error).message.split("\n"),
+      });
+    } finally {
+      setPostingBusy(false);
+    }
   }
   function setProject(next: Project) {
     setJob((previous) => editView(previous, activeView, next));
@@ -610,6 +679,14 @@ export default function App() {
     return window.confirm("Discard unsaved changes to this job?");
   }
   async function documentAction(command: string) {
+    if (command === "post-all") {
+      void post();
+      return;
+    }
+    if (command === "post-sheet") {
+      if (activeView.kind === "sheet") void post(activeView.id);
+      return;
+    }
     if (command === "machine-settings") {
       setMode("machine");
       setSelected(null);
@@ -1722,7 +1799,7 @@ export default function App() {
                         <b>Preview parameters</b>
                         <p>
                           Custom and recorded reference settings are editable.
-                          Machine-specific cut export is not yet enabled.
+                          Post sheets from Jobs to generate WAZER cut files.
                         </p>
                       </div>
                     </div>
@@ -1823,7 +1900,8 @@ export default function App() {
                       Positive stock to leave enlarges the outside and reduces
                       holes; negative values do the reverse. The allowance is
                       per side. Tabs apply to closed outer contours. Leads are
-                      scrap-side entries: inside holes and outside outer profiles.
+                      scrap-side entries: inside holes and outside outer
+                      profiles.
                     </p>
                     <label className="field">
                       <span>Part cut default</span>
@@ -2044,7 +2122,8 @@ export default function App() {
                   onShowPaths={(show) =>
                     setSheetToolpaths((p) => ({ ...p, [sheet.id]: show }))
                   }
-                  disabled={nestingBusy}
+                  disabled={nestingBusy || postingBusy}
+                  onPost={post}
                   onSelect={(id, partId) => {
                     setView({ kind: "sheet", id });
                     setSelected(partId);
@@ -2080,7 +2159,7 @@ export default function App() {
                   disabled={nestingBusy}
                 />
               }
-              nestingBusy={nestingBusy}
+              nestingBusy={nestingBusy || postingBusy}
               job={job}
               library={library}
               onChange={(next) =>
@@ -2099,6 +2178,7 @@ export default function App() {
               onUpload={() => importInput.current?.click()}
               onNewPart={createPart}
               onNest={() => runNest(true)}
+              onPost={() => void post()}
             />
           ) : mode === "machine" ? (
             <MachineSettingsEditor
@@ -2982,8 +3062,8 @@ export default function App() {
                   ) : (
                     <div className="issues">
                       <p>
-                        <AlertTriangle size={15} /> Preview only. WAZER machine
-                        output requires a validated postprocessor.
+                        <AlertTriangle size={15} /> Review cutting settings and
+                        sheet placement before posting.
                       </p>
                       {preview.issues.length ? (
                         preview.issues.map((s, i) => (
@@ -3071,6 +3151,9 @@ export default function App() {
               <X size={14} />
             </button>
           </div>
+        ) : null}
+        {postReport ? (
+          <PostReport report={postReport} onClose={() => setPostReport(null)} />
         ) : null}
         {palette ? (
           <div className="modal-backdrop" onClick={() => setPalette(false)}>

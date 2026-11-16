@@ -25,7 +25,7 @@ The workspace contains both `speedMode` and `ecoMode` fields. The recorded Eco r
 
 Nine captured default tab widths exceed the 460 mm bed width; the largest is 2,684,341.03 mm for 0.001-inch granite. These values are preserved as WAM observations, not approved cutting presets. They must not be applied blindly or used to relax the editor's parameter validation.
 
-To claim exact reproduction for every supported thickness, obtain the calculation definitions and coefficients, or develop an independent model and validate its rounding, limits, transitions, and units against substantially broader holdouts. WAM's material changes were observed making a `calculateMaterialValues` service request; ordinary workspace exports contain the evaluated values, not enough information to establish the complete calculation. Desktop requires separate captures and validation. Machine-ready export remains disabled.
+To claim exact reproduction for every supported thickness, obtain the calculation definitions and coefficients, or develop an independent model and validate its rounding, limits, transitions, and units against substantially broader holdouts. WAM's material changes were observed making a `calculateMaterialValues` service request; ordinary workspace exports contain the evaluated values, not enough information to establish the complete calculation. Desktop requires separate captures and validation. Independent WAZER posting is available in version 0.7; physical machine and firmware-specific validation remain pending.
 
 ## Evidence and rerunning
 
