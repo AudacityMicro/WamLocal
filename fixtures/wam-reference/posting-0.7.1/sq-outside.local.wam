@@ -1,0 +1,85 @@
+{
+  "version": 2,
+  "name": "sq-outside",
+  "machine": "pro",
+  "materials": [
+    {
+      "name": "Aluminum - 6061",
+      "thickness": 2.999994,
+      "feed": 131.22000000000003,
+      "pierce": 6.93,
+      "pierceDiameter": 0,
+      "kerf": 0.9652,
+      "tabWidth": 1.35,
+      "tabCount": 0,
+      "lead": 0,
+      "id": "material-legacy",
+      "machine": "pro",
+      "source": "Migrated job material"
+    }
+  ],
+  "parts": [
+    {
+      "id": "sq-outside",
+      "name": "sq-outside",
+      "contours": [
+        {
+          "points": [
+            {
+              "x": 0,
+              "y": 0
+            },
+            {
+              "x": 50,
+              "y": 0
+            },
+            {
+              "x": 50,
+              "y": 50
+            },
+            {
+              "x": 0,
+              "y": 50
+            }
+          ],
+          "closed": true,
+          "hole": false
+        }
+      ],
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "scale": 1,
+      "cut": "outside",
+      "materialId": "material-legacy",
+      "quantity": 1
+    }
+  ],
+  "sheets": [
+    {
+      "id": "sheet-legacy",
+      "name": "Sheet 1",
+      "materialId": "material-legacy",
+      "stock": {
+        "width": 460,
+        "height": 305,
+        "margin": 8,
+        "spacing": 4
+      },
+      "wcs": {
+        "x": 0,
+        "y": 0
+      },
+      "placements": [
+        {
+          "id": "sq-outside",
+          "partId": "sq-outside",
+          "x": 19.999959999999994,
+          "y": 19.999959999999994,
+          "rotation": 0,
+          "scale": 1
+        }
+      ]
+    }
+  ]
+}

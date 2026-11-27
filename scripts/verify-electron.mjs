@@ -5,6 +5,7 @@ import { mkdtemp, rm, access } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import assert from "node:assert/strict";
+import { verifyWorkbench } from "./verify-workbench.mjs";
 const root = await mkdtemp(path.join(tmpdir(), "wam-electron-"));
 const env = Object.fromEntries(
   Object.entries(process.env).filter(
@@ -24,10 +25,19 @@ try {
     env: { ...env, WAM_USER_DATA_DIR: path.join(root, "editor") },
     timeout: 30000,
   });
+  // The smoke flow uses disposable jobs. Test the renderer workflow without
+  // opening OS confirmation dialogs; job-files unit tests cover prompt choices.
+  await app.evaluate(({dialog}) => {
+    const original = dialog.showMessageBox.bind(dialog);
+    dialog.showMessageBox = async (...args) => {
+      const options = args.at(-1);
+      if (options.title === "Unsaved job") return {response:1,checkboxChecked:false};
+      return original(...args);
+    };
+  });
   const page = await app.firstWindow();
   page.setDefaultTimeout(10000);
-  await page.getByRole("heading", { name: "Design & arrange" }).waitFor();
-  assert.equal(await page.locator(".parts-table button").count(), 4);
+  await page.getByRole("heading", { name: "Jobs", exact: true }).waitFor();
   assert.equal(await page.evaluate(() => typeof window.require), "undefined");
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
@@ -36,7 +46,7 @@ try {
   });
   await page.context().setOffline(true);
   await page
-    .locator('input[type=file][accept=".svg,.dxf"]')
+    .locator('input[type=file][multiple]')
     .setInputFiles({
       name: "offline.svg",
       mimeType: "image/svg+xml",
@@ -46,7 +56,9 @@ try {
     });
   await page.getByRole("status").waitFor();
   console.log("Electron SVG:", await page.getByRole("status").innerText());
-  assert.equal(await page.locator(".parts-table button").count(), 5);
+  assert.equal(await page.getByRole("button", {name:"offline.svg",exact:true}).count(), 1);
+  await page.context().setOffline(false);
+  await verifyWorkbench(page);
   assert.equal(
     await page.evaluate(async () => {
       try {

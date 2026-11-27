@@ -6,6 +6,8 @@ import {
   extendMaterialLibrary,
 } from "../core/material-library";
 export { readJobFile, writeJobFile } from "./job-files";
+export { postJob, writePostedFiles } from "./post-files";
+export { jobFilename, cutFilename } from "../core/cut-filename";
 export async function readLibraryFile(file: string) {
   try {
     const raw = await readFile(file, "utf8");

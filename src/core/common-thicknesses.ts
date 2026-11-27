@@ -1,0 +1,2 @@
+export const COMMON_METRIC_THICKNESSES_MM = [0.5,0.8,1,1.2,1.5,1.6,2,2.5,3,4,5,6,8,10,12,15,16,18,20,22,24,25] as const;
+export const COMMON_FRACTIONAL_THICKNESSES_IN = [1/64,1/32,1/16,3/32,1/8,5/32,3/16,1/4,5/16,3/8,7/16,1/2,5/8,3/4,7/8,1] as const;

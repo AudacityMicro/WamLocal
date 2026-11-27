@@ -9,3 +9,4 @@ projects/
 .env
 .env.*
 artifacts/wam-login.png
+artifacts/

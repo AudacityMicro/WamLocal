@@ -1,3 +1,7 @@
+import {
+  MATERIAL_FAMILIES,
+  materialHierarchy,
+} from "../core/material-hierarchy";
 import type { JobMaterial } from "../core/job";
 import {
   materialCatalog,
@@ -30,11 +34,52 @@ export function PresetSelector({
   allMachines?: boolean;
 }) {
   const u = useDisplayUnits(),
-    items = materialCatalog(records, current),
+    items = materialCatalog(records, current).filter(
+      (m) => m.id === current.id || allMachines || m.machine === machine,
+    ),
     name = materialName(current);
-  const names = [...new Set(items.map(materialName))].sort((a, b) =>
-    a.localeCompare(b),
+  const organized=new Map<string,JobMaterial>();
+  for(const record of records) if(record.family!==undefined||record.materialClass!==undefined||record.grade!==undefined) {
+    const key=materialName(record),old=organized.get(key);
+    if(!old||(record.organizationRevision??0)>=(old.organizationRevision??0))organized.set(key,record);
+  }
+  const hierarchyOf=(m:JobMaterial)=>materialHierarchy(organized.get(materialName(m))??m);
+  const hierarchy = hierarchyOf(current);
+  const stockItems = [
+    ...new Map(items.map((m) => [materialName(m), m])).values(),
+  ];
+  const byFamily = stockItems.filter(
+    (m) => hierarchyOf(m).family === hierarchy.family,
   );
+  const classes = [
+    ...new Set(byFamily.map((m) => hierarchyOf(m).materialClass)),
+  ].sort((a, b) => a.localeCompare(b));
+  const names = byFamily
+    .filter(
+      (m) => hierarchyOf(m).materialClass === hierarchy.materialClass,
+    )
+    .map(materialName)
+    .sort((a, b) => a.localeCompare(b));
+  const chooseGroup = (family: string, materialClass?: string) => {
+    const candidates = stockItems
+      .filter(
+        (m) =>
+          hierarchyOf(m).family === family &&
+          (materialClass === undefined ||
+            hierarchyOf(m).materialClass === materialClass),
+      )
+      .sort((a, b) => materialName(a).localeCompare(materialName(b)));
+    if (candidates.length)
+      select(
+        selectMaterialProfile(
+          items,
+          current,
+          machine,
+          materialName(candidates[0]),
+        ),
+      );
+  };
+
   const thicknesses = items
     .filter((m) => materialName(m) === name)
     .filter(
@@ -49,6 +94,48 @@ export function PresetSelector({
     onChange({ ...m, stockKey: materialName(m), quality: materialQuality(m) });
   const fields = [
     {
+      label: "Family",
+      control: (
+        <select
+          aria-label={`Material family${labelSuffix ? " " + labelSuffix : ""}`}
+          value={hierarchy.family}
+          onChange={(e) => chooseGroup(e.target.value)}
+        >
+          {MATERIAL_FAMILIES.map((f) => (
+            <option
+              key={f}
+              value={f}
+              disabled={
+                !stockItems.some((m) => hierarchyOf(m).family === f)
+              }
+            >
+              {f}
+            </option>
+          ))}
+        </select>
+      ),
+    },
+    ...(classes.some((c) => c !== "")
+      ? [
+          {
+            label: "Class",
+            control: (
+              <select
+                aria-label={`Material class${labelSuffix ? " " + labelSuffix : ""}`}
+                value={hierarchy.materialClass}
+                onChange={(e) => chooseGroup(hierarchy.family, e.target.value)}
+              >
+                {classes.map((c) => (
+                  <option key={c} value={c}>
+                    {c || "Unclassified"}
+                  </option>
+                ))}
+              </select>
+            ),
+          },
+        ]
+      : []),
+    {
       label: "Material",
       control: (
         <select
@@ -62,7 +149,11 @@ export function PresetSelector({
         >
           {names.map((n) => (
             <option key={n} value={n}>
-              {n}
+              {
+                materialHierarchy(
+                  stockItems.find((m) => materialName(m) === n)!,
+                ).grade
+              }
             </option>
           ))}
         </select>
@@ -113,13 +204,8 @@ export function PresetSelector({
                   <option key={m.id} value={m.id}>
                     {qualityLabel(m)}
                     {allMachines ? ` - ${m.machine}` : ""}
-                    {m.requiresVerification ? " - Needs settings" : ""}
-                    {qualities.filter(
-                      (x) => materialQuality(x) === materialQuality(m),
-                    ).length > 1
-                      ? m.preset
-                        ? " - WAM reference"
-                        : ` - ${m.name}`
+                    {qualities.some(x=>x.id!==m.id&&materialQuality(x)===materialQuality(m)&&x.machine===m.machine)
+                      ? ` · ${u.number(m.feed)} ${u.unit}/min · ${m.pierce} s · ${u.number(m.lead)} ${u.unit}`
                       : ""}
                   </option>
                 ))}

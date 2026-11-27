@@ -1,0 +1,72 @@
+[
+  {
+    "name": "washer",
+    "cut": "outside",
+    "machine": "desktop",
+    "material": "Aluminum - 6061",
+    "thicknessMm": 0.508,
+    "quality": "medium",
+    "positionMm": {
+      "x": 12.7,
+      "y": 12.7
+    },
+    "tabs": 0,
+    "lead": false
+  },
+  {
+    "name": "slotted-plate",
+    "cut": "outside",
+    "machine": "desktop",
+    "material": "Aluminum - 6061",
+    "thicknessMm": 0.508,
+    "quality": "medium",
+    "positionMm": {
+      "x": 12.7,
+      "y": 12.7
+    },
+    "tabs": 0,
+    "lead": false
+  },
+  {
+    "name": "concave-bracket",
+    "cut": "outside",
+    "machine": "desktop",
+    "material": "Aluminum - 6061",
+    "thicknessMm": 0.508,
+    "quality": "medium",
+    "positionMm": {
+      "x": 12.7,
+      "y": 12.7
+    },
+    "tabs": 0,
+    "lead": false
+  },
+  {
+    "name": "open-path",
+    "cut": "centerline",
+    "machine": "desktop",
+    "material": "Aluminum - 6061",
+    "thicknessMm": 0.508,
+    "quality": "medium",
+    "positionMm": {
+      "x": 12.7,
+      "y": 12.7
+    },
+    "tabs": 0,
+    "lead": false
+  },
+  {
+    "name": "tabs-leads",
+    "cut": "outside",
+    "tabs": 2,
+    "lead": true,
+    "machine": "desktop",
+    "material": "Aluminum - 6061",
+    "thicknessMm": 0.508,
+    "quality": "medium",
+    "positionMm": {
+      "x": 12.7,
+      "y": 12.7
+    }
+  }
+]

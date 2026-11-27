@@ -1,3 +1,5 @@
+import { NumericInput } from "./NumericInput";
+import { SettingsScope } from "./SettingDefaults";
 import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Settings2, X } from "lucide-react";
@@ -32,7 +34,7 @@ export function NestingSettings({
     key: "effort" | "method" | "order" | "objective" | "detail",
     options: [string, string][],
   ) => (
-    <label className="field" key={key}>
+    <label className="field" key={key} data-default-key={key}>
       <span>{label}</span>
       <select
         aria-label={label}
@@ -59,24 +61,34 @@ export function NestingSettings({
     min: number,
     max: number,
   ) => (
-    <label className="field">
+    <label className="field" data-default-key={key}>
       <span>{label}</span>
-      <input
+      <NumericInput
         aria-label={label}
-        type="number"
+        integer
+        unit={
+          key === "budgetSeconds" || key === "maxAutoSeconds" ? "s" : undefined
+        }
+
         min={min}
         max={max}
         step={1}
         value={cfg[key]}
         onChange={(e) => {
-          const n = e.target.valueAsNumber;
+          const n = e;
           if (Number.isInteger(n) && n >= min && n <= max) update({ [key]: n });
         }}
       />
     </label>
   );
   return (
-    <>
+    <SettingsScope
+      title="Nesting defaults"
+      prefix="nesting."
+      values={cfg}
+      fallbacks={searchSettings(undefined)}
+      onRevert={(key, v) => update({ [key]: v })}
+    >
       <fieldset className="nesting-options" disabled={disabled}>
         <div className="nesting-controls-header">
           <button
@@ -113,6 +125,7 @@ export function NestingSettings({
           <label className="check">
             <input
               type="checkbox"
+              data-default-key="allowRotation"
               checked={cfg.allowRotation}
               onChange={(e) => update({ allowRotation: e.target.checked })}
             />
@@ -121,15 +134,18 @@ export function NestingSettings({
           {cfg.allowRotation && (
             <label className="field">
               <span>Allowed rotation step</span>
-              <input
+              <NumericInput
+                data-default-key="rotationStep"
                 aria-label="Allowed rotation step"
-                type="number"
+                integer
+                unit="deg"
+
                 min={1}
                 max={90}
                 step={1}
                 value={cfg.rotationStep}
                 onChange={(e) => {
-                  const n = e.target.valueAsNumber;
+                  const n = e;
                   if (Number.isInteger(n) && n >= 1 && n <= 90)
                     update({ rotationStep: n });
                 }}
@@ -140,6 +156,7 @@ export function NestingSettings({
           <label className="check">
             <input
               type="checkbox"
+              data-default-key="optimize"
               checked={cfg.optimize}
               onChange={(e) => update({ optimize: e.target.checked })}
             />
@@ -148,6 +165,7 @@ export function NestingSettings({
           <label className="check">
             <input
               type="checkbox"
+              data-default-key="insideHoles"
               checked={cfg.insideHoles}
               onChange={(e) => update({ insideHoles: e.target.checked })}
             />
@@ -158,6 +176,7 @@ export function NestingSettings({
               <label className="check">
                 <input
                   type="checkbox"
+                  data-default-key="allowNewSheets"
                   checked={cfg.allowNewSheets}
                   onChange={(e) => update({ allowNewSheets: e.target.checked })}
                 />
@@ -166,6 +185,7 @@ export function NestingSettings({
               <label className="check">
                 <input
                   type="checkbox"
+                  data-default-key="preservePlaced"
                   checked={cfg.preservePlaced}
                   onChange={(e) => update({ preservePlaced: e.target.checked })}
                 />
@@ -215,6 +235,7 @@ export function NestingSettings({
                 <label className="field">
                   <span>Time budget</span>
                   <select
+                    data-default-key="budgetMode"
                     aria-label="Time budget"
                     value={cfg.budgetMode}
                     onChange={(e) =>
@@ -270,6 +291,6 @@ export function NestingSettings({
           </dialog>,
           document.body,
         )}
-    </>
+    </SettingsScope>
   );
 }

@@ -1,6 +1,7 @@
 import type { Point } from "./model";
+import {DEFAULT_IMPORT_TOLERANCE_MM,importTolerance} from './import-settings';
 
-export const DXF_CURVE_TOLERANCE_MM = 0.08;
+export const DXF_CURVE_TOLERANCE_MM = DEFAULT_IMPORT_TOLERANCE_MM;
 const MAX_POINTS = 20000;
 type Vertex = Point & { bulge?: number };
 
@@ -12,13 +13,14 @@ export function flattenDxfPolyline(
   vertices: Vertex[],
   closed: boolean,
   mmPerUnit: number,
+  toleranceMm = DEFAULT_IMPORT_TOLERANCE_MM,
 ): Point[] {
   if (!Number.isFinite(mmPerUnit) || mmPerUnit <= 0)
     throw Error("Invalid DXF units.");
   if (vertices.some((p) => !Number.isFinite(p.x) || !Number.isFinite(p.y)))
     throw Error("DXF polyline contains invalid coordinates.");
   if (vertices.length < 2) return [];
-  const tolerance = DXF_CURVE_TOLERANCE_MM / mmPerUnit;
+  const tolerance = importTolerance(toleranceMm) / mmPerUnit;
   const points: Point[] = [{ x: vertices[0].x, y: vertices[0].y }];
   const segments = closed ? vertices.length : vertices.length - 1;
   for (let i = 0; i < segments; i++) {
@@ -92,7 +94,7 @@ export function flattenDxfPolyline(
     points.pop();
   if (points.length > MAX_POINTS)
     throw Error(
-      "DXF polyline exceeds 20,000 points at 0.08 mm curve tolerance. Split the drawing into smaller contours.",
+      `DXF polyline exceeds 20,000 points at ${toleranceMm} mm curve tolerance. Increase import tolerance or split the contour.`,
     );
   return points;
 }

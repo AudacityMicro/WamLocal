@@ -1,0 +1,682 @@
+{
+  "wam": [
+    {
+      "from": {
+        "x": 0,
+        "y": 0
+      },
+      "to": {
+        "x": 20,
+        "y": 20
+      },
+      "rapid": true,
+      "feed": 0,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 20
+      },
+      "to": {
+        "x": 25,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 25,
+        "y": 20
+      },
+      "to": {
+        "x": 30,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 30,
+        "y": 20
+      },
+      "to": {
+        "x": 35,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 35,
+        "y": 20
+      },
+      "to": {
+        "x": 40,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 40,
+        "y": 20
+      },
+      "to": {
+        "x": 45,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 45,
+        "y": 20
+      },
+      "to": {
+        "x": 45,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 124.66,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 45,
+        "y": 20
+      },
+      "to": {
+        "x": 50,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 50,
+        "y": 20
+      },
+      "to": {
+        "x": 55,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 55,
+        "y": 20
+      },
+      "to": {
+        "x": 60,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 111.54,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 60,
+        "y": 20
+      },
+      "to": {
+        "x": 65,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 85.29,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 65,
+        "y": 20
+      },
+      "to": {
+        "x": 70,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 59.05,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 70,
+        "y": 20
+      },
+      "to": {
+        "x": 70,
+        "y": 25
+      },
+      "rapid": false,
+      "feed": 85.29,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 70,
+        "y": 25
+      },
+      "to": {
+        "x": 70,
+        "y": 30
+      },
+      "rapid": false,
+      "feed": 111.54,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 70,
+        "y": 30
+      },
+      "to": {
+        "x": 70,
+        "y": 35
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 70,
+        "y": 35
+      },
+      "to": {
+        "x": 70,
+        "y": 40
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 70,
+        "y": 40
+      },
+      "to": {
+        "x": 70,
+        "y": 45
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 70,
+        "y": 45
+      },
+      "to": {
+        "x": 70,
+        "y": 50
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 70,
+        "y": 50
+      },
+      "to": {
+        "x": 70,
+        "y": 55
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 70,
+        "y": 55
+      },
+      "to": {
+        "x": 70,
+        "y": 60
+      },
+      "rapid": false,
+      "feed": 111.54,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 70,
+        "y": 60
+      },
+      "to": {
+        "x": 70,
+        "y": 65
+      },
+      "rapid": false,
+      "feed": 85.29,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 70,
+        "y": 65
+      },
+      "to": {
+        "x": 70,
+        "y": 70
+      },
+      "rapid": false,
+      "feed": 59.05,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 70,
+        "y": 70
+      },
+      "to": {
+        "x": 65,
+        "y": 70
+      },
+      "rapid": false,
+      "feed": 85.29,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 65,
+        "y": 70
+      },
+      "to": {
+        "x": 60,
+        "y": 70
+      },
+      "rapid": false,
+      "feed": 111.54,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 60,
+        "y": 70
+      },
+      "to": {
+        "x": 55,
+        "y": 70
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 55,
+        "y": 70
+      },
+      "to": {
+        "x": 50,
+        "y": 70
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 50,
+        "y": 70
+      },
+      "to": {
+        "x": 45,
+        "y": 70
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 45,
+        "y": 70
+      },
+      "to": {
+        "x": 45,
+        "y": 70
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 45,
+        "y": 70
+      },
+      "to": {
+        "x": 40,
+        "y": 70
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 40,
+        "y": 70
+      },
+      "to": {
+        "x": 35,
+        "y": 70
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 35,
+        "y": 70
+      },
+      "to": {
+        "x": 30,
+        "y": 70
+      },
+      "rapid": false,
+      "feed": 111.54,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 30,
+        "y": 70
+      },
+      "to": {
+        "x": 25,
+        "y": 70
+      },
+      "rapid": false,
+      "feed": 85.29,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 25,
+        "y": 70
+      },
+      "to": {
+        "x": 20,
+        "y": 70
+      },
+      "rapid": false,
+      "feed": 59.05,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 70
+      },
+      "to": {
+        "x": 20,
+        "y": 70
+      },
+      "rapid": false,
+      "feed": 59.05,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 70
+      },
+      "to": {
+        "x": 20,
+        "y": 65
+      },
+      "rapid": false,
+      "feed": 85.29,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 65
+      },
+      "to": {
+        "x": 20,
+        "y": 60
+      },
+      "rapid": false,
+      "feed": 111.54,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 60
+      },
+      "to": {
+        "x": 20,
+        "y": 55
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 55
+      },
+      "to": {
+        "x": 20,
+        "y": 50
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 50
+      },
+      "to": {
+        "x": 20,
+        "y": 45
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 45
+      },
+      "to": {
+        "x": 20,
+        "y": 45
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 45
+      },
+      "to": {
+        "x": 20,
+        "y": 40
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 40
+      },
+      "to": {
+        "x": 20,
+        "y": 35
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 35
+      },
+      "to": {
+        "x": 20,
+        "y": 30
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 30
+      },
+      "to": {
+        "x": 20,
+        "y": 25
+      },
+      "rapid": false,
+      "feed": 98.42,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 25
+      },
+      "to": {
+        "x": 20,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 65.61,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 20
+      },
+      "to": {
+        "x": 20,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 65.61,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 20
+      },
+      "to": {
+        "x": 20,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 65.61,
+      "segment": 0
+    }
+  ],
+  "local": [
+    {
+      "from": {
+        "x": 0,
+        "y": 0
+      },
+      "to": {
+        "x": 20,
+        "y": 20
+      },
+      "rapid": true,
+      "feed": 0,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 20
+      },
+      "to": {
+        "x": 70,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 70,
+        "y": 20
+      },
+      "to": {
+        "x": 70,
+        "y": 70
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 70,
+        "y": 70
+      },
+      "to": {
+        "x": 20,
+        "y": 70
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    },
+    {
+      "from": {
+        "x": 20,
+        "y": 70
+      },
+      "to": {
+        "x": 20,
+        "y": 20
+      },
+      "rapid": false,
+      "feed": 131.22,
+      "segment": 0
+    }
+  ]
+}

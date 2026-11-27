@@ -7,6 +7,7 @@ import { EventEmitter } from "node:events";
 import { readJobFile, writeJobFile } from "../desktop/job-files";
 import { readLibraryFile, writeLibraryFile } from "../desktop/material-library";
 import { newJob } from "./job";
+import { jobFilename } from "./cut-filename";
 import { makePart, rectangle, newProject } from "./model";
 const { registerJobFiles } = createRequire(import.meta.url)(
   "../../electron/job-files.cjs",
@@ -124,6 +125,7 @@ function harness() {
     win,
     readJobFile: read,
     writeJobFile: write,
+    jobFilename,
   });
   return {
     handlers,

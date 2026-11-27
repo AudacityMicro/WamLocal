@@ -1,0 +1,50 @@
+{
+  "checked": "2026-11-16",
+  "documentation": "https://support.wazer.com/resources/maintenance/wam-procedures/understanding-g-code-on-wazer",
+  "references": [
+    {
+      "machine": "desktop",
+      "source": "https://support.wazer.com/s/Bottle-Opener.gcode",
+      "sha256": "d052e1548cd84e6d0eb20bc5c2262a4219ff271ff9a49545ea86acb8db32bc72",
+      "dialect": "1.4",
+      "startup": [
+        "G90",
+        "G21",
+        "M1403"
+      ],
+      "valveOn": [
+        "M3",
+        "M8"
+      ],
+      "valveOff": [
+        "M9",
+        "G4 S1",
+        "M5",
+        "G4 S1"
+      ],
+      "shutdown": "M1404"
+    },
+    {
+      "machine": "pro",
+      "source": "https://support.wazer.com/s/Gauge_w_Jig.gcode",
+      "sha256": "15aae2527328e85a7c9e3ef1245cfa1621acce29e0f7851729135d0d7d2eb961",
+      "dialect": "1.6",
+      "startup": [
+        "G90",
+        "G21",
+        "M1403"
+      ],
+      "valveOn": [
+        "M3",
+        "M8"
+      ],
+      "valveOff": [
+        "M9",
+        "G4 S1",
+        "M5",
+        "G4 S1"
+      ],
+      "shutdown": "M1404"
+    }
+  ]
+}

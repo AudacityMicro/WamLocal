@@ -1,16 +1,17 @@
-import { PresetSelector } from "./PresetSelector";
-import { id } from "../core/model";
-import { Pencil, Trash2 } from "lucide-react";
-import { materialLabel, materialForMachine } from "../core/material-gauges";
+import { NumericInput } from "./NumericInput";
+import { PartThumbnail } from "./PartThumbnail";
+import { JobSettings } from "./JobSettings";
+import { Pencil, Trash2, Upload } from "lucide-react";
 import { JobPanel } from "./JobPanel";
 import { useState, type ReactNode } from "react";
 import {
   placedCount,
   type Job,
   type JobView,
+  type JobMaterial,
   type MaterialLibrary,
 } from "../core/job";
-import { setPartMaterial, setPartQuantity } from "../core/job-ops";
+import { setPartQuantity } from "../core/job-ops";
 
 export function JobSetup({
   job,
@@ -20,13 +21,16 @@ export function JobSetup({
   onUpload,
   onNewPart,
   onNest,
+  onPost,
   activeSheetId,
   renderSheetPreview,
   onClearSelection,
   onSelectSheet,
   nestingPanel,
   nestingBusy = false,
+  onMaterialEdit,
 }: {
+  onMaterialEdit?: (mode: "new" | "edit", material: JobMaterial) => void;
   activeSheetId?: string;
   renderSheetPreview?: (sheet: Job["sheets"][number]) => ReactNode;
   onClearSelection?: () => void;
@@ -40,10 +44,10 @@ export function JobSetup({
   onUpload: () => void;
   onNewPart: () => void;
   onNest: () => void;
+  onPost: () => void;
 }) {
   const [selected, select] = useState<string>();
   const part = job.parts.find((p) => p.id === selected) ?? job.parts[0];
-  const material = job.materials.find((m) => m.id === part?.materialId);
   const materials = [
     ...job.materials,
     ...library.materials.filter(
@@ -72,41 +76,10 @@ export function JobSetup({
           <span className="eyebrow">JOB SETUP</span>
           <h1>{job.name}</h1>
         </div>
-        <div className="button-row">
-          <button onClick={onUpload}>Upload parts</button>
-          <button onClick={onNewPart}>New part</button>
-          <button
-            className="primary"
-            onClick={onNest}
-            disabled={nestingBusy || !job.parts.length}
-          >
-            Nest job
-          </button>
-        </div>
       </header>
-      <div className="setup-job-fields">
-        <label className="field">
-          <span>Job name</span>
-          <input
-            value={job.name}
-            onChange={(e) =>
-              e.target.value && onChange({ ...job, name: e.target.value })
-            }
-          />
-        </label>
-        <label className="field">
-          <span>Machine</span>
-          <select
-            value={job.machine}
-            onChange={(e) =>
-              onChange({ ...job, machine: e.target.value as Job["machine"] })
-            }
-          >
-            <option value="desktop">WAZER Desktop</option>
-            <option value="pro">WAZER Pro</option>
-          </select>
-        </label>
-      </div>
+      <p className="job-machine-summary">
+        WAZER {job.machine === "pro" ? "Pro" : "Desktop"}
+      </p>
       <div className="setup-columns">
         <section className="setup-parts">
           <div className="setup-section-heading">
@@ -119,9 +92,6 @@ export function JobSetup({
             <div className="setup-row setup-labels">
               <span>Part</span>
               <span>Quantity</span>
-              <span>Material</span>
-              <span>Thickness</span>
-              <span>Quality</span>
               <span>Actions</span>
               <span>Placed</span>
             </div>
@@ -134,36 +104,21 @@ export function JobSetup({
                   className="part-name-button"
                   onClick={() => select(p.id)}
                 >
-                  {p.name}
+                  <PartThumbnail contours={p.contours} />
+                  <span>{p.name}</span>
                 </button>
-                <input
+                <NumericInput
                   aria-label={`Quantity ${p.name}`}
-                  type="number"
-                  min="1"
+                  integer
+
+                  min="0"
                   max="2000"
                   value={p.quantity}
                   onFocus={() => select(p.id)}
                   onChange={(e) => {
-                    const n = e.target.valueAsNumber;
-                    if (Number.isInteger(n) && n > 0 && n <= 2000)
+                    const n = e;
+                    if (Number.isInteger(n) && n >= 0 && n <= 2000)
                       onChange(setPartQuantity(job, p.id, n));
-                  }}
-                />
-                <PresetSelector
-                  row
-                  labelSuffix={p.name}
-                  records={materials}
-                  current={job.materials.find((m) => m.id === p.materialId)!}
-                  machine={job.machine}
-                  onChange={(selectedRecord) => {
-                    const record = materialForMachine(
-                      selectedRecord,
-                      job.machine,
-                    );
-                    const next = job.materials.some((m) => m.id === record.id)
-                      ? job
-                      : { ...job, materials: [...job.materials, record] };
-                    onChange(setPartMaterial(next, p.id, record.id));
                   }}
                 />
                 <div className="row-part-actions">
@@ -190,11 +145,21 @@ export function JobSetup({
           </div>
           {!job.parts.length && (
             <div className="setup-empty">
-              Add a part to begin setting up this job.
+              <p>Add a part to begin setting up this job.</p>
+              <button onClick={onUpload}>
+                <Upload size={16} /> Upload parts
+              </button>
             </div>
           )}
         </section>
       </div>
+      <JobSettings
+        onMaterialEdit={onMaterialEdit}
+        job={job}
+        materials={materials}
+        library={library}
+        onChange={onChange}
+      />
       {nestingPanel && (
         <details className="job-nesting-options" open>
           <summary>Nesting options</summary>

@@ -8,6 +8,7 @@ Direct runtime components:
 | --- | --- | --- |
 | [Electron](https://github.com/electron/electron) | MIT, plus bundled Chromium/Node notices | Desktop runtime |
 | [electron-updater](https://github.com/electron-userland/electron-builder) | MIT | User-requested GitHub release checks and Windows installer updates |
+| [fflate](https://github.com/101arrowz/fflate) | MIT | ZIP download for batch posting in the browser build |
 | [React](https://github.com/facebook/react) | MIT | UI |
 | [Paper.js](https://github.com/paperjs/paper.js) | MIT | SVG parsing and curve flattening |
 | [dxf-parser](https://github.com/gdsestimating/dxf-parser) | MIT | DXF parsing |

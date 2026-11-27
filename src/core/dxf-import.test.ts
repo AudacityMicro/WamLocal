@@ -67,9 +67,7 @@ describe("DXF bulged polyline import", () => {
       width: 40,
       height: 30,
     });
-    expect(notices).toEqual([
-      "Skipped 2 DXF POINT markers; cut paths were retained.",
-    ]);
+    expect(notices).toEqual([]);
   });
   it("explains when a drawing has point markers but no paths", () => {
     expect(() =>
@@ -79,12 +77,13 @@ describe("DXF bulged polyline import", () => {
       ),
     ).toThrow(/only point markers and no cuttable paths/);
   });
-  it("still rejects unsupported cut geometry when point markers are present", () => {
+  it("imports ellipse geometry when point markers are present", () => {
     const entities =
       "0\nPOINT\n8\n0\n10\n2\n20\n3\n30\n0\n0\nELLIPSE\n8\n0\n10\n0\n20\n0\n11\n10\n21\n0\n40\n0.5\n41\n0\n42\n6.283185307\n";
-    expect(() => importDxf(document(entities), "unsupported")).toThrow(
-      /Unsupported DXF entities: ELLIPSE/,
-    );
+    const p=importDxf(document(entities),'ellipse');
+    expect(p.contours).toHaveLength(1);
+    expect(p.contours[0].closed).toBe(true);
+    expect(bounds(p.contours[0].points).width).toBeCloseTo(20,1);
   });
   it("imports the rounded-plate fixture with quarter-circle corners and a two-vertex circular hole", () => {
     const source = readFileSync(

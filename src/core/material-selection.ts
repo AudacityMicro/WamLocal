@@ -1,10 +1,13 @@
 import type { JobMaterial } from "./job";
 import { gaugesFor } from "./material-gauges";
+import { canonicalStockName } from "./stock-name";
 export type CutQuality = "coarse" | "medium" | "fine" | "custom";
+export const isDemoFeedProfile = (m: { source?: string }) => /^WAM (Pro|Desktop) demo feed capture/.test(m.source ?? "");
 export function materialName(m: JobMaterial) {
-  return (
+  const name = (
     m.stockKey ?? m.name.replace(/\s*[\u00b7-]\s*(coarse|medium|fine)$/i, "")
   );
+  return canonicalStockName(name);
 }
 export function materialQuality(m: JobMaterial): CutQuality {
   return (
@@ -16,7 +19,9 @@ export function materialQuality(m: JobMaterial): CutQuality {
     "custom"
   );
 }
-export const thicknessKey = (n: number) => n.toFixed(7);
+// Match the 0.0001 mm output/display precision; e.g. WAM's 0.11811 in
+// reference (2.999994 mm) and nominal 3 mm must not create duplicate choices.
+export const thicknessKey = (n: number) => n.toFixed(4);
 export function thicknessLabel(m: JobMaterial, units: "mm" | "in" = "mm") {
   const g = gaugesFor(materialName(m)).find(
     (g) => Math.abs(g.mm - m.thickness) < 0.00001,
@@ -62,6 +67,9 @@ export function qualityProfiles(
       names(m),
       allMachines ? m.machine : "",
       m.requiresVerification ? "pending" : "ready",
+      isDemoFeedProfile(m)
+        ? "feed-reference"
+        : "",
     ].join("|");
   return ordered
     .filter((m, i, a) => a.findIndex((x) => key(x) === key(m)) === i)

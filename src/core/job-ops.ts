@@ -1,5 +1,10 @@
 import { id, type Part, type Project } from "./model";
+import { defaultTabWidth } from "./tab-defaults";
+import {materialTabDefaults,newContourDefaults,newPartDefaults} from "./setting-defaults";
 import { bounds, transformed, plan } from "./geometry";
+import { materialForMachine } from "./material-gauges";
+import { defaultMachineSettings } from "./machine-settings";
+import { materialName, materialQuality, thicknessKey } from "./material-selection";
 import {
   BED,
   jobSchema,
@@ -8,10 +13,42 @@ import {
   sheetProject,
   type Job,
   type JobView,
+  type MaterialLibrary,
+  type JobMaterial,
 } from "./job";
+
+/** Apply a preset snapshot to the active part/sheet, retaining compatible placements. */
+export function applyJobMaterial(job: Job, view: JobView, preset: JobMaterial): Job {
+  if (job.sharedSetup) return setJobMaterial(job, preset);
+  const record = materialForMachine(preset, job.machine);
+  const next = structuredClone(job);
+  next.materials = [...next.materials.filter(m => m.id !== record.id), record];
+  if (view.kind === "part") return setPartMaterial(next, view.id, record.id);
+  next.sheets = next.sheets.map(sheet => sheet.id !== view.id ? sheet : {
+    ...sheet,
+    materialId: record.id,
+    placements: sheet.placements.filter(placement => {
+      const part = next.parts.find(p => p.id === placement.partId);
+      return materialsCompatible(next.materials.find(m => m.id === part?.materialId), record);
+    }),
+  });
+  return jobSchema.parse(next);
+}
+
+export function changeJobMachine(job: Job, machine: Job["machine"], library: MaterialLibrary): Job {
+  if (machine === job.machine) return job;
+  const materials = job.materials.map(current => {
+    if(current.machine===machine) return current;
+    const matches=library.materials.filter(m=>m.machine===machine && materialName(m)===materialName(current) && thicknessKey(m.thickness)===thicknessKey(current.thickness) && materialQuality(m)===materialQuality(current));
+    matches.sort((a,b)=>Number(!!a.requiresVerification)-Number(!!b.requiresVerification) || Number(!!b.source?.includes("demo feed capture"))-Number(!!a.source?.includes("demo feed capture")));
+    return {...(matches[0]??materialForMachine(current,machine)),id:current.id,tabCount:current.tabCount,leadStyle:current.leadStyle,cornerSlowdown:current.cornerSlowdown};
+  });
+  return jobSchema.parse({...job,machine,materials,machineSettings:library.machines?.[machine] ?? defaultMachineSettings(machine)});
+}
 
 export function newDefinition(job: Job, materialId: string) {
   const partId = id();
+  const defaults=job.materials.find(m=>m.id===materialId)?.settingDefaults ?? {};
   return {
     partId,
     job: jobSchema.parse({
@@ -26,7 +63,8 @@ export function newDefinition(job: Job, materialId: string) {
           y: 15,
           rotation: 0,
           scale: 1,
-          cut: "outside",
+          cut: defaults.cut ?? "outside",
+          stockToLeave: defaults.stockToLeave ?? 0,
           materialId,
           quantity: 1,
         },
@@ -99,6 +137,11 @@ export function setPartMaterial(
   partId: string,
   materialId: string,
 ): Job {
+  if (job.sharedSetup) {
+    const material = job.materials.find(m => m.id === materialId);
+    if (!material) throw Error("Unknown material");
+    return setJobMaterial(job, material);
+  }
   return jobSchema.parse({
     ...job,
     parts: job.parts.map((p) => (p.id === partId ? { ...p, materialId } : p)),
@@ -113,6 +156,23 @@ export function setPartMaterial(
           ),
       ),
     })),
+  });
+}
+
+/** One material and one stock template for every part and sheet in this job. */
+export function setJobMaterial(job: Job, preset: JobMaterial): Job {
+  const material = materialForMachine(preset, job.machine);
+  const old = job.materials.find(m=>m.id===job.sheets[0].materialId);
+  const useSavedTabs = Object.keys(material.settingDefaults??{}).some(k=>k.startsWith("tabs.")) || (old && old.id !== material.id && !materialsCompatible(old,material));
+  return jobSchema.parse({
+    ...job, sharedSetup: true,
+    materials: [...job.materials.filter(m => m.id !== material.id), material],
+    parts: job.parts.map(p => ({ ...p, materialId: material.id })),
+    sheets: job.sheets.map(s => ({ ...s, materialId: material.id })),
+    tabRules: useSavedTabs ? materialTabDefaults(material) : job.tabRules && {
+      ...job.tabRules,
+      width: job.tabRules.automaticWidth ? defaultTabWidth(material.thickness) : job.tabRules.width,
+    },
   });
 }
 export function editView(job: Job, view: JobView, next: Project): Job {
@@ -142,7 +202,7 @@ export function editView(job: Job, view: JobView, next: Project): Job {
         extras = next.parts.filter((p) => p.id !== def.id);
       if (!next.parts.length) return { ...def, contours: [] };
       if (!extras.length && own)
-        return { ...def, ...own, definitionId: undefined };
+        return { ...def, ...own, contours:own.contours.map((c,i)=>i<def.contours.length?c:newContourDefaults(c,updated.materials.find(m=>m.id===def.materialId)!)), definitionId: undefined };
       return {
         ...def,
         x: 0,
@@ -155,6 +215,7 @@ export function editView(job: Job, view: JobView, next: Project): Job {
   } else {
     const sheet = updated.sheets.find((s) => s.id === view.id)!;
     sheet.stock = next.stock;
+    if (updated.sharedSetup) for (const s of updated.sheets) s.stock = {...s.stock, width: next.stock.width, height: next.stock.height, margin: next.stock.margin, spacing: next.stock.spacing};
     const before = new Map(sheet.placements.map((i) => [i.id, i]));
     sheet.placements = [];
     for (const p of next.parts) {
@@ -210,6 +271,8 @@ export function editView(job: Job, view: JobView, next: Project): Job {
             materialId: sheet.materialId,
             quantity: 1,
           };
+          const defaults=newPartDefaults(def,updated.materials.find(m=>m.id===sheet.materialId)!);
+          Object.assign(def,defaults);
           updated.parts.push(def);
         }
         sheet.placements.push({
@@ -229,7 +292,7 @@ export function editView(job: Job, view: JobView, next: Project): Job {
   }
   return jobSchema.parse(updated);
 }
-export function jobIssues(job: Job): string[] {
+export function jobIssues(job: Job, planner: typeof plan = plan): string[] {
   const issues: string[] = [];
   for (const p of job.parts) {
     const left = p.quantity - placedCount(job, p.id);
@@ -237,7 +300,7 @@ export function jobIssues(job: Job): string[] {
       issues.push(
         `${p.name}: ${left} of ${p.quantity} requested copies remain unplaced.`,
       );
-    if (!p.contours.length) issues.push(`${p.name}: no geometry.`);
+    if (p.quantity > 0 && !p.contours.length) issues.push(`${p.name}: no geometry.`);
   }
   for (const s of job.sheets) {
     if (
@@ -254,7 +317,9 @@ export function jobIssues(job: Job): string[] {
       issues.push(`${s.name}: parameters belong to another machine profile.`);
     if (s.placements.length)
       issues.push(
-        ...plan(sheetProject(job, s.id)).issues.map((i) => `${s.name}: ${i}`),
+        ...planner(sheetProject(job, s.id)).issues.map(
+          (i) => `${s.name}: ${i}`,
+        ),
       );
   }
   return [...new Set(issues)];

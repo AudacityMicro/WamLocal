@@ -1,0 +1,132 @@
+[
+  {
+    "machine": "desktop",
+    "name": "Steel - 1095",
+    "thicknessMm": 0.8,
+    "quality": "coarse",
+    "previousFeed": 72.77,
+    "feed": 64.8,
+    "evidence": "wam-steel1095-coarse-visible-code.txt",
+    "date": "2026-11-18"
+  },
+  {
+    "machine": "desktop",
+    "name": "Brass - 260",
+    "thicknessMm": 1.6,
+    "quality": "coarse",
+    "previousFeed": 42.41,
+    "feed": 40.98,
+    "evidence": "material-feed-recaptures-2026-11-19.json",
+    "date": "2026-11-19"
+  },
+  {
+    "machine": "desktop",
+    "name": "Glass - Soda Lime",
+    "thicknessMm": 1.016,
+    "quality": "coarse",
+    "previousFeed": 1268.41,
+    "feed": 1119.72,
+    "evidence": "material-feed-recaptures-2026-11-19.json",
+    "date": "2026-11-19"
+  },
+  {
+    "machine": "desktop",
+    "name": "Carbon Fiber - Carbon Fiber",
+    "thicknessMm": 6,
+    "quality": "coarse",
+    "previousFeed": 17.21,
+    "feed": 16.97,
+    "evidence": "material-feed-recaptures-2026-11-19.json",
+    "date": "2026-11-19"
+  },
+  {
+    "machine": "desktop",
+    "name": "Glass - Soda Lime",
+    "thicknessMm": 1,
+    "quality": "coarse",
+    "previousFeed": 1310.76,
+    "feed": 1154.08,
+    "evidence": "material-feed-recaptures-2026-11-19.json",
+    "date": "2026-11-19"
+  },
+  {
+    "machine": "desktop",
+    "name": "Glass - Soda Lime",
+    "thicknessMm": 6.35,
+    "quality": "coarse",
+    "previousFeed": 69.99,
+    "feed": 68.65,
+    "evidence": "material-feed-recaptures-2026-11-19.json",
+    "date": "2026-11-19"
+  },
+  {
+    "machine": "desktop",
+    "name": "Neoprene - 50A",
+    "thicknessMm": 6.35,
+    "quality": "coarse",
+    "previousFeed": 154.4,
+    "feed": 149.58,
+    "evidence": "material-feed-recaptures-2026-11-19.json",
+    "date": "2026-11-19"
+  },
+  {
+    "machine": "desktop",
+    "name": "Silicone - 50A",
+    "thicknessMm": 9.525,
+    "quality": "coarse",
+    "previousFeed": 158.27,
+    "feed": 154.22,
+    "evidence": "material-feed-recaptures-2026-11-19.json",
+    "date": "2026-11-19"
+  },
+  {
+    "machine": "desktop",
+    "name": "Silicone - 50A",
+    "thicknessMm": 15.875,
+    "quality": "coarse",
+    "previousFeed": 32.56,
+    "feed": 32.06,
+    "evidence": "material-feed-recaptures-2026-11-19.json",
+    "date": "2026-11-19"
+  },
+  {
+    "machine": "desktop",
+    "name": "Tile - Ceramic",
+    "thicknessMm": 1.5,
+    "quality": "coarse",
+    "previousFeed": 151.36,
+    "feed": 145.25,
+    "evidence": "material-feed-recaptures-2026-11-19.json",
+    "date": "2026-11-19"
+  },
+  {
+    "machine": "pro",
+    "name": "Copper - 110",
+    "thicknessMm": 5,
+    "quality": "coarse",
+    "previousFeed": 37.54,
+    "feed": 37.03,
+    "evidence": "material-feed-recaptures-2026-11-19.json",
+    "date": "2026-11-19"
+  },
+  {
+    "machine": "pro",
+    "name": "Silicone - 50A",
+    "thicknessMm": 18,
+    "quality": "coarse",
+    "previousFeed": 314.26,
+    "feed": 309.8,
+    "evidence": "material-feed-recaptures-2026-11-19.json",
+    "date": "2026-11-19"
+  },
+  {
+    "machine": "pro",
+    "name": "Steel - 1018",
+    "thicknessMm": 2.5,
+    "quality": "coarse",
+    "previousFeed": 58.89,
+    "feed": 57.72,
+    "evidence": "material-feed-recaptures-2026-11-19.json",
+    "date": "2026-11-19"
+  }
+]
