@@ -94,4 +94,10 @@ npx tsx scripts/verify-step.ts
 
 Set `WAM_MCP_EXE` to the packaged x64 `Wam Local.exe` to run these checks against the packaged application. Installer hashes are in the release's `SHA256SUMS.txt`; update verification also uses `latest.yml` and the blockmap.
 
-Open-source notices are in [licenses](licenses/), including [the STEP reader notice](licenses/STEP-reader-notice.md). Earlier development notes are archived in [Development history](docs/DEVELOPMENT-HISTORY.md); future work is listed in [ROADMAP.md](ROADMAP.md).
+## License
+
+Wam Local's original code and documentation are licensed under the [BSD Zero Clause License (0BSD)](LICENSE). You may use, copy, modify, redistribute and sell them for any purpose, including in closed-source products, without attribution or a requirement to publish your changes. The software is provided without warranty.
+
+Third-party components and externally sourced fixtures retain their respective licenses and rights; the project license does not relicense them. See [THIRD_PARTY.md](THIRD_PARTY.md) and [licenses](licenses/), including [the STEP reader notice](licenses/STEP-reader-notice.md).
+
+Earlier development notes are archived in [Development history](docs/DEVELOPMENT-HISTORY.md); future work is listed in [ROADMAP.md](ROADMAP.md).
