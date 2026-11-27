@@ -1,5 +1,7 @@
 # WAM material reference checks
 
+**2026-11-17 update:** [Both-machine common-size coverage](BOTH-MACHINES.md) adds 1,700 feed-only thickness captures (5,100 quality feeds) across all 28 Desktop and 24 Pro materials. All supported common metric, fractional and gauge sizes are covered. Original full Pro records remain authoritative for pierce/lead settings. Demo exports are disabled; Desktop process fields remain unverified. Bounded custom-thickness interpolation is available with review flags.
+
 Captured through the signed-in WAM 2.5.0 browser UI on 2026-11-08, with 111 missing metal-gauge sizes (including 0.020-inch Aluminum 6061) added on 2026-11-16, using the account's registered **Pro** machine. These are reference measurements, not a claim of complete machine compatibility.
 
 ## Results

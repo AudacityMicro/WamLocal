@@ -1,0 +1,46 @@
+[
+  {
+    "category": "Metals",
+    "names": [
+      "Steel - 1095",
+      "Brass - 260",
+      "Steel - A2",
+      "Titanium - Grade 2",
+      "Aluminum - 6061",
+      "Stainless Steel - 316",
+      "Steel - 1018",
+      "Stainless Steel - 304",
+      "Copper - 110"
+    ]
+  },
+  {
+    "category": "Plastics & Rubbers",
+    "names": [
+      "Acrylic - Acrylic",
+      "Polycarbonate - Polycarbonate",
+      "HDPE - HDPE",
+      "Neoprene - 50A",
+      "Silicone - 50A",
+      "Polyethylene Foam - 4lb",
+      "EPDM - EPDM"
+    ]
+  },
+  {
+    "category": "Ceramics & Stone",
+    "names": [
+      "Glass - Soda Lime",
+      "Granite - Granite",
+      "Glass - Borosilicate",
+      "Graphite - Graphite",
+      "Marble - Marble",
+      "Tile - Ceramic"
+    ]
+  },
+  {
+    "category": "Other",
+    "names": [
+      "Garolite - G-10/FR4",
+      "Carbon Fiber - Carbon Fiber"
+    ]
+  }
+]

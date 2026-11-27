@@ -1,0 +1,81 @@
+{
+  "version": 2,
+  "name": "open-centerline",
+  "machine": "pro",
+  "materials": [
+    {
+      "source": "Migrated job material",
+      "name": "Aluminum - 6061",
+      "thickness": 2.999994,
+      "feed": 131.22000000000003,
+      "pierce": 6.93,
+      "pierceDiameter": 0,
+      "kerf": 0.9652,
+      "tabWidth": 1.35,
+      "tabCount": 0,
+      "lead": 0,
+      "id": "material-legacy",
+      "machine": "pro"
+    }
+  ],
+  "parts": [
+    {
+      "id": "open-centerline",
+      "name": "open-centerline",
+      "contours": [
+        {
+          "points": [
+            {
+              "x": 0,
+              "y": 0
+            },
+            {
+              "x": 50,
+              "y": 0
+            },
+            {
+              "x": 50,
+              "y": 20
+            }
+          ],
+          "closed": false,
+          "hole": false
+        }
+      ],
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "scale": 1,
+      "cut": "centerline",
+      "materialId": "material-legacy",
+      "quantity": 1
+    }
+  ],
+  "sheets": [
+    {
+      "id": "sheet-legacy",
+      "name": "Sheet 1",
+      "materialId": "material-legacy",
+      "stock": {
+        "width": 460,
+        "height": 305,
+        "margin": 8,
+        "spacing": 4
+      },
+      "wcs": {
+        "x": 0,
+        "y": 0
+      },
+      "placements": [
+        {
+          "id": "open-centerline",
+          "partId": "open-centerline",
+          "x": 19.99995999999999,
+          "y": 19.999959999999994,
+          "rotation": 0,
+          "scale": 1
+        }
+      ]
+    }
+  ]
+}

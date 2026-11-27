@@ -7,8 +7,10 @@ declare module "paper/dist/paper-core" {
   export = paper;
 }
 interface Window {
+  mcpSetup?:{load():Promise<import("./ui/mcp-guide").McpConnection>;copy(text:string):Promise<void>};
+  importAssets?:{resolve:(file:File,reference:string)=>Promise<string|null>};
   jobFiles?: {
-    open(): Promise<{ job: unknown; path: string } | null>;
+    open(documentId?: string): Promise<{ job: unknown; path: string } | null>;
     post(
       job: unknown,
       sheetId?: string,
@@ -22,9 +24,9 @@ interface Window {
         warnings: string[];
       }[];
     } | null>;
-    save(job: unknown, saveAs?: boolean): Promise<{ path: string } | null>;
-    reset(): Promise<void>;
-    confirmDiscard(): Promise<"save" | "discard" | "cancel">;
+    save(job: unknown, saveAs?: boolean, documentId?: string): Promise<{ path: string } | null>;
+    reset(documentId?: string): Promise<void>;
+    confirmDiscard(name?: string): Promise<"save" | "discard" | "cancel">;
     updateViewPreferences(value: {
       units: "mm" | "in";
       showFileLabels: boolean;

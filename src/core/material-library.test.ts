@@ -1,3 +1,4 @@
+import {defaultTabWidth} from "./tab-defaults";
 import { describe, it, expect } from "vitest";
 import {
   initialMaterialLibrary,
@@ -5,6 +6,8 @@ import {
   CUT_QUALITIES,
 } from "./material-library";
 import { materialPresets, presetIssue } from "./material-presets";
+import {feedCaptures} from "./material-feed-corrections";
+import {estimateMaterialSettings} from "./material-estimate";
 import {
   materialName,
   materialQuality,
@@ -20,6 +23,14 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 
 describe("complete material quality catalog", () => {
+  it("fills absent legacy abrasive rates from the machine and preserves explicit values",()=>{
+    const library=initialMaterialLibrary();
+    library.machines!.desktop.abrasive=175;
+    const records=library.materials.filter(m=>m.machine==="desktop").slice(0,3);
+    records[0].abrasive=undefined;records[1].abrasive=0;records[2].abrasive=321;
+    const upgraded=extendMaterialLibrary(library);
+    expect(records.map(m=>upgraded.materials.find(p=>p.id===m.id)!.abrasive)).toEqual([175,0,321]);
+  });
   it("has captured Pro settings for every 7-26 gauge of each standard metal stock", () => {
     const library = initialMaterialLibrary();
     for (const stock of new Set(materialPresets.map((p) => p.name)))
@@ -104,10 +115,10 @@ describe("complete material quality catalog", () => {
         expect(m.feed).toBe(p.feeds[quality]);
         expect(m.pierce).toBe(p.pierce);
         expect(m.abrasive).toBe(p.abrasive);
-        expect(m.requiresVerification).toBe(!!presetIssue(p));
+        expect(m.requiresVerification).toBe(!!presetIssue(p)||!!p.processProxy||!!p.requiresProcessReview);
         expect(m.tabWidth).toBeLessThanOrEqual(20);
-        if (presetIssue(p)) expect(m.preset).toBeUndefined();
-        else expect(m.tabWidth).toBe(p.tabWidth);
+        if (presetIssue(p)||p.processProxy||p.requiresProcessReview) expect(m.preset).toBeUndefined();
+        else expect(m.tabWidth).toBe(defaultTabWidth(p.thicknessMm));
       }
   });
   it("offers every quality for each listed machine/material/thickness without reusing Pro feeds on Desktop", () => {
@@ -120,7 +131,12 @@ describe("complete material quality catalog", () => {
       if (m.machine === "desktop" && m.quality && m.quality !== "custom") {
         expect(m.requiresVerification).toBe(true);
         expect(m.preset).toBeUndefined();
-        expect(m.feed).toBe(defaultMaterial("desktop").feed);
+        if (m.source?.includes("WAM Desktop demo feed capture")) {
+          const capture=feedCaptures.find(c=>c.name===m.stockKey&&Math.abs(c.thicknessMm-m.thickness)<1e-7)!;
+          expect(capture).toBeDefined();
+          expect(m.feed).toBe(capture.feeds[m.quality as "coarse"|"medium"|"fine"]);
+        } else if(materialName(m)!=="Custom material") expect(m.feed).toBe(estimateMaterialSettings(m,m.thickness,m.quality).feed);
+        else expect(m.feed).toBe(defaultMaterial("desktop").feed);
       }
     }
     for (const qualities of groups.values())

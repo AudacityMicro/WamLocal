@@ -1,8 +1,12 @@
+import { MCP_SERVER_INSTRUCTIONS } from "../core/mcp-instructions";
+import { registerWorkbenchTools } from "./workbench-tools";
 import { workOriginPoint, toWorkPoint } from "../core/work-origin";
+import { applyNewJobDefaults } from "../core/setting-defaults";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { readFile, writeFile, rename, mkdir } from "node:fs/promises";
+import { lstatSync } from "node:fs";
 import path from "node:path";
 import { homedir } from "node:os";
 import {
@@ -28,6 +32,8 @@ import {
 import { nest, svgExport } from "../core/geometry.js";
 import { postJob, planForPosting } from "../core/postprocessor";
 import { writePostedFiles } from "../desktop/post-files";
+import { estimateMaterialSettings } from "../core/material-estimate";
+import { jobMaterialSchema } from "../core/job";
 import {
   materialPresets,
   presetIssue,
@@ -36,7 +42,10 @@ import {
 } from "../core/material-presets.js";
 const root = path.resolve(process.env.WAM_PROJECT_DIR || "projects");
 await mkdir(root, { recursive: true });
-const server = new McpServer({ name: "wam-local", version: "0.7.0" });
+const server = new McpServer(
+  { name: "wam-local", version: "1.0.0" },
+  { instructions: MCP_SERVER_INSTRUCTIONS },
+);
 let pending: Promise<unknown> = Promise.resolve();
 function serial<T>(operation: () => Promise<T>): Promise<T> {
   const result = pending.then(operation);
@@ -45,7 +54,17 @@ function serial<T>(operation: () => Promise<T>): Promise<T> {
 }
 const fileSchema = z
   .string()
-  .regex(/^[a-zA-Z0-9_-]+(?:\.wam|\.(?:wam|job)\.json)$/);
+  .min(1)
+  .max(180)
+  .regex(
+    /^[^\x00-\x1f<>:"/\\|?*.][^\x00-\x1f<>:"/\\|?*]*(?:\.wam|\.(?:wam|job)\.json)$/i,
+  )
+  .refine(
+    (name) =>
+      !name.includes("..") &&
+      !/^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])\./i.test(name),
+    "Use a regular job filename",
+  );
 const libraryFile = path.resolve(
   process.env.WAM_MATERIAL_LIBRARY ||
     path.join(
@@ -55,7 +74,15 @@ const libraryFile = path.resolve(
     ),
 );
 function file(name: string) {
-  return path.join(root, name);
+  const result = path.join(root, name);
+  for (const target of [result, result + ".tmp"])
+    try {
+      if (lstatSync(target).isSymbolicLink())
+        throw Error("Job files cannot be symbolic links");
+    } catch (error: any) {
+      if (error.code !== "ENOENT") throw error;
+    }
+  return result;
 }
 async function read(name: string) {
   return projectSchema.parse(JSON.parse(await readFile(file(name), "utf8")));
@@ -70,12 +97,55 @@ async function save(name: string, value: unknown) {
 async function readSavedJob(name: string) {
   return readJob(JSON.parse(await readFile(file(name), "utf8")));
 }
-async function saveJob(name: string, value: unknown) {
+const histories = new Map<
+  string,
+  { undo: Job[]; redo: Job[]; expected: string }
+>();
+async function saveJob(name: string, value: unknown, remember = true) {
   const job = jobSchema.parse(value),
     temp = file(name) + ".tmp";
+  let previous: Job | undefined;
+  if (remember)
+    try {
+      previous = await readSavedJob(name);
+    } catch (e: any) {
+      if (e.code !== "ENOENT") throw e;
+    }
   await writeFile(temp, JSON.stringify(job, null, 2), "utf8");
   await rename(temp, file(name));
+  if (remember && previous) {
+    const text = JSON.stringify(previous),
+      h = histories.get(name);
+    const undo = h?.expected === text ? h.undo : [];
+    undo.push(previous);
+    while (
+      undo.length > 20 ||
+      (undo.length > 1 && JSON.stringify(undo).length > 40000000)
+    )
+      undo.shift();
+    histories.set(name, { undo, redo: [], expected: JSON.stringify(job) });
+  }
   return job;
+}
+async function history(name: string, action: "undo" | "redo" | "status") {
+  const current = await readSavedJob(name),
+    h = histories.get(name);
+  if (h && h.expected !== JSON.stringify(current)) {
+    histories.delete(name);
+    if (action !== "status")
+      throw Error("Job changed outside this MCP session; history was cleared");
+  }
+  const valid = histories.get(name);
+  if (action === "status")
+    return { undo: valid?.undo.length ?? 0, redo: valid?.redo.length ?? 0 };
+  const source = action === "undo" ? valid?.undo : valid?.redo;
+  if (!valid || !source?.length) throw Error(`Nothing to ${action}`);
+  const target = source[source.length - 1],
+    saved = await saveJob(name, target, false);
+  source.pop();
+  (action === "undo" ? valid.redo : valid.undo).push(current);
+  valid.expected = JSON.stringify(saved);
+  return { job: saved, undo: valid.undo.length, redo: valid.redo.length };
 }
 const response = (value: unknown) => ({
   content: [{ type: "text" as const, text: JSON.stringify(value, null, 2) }],
@@ -86,11 +156,18 @@ server.tool(
   {
     file: fileSchema,
     name: z.string().min(1),
-    machine: z.enum(["desktop", "pro"]),
+    machine: z.enum(["desktop", "pro"]).optional(),
   },
   async ({ file, name, machine }) =>
     serial(async () => {
-      const p = projectSchema.parse({ ...newProject(), name, machine });
+      const library = await readLibraryFile(libraryFile);
+      const selected = machine ?? library.defaultMachine ?? "desktop";
+      const p = projectSchema.parse({
+        ...newProject(),
+        name,
+        machine: selected,
+        machineSettings: library.machines?.[selected],
+      });
       await writeFile(path.join(root, file), JSON.stringify(p, null, 2), {
         encoding: "utf8",
         flag: "wx",
@@ -210,12 +287,20 @@ server.tool(
   "Create a version-2 job with a part library, embedded material defaults, and an initial sheet.",
   {
     file: fileSchema,
-    name: z.string().min(1),
-    machine: z.enum(["desktop", "pro"]),
+    name: z.string().min(1).optional(),
+    machine: z.enum(["desktop", "pro"]).optional(),
   },
   async ({ file: name, name: label, machine }) =>
     serial(async () => {
-      const job = { ...newJob(machine), name: label };
+      const library = await readLibraryFile(libraryFile);
+      const selected = machine ?? library.defaultMachine ?? "desktop";
+      const defaults = applyNewJobDefaults(
+        newJob(selected, library.machines?.[selected]),
+        library,
+      );
+      const job = label
+        ? { ...defaults, name: label, nameMode: "manual" as const }
+        : defaults;
       await writeFile(file(name), JSON.stringify(job, null, 2), {
         encoding: "utf8",
         flag: "wx",
@@ -266,7 +351,7 @@ server.tool(
 );
 server.tool(
   "add_sheet",
-  "Add a sheet with stock dimensions, a material and an X/Y WCS origin.",
+  "Add a sheet. Shared jobs inherit the job material, stock size, spacing and sheet origin.",
   { file: fileSchema, sheet: sheetSchema },
   async ({ file, sheet }) =>
     serial(async () => {
@@ -278,7 +363,7 @@ server.tool(
 );
 server.tool(
   "update_sheet",
-  "Replace a sheet including placements and WCS. Incompatible materials and excess quantities are rejected.",
+  "Replace a sheet including placements and WCS. In shared jobs, material, stock dimensions, spacing and sheet origin update every sheet and part; placements remain per sheet.",
   { file: fileSchema, sheet: sheetSchema },
   async ({ file, sheet }) =>
     serial(async () => {
@@ -288,7 +373,24 @@ server.tool(
       return response(
         await saveJob(file, {
           ...job,
-          sheets: job.sheets.map((s) => (s.id === sheet.id ? sheet : s)),
+          sheets: job.sheets.map((s) => {
+            const next = s.id === sheet.id ? sheet : s;
+            return job.sharedSetup
+              ? {
+                  ...next,
+                  materialId: sheet.materialId,
+                  workOrigin: sheet.workOrigin,
+                  workOriginReference: sheet.workOriginReference,
+                  stock: {
+                    ...next.stock,
+                    width: sheet.stock.width,
+                    height: sheet.stock.height,
+                    margin: sheet.stock.margin,
+                    spacing: sheet.stock.spacing,
+                  },
+                }
+              : next;
+          }),
         }),
       );
     }),
@@ -299,7 +401,7 @@ server.tool(
   {
     file: fileSchema,
     rotate: z.boolean().optional(),
-    settings: jobSchema.shape.nesting.optional(),
+    settings: projectSchema.shape.nesting.optional(),
   },
   async ({ file, rotate, settings }) =>
     serial(async () => {
@@ -373,4 +475,26 @@ for (const all of [false, true])
         return response({ paths, sheets: files.map(({ content, ...f }) => f) });
       }),
   );
+server.tool(
+  "estimate_material_settings",
+  "Return exact recorded settings or a same-machine, bracketed custom-thickness estimate. No extrapolation or cross-machine scaling. Does not modify a job.",
+  {
+    material: jobMaterialSchema,
+    thicknessMm: z.number().positive(),
+    quality: z.enum(["coarse", "medium", "fine"]),
+  },
+  async ({ material, thicknessMm, quality }) =>
+    response(estimateMaterialSettings(material, thicknessMm, quality)),
+);
+registerWorkbenchTools(server, {
+  root,
+  location: file,
+  fileSchema,
+  read: readSavedJob,
+  save: saveJob,
+  readLibrary: () => readLibraryFile(libraryFile),
+  writeLibrary: (value) => writeLibraryFile(libraryFile, value),
+  serial,
+  history,
+});
 await server.connect(new StdioServerTransport());

@@ -9,16 +9,23 @@ import {
   type Move,
   type Plan,
 } from "./geometry";
-import { leadInStart } from "./lead-in";
+import { curvedLead, leadInStart, smallHolePierce } from "./lead-in";
+import { scheduleCornerFeeds } from "./corner-feed";
 import { closestOnPath, movePathStart, pointInPaths } from "./path-math";
 import { jobSchema, sheetProject, BED, type Job } from "./job";
 import { workOriginPoint } from "./work-origin";
+import { cutFilename } from "./cut-filename";
+import { overlapProfile } from "./lead-overlap";
+import { reserveTabLeads, tabLeadsClear, type TabMove } from "./tab-leads";
 
 export type CutOperation = {
   partId: string;
+  contourIndex: number;
+  entry: Point;
   pierce: number;
   start: Point;
   moves: Move[];
+  pierceOnly?: boolean;
 };
 export type PostedFile = {
   sheetId: string;
@@ -26,7 +33,18 @@ export type PostedFile = {
   filename: string;
   content: string;
   operations: number;
+  pierceOnlyOperations?: number;
   seconds: number;
+  abrasiveGrams: number;
+  cutSeconds: number;
+  pierceSeconds: number;
+  overheadSeconds: number;
+  cost: {
+    currency: string;
+    abrasive: number | null;
+    running: number | null;
+    total: number | null;
+  };
   warnings: string[];
 };
 export class PostError extends Error {
@@ -98,14 +116,30 @@ export function planForPosting(
     abrasiveGrams = 0;
   for (const cp of base.contourPlans) {
     const { contour, process, partId } = cp;
+    const own = project.parts.find((p) => p.id === partId)!;
+    const centerAllowed =
+      !cp.moves.some((m) => m.kind === "tab") &&
+      !transformed(own).some(
+        (other, i) =>
+          i !== cp.contourIndex &&
+          other.closed &&
+          pointInPaths([contour.points], other.points[0]),
+      );
     // The base plan begins with a rapid and, for compensated paths, a lead.
     const hasLead =
+      !cp.pierceOnly &&
       project.parts.find((p) => p.id === partId) &&
       (contour.cut ?? project.parts.find((p) => p.id === partId)!.cut) !==
         "centerline" &&
       process.lead > 0;
     const lead = hasLead ? process.lead : 0;
     let segments = cp.moves.slice(hasLead ? 2 : 1);
+    if (cp.pierceOnly) {
+      const center = cp.moves[0].to;
+      segments = [
+        { from: center, to: center, kind: "cut", partId, feed: process.feed },
+      ];
+    }
     if (
       contour.closed &&
       contour.startPosition === undefined &&
@@ -118,47 +152,172 @@ export function planForPosting(
       );
       if (at >= 0) segments = [...segments.slice(at), ...segments.slice(0, at)];
     }
-    const spans: Move[][] = [];
-    let span: Move[] = [];
-    for (const m of segments) {
-      if (m.kind === "cut") span.push(m);
-      else if (span.length) {
-        spans.push(span);
-        span = [];
-      }
+    if (
+      hasLead &&
+      process.leadStyle !== "straight" &&
+      segments.some((m) => m.kind === "tab")
+    ) {
+      segments = reserveTabLeads(
+        segments,
+        (lead * 2) / Math.PI +
+          Math.max(0, (effectivePierceDiameter(process) - process.kerf) / 2),
+        process.kerf,
+      );
+      cp.moves = [...cp.moves.slice(0, hasLead ? 2 : 1), ...segments];
     }
-    if (span.length) spans.push(span);
-    for (const cut of spans) {
-      const entry = cut[0].from,
-        end = cut.at(-1)!.to;
-      const at = (p: Point): Contour => ({
-        ...contour,
-        points: movePathStart(contour.points, p),
-      });
-      const start = contour.closed ? leadInStart(at(entry), lead) : entry;
-      const exit = contour.closed ? leadInStart(at(end), lead) : end;
-      const cutting: Move[] = [];
-      if (distance(start, entry) > 1e-8)
-        cutting.push({
-          from: start,
-          to: entry,
-          kind: "cut",
-          partId,
-          feed: process.feed,
-        });
-      cutting.push(...cut);
-      if (distance(end, exit) > 1e-8)
-        cutting.push({
-          from: end,
-          to: exit,
-          kind: "cut",
-          partId,
-          feed: process.feed,
-        });
-      const leads = [
-        distance(start, entry) > 1e-8 ? { from: start, to: entry } : null,
-        distance(end, exit) > 1e-8 ? { from: end, to: exit } : null,
-      ].filter((v) => v !== null);
+    if (!cp.pierceOnly)
+      segments = overlapProfile(
+        segments,
+        contour.closed,
+        process.leadInOverlap,
+        process.leadOutOverlap,
+      );
+    const at = (p: Point): Contour => ({
+      ...contour,
+      points: movePathStart(contour.points, p),
+    });
+    const leadPath = (p: Point, exit: boolean, requested = lead) => {
+      if (cp.pierceOnly) return [p];
+      const draw = (length: number) =>
+        process.leadStyle === "straight"
+          ? exit
+            ? [p, leadInStart(at(p), length, centerAllowed)]
+            : [leadInStart(at(p), length, centerAllowed), p]
+          : curvedLead(at(p), length, exit, centerAllowed);
+      if (centerAllowed) return draw(requested);
+      const retained = design[project.parts.findIndex((p) => p.id === partId)]
+        .filter((c) => c.closed)
+        .map((c) => c.points);
+      for (let i = 0; i < 16; i++) {
+        const path = draw(requested * 0.5 ** i),
+          pierce = exit ? path.at(-1)! : path[0];
+        if (
+          !pointInPaths(retained, pierce) &&
+          path
+            .slice(1)
+            .every((to, i) => !crossesRegion(path[i], to, retained, true))
+        )
+          return path;
+      }
+      return [p];
+    };
+    const groups: { kind: string; moves: TabMove[] }[] = [];
+    for (const move of segments) {
+      const last = groups.at(-1);
+      if (last?.kind === move.kind) last.moves.push(move);
+      else groups.push({ kind: move.kind, moves: [move] });
+    }
+    if (
+      groups.length > 1 &&
+      groups[0].kind === "tab" &&
+      groups.at(-1)!.kind === "tab"
+    ) {
+      groups[0].moves = [...groups.pop()!.moves, ...groups[0].moves];
+    }
+    const spans = groups.flatMap((g, index) =>
+      g.kind === "cut" ? [{ group: index, cut: g.moves }] : [],
+    );
+    const prepared = spans.map(({ group, cut }) => ({
+      group,
+      cut,
+      entry: cut[0].from,
+      end: cut.at(-1)!.to,
+      entryLength: lead,
+      exitLength: lead,
+      entryPath: leadPath(cut[0].from, false),
+      exitPath: leadPath(cut.at(-1)!.to, true),
+    }));
+    if (
+      hasLead &&
+      process.leadStyle !== "straight" &&
+      groups.some((g) => g.kind === "tab")
+    ) {
+      if (!prepared.length)
+        issues.push(
+          "Retaining tabs and leads consume the entire contour. Reduce tab count, width or lead length.",
+        );
+      let reduced = false;
+      for (const previous of prepared) {
+        const gapIndex = (previous.group + 1) % groups.length,
+          gap = groups[gapIndex];
+        if (gap.kind !== "tab") continue;
+        const next = prepared.find(
+          (p) => p.group === (gapIndex + 1) % groups.length,
+        );
+        if (!next) continue;
+        const width = Math.max(
+          ...gap.moves.map((m) => m.bridgeWidth ?? process.tabWidth),
+        );
+        for (let attempt = 0; attempt < 18; attempt++) {
+          if (
+            tabLeadsClear(
+              previous.exitPath,
+              next.entryPath,
+              process.kerf,
+              effectivePierceDiameter(process),
+              width,
+            )
+          )
+            break;
+          reduced = true;
+          previous.exitLength *= 0.5;
+          next.entryLength *= 0.5;
+          previous.exitPath = leadPath(previous.end, true, previous.exitLength);
+          next.entryPath = leadPath(next.entry, false, next.entryLength);
+        }
+        if (
+          !tabLeadsClear(
+            previous.exitPath,
+            next.entryPath,
+            process.kerf,
+            effectivePierceDiameter(process),
+            width,
+          )
+        )
+          issues.push(
+            "Retaining tab clearance cannot be preserved. Move the tab or reduce tab width, lead length, tab count or pierce diameter.",
+          );
+      }
+      if (reduced)
+        issues.push("Lead length reduced to preserve retaining tabs.");
+    }
+    for (const {
+      cut,
+      entry,
+      end,
+      entryPath,
+      exitPath,
+      entryLength,
+      exitLength,
+    } of prepared) {
+      const start = entryPath[0],
+        exit = exitPath.at(-1)!;
+      const asMoves = (points: Point[]): Move[] =>
+        points.slice(1).flatMap((to, i) =>
+          distance(points[i], to) > 1e-8
+            ? [
+                {
+                  from: points[i],
+                  to,
+                  kind: "cut" as const,
+                  partId,
+                  feed: process.feed,
+                },
+              ]
+            : [],
+        );
+      const entryMoves = asMoves(entryPath),
+        exitMoves = asMoves(exitPath);
+      const unscheduled = [
+        ...entryMoves,
+        ...(cp.pierceOnly ? [] : cut),
+        ...exitMoves,
+      ];
+      const cutting =
+        process.cornerSlowdown === false
+          ? unscheduled
+          : scheduleCornerFeeds(unscheduled, process.feed);
+      const leads = [...entryMoves, ...exitMoves];
       if (
         leads.some((line) =>
           design.some(
@@ -207,8 +366,11 @@ export function planForPosting(
           `${project.parts.find((p) => p.id === partId)?.name}: pierce or stop footprint may alter a finished cut profile. Increase lead length or move the entry.`,
         );
       if (
-        distance(start, entry) < lead - 0.0001 ||
-        distance(exit, end) < lead - 0.0001
+        !(centerAllowed && smallHolePierce(at(entry), lead)) &&
+        (entryMoves.reduce((n, m) => n + distance(m.from, m.to), 0) <
+          entryLength * 0.995 ||
+          exitMoves.reduce((n, m) => n + distance(m.from, m.to), 0) <
+            exitLength * 0.995)
       )
         issues.push("Lead length reduced to remain within scrap.");
       pierces.push({ point: start, radius, partId, warning });
@@ -218,9 +380,12 @@ export function planForPosting(
       );
       operations.push({
         partId,
+        contourIndex: cp.contourIndex,
+        entry,
         pierce: process.pierce,
         start,
         moves: cutting,
+        ...(cp.pierceOnly ? { pierceOnly: true } : {}),
       });
       cursor = exit;
       const cuttingMinutes = cutting.reduce(
@@ -231,7 +396,7 @@ export function planForPosting(
       abrasiveGrams +=
         (cuttingMinutes + (process.pierce + 1) / 60) *
         (project.machineSettings?.abrasive ?? process.abrasive ?? 0);
-      const points = [start, exit];
+      const points = [...entryPath, ...exitPath];
       if (
         points.some(
           (p) =>
@@ -449,15 +614,15 @@ export function postJob(value: Job, sheetId?: string): PostedFile[] {
       );
       continue;
     }
-    const origin = workOriginPoint(sheet);
+    const origin = workOriginPoint(sheet, project.parts);
     const lines = [
       "; Generated by Wam Local",
       `; Job: ${text(job.name)}`,
       `; Sheet: ${text(sheet.name)}`,
       `; Machine: ${job.machine === "pro" ? "WAZER Pro" : "WAZER Desktop"}`,
       "; Coordinates: absolute machine bed, millimeters, Y negative down",
-      `; Sheet origin on bed: ${number(sheet.wcs.x + origin.x)}, ${number(sheet.wcs.y + origin.y)} mm (${sheet.workOrigin ?? "top-left"})`,
-      "; Per-part feed and pierce settings; straight scrap-side leads",
+      `; Sheet origin on bed: ${number(sheet.wcs.x + origin.x)}, ${number(sheet.wcs.y + origin.y)} mm (${sheet.workOrigin ?? "top-left"}${sheet.workOriginReference === "parts" ? ", parts bounds" : ""})`,
+      "; Per-part feed and pierce settings; scrap-side leads",
       "; Cut time excludes rapid travel; resume pierce uses the sheet maximum",
       "G90",
       "G21",
@@ -479,18 +644,44 @@ export function postJob(value: Job, sheetId?: string): PostedFile[] {
     }
     lines.push(`M1413 ${clock(prepared.minutes * 60)}`, "M1404", "");
     const index = job.sheets.findIndex((s) => s.id === sheet.id) + 1;
-    const prefix = job.name
-      .replace(/[^A-Za-z0-9]/g, "")
-      .slice(0, 2)
-      .padEnd(2, "X")
-      .toUpperCase();
     files.push({
       sheetId: sheet.id,
       sheetName: sheet.name,
-      filename: `J${prefix}${String(index).padStart(3, "0")}.gcode`,
+      filename: cutFilename(job.name, index, job.sheets.length),
       content: lines.join("\r\n"),
       operations: prepared.operations.length,
+      pierceOnlyOperations: prepared.operations.filter((op) => op.pierceOnly)
+        .length,
       seconds: Math.ceil(prepared.minutes * 60),
+      abrasiveGrams: prepared.abrasiveGrams,
+      cutSeconds: prepared.operations
+        .flatMap((o) => o.moves)
+        .reduce(
+          (n, m) =>
+            n +
+            (60 * distance(m.from, m.to)) / (m.feed ?? project.material.feed),
+          0,
+        ),
+      pierceSeconds: prepared.operations.reduce((n, o) => n + o.pierce, 0),
+      overheadSeconds: prepared.operations.length * 3,
+      cost: (() => {
+        const settings = project.machineSettings;
+        const abrasive =
+          settings?.abrasiveCostPerKg === undefined
+            ? null
+            : (prepared.abrasiveGrams / 1000) * settings.abrasiveCostPerKg;
+        const running =
+          settings?.runningCostPerHour === undefined
+            ? null
+            : (prepared.minutes / 60) * settings.runningCostPerHour;
+        return {
+          currency: settings?.currency ?? "USD",
+          abrasive,
+          running,
+          total:
+            abrasive === null || running === null ? null : abrasive + running,
+        };
+      })(),
       warnings: [
         ...prepared.issues,
         ...(new Set(prepared.operations.map((op) => op.pierce)).size > 1

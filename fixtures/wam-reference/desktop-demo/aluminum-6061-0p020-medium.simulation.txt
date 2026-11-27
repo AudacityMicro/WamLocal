@@ -1,0 +1,58 @@
+;-------------------------------Cut file parameters------------------------
+; Input file name : square.svg
+; File rotation : 0 File scale : 1
+; Machine : Desktop
+; Material name : Aluminum - 6061
+; Material thickness : 0.02 in
+; Cut path  : Centerline
+; Cut quality : mediumRate
+; Raw Material width : 2.0in
+; Raw Material height : 2.0in
+;-------------------------------Do Not modify the Gcode file---------------
+; Start of Cut File
+; Jog
+G0 X2.74 Y-0.00
+; Pierce and Start Cut Segment
+G1 X7.74 Y-0.00 F186.59
+G1 X12.74 Y-0.00
+G1 X17.74 Y-0.00
+G1 X22.74 Y-0.00
+G1 X25.00 Y-0.00
+G1 X30.00 Y-0.00
+G1 X35.00 Y-0.00
+G1 X40.00 Y-0.00 F158.60
+G1 X45.00 Y-0.00 F121.28
+G1 X50.00 Y-0.00 F83.97
+G1 X50.00 Y-5.00 F121.28
+G1 X50.00 Y-10.00 F158.60
+G1 X50.00 Y-15.00 F186.59
+G1 X50.00 Y-20.00
+G1 X50.00 Y-25.00
+G1 X50.00 Y-30.00
+G1 X50.00 Y-35.00
+G1 X50.00 Y-40.00 F158.60
+G1 X50.00 Y-45.00 F121.28
+G1 X50.00 Y-50.00 F83.97
+G1 X45.00 Y-50.00 F121.28
+G1 X40.00 Y-50.00 F158.60
+G1 X35.00 Y-50.00 F186.59
+G1 X30.00 Y-50.00
+G1 X25.00 Y-50.00
+G1 X25.00 Y-50.00 F177.26
+G1 X20.00 Y-50.00 F186.59
+G1 X15.00 Y-50.00
+G1 X10.00 Y-50.00 F158.60
+G1 X5.00 Y-50.00 F121.28
+G1 X0.00 Y-50.00 F83.97
+G1 X0.00 Y-50.00
+G1 X0.00 Y-45.00 F121.28
+G1 X0.00 Y-40.00 F158.60
+G1 X0.00 Y-35.00 F186.59
+G1 X0.00 Y-30.00
+G1 X0.00 Y-25.00
+G1 X0.00 Y-25.00 F139.94
+G1 X0.00 Y-0.00 F93.30
+G1 X0.00 Y-0.00
+G1 X0.00 Y-0.00
+; End Cut Segment
+; End of Cut File

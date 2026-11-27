@@ -10,6 +10,9 @@ import { closestOnPath } from "./path-math";
 
 function fixture(machine: "desktop" | "pro" = "pro") {
   const j = newJob(machine);
+  // Exercise legacy per-material process fixtures; shared job rules have separate coverage.
+  j.sharedSetup = false;
+  j.tabRules = undefined;
   j.materials[0] = {
     ...j.materials[0],
     feed: 120,
@@ -46,6 +49,28 @@ function fixture(machine: "desktop" | "pro" = "pro") {
   ];
   return j;
 }
+it("defaults posted filenames to the descriptive job name", () => {
+  const job = fixture();
+  job.name = "Mounting plate revision 2";
+  expect(postJob(job)[0].filename).toBe("Mounting plate revision 2.gcode");
+  job.parts[0].quantity = 2;
+  job.sheets.push({
+    ...structuredClone(job.sheets[0]),
+    id: "second-sheet",
+    name: "Second",
+    placements: job.sheets[0].placements.map((p) => ({
+      ...p,
+      id: p.id + "-second",
+    })),
+  });
+  expect(postJob(job).map((f) => f.filename)).toEqual([
+    "Mounting plate revision 2 - Sheet 1.gcode",
+    "Mounting plate revision 2 - Sheet 2.gcode",
+  ]);
+  expect(postJob(job, "second-sheet")[0].filename).toBe(
+    "Mounting plate revision 2 - Sheet 2.gcode",
+  );
+});
 /** Independent controller-state replay: no G0 with power, no unpowered G1. */
 function replay(source: string) {
   let water = false,
@@ -130,9 +155,11 @@ describe("WAZER posting", () => {
       expect(nc.unsupportedCodes).toEqual([]);
       expect(nc.segments).toBe(2);
       expect(file.operations).toBe(2);
-      expect(file.filename.length).toBeLessThanOrEqual(13);
+      expect(file.filename.endsWith(".gcode")).toBe(true);
       expect(
-        nc.moves.filter((m) => !m.rapid).every((m) => m.feed === 120),
+        nc.moves
+          .filter((m) => !m.rapid)
+          .every((m) => m.feed > 0 && m.feed <= 120),
       ).toBe(true);
       expect(nc.dwellSeconds).toBe(11);
     },
@@ -157,13 +184,14 @@ describe("WAZER posting", () => {
   });
   it("leaves automatic and wrapped manual tab gaps uncut and re-pierces from scrap", () => {
     const j = fixture();
+    j.materials[0].leadStyle='straight';
     j.parts[0].contours = [rectangle(40, 30)];
     j.materials[0].tabCount = 2;
     const p = planForPosting(sheetProject(j, j.sheets[0].id));
     expect(p.operations).toHaveLength(2);
     const tabs = p.moves.filter((m) => m.kind === "tab");
     expect(tabs.reduce((n, m) => n + distance(m.from, m.to), 0)).toBeCloseTo(
-      4,
+      2 * (2 + j.materials[0].kerf),
       4,
     );
     const file = postJob(j)[0];
@@ -197,7 +225,7 @@ describe("WAZER posting", () => {
       manual.moves
         .filter((m) => m.kind === "tab")
         .reduce((n, m) => n + distance(m.from, m.to), 0),
-    ).toBeCloseTo(7, 4);
+    ).toBeCloseTo(7 + 2 * j.materials[0].kerf, 4);
     replay(postJob(j)[0].content);
   });
   it("maps all nine sheet origins to the same absolute bed coordinates", () => {
@@ -240,37 +268,59 @@ describe("WAZER posting", () => {
     expect(() => postJob(j)).toThrow(/stock outline/);
     delete j.sheets[0].stock.outline;
     j.parts[0].contours[0].startPosition = 0.9;
-    j.sheets[0].wcs.x = -17.4;
+    const pierced = planForPosting(sheetProject(j, j.sheets[0].id)).pierces[0];
+    j.sheets[0].wcs.x = -pierced.point.x + pierced.radius - 0.1;
     expect(() => postJob(j)).toThrow(/footprint exceeds the machine/);
   });
   it("detects a lead crossing even a narrow neighboring part", () => {
     const j = fixture();
     j.parts[0].contours = [{ ...rectangle(40, 30), startPosition: 0.1 }];
+    const lead = planForPosting(sheetProject(j, j.sheets[0].id)).operations[0]
+      .moves[3];
+    const center = {
+      x: (lead.from.x + lead.to.x) / 2,
+      y: (lead.from.y + lead.to.y) / 2,
+    };
     const other = {
       ...j.parts[0],
       id: "narrow",
       name: "narrow",
-      contours: [rectangle(0.2, 0.2)],
+      contours: [rectangle(0.02, 0.02)],
     };
     j.parts.push(other);
     j.sheets[0].placements.push({
       id: "narrow-copy",
       partId: other.id,
-      x: 33.9,
-      y: 18.7,
+      x: center.x - 0.01,
+      y: center.y - 0.01,
       rotation: 0,
       scale: 1,
     });
     expect(() => postJob(j)).toThrow(/lead crosses retained material/);
   });
-  it("rejects bounds, overlap, unverified settings and incomplete post-all without changing the job", () => {
+  it.each(["desktop", "pro"] as const)(
+    "posts legacy review-flagged %s presets using their actual values",
+    (machine) => {
+      const j = fixture(machine),
+        before = postJob(j);
+      j.materials[0].requiresVerification = true;
+      j.materials[0].source = "Estimated process settings";
+      const snapshot = structuredClone(j);
+      const project = sheetProject(j, j.sheets[0].id);
+      expect(
+        planForPosting(project).issues.some((s) =>
+          /verification|settings.*review/i.test(s),
+        ),
+      ).toBe(false);
+      expect(postJob(j)).toEqual(before);
+      expect(j).toEqual(snapshot);
+    },
+  );
+  it("rejects bounds, overlap and incomplete post-all without changing the job", () => {
     const j = fixture(),
       before = structuredClone(j);
     postJob(j);
     expect(j).toEqual(before);
-    j.materials[0].requiresVerification = true;
-    expect(() => postJob(j)).toThrow(/verification/);
-    j.materials[0].requiresVerification = false;
     j.sheets[0].placements[0].x = 450;
     expect(() => postJob(j)).toThrow(/outside|cutting area/);
     j.sheets[0].placements[0].x = 20;
@@ -305,8 +355,18 @@ describe("WAZER posting", () => {
     const source = postJob(j)[0].content;
     replay(source);
     expect(source).toContain("G4 S7");
-    expect(source).toContain("F61");
-    expect(source).toContain("F120");
+    const postedPlan = planForPosting(sheetProject(j, j.sheets[0].id));
+    for (const [partId, nominal] of [
+      ["placement", 120],
+      ["second-copy", 61],
+    ] as const) {
+      const moves = postedPlan.operations
+        .filter((o) => o.partId === partId)
+        .flatMap((o) => o.moves);
+      expect(moves.length).toBeGreaterThan(0);
+      expect(moves.every((m) => m.feed! > 0 && m.feed! <= nominal)).toBe(true);
+      expect(moves.some((m) => m.feed! < nominal)).toBe(true);
+    }
     const original = structuredClone(j);
     postJob(j);
     expect(j).toEqual(original);

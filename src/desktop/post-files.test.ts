@@ -13,6 +13,7 @@ import path from "node:path";
 import { createRequire } from "node:module";
 import { writePostedFiles } from "./post-files";
 import { postJob } from "../core/postprocessor";
+import { cutFilename } from "../core/cut-filename";
 import { newJob } from "../core/job";
 import { rectangle, makePart } from "../core/model";
 const require = createRequire(import.meta.url);
@@ -168,6 +169,7 @@ describe("cut file output", () => {
         showMessageBox: async () => ({ response: 0 }),
       };
       registerPosting({
+        cutFilename,
         ipcMain: {
           handle: (_: string, callback: any) => {
             handler = callback;
@@ -192,9 +194,19 @@ describe("cut file output", () => {
       expect(await readFile(all.paths[0], "utf8")).toBe(
         postJob(job)[0].content,
       );
+      dialog.showSaveDialog=async()=>({filePath:path.join(folder,'shim.0.020.gcode'),canceled:false});
+      const renamed=await handler(event,job,sheet.id);
+      expect(path.basename(renamed.paths[0])).toBe('shim_0_020.gcode');
+      dialog.showMessageBox=async()=>({response:1});
+      expect(await handler(event,job,sheet.id)).toBeNull();
+      dialog.showMessageBox=async()=>({response:0});
       dialog.showSaveDialog = async () => ({ filePath: "", canceled: true });
       expect(await handler(event, job, sheet.id)).toBeNull();
       job.materials[0].requiresVerification = true;
-      await expect(handler(event, job)).rejects.toThrow(/verification/);
+      const flagged = await handler(event, job);
+      expect(flagged.paths).toEqual(all.paths);
+      expect(await readFile(flagged.paths[0], "utf8")).toBe(
+        postJob(job)[0].content,
+      );
     }));
 });

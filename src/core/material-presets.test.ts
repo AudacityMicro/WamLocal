@@ -1,3 +1,4 @@
+import {defaultTabWidth} from "./tab-defaults";
 import { describe, it, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import { newProject, projectSchema } from "./model";
@@ -5,6 +6,7 @@ import {
   activeMaterialPreset,
   applyMaterialPreset,
   materialPresets,
+  rawMaterialPresets,
   presetIssue,
   type CutQuality,
 } from "./material-presets";
@@ -29,6 +31,15 @@ describe("material preset integration", () => {
     for (const capture of captures) {
       const id = `pro-${capture.materialIndex}-${capture.thicknessIn}`;
       const preset = materialPresets.find((p) => p.id === id)!;
+      const original = rawMaterialPresets.find(p=>p.id===id)!;
+      if(preset.processProxy) {
+        expect(original.feeds.medium).toBe(10.16);
+        expect(preset.feeds.medium).not.toBe(10.16);
+        const applied=applyMaterialPreset({...newProject(),machine:"pro"},id,"medium");
+        expect(applied.material.requiresVerification).toBe(true);
+        expect(activeMaterialPreset(applied)).toBeUndefined();
+        continue;
+      }
       expect(preset).toBeDefined();
       for (const [quality, rate] of [
         ["coarse", "roughRate"],
@@ -58,13 +69,13 @@ describe("material preset integration", () => {
           pierce: capture.data.pierceTime.value,
           abrasive: capture.data.speedMode.abrasiveRate.value,
           lead: capture.data.defaultLeadDist.value,
-          tabWidth: capture.data.defaultTabWidth.value,
+          tabWidth: defaultTabWidth(capture.thicknessIn * 25.4),
         });
         expect(
           activeMaterialPreset(
             projectSchema.parse(JSON.parse(JSON.stringify(applied))),
           )?.id,
-        ).toBe(id);
+        ).toBe(preset.requiresProcessReview?undefined:id);
       }
     }
   });
@@ -80,7 +91,7 @@ describe("material preset integration", () => {
     expect(applied.stock).toEqual(project.stock);
     expect(applied.parts).toEqual(project.parts);
   });
-  it("rejects Desktop, unknown records, unknown qualities and tab outliers", () => {
+  it("rejects Desktop and unknown records/qualities while replacing captured tab outliers", () => {
     expect(() =>
       applyMaterialPreset(newProject(), "pro-0-0.125", "medium"),
     ).toThrow(/requires WAZER Pro/);
@@ -91,9 +102,7 @@ describe("material preset integration", () => {
     expect(() =>
       applyMaterialPreset(pro, "pro-0-0.125", "eco" as CutQuality),
     ).toThrow(/Unknown cut quality/);
-    expect(() => applyMaterialPreset(pro, "pro-18-0.001", "medium")).toThrow(
-      /tab width/,
-    );
+    expect(applyMaterialPreset(pro, "pro-18-0.001", "medium").material.tabWidth).toBe(1.016);
   });
   it("does not label changed values or a changed machine as a matching reference", () => {
     const applied = applyMaterialPreset(

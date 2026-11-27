@@ -1,5 +1,18 @@
 import { machineSettingsSchema } from "./machine-settings";
 import { z } from "zod";
+import { defaultTabWidth } from "./tab-defaults";
+import { MATERIAL_FAMILIES } from "./material-hierarchy";
+export const tabRulesSchema = z.object({
+  width: z.number().nonnegative().max(20),
+  count: z.number().int().min(0).max(20),
+  automaticWidth: z.boolean().default(true),
+  minHoleArea: z.number().nonnegative().max(1e10).default(0),
+  maxPartArea: z.number().positive().max(1e10).optional(),
+});
+export const savedDefaultsSchema = z.record(
+  z.string(),
+  z.union([z.number().finite(), z.string(), z.boolean(), z.null()]),
+);
 export const pointSchema = z.object({
   x: z.number().finite(),
   y: z.number().finite(),
@@ -20,10 +33,22 @@ export const contourSchema = z.object({
     .max(100)
     .optional(),
   lead: z.number().nonnegative().max(30).optional(),
+  leadInOverlap: z.number().nonnegative().max(30).optional(),
+  leadOutOverlap: z.number().nonnegative().max(30).optional(),
   startPosition: z.number().min(0).max(1).optional(),
 });
 export const materialSchema = z.object({
+  processRevision: z.number().int().nonnegative().optional(),
+  family: z.enum(MATERIAL_FAMILIES).optional(),
+  materialClass: z.string().max(120).optional(),
+  grade: z.string().max(120).optional(),
+  organizationRevision: z.number().nonnegative().optional(),
+  settingDefaults: savedDefaultsSchema.optional(),
+  source: z.string().optional(),
+  leadStyle: z.enum(["arc", "straight"]).optional(),
+  cornerSlowdown: z.boolean().optional(),
   quality: z.enum(["coarse", "medium", "fine", "custom"]).optional(),
+  // Legacy process provenance for preset selection/upgrades; never a posting gate.
   requiresVerification: z.boolean().optional(),
   name: z.string(),
   thickness: z.number().positive(),
@@ -36,10 +61,39 @@ export const materialSchema = z.object({
   pierceDiameter: z.number().nonnegative().max(100).optional(),
   kerf: z.number().nonnegative().max(10),
   tabWidth: z.number().nonnegative().max(20),
+  tabDefaultWidthMm: z.number().nonnegative().optional(),
   tabCount: z.number().int().min(0).max(20),
   lead: z.number().nonnegative().max(30),
+  leadInOverlap: z.number().nonnegative().max(30).optional(),
+  leadOutOverlap: z.number().nonnegative().max(30).optional(),
 });
 export const partSchema = z.object({
+  stepSource: z
+    .object({
+      selected: z.string(),
+      toleranceMm: z.number().positive(),
+      bodyCount: z.number().int().positive(),
+      faces: z
+        .array(
+          z.object({
+            id: z.string(),
+            body: z.string(),
+            label: z.string(),
+            area: z.number().positive(),
+            holes: z.number().int().nonnegative(),
+            blindHoles: z.number().int().nonnegative(),
+            normal: z.tuple([
+              z.number().finite(),
+              z.number().finite(),
+              z.number().finite(),
+            ]),
+            contours: z.array(contourSchema).min(1).max(1000),
+          }),
+        )
+        .min(1)
+        .max(5000),
+    })
+    .optional(),
   locked: z.boolean().optional(),
   rotationPolicy: z.enum(["free", "fixed", "grain-x", "grain-y"]).optional(),
   id: z.string().min(1),
@@ -82,6 +136,7 @@ export const projectSchema = z
     machineSettings: machineSettingsSchema.optional(),
     bedOffset: pointSchema.optional(),
     nesting: nestingSchema.optional(),
+    tabRules: tabRulesSchema.optional(),
     stock: z.object({
       width: z.number().positive().max(460),
       height: z.number().positive().max(305),
@@ -112,7 +167,8 @@ export const newProject = (): Project => ({
     feed: 100,
     pierce: 5,
     kerf: 1.1,
-    tabWidth: 2,
+    tabWidth: defaultTabWidth(3),
+    tabDefaultWidthMm: defaultTabWidth(3),
     tabCount: 2,
     lead: 2,
   },

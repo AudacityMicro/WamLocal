@@ -1,3 +1,5 @@
+import { NumericInput } from "./NumericInput";
+import { PartThumbnail } from "./PartThumbnail";
 import type { ReactNode } from "react";
 import type { Sheet } from "../core/job";
 import { PresetSelector } from "./PresetSelector";
@@ -108,7 +110,8 @@ export function JobPanel({
                   className="job-item"
                   onClick={() => onOpen({ kind: "part", id: p.id })}
                 >
-                  {p.name}
+                  <PartThumbnail contours={p.contours} />
+                  <span>{p.name}</span>
                 </button>
                 <p className="micro">
                   {placedCount(job, p.id)} placed / {p.quantity} requested ·{" "}
@@ -116,15 +119,16 @@ export function JobPanel({
                 </p>
                 <label className="field">
                   <span>Quantity · {p.name}</span>
-                  <input
+                  <NumericInput
                     aria-label={`Quantity ${p.name}`}
-                    type="number"
-                    min="1"
+                    integer
+
+                    min="0"
                     max="2000"
                     value={p.quantity}
                     onChange={(e) => {
-                      const n = e.target.valueAsNumber;
-                      if (Number.isInteger(n) && n > 0 && n <= 2000)
+                      const n = e;
+                      if (Number.isInteger(n) && n >= 0 && n <= 2000)
                         act(() => setPartQuantity(job, p.id, n));
                     }}
                   />
@@ -225,112 +229,6 @@ export function JobPanel({
                   }}
                 />
               </label>
-              <div className="field-grid">
-                {(
-                  [
-                    ["width", "Width - mm", 460],
-                    ["height", "Height - mm", 305],
-                  ] as const
-                ).map(([key, label, max]) => (
-                  <label className="field" key={key}>
-                    <span>
-                      {key === "width" ? "Width" : "Height"} - {units.unit}
-                    </span>
-                    <LengthInput
-                      aria-label={`${s.name} ${key}`}
-                      min={1}
-                      max={max}
-                      value={s.stock[key]}
-                      onChange={(n) =>
-                        onChange({
-                          ...job,
-                          sheets: job.sheets.map((a) =>
-                            a.id === s.id
-                              ? { ...a, stock: { ...a.stock, [key]: n } }
-                              : a,
-                          ),
-                        })
-                      }
-                    />
-                  </label>
-                ))}
-              </div>
-              {renderPreview && (
-                <div className="field-grid">
-                  {(["margin", "spacing"] as const).map((key) => (
-                    <label className="field" key={key}>
-                      <span>
-                        {key === "margin" ? "Edge margin" : "Part spacing"} -{" "}
-                        {units.unit}
-                      </span>
-                      <LengthInput
-                        aria-label={`${s.name} ${key}`}
-                        value={s.stock[key]}
-                        min={0}
-                        max={100}
-                        onChange={(n) =>
-                          onChange({
-                            ...job,
-                            sheets: job.sheets.map((a) =>
-                              a.id === s.id
-                                ? { ...a, stock: { ...a.stock, [key]: n } }
-                                : a,
-                            ),
-                          })
-                        }
-                      />
-                    </label>
-                  ))}
-                </div>
-              )}
-              <WorkOriginPicker
-                label={`${s.name} WCS origin`}
-                value={s.workOrigin}
-                onChange={(anchor) =>
-                  onChange({
-                    ...job,
-                    sheets: job.sheets.map((a) =>
-                      a.id === s.id ? { ...a, workOrigin: anchor } : a,
-                    ),
-                  })
-                }
-              />
-              <PresetSelector
-                showQuality={false}
-                labelSuffix={s.name}
-                records={presets ?? job.materials}
-                current={job.materials.find((m) => m.id === s.materialId)!}
-                machine={job.machine}
-                onChange={(selected) => {
-                  const record = materialForMachine(selected, job.machine);
-                  const nextMaterials = job.materials.some(
-                    (m) => m.id === record.id,
-                  )
-                    ? job.materials
-                    : [...job.materials, record];
-                  onChange({
-                    ...job,
-                    materials: nextMaterials,
-                    sheets: job.sheets.map((a) =>
-                      a.id === s.id
-                        ? {
-                            ...a,
-                            materialId: record.id,
-                            placements: a.placements.filter((i) => {
-                              const p = job.parts.find(
-                                (p) => p.id === i.partId,
-                              )!;
-                              const old = job.materials.find(
-                                (m) => m.id === p.materialId,
-                              )!;
-                              return materialsCompatible(old, record);
-                            }),
-                          }
-                        : a,
-                    ),
-                  });
-                }}
-              />
               <div className="button-row">
                 {!renderPreview && (
                   <button onClick={() => onOpen({ kind: "sheet", id: s.id })}>
@@ -389,8 +287,8 @@ export function JobPanel({
             </button>
           )}
         <p className="micro">
-          Removing a sheet or changing its material returns affected copies to
-          the unplaced quantity.
+          Removing a sheet returns its copies to the unplaced quantity. Sheet
+          settings apply to the whole job.
         </p>
       </section>
     </>

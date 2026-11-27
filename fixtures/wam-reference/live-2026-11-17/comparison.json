@@ -1,0 +1,195 @@
+{
+  "version": "0.8.1",
+  "date": "2026-11-17",
+  "physicalCutTested": false,
+  "scope": "Five fresh Desktop simulation motion captures versus local planned motion, plus separate 11 full Pro posting comparisons in ../posting-0.8.1/comparison.json.",
+  "limitations": [
+    "Desktop demo omits initialization/valve commands and pierce dwells; full Desktop executable output and total time are not validated.",
+    "The tabbed case uses an approximate 0.46 mm lead radius read from rounded simulation coordinates; other cases disable leads.",
+    "Different entry and tab locations can produce local geometric differences without changing the finished profile.",
+    "Hausdorff-style distance samples cut moves every 0.2 mm; it is not a proof of physical cut quality."
+  ],
+  "results": [
+    {
+      "name": "washer",
+      "machine": "desktop",
+      "contours": 2,
+      "holes": 1,
+      "cut": "outside",
+      "tabsPerContour": 0,
+      "leadMm": 0,
+      "tabWidthMm": 2.54,
+      "nominalFeed": 186.59,
+      "referenceOperations": 2,
+      "localOperations": 2,
+      "referenceCutLengthMm": 163.31707980934866,
+      "localCutLengthMm": 163.26374349438234,
+      "cutLengthDeltaMm": -0.05333631496631597,
+      "referenceLinearSeconds": 75.07326837387953,
+      "localLinearSeconds": 52.499194006446906,
+      "maxSampledCutDeviationMm": 0.03236647295487194,
+      "referenceBounds": {
+        "x": 12.22,
+        "y": 12.24,
+        "width": 40.96,
+        "height": 40.919999999999995
+      },
+      "localBounds": {
+        "x": 12.218,
+        "y": 12.218,
+        "width": 40.964,
+        "height": 40.964
+      },
+      "localIssues": [
+        "washer.svg: cutting settings require verification for Aluminum - 6061, 0.508 mm, WAZER Desktop. Review the process values in Presets or select a complete same-machine reference."
+      ],
+      "geometryMatchesWithinPointOneMm": true,
+      "referenceSha256": "cfb0e54cccf5634666034af2376bb1319c5853a1f2ebaca5862d3496317e2f5f"
+    },
+    {
+      "name": "slotted-plate",
+      "machine": "desktop",
+      "contours": 2,
+      "holes": 1,
+      "cut": "outside",
+      "tabsPerContour": 0,
+      "leadMm": 0,
+      "tabWidthMm": 2.54,
+      "nominalFeed": 186.59,
+      "referenceOperations": 2,
+      "localOperations": 2,
+      "referenceCutLengthMm": 264.48904952977705,
+      "localCutLengthMm": 264.3971694352363,
+      "cutLengthDeltaMm": -0.09188009454072699,
+      "referenceLinearSeconds": 101.53412811622945,
+      "localLinearSeconds": 85.01972327624297,
+      "maxSampledCutDeviationMm": 0.0817460694189006,
+      "referenceBounds": {
+        "x": 12.22,
+        "y": 12.22,
+        "width": 60.96000000000001,
+        "height": 40.96
+      },
+      "localBounds": {
+        "x": 12.2174,
+        "y": 12.2174,
+        "width": 60.965199999999996,
+        "height": 40.9652
+      },
+      "localIssues": [
+        "slotted-plate.svg: cutting settings require verification for Aluminum - 6061, 0.508 mm, WAZER Desktop. Review the process values in Presets or select a complete same-machine reference."
+      ],
+      "geometryMatchesWithinPointOneMm": true,
+      "referenceSha256": "cb285575cc502e22fe4bd910df341f229ecaab8f17bd165e4792d93a4b035b4b"
+    },
+    {
+      "name": "concave-bracket",
+      "machine": "desktop",
+      "contours": 2,
+      "holes": 1,
+      "cut": "outside",
+      "tabsPerContour": 0,
+      "leadMm": 0,
+      "tabWidthMm": 2.54,
+      "nominalFeed": 186.59,
+      "referenceOperations": 2,
+      "localOperations": 2,
+      "referenceCutLengthMm": 228.8018579947812,
+      "localCutLengthMm": 228.4812955390804,
+      "cutLengthDeltaMm": -0.3205624557007809,
+      "referenceLinearSeconds": 86.3260641774719,
+      "localLinearSeconds": 101.17085168117825,
+      "maxSampledCutDeviationMm": 0.06209815178181057,
+      "referenceBounds": {
+        "x": 12.22,
+        "y": 12.22,
+        "width": 60.96000000000001,
+        "height": 45.96
+      },
+      "localBounds": {
+        "x": 12.2174,
+        "y": 12.2174,
+        "width": 60.965199999999996,
+        "height": 45.9652
+      },
+      "localIssues": [
+        "concave-bracket.svg: cutting settings require verification for Aluminum - 6061, 0.508 mm, WAZER Desktop. Review the process values in Presets or select a complete same-machine reference."
+      ],
+      "geometryMatchesWithinPointOneMm": true,
+      "referenceSha256": "5117d07b8caa15124081ae0e3e38cb256bd824d55f1bcef57368e5ebdcaf0f9a"
+    },
+    {
+      "name": "open-path",
+      "machine": "desktop",
+      "contours": 1,
+      "holes": 0,
+      "cut": "centerline",
+      "tabsPerContour": 0,
+      "leadMm": 0,
+      "tabWidthMm": 2.54,
+      "nominalFeed": 186.59,
+      "referenceOperations": 1,
+      "localOperations": 1,
+      "referenceCutLengthMm": 81.21320343559644,
+      "localCutLengthMm": 81.21320343559637,
+      "cutLengthDeltaMm": -7.105427357601002e-14,
+      "referenceLinearSeconds": 33.98353600009294,
+      "localLinearSeconds": 31.366365491465153,
+      "maxSampledCutDeviationMm": 1.0048591735576161e-14,
+      "referenceBounds": {
+        "x": 12.7,
+        "y": 12.7,
+        "width": 55,
+        "height": 35
+      },
+      "localBounds": {
+        "x": 12.7,
+        "y": 12.7,
+        "width": 55,
+        "height": 35
+      },
+      "localIssues": [
+        "open-path.svg: cutting settings require verification for Aluminum - 6061, 0.508 mm, WAZER Desktop. Review the process values in Presets or select a complete same-machine reference.",
+        "open-path.svg: pierce or stop footprint may alter a finished cut profile. Increase lead length or move the entry."
+      ],
+      "geometryMatchesWithinPointOneMm": true,
+      "referenceSha256": "84e704c20e50e72d60c87f073b3dcbcebe665a4d991d32f6b0aea6821890a02f"
+    },
+    {
+      "name": "tabs-leads",
+      "machine": "desktop",
+      "contours": 2,
+      "holes": 1,
+      "cut": "outside",
+      "tabsPerContour": 2,
+      "leadMm": 0.46,
+      "tabWidthMm": 2.54,
+      "nominalFeed": 186.59,
+      "referenceOperations": 4,
+      "localOperations": 4,
+      "referenceCutLengthMm": 198.62603544208622,
+      "localCutLengthMm": 197.28857722276905,
+      "cutLengthDeltaMm": -1.3374582193171705,
+      "referenceLinearSeconds": 75.53810483652019,
+      "localLinearSeconds": 90.55926572631456,
+      "maxSampledCutDeviationMm": 1.4801891487124508,
+      "referenceBounds": {
+        "x": 11.76,
+        "y": 12.22,
+        "width": 51.88,
+        "height": 35.96
+      },
+      "localBounds": {
+        "x": 12.2174,
+        "y": 11.924554904710913,
+        "width": 50.9652,
+        "height": 36.55089019057817
+      },
+      "localIssues": [
+        "tabs-leads.svg: cutting settings require verification for Aluminum - 6061, 0.508 mm, WAZER Desktop. Review the process values in Presets or select a complete same-machine reference."
+      ],
+      "geometryMatchesWithinPointOneMm": false,
+      "referenceSha256": "832341f735f98effc299414a101c5b5a46d4de8104ba48d545627ef6b87a6f68"
+    }
+  ]
+}

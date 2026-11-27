@@ -1,6 +1,13 @@
 const path = require("node:path");
 const { access } = require("node:fs/promises");
-function registerPosting({ ipcMain, dialog, win, postJob, writePostedFiles }) {
+function registerPosting({
+  ipcMain,
+  dialog,
+  win,
+  postJob,
+  writePostedFiles,
+  cutFilename,
+}) {
   let pending = false;
   ipcMain.handle("wam:post", async (event, job, sheetId) => {
     if (
@@ -22,8 +29,28 @@ function registerPosting({ ipcMain, dialog, win, postJob, writePostedFiles }) {
         });
         if (selected.canceled || !selected.filePath) return null;
         directory = path.dirname(selected.filePath);
-        files[0].filename = path.basename(selected.filePath);
-        replace = true;
+        const requested = path.basename(selected.filePath);
+        files[0].filename = cutFilename(requested, 1, 1);
+        replace = files[0].filename === requested;
+        if (
+          !replace &&
+          (await access(path.join(directory, files[0].filename)).then(
+            () => true,
+            () => false,
+          ))
+        ) {
+          const answer = await dialog.showMessageBox(win, {
+            type: "question",
+            title: "Replace cut file?",
+            message: "Replace the existing cut file?",
+            detail: files[0].filename,
+            buttons: ["Replace", "Cancel"],
+            defaultId: 1,
+            cancelId: 1,
+          });
+          if (answer.response !== 0) return null;
+          replace = true;
+        }
       } else {
         const selected = await dialog.showOpenDialog(win, {
           title: "Post all sheets — choose output folder",

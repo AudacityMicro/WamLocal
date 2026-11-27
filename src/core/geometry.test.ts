@@ -47,10 +47,10 @@ describe("kerf and paths", () => {
       result.moves
         .filter((m) => m.kind === "tab")
         .reduce((s, m) => s + distance(m.from, m.to), 0),
-    ).toBeCloseTo(4);
+    ).toBeCloseTo(8); // Two physical tabs on each of the two contours.
     expect(result.issues).toEqual([]);
   });
-  it("reports out of stock toolpaths and vanished holes", () => {
+  it("reports out of stock toolpaths and converts undersize holes to pierce-only", () => {
     const p = newProject();
     p.parts = [
       makePart(
@@ -61,7 +61,9 @@ describe("kerf and paths", () => {
       ),
     ];
     expect(plan(p).issues.join(" ")).toMatch(/outside the stock/);
-    expect(plan(p).issues.join(" ")).toMatch(/removes a contour/);
+    expect(
+      plan(p).contourPlans.find((c) => c.contourIndex === 1)?.pierceOnly,
+    ).toBe(true);
   });
   it("does not manufacture a closed offset for open centerline paths", () => {
     const p = newProject();

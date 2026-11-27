@@ -1,6 +1,6 @@
 const NS = "http://www.w3.org/2000/svg";
 /** Resolve local SVG instances without loading fonts, images, scripts or external resources. */
-export function prepareSvg(source: string): Element {
+export function prepareSvg(source: string,allowArtwork=false): Element {
   if (/<!ENTITY|<!DOCTYPE[^>]*\[/i.test(source))
     throw Error("SVG entity declarations are not supported.");
   source = source.replace(/<!DOCTYPE[^>]*>/gi, "");
@@ -103,6 +103,7 @@ export function prepareSvg(source: string): Element {
     "title",
     "desc",
   ]);
+  if(allowArtwork)for(const tag of ['text','tspan','textPath','image','foreignObject','mask','filter','a','switch','marker','pattern'])allowed.add(tag);
   for (const el of [svg, ...Array.from(svg.querySelectorAll("*"))]) {
     if (
       (el.namespaceURI && el.namespaceURI !== NS) ||
@@ -113,7 +114,7 @@ export function prepareSvg(source: string): Element {
       el.remove();
       continue;
     }
-    if (!allowed.has(el.localName)) {
+    if (!allowed.has(el.localName)&&!(allowArtwork&&el.localName.startsWith('fe'))) {
       if (el.closest("defs") && !el.closest("clipPath")) {
         el.remove();
         continue;
@@ -129,26 +130,26 @@ export function prepareSvg(source: string): Element {
     for (const a of Array.from(el.attributes)) {
       if (/^on/i.test(a.name) || a.name === "data-paper-data")
         el.removeAttribute(a.name);
-      if (/href/i.test(a.name) && !a.value.startsWith("#"))
+      if (/href/i.test(a.name) && !a.value.startsWith("#")&&!(allowArtwork&&/^data:image\//i.test(a.value)))
         throw Error(
           "External SVG resources are not supported. Embed the vector geometry in the file.",
         );
       for (const match of a.value.matchAll(/url\s*\(\s*['"]?([^'"\s)]+)/gi))
-        if (!match[1].startsWith("#"))
+        if (!match[1].startsWith("#")&&!(allowArtwork&&/^data:(image|font|application\/(x-font|font))/i.test(match[1])))
           throw Error("External SVG resources are not supported.");
-      if (a.name === "mask" && a.value !== "none")
+      if (!allowArtwork&&a.name === "mask" && a.value !== "none")
         throw Error(
           "SVG masks must be converted to vector paths before importing.",
         );
     }
     if (el.localName === "style") {
       const css = el.textContent ?? "";
-      if (/@import|@font-face|\bmask\s*:/i.test(css))
+      if (/@import/i.test(css)||(!allowArtwork&&/@font-face|\bmask\s*:/i.test(css)))
         throw Error(
           "SVG styles require external fonts/resources or unsupported masks.",
         );
       for (const m of css.matchAll(/url\s*\(\s*['"]?([^'"\s)]+)/gi))
-        if (!m[1].startsWith("#"))
+        if (!m[1].startsWith("#")&&!(allowArtwork&&/^data:(image|font|application\/(x-font|font))/i.test(m[1])))
           throw Error("SVG styles contain external resources.");
     }
   }

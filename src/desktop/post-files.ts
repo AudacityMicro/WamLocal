@@ -2,6 +2,7 @@ import { writeFile, rename, unlink, lstat } from "node:fs/promises";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
 import type { PostedFile } from "../core/postprocessor";
+import { validCutFilename } from "../core/cut-filename";
 export { postJob } from "../core/postprocessor";
 
 export async function writePostedFiles(
@@ -15,12 +16,9 @@ export async function writePostedFiles(
   )
     throw Error("Empty or duplicate output filenames");
   const batch = files.map((f) => {
-    if (
-      !/^[a-z0-9_-]{1,7}\.gcode$/i.test(f.filename) ||
-      /^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])\./i.test(f.filename)
-    )
+    if (!validCutFilename(f.filename))
       throw Error(
-        "Cut filenames must be 1-7 letters, digits, underscores or hyphens, followed by .gcode.",
+        "Cut filenames must be valid filenames ending in .gcode (maximum 240 characters).",
       );
     if (Buffer.byteLength(f.content) > 50_000_000)
       throw Error("A cut file exceeds 50 MB");

@@ -1,0 +1,36 @@
+;-------------------------------Cut file parameters------------------------
+; Input file name : open-path.svg
+; File rotation : 0 File scale : 1
+; Machine : Desktop
+; Material name : Aluminum - 6061
+; Material thickness : 0.02 in
+; Cut path  : Centerline
+; Cut quality : mediumRate
+; Raw Material width : 2.2in
+; Raw Material height : 1.4in
+;-------------------------------Do Not modify the Gcode file---------------
+; Start of Cut File
+; Jog
+G0 X12.70 Y-12.70
+; Pierce and Start Cut Segment
+G1 X17.70 Y-12.70 F186.59
+G1 X22.70 Y-12.70
+G1 X27.70 Y-12.70
+G1 X32.70 Y-12.70
+G1 X37.70 Y-12.70
+G1 X42.70 Y-12.70 F158.60
+G1 X47.70 Y-12.70 F121.28
+G1 X52.70 Y-12.70 F83.97
+G1 X52.70 Y-17.70 F121.28
+G1 X52.70 Y-22.70 F158.60
+G1 X52.70 Y-27.70
+G1 X52.70 Y-32.70 F130.61
+G1 X56.24 Y-36.24 F158.60
+G1 X59.77 Y-39.77 F186.59
+G1 X60.20 Y-40.20 F177.26
+G1 X63.74 Y-43.74 F139.94
+G1 X67.27 Y-47.27 F93.30
+G1 X67.70 Y-47.70
+G1 X67.70 Y-47.70
+; End Cut Segment
+; End of Cut File

@@ -117,24 +117,25 @@ try {
   assert.equal(applied.material.feed, preset.feeds.fine);
   assert.equal(applied.material.thickness, 3.175);
   assert.equal(applied.material.pierce, preset.pierce);
-  const rejected = await client.callTool({
-    name: "apply_material_preset",
-    arguments: {
-      file: "test.wam.json",
-      presetId: "pro-18-0.001",
-      quality: "medium",
-    },
+  const replacedTabOutlier = await call("apply_material_preset", {
+    file: "test.wam.json",
+    presetId: "pro-18-0.001",
+    quality: "medium",
   });
-  assert.ok(rejected.isError);
-  assert.deepEqual(
-    (await call("read_project", { file: "test.wam.json" })).material,
-    applied.material,
-  );
+  assert.equal(replacedTabOutlier.material.tabWidth, 1.016);
+  const preferences = await call("read_material_library", {});
+  preferences.defaultMachine = "pro";
+  preferences.importSettings={curveToleranceMm:0.01,traceDpi:600,traceThreshold:128};
+  preferences.machines.pro.abrasiveCostPerKg = 1.17;
+  preferences.machines.pro.runningCostPerHour = 5.22;
+  await call("write_material_library", { library: preferences });
+  assert.equal((await call('read_material_library',{})).importSettings.curveToleranceMm,0.01);
   const job = await call("create_job", {
     file: "multi.job.json",
     name: "Multi-sheet test",
-    machine: "pro",
   });
+  assert.equal(job.machine, "pro");
+  assert.equal(job.machineSettings.runningCostPerHour, 5.22);
   const materialId = job.materials[0].id;
   await call("add_job_part", {
     file: "multi.job.json",
@@ -181,6 +182,7 @@ try {
   assert.equal(inspected.sheets.length, 3);
   assert.ok(inspected.sheets[0].pierces.length);
   const posted = await call("post_all", { file: "multi.job.json" });
+  assert.ok(posted.sheets.every(s => s.abrasiveGrams > 0 && s.cost.total > 0 && s.cutSeconds > 0));
   assert.equal(posted.paths.length, 3);
   for (const output of posted.paths) {
     const nc = await readFile(output, "utf8");
@@ -193,6 +195,13 @@ try {
     replace: true,
   });
   assert.equal(overwritten.paths.length, 1);
+  const sharedUpdate = await call("update_sheet", {
+    file: "multi.job.json",
+    sheet: {...multi.sheets[1], stock: {...multi.sheets[1].stock, width: 200}, workOrigin: "bottom-right"},
+  });
+  assert.ok(sharedUpdate.sheets.every(s => s.stock.width === 200 && s.workOrigin === "bottom-right"));
+  assert.deepEqual(sharedUpdate.sheets.map(s => s.placements), multi.sheets.map(s => s.placements));
+  assert.equal(sharedUpdate.tabRules.width, job.tabRules.width);
   const library = await call("read_material_library", {});
   library.materials[0].feed = 321;
   await call("write_material_library", { library });

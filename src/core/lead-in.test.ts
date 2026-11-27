@@ -45,7 +45,7 @@ describe("scrap-side lead-ins", () => {
       expect(distance(outer.points[0], target)).toBeLessThan(1e-10);
     }
   });
-  it("shortens a long lead before it crosses the opposite side of a small hole", () => {
+  it("centers the pierce rather than extending a long lead across a small hole", () => {
     const hole = { ...circle(2), hole: true };
     const start = leadInStart(hole, 20);
     expect(pointInPaths([hole.points], start)).toBe(true);
@@ -53,7 +53,8 @@ describe("scrap-side lead-ins", () => {
     const project = newProject();
     project.parts = [makePart("small hole", [hole], 30, 30)];
     project.material = { ...project.material, kerf: 0, lead: 20, tabCount: 0 };
-    expect(plan(project).issues.join(" ")).toContain("lead length reduced");
+    expect(plan(project).pierces[0].point.x).toBeCloseTo(32, 8);
+    expect(plan(project).pierces[0].point.y).toBeCloseTo(32, 8);
   });
   it("retains zero lead and open centerline behavior", () => {
     const contour = circle(5);

@@ -67,8 +67,8 @@ export function nestJobDetailed(
   const budget = searchBudget(job, rotate),
     clock = createSearchClock(budget, options.now);
   const materials = new Map(job.materials.map((m) => [m.id, m]));
-  const process = (materialId: string) => ({
-    ...materials.get(materialId)!,
+  const process = (materialId: string, override?: Part["process"]) => ({
+    ...(override ?? materials.get(materialId)!),
     ...(job.machineSettings
       ? {
           kerf: job.machineSettings.kerf,
@@ -79,11 +79,15 @@ export function nestJobDetailed(
   const definitions = new Map(
     job.parts.map((p) => [
       p.id,
-      { ...p, contours: definitionContours(p), process: process(p.materialId) },
+      {
+        ...p,
+        contours: definitionContours(p),
+        process: process(p.materialId, p.process),
+      },
     ]),
   );
   for (const p of job.parts)
-    if (!p.contours.length) throw Error(`${p.name}: no geometry to nest`);
+    if (p.quantity > 0 && !p.contours.length) throw Error(`${p.name}: no geometry to nest`);
   const retained = new Map(
     job.sheets.map((s) => [
       s.id,

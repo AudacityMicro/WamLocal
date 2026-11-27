@@ -1,0 +1,31 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+const asar=createRequire(import.meta.url)('@electron/asar');
+const directory=path.resolve(process.argv[2]??'release');
+const pkg=JSON.parse(await fs.readFile('package.json','utf8'));
+assert.equal(pkg.build.nsis.oneClick,true);
+assert.equal(pkg.build.nsis.perMachine,false);
+assert.equal(pkg.build.nsis.runAfterFinish,true);
+assert.equal(pkg.build.nsis.artifactName,'Wam-Local-Setup.exe');
+const executables=(await fs.readdir(directory)).filter(n=>n.endsWith('.exe'));
+assert.deepEqual(executables,['Wam-Local-Setup.exe'],'Release must contain one installer executable');
+const yaml=await fs.readFile(path.join(directory,'latest.yml'),'utf8');
+assert.ok(yaml.includes(`version: ${pkg.version}`));
+assert.ok(yaml.includes('Wam-Local-Setup.exe'));
+const installer=await fs.readFile(path.join(directory,'Wam-Local-Setup.exe'));
+assert.equal(crypto.createHash('sha512').update(installer).digest('base64'),yaml.match(/sha512: ([^\s]+)/)[1]);
+assert.ok((await fs.stat(path.join(directory,'Wam-Local-Setup.exe.blockmap'))).size>100);
+for(const [folder,machine] of [['win-unpacked',0x8664],['win-arm64-unpacked',0xaa64],['win-ia32-unpacked',0x14c]]){
+  const exe=await fs.readFile(path.join(directory,folder,'Wam Local.exe'));
+  const pe=exe.readUInt32LE(0x3c);assert.equal(exe.toString('ascii',pe,pe+4),'PE\0\0');assert.equal(exe.readUInt16LE(pe+4),machine,folder);
+  const archive=path.join(directory,folder,'resources','app.asar');
+  assert.equal(JSON.parse(asar.extractFile(archive,'package.json').toString()).version,pkg.version);
+  for(const name of await fs.readdir('dist/assets'))assert.deepEqual(asar.extractFile(archive,path.join('dist','assets',name)),await fs.readFile(path.join('dist','assets',name)),`${folder}: ${name}`);
+}
+const names=['Wam-Local-Setup.exe','Wam-Local-Setup.exe.blockmap','latest.yml'];
+const sums=await Promise.all(names.map(async name=>`${crypto.createHash('sha256').update(await fs.readFile(path.join(directory,name))).digest('hex')}  ${name}`));
+await fs.writeFile(path.join(directory,'SHA256SUMS.txt'),sums.join('\n')+'\n');
+console.log(`Verified ${pkg.version}: one self-contained x64/ARM64/x86 installer, matching assets and update checksums.`);

@@ -1,5 +1,5 @@
 import { effectivePierceDiameter } from "./model";
-import { leadInStart } from "./lead-in";
+import { leadInStart, smallHolePierce } from "./lead-in";
 import { searchBudget } from "./nesting-search";
 import ClipperLib from "clipper-lib";
 import { packSheet, partsOverlap } from "./nesting";
@@ -48,7 +48,8 @@ const clipPath = (ps: Point[]) =>
   ps.map((p) => ({ X: Math.round(p.x * S), Y: Math.round(p.y * S) }));
 export function offset(c: Contour, delta: number): Contour[] {
   if (!c.closed || delta === 0) return [c];
-  const off = new ClipperLib.ClipperOffset(2, 0.03 * S),
+  // Bound round-join chord error in physical units, independent of rotation.
+  const off = new ClipperLib.ClipperOffset(2, 0.001 * S),
     out: any[] = [];
   off.AddPath(
     clipPath(area(c.points) < 0 ? [...c.points].reverse() : c.points),
@@ -86,9 +87,11 @@ export type Move = {
 export type Plan = {
   contourPlans: {
     partId: string;
+    contourIndex: number;
     contour: Contour;
     process: Project["material"];
     moves: Move[];
+    pierceOnly?: boolean;
   }[];
   moves: Move[];
   cutLength: number;
@@ -102,20 +105,26 @@ export function plan(project: Project): Plan {
   const moves: Move[] = [],
     issues: string[] = [];
   const pierceMarkers: Plan["pierces"] = [];
-  for (const p of project.parts)
-    if ((p.process ?? project.material).requiresVerification)
-      issues.push(
-        `${p.name}: cutting settings require verification for this material, thickness and machine.`,
-      );
   const design = project.parts.map((p) => ({
     p,
     contours: transformed(p).flatMap((c) =>
       offset(c, c.closed ? (p.stockToLeave ?? 0) * (c.hole ? -1 : 1) : 0),
     ),
   }));
+  const partAreas = new Map(
+    project.parts.map((p) => [
+      p.id,
+      transformed(p)
+        .filter((c) => c.closed)
+        .reduce(
+          (sum, c) => sum + Math.abs(area(c.points)) * (c.hole ? -1 : 1),
+          0,
+        ),
+    ]),
+  );
   const paths = project.parts
     .flatMap((p) =>
-      transformed(p).flatMap((raw) => {
+      transformed(p).flatMap((raw, contourIndex) => {
         const stored = p.process ?? project.material;
         const base = project.machineSettings
           ? {
@@ -124,7 +133,26 @@ export function plan(project: Project): Plan {
               abrasive: project.machineSettings.abrasive,
             }
           : stored;
-        const process = { ...base, lead: raw.lead ?? base.lead };
+        const process = {
+          ...base,
+          lead: raw.lead ?? base.lead,
+          leadInOverlap: raw.leadInOverlap ?? base.leadInOverlap,
+          leadOutOverlap: raw.leadOutOverlap ?? base.leadOutOverlap,
+          ...(project.tabRules
+            ? {
+                tabCount: project.tabRules.count,
+                tabWidth: project.tabRules.width,
+              }
+            : {}),
+        };
+        const partArea = partAreas.get(p.id)!;
+        const automaticTabsAllowed =
+          !project.tabRules ||
+          ((!raw.hole ||
+            Math.abs(area(raw.points)) + 1e-8 >=
+              project.tabRules.minHoleArea) &&
+            (project.tabRules.maxPartArea === undefined ||
+              partArea <= project.tabRules.maxPartArea + 1e-8));
         const c = {
           ...raw,
           points: raw.points.filter(
@@ -167,17 +195,21 @@ export function plan(project: Project): Plan {
         if (!c.closed && p.stockToLeave)
           issues.push(`${p.name}: stock to leave requires a closed contour.`);
         const result = offset(c, delta + allowance);
-        if (!result.length)
+        const pierceOnly = !result.length && c.closed && c.hole && delta < 0;
+        if (!result.length && !pierceOnly)
           issues.push(`${p.name}: kerf compensation removes a contour.`);
-        return result.map((contour) => ({
+        return (pierceOnly ? [c] : result).map((contour) => ({
+          pierceOnly,
           p,
           c:
             entry && contour.closed
               ? { ...contour, points: movePathStart(contour.points, entry) }
               : contour,
           tabTargets,
+          contourIndex,
           cutMode,
           process,
+          automaticTabsAllowed,
         }));
       }),
     )
@@ -190,8 +222,63 @@ export function plan(project: Project): Plan {
     pierces = 0,
     pierceSeconds = 0,
     abrasiveGrams = 0;
-  for (const { p, c, tabTargets, cutMode, process } of paths) {
+  for (const {
+    p,
+    c,
+    tabTargets,
+    contourIndex,
+    cutMode,
+    process,
+    automaticTabsAllowed,
+    pierceOnly,
+  } of paths) {
     const firstMove = moves.length;
+    if (pierceOnly) {
+      const center = smallHolePierce(
+        c,
+        Infinity,
+        (point) =>
+          !design.some((d) =>
+            pointInPaths(
+              d.contours.filter((c) => c.closed).map((c) => c.points),
+              point,
+            ),
+          ),
+      );
+      if (!center) {
+        issues.push(
+          `${p.name}: no safe interior pierce point for undersize hole.`,
+        );
+        continue;
+      }
+      const radius = effectivePierceDiameter(process) / 2;
+      const warning = design.some((d) =>
+        d.contours.some(
+          (other) =>
+            closestOnPath(other.points, other.closed, center).distance <
+            radius - 2 / S,
+        ),
+      );
+      if (warning)
+        issues.push(
+          `${p.name}: pierce footprint may alter a finished cut profile. Hole will be pierced without perimeter cutting.`,
+        );
+      moves.push({ from: cursor, to: center, kind: "rapid", partId: p.id });
+      cursor = center;
+      pierceMarkers.push({ point: center, radius, partId: p.id, warning });
+      pierces++;
+      pierceSeconds += process.pierce;
+      abrasiveGrams += (process.pierce / 60) * (process.abrasive ?? 0);
+      contourPlans.push({
+        partId: p.id,
+        contourIndex,
+        contour: c,
+        process,
+        moves: moves.slice(firstMove),
+        pierceOnly: true,
+      });
+      continue;
+    }
     const pts = c.closed ? [...c.points, c.points[0]] : c.points;
     const total = pts.slice(1).reduce((s, v, i) => s + distance(pts[i], v), 0);
     if (total < 0.001) {
@@ -201,16 +288,16 @@ export function plan(project: Project): Plan {
     const n =
         c.tabMode === "none" || c.tabMode === "manual"
           ? 0
-          : c.closed && !c.hole
+          : c.closed && automaticTabsAllowed
             ? process.tabCount
             : 0,
-      tw = process.tabWidth;
+      tw = process.tabWidth > 0 ? process.tabWidth + process.kerf : 0;
     const tabs =
       c.closed && c.tabMode === "manual"
         ? tabTargets.flatMap((tab) => {
             const at = closestOnPath(c.points, true, tab.point).along;
-            const start = at - tab.width / 2,
-              end = at + tab.width / 2;
+            const start = at - (tab.width + process.kerf) / 2,
+              end = at + (tab.width + process.kerf) / 2;
             return [0, -total, total]
               .map((shift) => ({ start: start + shift, end: end + shift }))
               .filter((t) => t.end > 0 && t.start < total);
@@ -221,8 +308,15 @@ export function plan(project: Project): Plan {
           }));
     if (n * tw >= total) issues.push(`${p.name}: tabs consume the contour.`);
     const lead = cutMode === "centerline" ? 0 : process.lead;
-    const start = leadInStart(c, lead);
-    if (distance(start, pts[0]) < lead - 1e-4)
+    const centerAllowed = !transformed(p).some(
+      (other, i) =>
+        i !== contourIndex &&
+        other.closed &&
+        pointInPaths([c.points], other.points[0]),
+    );
+    const center = centerAllowed ? smallHolePierce(c, lead) : undefined;
+    const start = center ?? leadInStart(c, lead, centerAllowed);
+    if (!center && distance(start, pts[0]) < lead - 1e-4)
       issues.push(
         `${p.name}: lead length reduced to remain on the scrap side of the profile.`,
       );
@@ -305,6 +399,7 @@ export function plan(project: Project): Plan {
     cursor = pts[pts.length - 1];
     contourPlans.push({
       partId: p.id,
+      contourIndex,
       contour: c,
       process,
       moves: moves.slice(firstMove),

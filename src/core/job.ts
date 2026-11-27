@@ -1,8 +1,16 @@
+import { automaticJobName, jobDate } from "./job-name";
+import {
+  deduplicateContours,
+  classifyImportedContours,
+} from "./import-contours";
 import {
   machineSettingsSchema,
   type MachineSettings,
+  defaultMachineSettings,
 } from "./machine-settings";
 import { z } from "zod";
+import { canonicalStockName } from "./stock-name";
+import { importSettingsSchema } from "./import-settings";
 import { ORIGIN_ANCHORS } from "./work-origin";
 import {
   id,
@@ -11,6 +19,8 @@ import {
   contourSchema,
   pointSchema,
   projectSchema,
+  tabRulesSchema,
+  savedDefaultsSchema,
   type Project,
 } from "./model";
 import { bounds, transformed, plan, nest } from "./geometry";
@@ -29,18 +39,21 @@ export function materialsCompatible(
   return (
     !!a &&
     !!b &&
-    (a.stockKey ??
-      a.name.replace(/\s*[\u00b7-]\s*(coarse|medium|fine)$/i, "")) ===
-      (b.stockKey ??
-        b.name.replace(/\s*[\u00b7-]\s*(coarse|medium|fine)$/i, "")) &&
-    Math.abs(a.thickness - b.thickness) < 1e-7 &&
+    canonicalStockName(
+      a.stockKey ?? a.name.replace(/\s*[\u00b7-]\s*(coarse|medium|fine)$/i, ""),
+    ) ===
+      canonicalStockName(
+        b.stockKey ??
+          b.name.replace(/\s*[\u00b7-]\s*(coarse|medium|fine)$/i, ""),
+      ) &&
+    Math.abs(a.thickness - b.thickness) < 0.0001 &&
     a.machine === b.machine
   );
 }
 export const partDefinitionSchema = partSchema.extend({
   contours: z.array(contourSchema).max(1000),
   materialId: z.string().min(1),
-  quantity: z.number().int().min(1).max(2000),
+  quantity: z.number().int().min(0).max(2000),
 });
 export const placementSchema = z.object({
   locked: z.boolean().optional(),
@@ -58,18 +71,70 @@ export const sheetSchema = z.object({
   stock: projectSchema.shape.stock,
   wcs: pointSchema,
   workOrigin: z.enum(ORIGIN_ANCHORS).optional(),
+  workOriginReference: z.enum(['sheet','parts']).optional(),
   placements: z.array(placementSchema).max(2000),
 });
 export const jobSchema = z
   .object({
     version: z.literal(2),
     name: z.string().min(1),
+    nameMode: z.enum(["auto", "manual"]).optional(),
+    nameDate: z
+      .string()
+      .regex(/^\d{4}-\d{2}-\d{2}$/)
+      .optional(),
+    nameUnits: z.enum(["mm", "in"]).optional(),
     machine: z.enum(["desktop", "pro"]),
     machineSettings: machineSettingsSchema.optional(),
     nesting: projectSchema.shape.nesting,
+    sharedSetup: z.boolean().optional(),
+    tabRules: tabRulesSchema.optional(),
     materials: z.array(jobMaterialSchema).min(1).max(5000),
     parts: z.array(partDefinitionSchema).max(2000),
     sheets: z.array(sheetSchema).min(1).max(500),
+  })
+  .transform((job) => {
+    job = {
+      ...job,
+      parts: job.parts.map((p) => {
+        const unique = deduplicateContours(p.contours);
+        return unique.length === p.contours.length
+          ? p
+          : { ...p, contours: classifyImportedContours(unique) };
+      }),
+    };
+    const material = job.materials.find(
+      (m) => m.id === job.sheets[0].materialId,
+    );
+    if (job.nameMode === "auto" && material) {
+      const date = job.nameDate ?? jobDate();
+      job = {
+        ...job,
+        nameDate: date,
+        name: automaticJobName(material, date, job.nameUnits ?? "mm"),
+      };
+    }
+    if (!job.sharedSetup) return job;
+    const first = job.sheets[0];
+    const base = job.materials.find((m) => m.id === first.materialId);
+    if (!base) return job;
+    return {
+      ...job,
+      parts: job.parts.map((p) => ({ ...p, materialId: base.id })),
+      sheets: job.sheets.map((s) => ({
+        ...s,
+        materialId: base.id,
+        stock: {
+          ...s.stock,
+          width: first.stock.width,
+          height: first.stock.height,
+          margin: first.stock.margin,
+          spacing: first.stock.spacing,
+        },
+        workOrigin: first.workOrigin,
+        workOriginReference: first.workOriginReference,
+      })),
+    };
   })
   .superRefine((job, ctx) => {
     for (const [name, list] of [
@@ -135,11 +200,15 @@ export const jobSchema = z
   });
 export const materialLibrarySchema = z.object({
   version: z.literal(1),
-  materials: z.array(jobMaterialSchema).max(5000),
+  settingDefaults: savedDefaultsSchema.optional(),
+  materials: z.array(jobMaterialSchema).max(20000),
+  deletedMaterialIds: z.array(z.string().min(1)).max(20000).optional(),
+  importSettings: importSettingsSchema.optional(),
   machines: z
     .object({ desktop: machineSettingsSchema, pro: machineSettingsSchema })
     .optional(),
   displayUnits: z.enum(["mm", "in"]).optional(),
+  defaultMachine: z.enum(["desktop", "pro"]).optional(),
   showFileLabels: z.boolean().optional(),
   layouts: z
     .array(z.object({ id: z.string(), name: z.string(), job: jobSchema }))
@@ -156,6 +225,8 @@ export const BED = { width: 460, height: 305 };
 export function defaultMaterial(machine: Job["machine"]): JobMaterial {
   return {
     ...newProject().material,
+    kerf: defaultMachineSettings(machine).kerf,
+    abrasive: defaultMachineSettings(machine).abrasive,
     id: id(),
     machine,
     name: "Custom material",
@@ -173,6 +244,13 @@ export function newJob(
     name: "Untitled job",
     machine,
     machineSettings: settings,
+    sharedSetup: true,
+    tabRules: {
+      width: material.tabWidth,
+      count: material.tabCount,
+      automaticWidth: true,
+      minHoleArea: 0,
+    },
     materials: [material],
     parts: [],
     sheets: [
@@ -250,6 +328,7 @@ export function sheetProject(job: Job, sheetId: string): Project {
     machine: job.machine,
     machineSettings: job.machineSettings,
     nesting: job.nesting,
+    tabRules: job.tabRules,
     stock: sheet.stock,
     bedOffset: sheet.wcs,
     material: machineProcess(job, material),
@@ -264,7 +343,7 @@ export function sheetProject(job: Job, sheetId: string): Project {
           definitionId: p.id,
           process: machineProcess(
             job,
-            job.materials.find((m) => m.id === p.materialId)!,
+            p.process ?? job.materials.find((m) => m.id === p.materialId)!,
           ),
           contours: definitionContours(p),
           x: i.x,
@@ -285,6 +364,7 @@ export function viewProject(job: Job, view: JobView): Project {
     name: job.name,
     machine: job.machine,
     machineSettings: job.machineSettings,
+    tabRules: job.tabRules,
     stock: { ...newProject().stock },
     material: machineProcess(
       job,
@@ -296,7 +376,8 @@ export function viewProject(job: Job, view: JobView): Project {
             ...part,
             process: machineProcess(
               job,
-              job.materials.find((m) => m.id === part.materialId)!,
+              part.process ??
+                job.materials.find((m) => m.id === part.materialId)!,
             ),
           },
         ]
@@ -310,7 +391,7 @@ export function placedCount(job: Job, partId: string) {
   );
 }
 
-function machineProcess(job: Job, material: JobMaterial) {
+function machineProcess(job: Job, material: Project["material"]) {
   return job.machineSettings
     ? {
         ...material,

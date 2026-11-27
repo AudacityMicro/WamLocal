@@ -1,3 +1,24 @@
+import { flushSync } from "react-dom";
+import { jobFilename, downloadFilename } from "../core/cut-filename";
+import {
+  newJobDocument,
+  documentDirty,
+  sameJobPath,
+  type JobDocument,
+} from "./job-tabs";
+import { materialHierarchy } from "../core/material-hierarchy";
+import { JobMaterialDialog } from "./JobMaterialDialog";
+import { saveJobMaterialProfiles } from "../core/job-material-actions";
+import { McpPage } from "./McpPage";
+import { JobActions } from "./JobActions";
+import { PartCutHandles } from "./PartCutHandles";
+import { NumericInput } from "./NumericInput";
+import { SettingDefaultsProvider, SettingsScope } from "./SettingDefaults";
+import {
+  applyNewJobDefaults,
+  matchingDefaultMaterial,
+  newPartDefaults,
+} from "../core/setting-defaults";
 import { SheetPreview } from "./SheetPreview";
 import { postJob, planForPosting as plan } from "../core/postprocessor";
 import { PostReport, type PostReportData } from "./PostReport";
@@ -10,7 +31,11 @@ import {
 import { NestingSettings } from "./NestingSettings";
 import type { NestingProgress } from "../core/job-nesting";
 import { MachineSettingsEditor } from "./MachineSettingsEditor";
-import { defaultMachineSettings } from "../core/machine-settings";
+import {
+  defaultMachineSettings,
+  withDefaultMachineCosts,
+} from "../core/machine-settings";
+import { defaultImportSettings } from "../core/import-settings";
 import {
   DisplayUnitsContext,
   useDisplayUnits,
@@ -53,6 +78,7 @@ import {
 } from "lucide-react";
 import {
   makePart,
+  newProject,
   rectangle,
   circle,
   id,
@@ -62,13 +88,13 @@ import {
   type Point,
 } from "../core/model";
 import { transformed, partBounds, nest, svgExport } from "../core/geometry";
+import { MAX_PART_ZOOM, zoomPartAt } from "./preview-zoom";
 type Mode =
   | "job"
   | "sheets"
   | "part"
   | "nest"
   | "paths"
-  | "remnants"
   | "material"
   | "library"
   | "mcp"
@@ -76,6 +102,7 @@ type Mode =
 import { JobSetup } from "./JobSetup";
 import { JobPanel } from "./JobPanel";
 import { MaterialsDatabase } from "./MaterialsDatabase";
+import { StepFaceSelector } from "./StepFaceSelector";
 import { PartProcessEditor } from "./PartProcessEditor";
 import {
   BED,
@@ -92,6 +119,8 @@ import {
 } from "../core/job";
 import {
   editView,
+  changeJobMachine,
+  applyJobMaterial,
   newDefinition,
   setPartMaterial,
   setPartQuantity,
@@ -99,10 +128,11 @@ import {
 import { materialForMachine } from "../core/material-gauges";
 import {
   initialMaterialLibrary,
+  materialLibrarySeed,
   extendMaterialLibrary,
+  saveMaterialPreset,
 } from "../core/material-library";
 import { closestOnPath, pointOnPath } from "../core/path-math";
-import { MaterialPresets } from "./MaterialPresets";
 import { PartControls } from "./PartControls";
 import {
   encodePartClipboard,
@@ -115,7 +145,7 @@ function download(name: string, text: string, type = "application/json") {
   const url = URL.createObjectURL(new Blob([text], { type }));
   const a = document.createElement("a");
   a.href = url;
-  a.download = name;
+  a.download = downloadFilename(name);
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
@@ -142,21 +172,40 @@ function NumberField({
   const dimensional = suffix === "mm" || suffix === "mm/min";
   const display = (n: number) => (dimensional ? u.toDisplay(n) : n);
   return (
-    <label className="field">
+    <label
+      className="field"
+      data-default-key={
+        (
+          {
+            "Cut feed": "feed",
+            "Pierce time": "pierce",
+            "Pierce diameter": "pierceDiameter",
+            "Lead length": "lead",
+            "Stock to leave": "stockToLeave",
+          } as Record<string, string>
+        )[label]
+      }
+    >
       <span>{label}</span>
       <div>
-        <input
+        <NumericInput
+          key={dimensional ? u.unit : "scalar"}
+          unit={
+            dimensional
+              ? suffix.replace("mm", u.unit)
+              : ["s", "sec", "deg", "%"].includes(suffix)
+                ? suffix
+                : undefined
+          }
           aria-label={label}
-          type="number"
+
           disabled={disabled}
           min={display(min)}
           max={display(max)}
           step={display(step)}
           value={Number(display(value).toFixed(dimensional ? 5 : 3))}
           onChange={(e) => {
-            const v = dimensional
-              ? u.toMM(e.target.valueAsNumber)
-              : e.target.valueAsNumber;
+            const v = dimensional ? u.toMM(e) : e;
             if (Number.isFinite(v) && v >= min && v <= max) onChange(v);
           }}
         />
@@ -191,6 +240,10 @@ function Tool({
   );
 }
 export default function App() {
+  const [materialEditor, setMaterialEditor] = useState<{
+    mode: "new" | "edit";
+    material: JobMaterial;
+  } | null>(null);
   const [job, setJob] = useState<Job>(() => newJob());
   const [savedSnapshot, setSavedSnapshot] = useState(() => JSON.stringify(job));
   const [filePath, setFilePath] = useState<string | null>(null);
@@ -223,6 +276,9 @@ export default function App() {
   const cuttingArea = job.machineSettings ?? BED;
   const origin = activeSheet?.wcs ?? { x: 0, y: 0 };
   const [library, setLibrary] = useState<MaterialLibrary>(() => {
+    // Desktop load() already validates and upgrades the authoritative file.
+    // Do not first rebuild a stale 5 MB localStorage mirror, then do it again.
+    if (window.materialDatabase) return materialLibrarySeed();
     try {
       return extendMaterialLibrary(
         materialLibrarySchema.parse(
@@ -234,15 +290,28 @@ export default function App() {
     }
   });
   const u = unitFormat(library.displayUnits ?? "mm");
+  const libraryRef = useRef(library);
+  libraryRef.current = library;
+  useEffect(() => {
+    if (job.nameMode === "auto" && job.nameUnits !== u.unit)
+      setJob((previous) => jobSchema.parse({ ...previous, nameUnits: u.unit }));
+  }, [job.nameMode, job.nameUnits, u.unit]);
   const showFileLabels = library.showFileLabels ?? true;
   const workOrigin = activeSheet
-    ? workOriginPoint(activeSheet)
+    ? workOriginPoint(activeSheet, project.parts)
     : { x: 0, y: 0 };
   useEffect(() => {
     window.jobFiles?.updateViewPreferences({ units: u.unit, showFileLabels });
   }, [u.unit, showFileLabels]);
   const [libraryReady, setLibraryReady] = useState(false);
+  const [libraryLoadError, setLibraryLoadError] = useState("");
+  const [libraryLoadAttempt, setLibraryLoadAttempt] = useState(0);
+  const persistedLibrary = useRef(library);
+  const desktopLibraryLoad = useRef<Promise<MaterialLibrary> | null>(null);
+  const startupDefaultsApplied = useRef(false);
   useEffect(() => {
+    if (!libraryReady || startupDefaultsApplied.current) return;
+    startupDefaultsApplied.current = true;
     if (
       !libraryReady ||
       job.machineSettings ||
@@ -251,14 +320,24 @@ export default function App() {
       filePath
     )
       return;
-    const next = {
-      ...job,
-      machineSettings:
-        library.machines?.[job.machine] ?? defaultMachineSettings(job.machine),
-    };
+    const machine = library.defaultMachine ?? "desktop";
+    const next = applyNewJobDefaults(
+      newJob(
+        machine,
+        library.machines?.[machine] ?? defaultMachineSettings(machine),
+      ),
+      library,
+    );
     setJob(next);
     setSavedSnapshot(JSON.stringify(next));
-  }, [libraryReady, job, dirty, filePath, library.machines]);
+  }, [
+    libraryReady,
+    job,
+    dirty,
+    filePath,
+    library.machines,
+    library.defaultMachine,
+  ]);
   const [contourIndex, setContourIndex] = useState(-1);
   const [partPanel, setPartPanel] = useState<"geometry" | "cuts" | "process">(
     "geometry",
@@ -293,6 +372,10 @@ export default function App() {
     const timer = setInterval(() => setNestingTick((n) => n + 1), 500);
     return () => clearInterval(timer);
   }, [nestingBusy]);
+  const [sheetSelection, setSheetSelection] = useState<{
+    sheetId: string;
+    ids: string[];
+  }>({ sheetId: "", ids: [] });
   const [selected, setSelected] = useState<string | null>(null),
     [mode, setMode] = useState<Mode>("job"),
     [detailsOpen, setDetailsOpen] = useState(false),
@@ -312,8 +395,44 @@ export default function App() {
     [playing, setPlaying] = useState(false),
     [draft, setDraft] = useState<Point[]>([]),
     [dxfUnits, setDxfUnits] = useState<"mm" | "in">("mm");
+  useEffect(() => {
+    const saved = library.settingDefaults?.["import.dxfUnits"];
+    if (libraryReady && (saved === "mm" || saved === "in")) setDxfUnits(saved);
+  }, [libraryReady]);
   const [history, setHistory] = useState<Job[]>([]),
     [future, setFuture] = useState<Job[]>([]);
+  const [documents, setDocuments] = useState<JobDocument[]>(() => [
+    newJobDocument(id(), job),
+  ]);
+  const [activeDocumentId, setActiveDocumentId] = useState(
+    () => documents[0].id,
+  );
+  const currentDocument = useRef<JobDocument>(
+    newJobDocument(activeDocumentId, job),
+  );
+  currentDocument.current = {
+    id: activeDocumentId,
+    job,
+    savedSnapshot,
+    filePath,
+    history,
+    future,
+    view: activeView,
+    mode,
+    zoom,
+    pan,
+    partPanel,
+  };
+  const captureDocument = () => currentDocument.current;
+  const commitFocusedField = () => {
+    if (document.activeElement instanceof HTMLElement)
+      flushSync(() => (document.activeElement as HTMLElement)?.blur());
+  };
+  const liveDocuments = () =>
+    documents.map((d) => (d.id === activeDocumentId ? captureDocument() : d));
+  const allDocumentsDirty =
+    dirty ||
+    documents.some((d) => d.id !== activeDocumentId && documentDirty(d));
   const [controlsId, setControlsId] = useState<string | null>(null);
   const [pixelsPerMm, setPixelsPerMm] = useState(1);
   const lastPaste = useRef({ text: "", sequence: 0 });
@@ -321,6 +440,29 @@ export default function App() {
     importInput = useRef<HTMLInputElement>(null),
     openInput = useRef<HTMLInputElement>(null),
     libraryInput = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    const element = svg.current;
+    if (!element) return;
+    const wheel = (e: WheelEvent) => {
+      if (!e.deltaY) return;
+      e.preventDefault();
+      const matrix = element.getScreenCTM();
+      if (!matrix) return;
+      const anchor = new DOMPoint(e.clientX, e.clientY).matrixTransform(
+        matrix.inverse(),
+      );
+      const next = zoomPartAt(
+        zoom,
+        pan,
+        anchor,
+        zoom * (e.deltaY > 0 ? 1 / 1.1 : 1.1),
+      );
+      setZoom(next.zoom);
+      setPan(next.pan);
+    };
+    element.addEventListener("wheel", wheel, { passive: false });
+    return () => element.removeEventListener("wheel", wheel);
+  }, [mode, libraryReady, zoom, pan.x, pan.y]);
   const drag = useRef<{
     id: string;
     point: Point;
@@ -333,6 +475,17 @@ export default function App() {
     changed?: boolean;
   } | null>(null);
   const current = project.parts.find((p) => p.id === selected);
+  const selectionIds =
+    activeView.kind === "sheet" &&
+    sheetSelection.sheetId === activeView.id &&
+    sheetSelection.ids.includes(selected ?? "")
+      ? sheetSelection.ids
+      : selected
+        ? [selected]
+        : [];
+  const selectedParts = project.parts.filter((p) =>
+    selectionIds.includes(p.id),
+  );
   const showCutPreview =
     mode === "paths" || (mode === "part" && partPanel !== "geometry");
   useEffect(() => {
@@ -466,6 +619,7 @@ export default function App() {
       setPostReport({
         title: `Posted ${files.length} sheet${files.length === 1 ? "" : "s"}`,
         files: paths,
+        estimates: files,
         issues: files.flatMap((f) =>
           f.warnings.map((s) => `${f.sheetName}: ${s}`),
         ),
@@ -497,7 +651,7 @@ export default function App() {
       ? partBounds(part)
       : { x: 0, y: 0, width: 120, height: 80 };
     const fit = Math.min(
-      5,
+      MAX_PART_ZOOM,
       (BED.width + 48) / (b.width + 40),
       (BED.height + 44) / (b.height + 40),
     );
@@ -539,36 +693,31 @@ export default function App() {
     setControlsId(null);
   }
   function createPart() {
+    const defaultMaterialId =
+      activeSheet?.materialId ?? definition?.materialId ?? job.materials[0].id;
+    const currentMaterial = job.materials.find(
+      (m) => m.id === defaultMaterialId,
+    )!;
+    const defaults = matchingDefaultMaterial(
+      library,
+      currentMaterial,
+    )?.settingDefaults;
     const result = newDefinition(
-      job,
+      {
+        ...job,
+        materials: job.materials.map((m) =>
+          m.id === defaultMaterialId
+            ? { ...m, settingDefaults: defaults ?? m.settingDefaults }
+            : m,
+        ),
+      },
       activeSheet?.materialId ?? definition?.materialId ?? job.materials[0].id,
     );
     editJob(result.job);
     openView({ kind: "part", id: result.partId });
   }
   function useMaterial(record: JobMaterial) {
-    record = materialForMachine(record, job.machine);
-    const next = structuredClone(job);
-    next.materials = next.materials.filter((m) => m.id !== record.id);
-    next.materials.push(structuredClone(record));
-    if (activeView.kind === "part") {
-      editJob(setPartMaterial(next, activeView.id, record.id));
-    } else {
-      next.sheets = next.sheets.map((s) =>
-        s.id === activeView.id
-          ? {
-              ...s,
-              materialId: record.id,
-              placements: s.placements.filter(
-                (i) =>
-                  next.parts.find((p) => p.id === i.partId)?.materialId ===
-                  record.id,
-              ),
-            }
-          : s,
-      );
-      editJob(next);
-    }
+    editJob(applyJobMaterial(job, activeView, record));
     notify("Preset snapshot applied to job");
   }
   function updateLibrary(next: MaterialLibrary) {
@@ -577,6 +726,12 @@ export default function App() {
     } catch (e) {
       notify((e as Error).message);
     }
+  }
+  async function savePresets() {
+    const current = materialLibrarySchema.parse(libraryRef.current);
+    if (window.materialDatabase) await window.materialDatabase.save(current);
+    else localStorage.setItem("wam-material-library", JSON.stringify(current));
+    notify("Presets saved");
   }
   function edit(p: Project) {
     try {
@@ -621,12 +776,42 @@ export default function App() {
     }
   }
   function activateJob(loaded: Job, path: string | null) {
+    startupDefaultsApplied.current = true;
     nestingWorker.current?.terminate();
     nestingWorker.current = null;
     setNestingBusy(false);
     setPlaying(false);
-    setJob(loaded);
-    setSavedSnapshot(JSON.stringify(loaded));
+    const oldMaterial = loaded.materials.find(
+      (m) => m.id === loaded.sheets[0].materialId,
+    )!;
+    const shared = jobSchema.parse({
+      ...loaded,
+      machineSettings: withDefaultMachineCosts(
+        loaded.machine,
+        loaded.machineSettings,
+      ),
+      sharedSetup: true,
+      tabRules: loaded.tabRules ?? {
+        width: oldMaterial.tabWidth,
+        count: oldMaterial.tabCount,
+        automaticWidth: false,
+        minHoleArea: 0,
+      },
+    });
+    setJob(shared);
+    setSavedSnapshot(JSON.stringify(path === null ? shared : loaded));
+    if (
+      !loaded.sharedSetup &&
+      (loaded.parts.some((p) => p.materialId !== loaded.sheets[0].materialId) ||
+        loaded.sheets.some(
+          (s) =>
+            s.stock.width !== loaded.sheets[0].stock.width ||
+            s.stock.height !== loaded.sheets[0].stock.height,
+        ))
+    )
+      notify(
+        "Job now shares the first sheet’s material and size across all parts and sheets. Review and save the updated job.",
+      );
     setFilePath(path);
     setHistory([]);
     setFuture([]);
@@ -640,17 +825,157 @@ export default function App() {
     setPan({ x: 0, y: 0 });
     lastPaste.current = { text: "", sequence: 0 };
   }
+  function restoreDocument(doc: JobDocument) {
+    activateJob(doc.job, doc.filePath);
+    // Switching tabs restores an existing document; it is not a fresh import.
+    setJob(doc.job);
+    setSavedSnapshot(doc.savedSnapshot);
+    setHistory(doc.history);
+    setFuture(doc.future);
+    setView(doc.view);
+    setMode(doc.mode);
+    setZoom(doc.zoom);
+    setPan(doc.pan);
+    setPartPanel(doc.partPanel);
+    setActiveDocumentId(doc.id);
+    setSheetSelection({ sheetId: "", ids: [] });
+    setContourIndex(-1);
+    setPostReport(null);
+    setMaterialEditor(null);
+    partReturn.current = null;
+    setToast("");
+  }
+  function switchDocument(targetId: string) {
+    if (
+      targetId === activeDocumentId ||
+      documentBusy.current ||
+      savingRef.current ||
+      nestingBusy ||
+      postingBusy
+    )
+      return;
+    commitFocusedField();
+    const target = documents.find((d) => d.id === targetId);
+    if (!target) return;
+    setDocuments(liveDocuments());
+    restoreDocument(target);
+  }
+  function openDocument(loaded: Job, path: string | null, documentId = id()) {
+    if (path && window.jobFiles) {
+      const existing = liveDocuments().find((d) =>
+        sameJobPath(d.filePath, path),
+      );
+      if (existing) {
+        if (existing.id !== activeDocumentId) {
+          setDocuments(liveDocuments());
+          restoreDocument(existing);
+        }
+        void window.jobFiles?.reset(documentId);
+        return;
+      }
+    }
+    const doc = newJobDocument(documentId, loaded, path);
+    setDocuments([...liveDocuments(), doc]);
+    setActiveDocumentId(documentId);
+    activateJob(loaded, path);
+    setSheetSelection({ sheetId: "", ids: [] });
+    setContourIndex(-1);
+    setPostReport(null);
+    setMaterialEditor(null);
+    setPartPanel("geometry");
+  }
+  async function saveDocument(doc: JobDocument) {
+    try {
+      let path = doc.filePath;
+      if (window.jobFiles) {
+        const result = await window.jobFiles.save(doc.job, false, doc.id);
+        if (!result) return false;
+        path = result.path;
+      } else {
+        path = jobFilename(doc.job.name);
+        download(path, JSON.stringify(doc.job, null, 2));
+      }
+      const saved = {
+        ...doc,
+        filePath: path,
+        savedSnapshot: JSON.stringify(doc.job),
+      };
+      setDocuments((previous) =>
+        previous.map((d) => (d.id === doc.id ? saved : d)),
+      );
+      if (doc.id === activeDocumentId) {
+        setFilePath(path);
+        setSavedSnapshot(saved.savedSnapshot);
+      }
+      return true;
+    } catch (error) {
+      notify("Could not save job: " + (error as Error).message);
+      return false;
+    }
+  }
+  async function confirmDocument(doc: JobDocument) {
+    if (!documentDirty(doc)) return true;
+    if (window.jobFiles) {
+      const choice = await window.jobFiles.confirmDiscard(doc.job.name);
+      if (choice === "cancel") return false;
+      return choice !== "save" || (await saveDocument(doc));
+    }
+    return window.confirm(`Discard unsaved changes to ${doc.job.name}?`);
+  }
+  async function closeDocument(targetId: string) {
+    if (documentBusy.current || savingRef.current || nestingBusy || postingBusy)
+      return;
+    commitFocusedField();
+    documentBusy.current = true;
+    try {
+      const all = liveDocuments(),
+        target = all.find((d) => d.id === targetId);
+      if (!target || !(await confirmDocument(target))) return;
+      let remaining = all.filter((d) => d.id !== targetId);
+      if (!remaining.length)
+        remaining = [
+          newJobDocument(
+            id(),
+            applyNewJobDefaults(
+              newJob(
+                library.defaultMachine ?? "desktop",
+                library.machines?.[library.defaultMachine ?? "desktop"] ??
+                  defaultMachineSettings(library.defaultMachine ?? "desktop"),
+              ),
+              library,
+            ),
+          ),
+        ];
+      setDocuments(remaining);
+      if (targetId === activeDocumentId)
+        restoreDocument(
+          remaining[
+            Math.min(
+              all.findIndex((d) => d.id === targetId),
+              remaining.length - 1,
+            )
+          ],
+        );
+      await window.jobFiles?.reset(targetId);
+    } finally {
+      documentBusy.current = false;
+    }
+  }
   function save(saveAs = false): Promise<boolean> {
     if (savingRef.current) return savingRef.current;
     const work = (async () => {
       const snapshot = jobSchema.parse(jobRef.current);
       try {
         if (window.jobFiles) {
-          const result = await window.jobFiles.save(snapshot, saveAs);
+          const result = await window.jobFiles.save(
+            snapshot,
+            saveAs,
+            activeDocumentId,
+          );
           if (!result) return false;
           setFilePath(result.path);
         } else {
-          const name = snapshot.name.replace(/[^a-z\d_-]/gi, "_") + ".wam";
+          const name = jobFilename(snapshot.name);
           download(name, JSON.stringify(snapshot, null, 2));
           setFilePath(name);
         }
@@ -668,17 +993,37 @@ export default function App() {
     });
     return work;
   }
-  async function canReplaceJob() {
-    if (!dirty) return true;
-    if (window.jobFiles) {
-      const choice = await window.jobFiles.confirmDiscard();
-      if (choice === "cancel") return false;
-      if (choice === "save") return save();
-      return true;
-    }
-    return window.confirm("Discard unsaved changes to this job?");
-  }
   async function documentAction(command: string) {
+    if (["new", "open", "save", "save-as", "close"].includes(command))
+      commitFocusedField();
+    if (command === "close-tab") {
+      await closeDocument(activeDocumentId);
+      return;
+    }
+    if (command === "next-tab" || command === "previous-tab") {
+      const index = documents.findIndex((d) => d.id === activeDocumentId);
+      switchDocument(
+        documents[
+          (index + (command === "next-tab" ? 1 : documents.length - 1)) %
+            documents.length
+        ].id,
+      );
+      return;
+    }
+
+    if (command === "select-all") {
+      if (isTextEditingTarget(document.activeElement))
+        document.execCommand("selectAll");
+      else if (activeView.kind === "sheet") {
+        setSheetSelection({
+          sheetId: activeView.id,
+          ids: project.parts.map((p) => p.id),
+        });
+        setSelected(project.parts[0]?.id ?? null);
+        setControlsId(null);
+      }
+      return;
+    }
     if (command === "post-all") {
       void post();
       return;
@@ -687,11 +1032,19 @@ export default function App() {
       if (activeView.kind === "sheet") void post(activeView.id);
       return;
     }
-    if (command === "machine-settings") {
+    if (command === "machine-settings" || command === "import-settings") {
       setMode("machine");
       setSelected(null);
       setControlsId(null);
       setTool("select");
+      if (command === "import-settings")
+        setTimeout(
+          () =>
+            document
+              .getElementById("import-settings")
+              ?.scrollIntoView({ block: "start" }),
+          0,
+        );
       return;
     }
     if (command === "units-mm" || command === "units-in") {
@@ -715,30 +1068,45 @@ export default function App() {
     }
 
     if (command === "save" || command === "save-as") {
+      if (command === "save" && (mode === "library" || mode === "material")) {
+        try {
+          await savePresets();
+        } catch (error) {
+          notify("Could not save presets: " + (error as Error).message);
+        }
+        return;
+      }
       await save(command === "save-as");
       return;
     }
-    if (documentBusy.current) return;
+    if (documentBusy.current || savingRef.current || nestingBusy || postingBusy)
+      return;
     documentBusy.current = true;
     try {
-      if ((command !== "open" || window.jobFiles) && !(await canReplaceJob()))
-        return;
       if (command === "new") {
-        await window.jobFiles?.reset();
-        activateJob(
-          newJob(
-            job.machine,
-            library.machines?.[job.machine] ??
-              defaultMachineSettings(job.machine),
+        openDocument(
+          applyNewJobDefaults(
+            newJob(
+              library.defaultMachine ?? "desktop",
+              library.machines?.[library.defaultMachine ?? "desktop"] ??
+                defaultMachineSettings(library.defaultMachine ?? "desktop"),
+            ),
+            library,
           ),
           null,
         );
       } else if (command === "open") {
         if (window.jobFiles) {
-          const result = await window.jobFiles.open();
-          if (result) activateJob(readJob(result.job), result.path);
+          const documentId = id();
+          const result = await window.jobFiles.open(documentId);
+          if (result)
+            openDocument(readJob(result.job), result.path, documentId);
         } else openInput.current?.click();
-      } else if (command === "close") window.jobFiles?.close();
+      } else if (command === "close") {
+        for (const doc of liveDocuments())
+          if (!(await confirmDocument(doc))) return;
+        window.jobFiles?.close();
+      }
     } catch (error) {
       notify("Could not open job: " + (error as Error).message);
     } finally {
@@ -779,16 +1147,21 @@ export default function App() {
   }
   function duplicate() {
     if (!current) return;
-    const p = {
-      ...structuredClone(current),
+    const copies = selectedParts.map((p) => ({
+      ...structuredClone(p),
       id: id(),
-      name: current.name + " copy",
-      x: current.x + 8,
-      y: current.y + 8,
-    };
-    edit({ ...project, parts: [...project.parts, p] });
-    setSelected(activeView.kind === "part" ? activeView.id : p.id);
-    setControlsId(activeView.kind === "part" ? activeView.id : p.id);
+      name: p.name + " copy",
+      x: p.x + 8,
+      y: p.y + 8,
+    }));
+    edit({ ...project, parts: [...project.parts, ...copies] });
+    setSelected(activeView.kind === "part" ? activeView.id : copies[0].id);
+    if (activeView.kind === "sheet")
+      setSheetSelection({
+        sheetId: activeView.id,
+        ids: copies.map((p) => p.id),
+      });
+    setControlsId(null);
   }
   function pasteText(text: string) {
     try {
@@ -798,6 +1171,8 @@ export default function App() {
       edit(result.project);
       lastPaste.current = { text, sequence };
       setSelected(activeView.kind === "part" ? activeView.id : result.ids[0]);
+      if (activeView.kind === "sheet")
+        setSheetSelection({ sheetId: activeView.id, ids: result.ids });
       setControlsId(null);
       setDraft([]);
       setTool("select");
@@ -809,7 +1184,7 @@ export default function App() {
   async function copyPart() {
     if (!current) return notify("Select a part to copy");
     try {
-      const text = encodePartClipboard([current]);
+      const text = encodePartClipboard(selectedParts);
       if (window.partClipboard) await window.partClipboard.copy(text);
       else {
         const write = (e: ClipboardEvent) => {
@@ -826,7 +1201,11 @@ export default function App() {
         if (!copied) throw Error("Copy unavailable");
       }
       lastPaste.current = { text: "", sequence: 0 };
-      notify("Part copied");
+      notify(
+        selectedParts.length > 1
+          ? `${selectedParts.length} parts copied`
+          : "Part copied",
+      );
     } catch {
       notify(
         "Clipboard access is unavailable. Select the part and use Ctrl+C.",
@@ -842,7 +1221,7 @@ export default function App() {
     if (current) {
       edit({
         ...project,
-        parts: project.parts.filter((p) => p.id !== selected),
+        parts: project.parts.filter((p) => !selectionIds.includes(p.id)),
       });
       setSelected(null);
       setControlsId(null);
@@ -969,9 +1348,9 @@ export default function App() {
     setTool("select");
   }
   useEffect(() => {
-    window.jobFiles?.setDirty(dirty);
+    window.jobFiles?.setDirty(allDocumentsDirty);
     document.title = `${dirty ? "* " : ""}${job.name} — Wam Local`;
-  }, [dirty, job.name, savedSnapshot, serializedJob]);
+  }, [allDocumentsDirty, dirty, job.name, savedSnapshot, serializedJob]);
   useEffect(() =>
     window.jobFiles?.onCommand((command) => {
       void documentAction(command);
@@ -979,27 +1358,37 @@ export default function App() {
   );
   useEffect(() => {
     const beforeUnload = (event: BeforeUnloadEvent) => {
-      if (dirty && !window.jobFiles) {
+      if (allDocumentsDirty && !window.jobFiles) {
         event.preventDefault();
         event.returnValue = "";
       }
     };
     window.addEventListener("beforeunload", beforeUnload);
     return () => window.removeEventListener("beforeunload", beforeUnload);
-  }, [dirty]);
+  }, [allDocumentsDirty]);
   useEffect(() => {
     let active = true;
+    setLibraryLoadError("");
     (async () => {
       let loaded = true;
       try {
         if (window.materialDatabase) {
-          const db = await window.materialDatabase.load();
-          if (active)
-            setLibrary(extendMaterialLibrary(materialLibrarySchema.parse(db)));
+          desktopLibraryLoad.current ??= window.materialDatabase
+            .load()
+            .then((db) => materialLibrarySchema.parse(db));
+          const next = await desktopLibraryLoad.current;
+          if (active) {
+            persistedLibrary.current = next;
+            setLibrary(next);
+          }
         }
       } catch (e) {
+        desktopLibraryLoad.current = null;
         loaded = false;
-        notify("Could not load material database: " + (e as Error).message);
+        if (active)
+          setLibraryLoadError(
+            "Could not load material database: " + (e as Error).message,
+          );
       } finally {
         if (active) setLibraryReady(loaded);
       }
@@ -1007,15 +1396,19 @@ export default function App() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [libraryLoadAttempt]);
   useEffect(() => {
-    if (!libraryReady) return;
-    try {
-      localStorage.setItem("wam-material-library", JSON.stringify(library));
-    } catch {
-      if (!window.materialDatabase)
-        notify("Material presets could not be saved locally. Export a backup.");
-    }
+    if (!libraryReady || library === persistedLibrary.current) return;
+    persistedLibrary.current = library;
+    if (!window.materialDatabase)
+      try {
+        localStorage.setItem("wam-material-library", JSON.stringify(library));
+      } catch {
+        if (!window.materialDatabase)
+          notify(
+            "Material presets could not be saved locally. Export a backup.",
+          );
+      }
     if (window.materialDatabase)
       void window.materialDatabase
         .save(library)
@@ -1065,12 +1458,16 @@ export default function App() {
       )
         return;
       try {
-        const text = encodePartClipboard([current]);
+        const text = encodePartClipboard(selectedParts);
         e.clipboardData.setData("text/plain", text);
         e.clipboardData.setData(PART_CLIPBOARD_MIME, text);
         e.preventDefault();
         lastPaste.current = { text: "", sequence: 0 };
-        notify("Part copied");
+        notify(
+          selectedParts.length > 1
+            ? `${selectedParts.length} parts copied`
+            : "Part copied",
+        );
       } catch (error) {
         e.preventDefault();
         notify((error as Error).message);
@@ -1095,6 +1492,7 @@ export default function App() {
   });
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
+      if (e.defaultPrevented) return;
       if (document.querySelector("dialog[open]")) return;
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
@@ -1117,10 +1515,37 @@ export default function App() {
         );
         return;
       }
+      if (
+        (e.ctrlKey || e.metaKey) &&
+        (e.key === "Tab" || e.key.toLowerCase() === "w")
+      ) {
+        e.preventDefault();
+        void documentAction(
+          e.key.toLowerCase() === "w"
+            ? "close-tab"
+            : e.shiftKey
+              ? "previous-tab"
+              : "next-tab",
+        );
+        return;
+      }
       if (isTextEditingTarget(e.target)) return;
       const cmd = e.ctrlKey || e.metaKey;
       const pressed = e.key.toLowerCase();
-      if (cmd && pressed === "s") {
+      if (
+        cmd &&
+        pressed === "a" &&
+        mode === "job" &&
+        activeView.kind === "sheet"
+      ) {
+        e.preventDefault();
+        setSheetSelection({
+          sheetId: activeView.id,
+          ids: project.parts.map((p) => p.id),
+        });
+        setSelected(project.parts[0]?.id ?? null);
+        setControlsId(null);
+      } else if (cmd && pressed === "s") {
         e.preventDefault();
         save();
       } else if (cmd && pressed === "z") {
@@ -1150,13 +1575,15 @@ export default function App() {
       } else if (current && e.key.startsWith("Arrow")) {
         e.preventDefault();
         const n = e.shiftKey ? 10 : 1;
-        updatePart({
-          x:
-            current.x +
-            (e.key === "ArrowRight" ? n : e.key === "ArrowLeft" ? -n : 0),
-          y:
-            current.y +
-            (e.key === "ArrowDown" ? n : e.key === "ArrowUp" ? -n : 0),
+        const dx = e.key === "ArrowRight" ? n : e.key === "ArrowLeft" ? -n : 0;
+        const dy = e.key === "ArrowDown" ? n : e.key === "ArrowUp" ? -n : 0;
+        edit({
+          ...project,
+          parts: project.parts.map((p) =>
+            selectionIds.includes(p.id)
+              ? { ...p, x: p.x + dx, y: p.y + dy }
+              : p,
+          ),
         });
       }
     };
@@ -1189,17 +1616,93 @@ export default function App() {
     const parts: Part[] = [],
       failures: string[] = [],
       notices: string[] = [];
-    const { importSvg, importDxf } = await import("../core/import");
-    for (const file of files) {
+    const { importDxf } = await import("../core/import");
+    const { importSvgArtwork } = await import("../core/svg-artwork");
+    const { embedSvgAssets, loadDxfImages, fileDataUrl, decodeRaster } =
+      await import("../core/import-assets");
+    const { decodeDxf } = await import("../core/dxf-decode");
+    const settings = library.importSettings ?? defaultImportSettings();
+    const consumedAssets = new Set<File>();
+    const drawingFiles = files.filter((f) =>
+      /\.(svg|dxf|step|stp)$/i.test(f.name),
+    );
+    for (const file of [
+      ...drawingFiles,
+      ...files.filter((f) => !drawingFiles.includes(f)),
+    ]) {
       try {
+        if (consumedAssets.has(file)) continue;
         if (file.size > 10_000_000) throw Error("File exceeds 10 MB");
-        const source = await file.text();
+        const resolve = async (reference: string) => {
+          if (reference.startsWith("data:")) return reference;
+          const basename = decodeURIComponent(reference.split(/[?#]/)[0])
+            .replace(/\\/g, "/")
+            .split("/")
+            .at(-1)
+            ?.toLowerCase();
+          const included = files.find(
+            (f) => f !== file && f.name.toLowerCase() === basename,
+          );
+          if (included) {
+            consumedAssets.add(included);
+            return fileDataUrl(included);
+          }
+          return window.importAssets
+            ? window.importAssets.resolve(file, reference)
+            : null;
+        };
+        if (/\.(step|stp)$/i.test(file.name)) {
+          const { importStep } = await import("../core/import-step");
+          const part = await importStep(
+            await file.arrayBuffer(),
+            file.name,
+            settings.curveToleranceMm,
+          );
+          parts.push(part);
+          if (part.stepSource!.bodyCount > 1)
+            notices.push(
+              `${file.name}: multiple bodies; only the selected cutting face was imported. Choose another face in the part editor.`,
+            );
+          continue;
+        }
+        if (/\.(png|jpe?g|gif|webp|bmp)$/i.test(file.name)) {
+          const data = await fileDataUrl(file),
+            image = await decodeRaster(data);
+          parts.push(
+            await importSvgArtwork(
+              `<svg xmlns="http://www.w3.org/2000/svg" width="${(image.width / 96) * 25.4}mm" height="${(image.height / 96) * 25.4}mm" viewBox="0 0 ${image.width} ${image.height}"><image width="${image.width}" height="${image.height}" href="${data}"/></svg>`,
+              file.name,
+              settings,
+              (m) => notices.push(m),
+            ),
+          );
+          notices.push(
+            `${file.name}: image size assumes 96 pixels/inch; adjust the part scale if needed.`,
+          );
+          continue;
+        }
+        if (!/\.(svg|dxf)$/i.test(file.name))
+          throw Error("This supporting asset was not referenced by a drawing.");
+        const source = file.name.toLowerCase().endsWith(".dxf")
+          ? decodeDxf(await file.arrayBuffer())
+          : await file.text();
         parts.push(
           file.name.toLowerCase().endsWith(".dxf")
-            ? importDxf(source, file.name, dxfUnits, (message) =>
-                notices.push(`${file.name}: ${message}`),
+            ? importDxf(
+                source,
+                file.name,
+                dxfUnits,
+                (message) => notices.push(`${file.name}: ${message}`),
+                settings.curveToleranceMm,
+                settings,
+                await loadDxfImages(source, resolve),
               )
-            : importSvg(source, file.name),
+            : await importSvgArtwork(
+                await embedSvgAssets(source, resolve),
+                file.name,
+                settings,
+                (message) => notices.push(`${file.name}: ${message}`),
+              ),
         );
       } catch (error) {
         failures.push(`${file.name}: ${(error as Error).message}`);
@@ -1218,7 +1721,17 @@ export default function App() {
           ...base,
           parts: [
             ...base.parts,
-            ...parts.map((p) => ({ ...p, materialId, quantity: 1 })),
+            ...parts.map((p) => ({
+              ...newPartDefaults(
+                p,
+                matchingDefaultMaterial(
+                  library,
+                  base.materials.find((m) => m.id === materialId)!,
+                ) ?? base.materials.find((m) => m.id === materialId)!,
+              ),
+              materialId,
+              quantity: 1,
+            })),
           ],
         });
         setMode("job");
@@ -1229,7 +1742,7 @@ export default function App() {
       }
     }
     notify(
-      `${parts.length} of ${files.length} files imported${[...failures, ...notices].length ? " - " + [...failures, ...notices].join(" - ") : ""}`,
+      `${parts.length} of ${files.length - consumedAssets.size} drawings imported${consumedAssets.size ? `; ${consumedAssets.size} supporting assets embedded` : ""}${[...failures, ...notices].length ? " - " + [...failures, ...notices].join(" - ") : ""}`,
     );
   }
   const visible = preview.moves.slice(
@@ -1241,6 +1754,10 @@ export default function App() {
       name: "Machine settings",
       action: () => documentAction("machine-settings"),
     },
+    {
+      name: "Import settings",
+      action: () => documentAction("import-settings"),
+    },
     { name: "Display units: inches", action: () => documentAction("units-in") },
     {
       name: "Display units: millimeters",
@@ -1250,7 +1767,10 @@ export default function App() {
       name: showFileLabels ? "Hide file labels" : "Show file labels",
       action: () => documentAction("toggle-labels"),
     },
-    { name: "Import SVG / DXF", action: () => importInput.current?.click() },
+    {
+      name: "Import SVG / DXF / STEP / image",
+      action: () => importInput.current?.click(),
+    },
     { name: "Save job", action: () => save() },
     { name: "Save job as…", action: () => save(true) },
     { name: "New job", action: () => documentAction("new") },
@@ -1284,7 +1804,7 @@ export default function App() {
     if (c.name === "Copy selected part") return editable && !!current;
     if (c.name === "Paste parts") return editable;
     if (
-      c.name === "Import SVG / DXF" ||
+      c.name === "Import SVG / DXF / STEP / image" ||
       c.name === "Add rectangle" ||
       c.name === "Add circle"
     )
@@ -1302,1896 +1822,1999 @@ export default function App() {
     if (c.name === "Redo") return future.length > 0 && editable;
     return true;
   });
+  if (!libraryReady)
+    return (
+      <main className="workspace-startup">
+        {libraryLoadError ? (
+          <>
+            <p role="alert">{libraryLoadError}</p>
+            <button onClick={() => setLibraryLoadAttempt((n) => n + 1)}>
+              Retry loading presets
+            </button>
+          </>
+        ) : (
+          <p role="status">Opening workspace…</p>
+        )}
+      </main>
+    );
   return (
     <DisplayUnitsContext.Provider value={u}>
-      <div className="app">
-        <div className={`body ${mode === "part" ? "part-editor" : ""}`}>
-          <nav className="rail">
-            {(
-              [
-                { key: "job", icon: <Briefcase />, name: "Jobs" },
-                { key: "remnants", icon: <Layers />, name: "Remnants" },
-                { key: "library", icon: <Database />, name: "Presets" },
-                { key: "mcp", icon: <Terminal />, name: "MCP" },
-                { key: "machine", icon: <Settings2 />, name: "Machine" },
-              ] as const
-            ).map((item) => (
-              <button
-                title={item.name}
-                key={item.key}
-                onClick={() => {
-                  if (item.key === "job" && activeView.kind === "part")
-                    openView({ kind: "sheet", id: job.sheets[0].id });
+      <SettingDefaultsProvider
+        library={library}
+        onChange={updateLibrary}
+        onMessage={notify}
+      >
+        {materialEditor && (
+          <JobMaterialDialog
+            mode={materialEditor.mode}
+            current={materialEditor.material}
+            library={library}
+            onClose={() => setMaterialEditor(null)}
+            onSave={(profiles, selected) => {
+              const result = saveJobMaterialProfiles(
+                library,
+                job,
+                profiles,
+                selected,
+              );
+              updateLibrary(result.library);
+              editJob(result.job);
+              setMaterialEditor(null);
+            }}
+          />
+        )}
+        <div className="app">
+          <div className="job-tabs" role="tablist" aria-label="Open jobs">
+            {liveDocuments().map((doc) => (
+              <div
+                className={`job-tab ${doc.id === activeDocumentId ? "active" : ""}`}
+                key={doc.id}
+              >
+                <button
+                  id={`job-tab-${doc.id}`}
+                  role="tab"
+                  aria-controls="job-tab-panel"
+                  tabIndex={doc.id === activeDocumentId ? 0 : -1}
+                  aria-selected={doc.id === activeDocumentId}
+                  title={doc.filePath ?? doc.job.name}
+                  disabled={nestingBusy || postingBusy}
+                  onClick={() => switchDocument(doc.id)}
+                >
+                  {doc.job.name}
+                  {documentDirty(doc) ? " *" : ""}
+                </button>
+                <button
+                  className="close-job-tab"
+                  aria-label={`Close job ${doc.job.name}`}
+                  title="Close job tab"
+                  disabled={nestingBusy || postingBusy}
+                  onClick={() => void closeDocument(doc.id)}
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+            <button
+              className="new-job-tab"
+              aria-label="New job tab"
+              title="New job tab (Ctrl+N)"
+              disabled={nestingBusy || postingBusy}
+              onClick={() => void documentAction("new")}
+            >
+              +
+            </button>
+          </div>
+          <div
+            key={activeDocumentId}
+            id="job-tab-panel"
+            role="tabpanel"
+            aria-labelledby={`job-tab-${activeDocumentId}`}
+            className={`body ${mode === "part" ? "part-editor" : ""}`}
+          >
+            <nav className="rail">
+              {(
+                [
+                  { key: "job", icon: <Briefcase />, name: "Jobs" },
+                  { key: "library", icon: <Database />, name: "Presets" },
+                  { key: "mcp", icon: <Terminal />, name: "MCP" },
+                  { key: "machine", icon: <Settings2 />, name: "Machine" },
+                ] as const
+              ).map((item) => (
+                <button
+                  title={item.name}
+                  key={item.key}
+                  onClick={() => {
+                    if (item.key === "job" && activeView.kind === "part")
+                      openView({ kind: "sheet", id: job.sheets[0].id });
+                    setSelected(null);
+                    setControlsId(null);
+                    setTool("select");
+                    setPlaying(false);
+                    setMode(item.key);
+                  }}
+                  className={mode === item.key ? "selected" : ""}
+                >
+                  {item.icon}
+                  <span>{item.name}</span>
+                </button>
+              ))}
+            </nav>
+            {!["library", "mcp", "machine"].includes(mode) && (
+              <aside
+                className={`inspector ${mode === "job" ? "job-sidebar" : ""}`}
+              >
+                <div className="panel-heading">
+                  <span>WORKSPACE</span>
+                  <Settings2 size={14} />
+                </div>
+                {mode === "part" && (
+                  <div className="part-editor-context">
+                    <button onClick={closePart}>Done editing</button>
+                    <b>{definition?.name}</b>
+                  </div>
+                )}
+                <h2>
+                  {
+                    {
+                      job: "Jobs",
+                      sheets: "Sheets",
+                      library: "Presets",
+                      part: "Part editor",
+                      nest: "Sheet nesting",
+                      paths: "Cut strategy",
+                      material: "Material setup",
+                      mcp: "MCP connection",
+                      machine: "Machine settings",
+                    }[mode]
+                  }
+                </h2>
+                {mode === "part" && (
+                  <div
+                    className="part-editor-tabs"
+                    role="tablist"
+                    aria-label="Part editor tools"
+                  >
+                    {(
+                      [
+                        ["geometry", "Geometry"],
+                        ["cuts", "Cuts & tabs"],
+                        ["process", "Process"],
+                      ] as const
+                    ).map(([key, label]) => (
+                      <button
+                        key={key}
+                        role="tab"
+                        aria-selected={partPanel === key}
+                        onClick={() => {
+                          setPartPanel(key);
+                          setTool("select");
+                        }}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+                {["part", "nest", "paths"].includes(mode) && (
+                  <label className="field workspace-switch">
+                    <span>
+                      {mode === "part" ? "Editing part" : "Active workspace"}
+                    </span>
+                    <select
+                      value={`${activeView.kind}:${activeView.id}`}
+                      onChange={(e) => {
+                        const [kind, ...key] = e.target.value.split(":");
+                        openView({
+                          kind: kind as JobView["kind"],
+                          id: key.join(":"),
+                        });
+                      }}
+                    >
+                      {mode !== "part" && (
+                        <optgroup label="Sheets">
+                          {job.sheets.map((s) => (
+                            <option key={s.id} value={`sheet:${s.id}`}>
+                              {s.name}
+                            </option>
+                          ))}
+                        </optgroup>
+                      )}
+                      {mode === "part" && (
+                        <optgroup label="Part editors">
+                          {job.parts.map((p) => (
+                            <option key={p.id} value={`part:${p.id}`}>
+                              {p.name}
+                            </option>
+                          ))}
+                        </optgroup>
+                      )}
+                    </select>
+                  </label>
+                )}
+                {mode === "job" && (
+                  <JobActions
+                    job={job}
+                    onChange={editJob}
+                    onUpload={() => importInput.current?.click()}
+                    onNewPart={createPart}
+                    onPost={() => void post()}
+                    onNest={() => runNest(true)}
+                    busy={nestingBusy || postingBusy}
+                  />
+                )}
+                {nestingBusy && (
+                  <div className="nesting-progress" role="status">
+                    <b>
+                      {nestingProgress?.phase ?? "Preparing nesting search"}
+                    </b>
+                    <p>
+                      {nestingProgress?.placed ?? 0} /{" "}
+                      {nestingProgress?.total ??
+                        job.parts.reduce((n, p) => n + p.quantity, 0)}{" "}
+                      copies placed · Pass {nestingProgress?.pass ?? 1}
+                    </p>
+                    <p>
+                      {Math.floor((Date.now() - nestingStarted.current) / 1000)}
+                      s elapsed
+                      {nestingProgress
+                        ? ` / ${Math.ceil(nestingProgress.budgetMs / 1000)}s current budget`
+                        : ""}
+                      {nestingProgress?.extensions
+                        ? ` · ${nestingProgress.extensions} time extensions`
+                        : ""}
+                    </p>
+                    <div className="button-row">
+                      <button onClick={() => stopNest(true)}>
+                        Stop &amp; keep best
+                      </button>
+                      <button onClick={() => stopNest(false)}>
+                        Cancel search
+                      </button>
+                    </div>
+                  </div>
+                )}
+                {mode === "job" ? (
+                  <p className="muted">
+                    Set up your parts, quantities and cutting settings, then
+                    arrange them on sheets.
+                  </p>
+                ) : mode === "sheets" ? (
+                  <JobPanel
+                    sheetsOnly
+                    onSelectSheet={(id) => {
+                      openView({ kind: "sheet", id });
+                      setMode("sheets");
+                    }}
+                    presets={[...job.materials, ...library.materials]}
+                    job={job}
+                    view={activeView}
+                    onChange={editJob}
+                    onOpen={(next) => {
+                      openView(next);
+                      setMode("job");
+                    }}
+                    onNewPart={createPart}
+                    onUpload={() => importInput.current?.click()}
+                    onNest={() => runNest(true)}
+                    onError={notify}
+                  />
+                ) : (
+                  <>
+                    <section>
+                      <h3>
+                        {activeSheet ? "MACHINE & STOCK" : "PART WORKSPACE"}
+                      </h3>
+                      {activeSheet && (
+                        <p className="micro">
+                          {activeSheet.name} - {u.number(project.stock.width)} -{" "}
+                          {u.length(project.stock.height)}
+                          <br />
+                          Change stock and origin in Sheets.
+                        </p>
+                      )}
+                      {definition ? (
+                        <>
+                          <h3>PART DEFINITION</h3>
+                          <label className="field">
+                            <span>Requested quantity</span>
+                            <NumericInput
+                              min="0"
+                              max="2000"
+                              integer
+                              value={definition.quantity}
+                              onChange={(e) => {
+                                const n = e;
+                                if (Number.isInteger(n) && n >= 0 && n <= 2000)
+                                  editJob(
+                                    setPartQuantity(job, definition.id, n),
+                                  );
+                              }}
+                            />
+                          </label>
+                          <p className="micro">
+                            Material and tab defaults are set for the whole job
+                            on the Jobs page.
+                          </p>
+                        </>
+                      ) : null}
+                    </section>
+                    {mode === "nest" ? (
+                      <section>
+                        <h3>
+                          NESTING SETTINGS <span className="pill">SVGNEST</span>
+                        </h3>
+                        <div className="field-grid">
+                          <NumberField
+                            label="Edge margin"
+                            value={project.stock.margin}
+                            max={100}
+                            onChange={(margin) =>
+                              edit({
+                                ...project,
+                                stock: { ...project.stock, margin },
+                              })
+                            }
+                          />
+                          <NumberField
+                            label="Part spacing"
+                            value={project.stock.spacing}
+                            max={100}
+                            onChange={(spacing) =>
+                              edit({
+                                ...project,
+                                stock: { ...project.stock, spacing },
+                              })
+                            }
+                          />
+                        </div>
+                        <NestingSettings
+                          job={job}
+                          project={project}
+                          scope="sheet"
+                          onChange={editJob}
+                          disabled={nestingBusy}
+                        />
+                        <button
+                          disabled={nestingBusy}
+                          className="primary wide"
+                          onClick={() => runNest()}
+                        >
+                          <BoxSelect size={16} /> Nest all{" "}
+                          {project.parts.length} parts
+                        </button>
+                        <p className="micro">
+                          Nest this sheet, or use Job to fill all requested
+                          quantities across sheets.
+                        </p>
+                      </section>
+                    ) : null}
+                    {mode === "material" ? (
+                      <section>
+                        <button
+                          className="wide"
+                          onClick={() => {
+                            const materialId =
+                              activeSheet?.materialId ?? definition!.materialId;
+                            const m = job.materials.find(
+                              (m) => m.id === materialId,
+                            )!;
+                            updateLibrary({
+                              ...library,
+                              materials: [
+                                ...library.materials.filter(
+                                  (r) => r.id !== m.id,
+                                ),
+                                { ...m, source: "Saved job defaults" },
+                              ],
+                            });
+                            notify("Material defaults saved to database");
+                          }}
+                        >
+                          Save these defaults to database
+                        </button>
+                      </section>
+                    ) : null}
+                    {mode === "part" &&
+                    definition &&
+                    partPanel === "process" ? (
+                      <SettingsScope
+                        title={`${project.material.name} · process defaults`}
+                        prefix="process."
+                        material={job.materials.find(
+                          (m) => m.id === definition.materialId,
+                        )}
+                        values={{
+                          ...project.material,
+                          pierceDiameter: project.material.pierceDiameter ?? 0,
+                        }}
+                        fallbacks={newProject().material}
+                        onRevert={(key, v) =>
+                          material(key as keyof Project["material"], v)
+                        }
+                      >
+                        <section>
+                          <h3>PROCESS PARAMETERS</h3>
+                          {definition ? (
+                            <>
+                              <NumberField
+                                label="Cut feed"
+                                value={project.material.feed}
+                                suffix="mm/min"
+                                min={0.01}
+                                onChange={(v) => material("feed", v)}
+                              />
+                              <NumberField
+                                label="Pierce time"
+                                value={project.material.pierce}
+                                suffix="sec"
+                                step={0.1}
+                                onChange={(v) => material("pierce", v)}
+                              />
+                              <NumberField
+                                label="Pierce diameter"
+                                value={project.material.pierceDiameter ?? 0}
+                                max={100}
+                                step={0.1}
+                                onChange={(v) => material("pierceDiameter", v)}
+                              />
+                              <p className="micro">
+                                Zero uses the kerf width automatically (
+                                {u.length(project.material.kerf)}). Enter a
+                                positive diameter to override it.
+                              </p>
+                            </>
+                          ) : null}
+                        </section>
+                      </SettingsScope>
+                    ) : null}
+                    {mode === "part" && partPanel === "geometry" ? (
+                      <section>
+                        <h3>IMPORT & CREATE</h3>
+                        <button className="wide" onClick={createPart}>
+                          New part editor
+                        </button>
+                        <button
+                          className="import-button"
+                          onClick={() => importInput.current?.click()}
+                        >
+                          <Upload size={19} />
+                          <b>Import vectors</b>
+                          <small>SVG, DXF, STEP or image</small>
+                        </button>
+                        <SettingsScope
+                          title="Import defaults"
+                          prefix="import."
+                          values={{ dxfUnits }}
+                          fallbacks={{ dxfUnits: "mm" }}
+                          onRevert={(key, v) => setDxfUnits(v)}
+                        >
+                          <label className="field">
+                            <span>DXF units if unspecified</span>
+                            <select
+                              data-default-key="dxfUnits"
+                              value={dxfUnits}
+                              onChange={(e) =>
+                                setDxfUnits(e.target.value as "mm" | "in")
+                              }
+                            >
+                              <option value="mm">Millimetres</option>
+                              <option value="in">Inches</option>
+                            </select>
+                          </label>
+                        </SettingsScope>
+                        {project.parts[0]?.stepSource && (
+                          <StepFaceSelector
+                            part={project.parts[0]}
+                            onChange={(p) => {
+                              edit({ ...project, parts: [p] });
+                              setContourIndex(0);
+                            }}
+                          />
+                        )}
+                        <div className="button-row">
+                          <button onClick={() => add("rect")}>
+                            <Square size={14} />
+                            Rectangle
+                          </button>
+                          <button onClick={() => add("circle")}>
+                            <Circle size={14} />
+                            Circle
+                          </button>
+                        </div>
+                      </section>
+                    ) : null}
+                    {mode === "part" &&
+                      partPanel === "cuts" &&
+                      !project.parts.length && (
+                        <p className="muted">
+                          Draw or import an outline in Geometry before placing
+                          tabs and entry points.
+                        </p>
+                      )}
+                    {mode === "part" &&
+                    definition &&
+                    project.parts[0] &&
+                    partPanel === "cuts" ? (
+                      <SettingsScope
+                        title={`${project.material.name} · part defaults`}
+                        material={job.materials.find(
+                          (m) => m.id === definition.materialId,
+                        )}
+                        values={{
+                          stockToLeave: project.parts[0].stockToLeave ?? 0,
+                          lead: project.material.lead,
+                          leadStyle: project.material.leadStyle ?? "arc",
+                          cornerSlowdown:
+                            project.material.cornerSlowdown !== false,
+                          cut: project.parts[0].cut,
+                        }}
+                        fallbacks={{
+                          stockToLeave: 0,
+                          lead: 2,
+                          leadStyle: "arc",
+                          cornerSlowdown: true,
+                          cut: "outside",
+                        }}
+                        onRevert={(key, v) =>
+                          key === "stockToLeave" || key === "cut"
+                            ? edit({
+                                ...project,
+                                parts: project.parts.map((p) => ({
+                                  ...p,
+                                  [key]: v,
+                                })),
+                              })
+                            : material(key as keyof Project["material"], v)
+                        }
+                      >
+                        <div className="field-grid">
+                          <NumberField
+                            label="Stock to leave"
+                            value={project.parts[0].stockToLeave ?? 0}
+                            min={-10}
+                            max={10}
+                            step={0.05}
+                            onChange={(stockToLeave) =>
+                              edit({
+                                ...project,
+                                parts: project.parts.map((p) => ({
+                                  ...p,
+                                  stockToLeave,
+                                })),
+                              })
+                            }
+                          />
+
+                          <NumberField
+                            label="Lead length"
+                            value={project.material.lead}
+                            max={30}
+                            step={0.5}
+                            onChange={(v) => material("lead", v)}
+                          />
+                        </div>
+                        <p className="micro">
+                          Positive stock to leave enlarges the outside and
+                          reduces holes; negative values do the reverse. The
+                          allowance is per side. Tab widths are finished bridge
+                          sizes; kerf and tangent-arc clearance are added
+                          automatically. Automatic tab widths, counts and area
+                          rules are set on the Jobs page. Leads are scrap-side
+                          entries: inside holes and outside outer profiles.
+                        </p>
+                        <label className="field">
+                          <span>Lead shape</span>
+                          <select
+                            data-default-key="leadStyle"
+                            value={project.material.leadStyle ?? "arc"}
+                            onChange={(e) =>
+                              material("leadStyle", e.target.value)
+                            }
+                          >
+                            <option value="arc">Tangent arc</option>
+                            <option value="straight">Straight</option>
+                          </select>
+                        </label>
+                        <label className="check">
+                          <input
+                            data-default-key="cornerSlowdown"
+                            type="checkbox"
+                            checked={project.material.cornerSlowdown !== false}
+                            onChange={(e) =>
+                              material("cornerSlowdown", e.target.checked)
+                            }
+                          />
+                          Slow down at corners
+                        </label>
+                        <label className="field">
+                          <span>Part cut default</span>
+                          <select
+                            data-default-key="cut"
+                            value={project.parts[0].cut}
+                            onChange={(e) =>
+                              edit({
+                                ...project,
+                                parts: project.parts.map((p) => ({
+                                  ...p,
+                                  cut: e.target.value as Part["cut"],
+                                })),
+                              })
+                            }
+                          >
+                            <option value="outside">Outside</option>
+                            <option value="inside">Inside</option>
+                            <option value="centerline">Centerline</option>
+                          </select>
+                        </label>
+                        <PartProcessEditor
+                          material={job.materials.find(
+                            (m) => m.id === definition.materialId,
+                          )}
+                          part={project.parts[0]}
+                          defaultLead={project.material.lead}
+                          selected={Math.min(
+                            contourIndex,
+                            project.parts[0].contours.length - 1,
+                          )}
+                          onChange={(p) => edit({ ...project, parts: [p] })}
+                          onTabs={() => {
+                            setTool("tabs");
+                            setSelected(definition.id);
+                          }}
+                          onEntry={() => {
+                            setTool("entry");
+                            setSelected(definition.id);
+                          }}
+                        />
+                      </SettingsScope>
+                    ) : null}
+                    {(mode === "nest" ||
+                      (mode === "part" && partPanel === "geometry")) && (
+                      <section>
+                        <h3>
+                          SELECTION{" "}
+                          {current ? (
+                            <span className="pill">1 PART</span>
+                          ) : null}
+                        </h3>
+                        {current ? (
+                          <>
+                            {activeSheet && (
+                              <label className="check">
+                                <input
+                                  type="checkbox"
+                                  checked={current.locked ?? false}
+                                  onChange={(e) =>
+                                    updatePart({ locked: e.target.checked })
+                                  }
+                                />
+                                Lock placement for nesting
+                              </label>
+                            )}
+                            {definition && (
+                              <SettingsScope
+                                title={`${project.material.name} · part defaults`}
+                                material={job.materials.find(
+                                  (m) => m.id === definition.materialId,
+                                )}
+                                values={{
+                                  rotationPolicy:
+                                    definition.rotationPolicy ?? "free",
+                                }}
+                                fallbacks={{ rotationPolicy: "free" }}
+                                onRevert={(key, v) =>
+                                  editJob({
+                                    ...job,
+                                    parts: job.parts.map((p) =>
+                                      p.id === definition.id
+                                        ? { ...p, rotationPolicy: v }
+                                        : p,
+                                    ),
+                                  })
+                                }
+                              >
+                                <label className="field">
+                                  <span>Nesting rotation / grain</span>
+                                  <select
+                                    data-default-key="rotationPolicy"
+                                    value={definition.rotationPolicy ?? "free"}
+                                    onChange={(e) =>
+                                      editJob({
+                                        ...job,
+                                        parts: job.parts.map((p) =>
+                                          p.id === definition.id
+                                            ? {
+                                                ...p,
+                                                rotationPolicy: e.target
+                                                  .value as
+                                                  | "free"
+                                                  | "fixed"
+                                                  | "grain-x"
+                                                  | "grain-y",
+                                              }
+                                            : p,
+                                        ),
+                                      })
+                                    }
+                                  >
+                                    <option value="free">
+                                      Any allowed rotation
+                                    </option>
+                                    <option value="fixed">Do not rotate</option>
+                                    <option value="grain-x">
+                                      Grain along sheet X
+                                    </option>
+                                    <option value="grain-y">
+                                      Grain along sheet Y
+                                    </option>
+                                  </select>
+                                </label>
+                              </SettingsScope>
+                            )}
+                            {activeSheet && current.definitionId ? (
+                              <button
+                                className="wide"
+                                onClick={() =>
+                                  openView({
+                                    kind: "part",
+                                    id: current.definitionId!,
+                                  })
+                                }
+                              >
+                                Edit source part · tabs & kerf
+                              </button>
+                            ) : null}
+                            <label className="field">
+                              <span>Part name</span>
+                              <input
+                                value={current.name}
+                                readOnly={mode !== "part"}
+                                onChange={(e) =>
+                                  updatePart({ name: e.target.value || "Part" })
+                                }
+                              />
+                            </label>
+                            <div className="field-grid">
+                              <NumberField
+                                label="Position X"
+                                value={current.x - workOrigin.x}
+                                min={-10000}
+                                onChange={(x) =>
+                                  updatePart({ x: x + workOrigin.x })
+                                }
+                              />
+                              <NumberField
+                                label="Position Y"
+                                value={current.y - workOrigin.y}
+                                min={-10000}
+                                onChange={(y) =>
+                                  updatePart({ y: y + workOrigin.y })
+                                }
+                              />
+                              <NumberField
+                                label="Rotation"
+                                value={current.rotation}
+                                min={-36000}
+                                max={36000}
+                                suffix="deg"
+                                onChange={(rotation) =>
+                                  updatePart({ rotation })
+                                }
+                              />
+                              {mode === "part" && (
+                                <NumberField
+                                  label="Scale"
+                                  value={current.scale * 100}
+                                  min={0.1}
+                                  max={100000}
+                                  suffix="%"
+                                  onChange={(scale) =>
+                                    updatePart({ scale: scale / 100 })
+                                  }
+                                />
+                              )}
+                            </div>
+                            <p className="micro">
+                              Bounds {u.number(partBounds(current).width)} ×{" "}
+                              {u.length(partBounds(current).height)}
+                            </p>
+
+                            <div className="button-row">
+                              <button onClick={duplicate}>
+                                <Copy size={14} />
+                                Duplicate
+                              </button>
+                              <button onClick={remove}>
+                                <Trash2 size={14} />
+                                Delete
+                              </button>
+                            </div>
+                          </>
+                        ) : (
+                          <div className="empty-selection">
+                            <MousePointer2 size={24} />
+                            <p>
+                              Select a part to edit its geometry
+                              <br />
+                              and cutting properties.
+                            </p>
+                          </div>
+                        )}
+                      </section>
+                    )}
+                  </>
+                )}
+                <div className="inspector-footer">
+                  <button onClick={() => void documentAction("open")}>
+                    <FolderOpen size={14} />
+                    Open job
+                  </button>
+                  <button onClick={() => void documentAction("new")}>
+                    New job <Plus size={14} />
+                  </button>
+                </div>
+              </aside>
+            )}
+            {mode === "job" ? (
+              <JobSetup
+                onMaterialEdit={(mode, material) => {
+                  const existing = matchingDefaultMaterial(library, material);
+                  setMaterialEditor({
+                    mode,
+                    material:
+                      mode === "edit"
+                        ? {
+                            ...material,
+                            ...(existing ? materialHierarchy(existing) : {}),
+                            id:
+                              existing?.id ??
+                              (library.materials.some(
+                                (m) => m.id === material.id,
+                              )
+                                ? id()
+                                : material.id),
+                          }
+                        : material,
+                  });
+                }}
+                activeSheetId={
+                  activeView.kind === "sheet" ? activeView.id : undefined
+                }
+                onClearSelection={() => {
                   setSelected(null);
                   setControlsId(null);
-                  setTool("select");
-                  setPlaying(false);
-                  setMode(item.key);
                 }}
-                className={mode === item.key ? "selected" : ""}
-              >
-                {item.icon}
-                <span>{item.name}</span>
-              </button>
-            ))}
-          </nav>
-          <aside className={`inspector ${mode === "job" ? "job-sidebar" : ""}`}>
-            <div className="panel-heading">
-              <span>WORKSPACE</span>
-              <Settings2 size={14} />
-            </div>
-            {mode === "part" && (
-              <div className="part-editor-context">
-                <button onClick={closePart}>Done editing</button>
-                <b>{definition?.name}</b>
-              </div>
-            )}
-            <h2>
-              {
-                {
-                  job: "Jobs",
-                  sheets: "Sheets",
-                  library: "Presets",
-                  remnants: "Remnants",
-                  part: "Part editor",
-                  nest: "Sheet nesting",
-                  paths: "Cut strategy",
-                  material: "Material setup",
-                  mcp: "MCP connection",
-                  machine: "Machine settings",
-                }[mode]
-              }
-            </h2>
-            {mode === "part" && (
-              <div
-                className="part-editor-tabs"
-                role="tablist"
-                aria-label="Part editor tools"
-              >
-                {(
-                  [
-                    ["geometry", "Geometry"],
-                    ["cuts", "Cuts & tabs"],
-                    ["process", "Process"],
-                  ] as const
-                ).map(([key, label]) => (
-                  <button
-                    key={key}
-                    role="tab"
-                    aria-selected={partPanel === key}
-                    onClick={() => {
-                      setPartPanel(key);
-                      setTool("select");
-                    }}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-            )}
-            {["part", "nest", "paths"].includes(mode) && (
-              <label className="field workspace-switch">
-                <span>
-                  {mode === "part" ? "Editing part" : "Active workspace"}
-                </span>
-                <select
-                  value={`${activeView.kind}:${activeView.id}`}
-                  onChange={(e) => {
-                    const [kind, ...key] = e.target.value.split(":");
-                    openView({
-                      kind: kind as JobView["kind"],
-                      id: key.join(":"),
-                    });
-                  }}
-                >
-                  {mode !== "part" && (
-                    <optgroup label="Sheets">
-                      {job.sheets.map((s) => (
-                        <option key={s.id} value={`sheet:${s.id}`}>
-                          {s.name}
-                        </option>
-                      ))}
-                    </optgroup>
-                  )}
-                  {mode === "part" && (
-                    <optgroup label="Part editors">
-                      {job.parts.map((p) => (
-                        <option key={p.id} value={`part:${p.id}`}>
-                          {p.name}
-                        </option>
-                      ))}
-                    </optgroup>
-                  )}
-                </select>
-              </label>
-            )}
-            {mode === "job" && (
-              <section>
-                <h3>REUSABLE LAYOUTS</h3>
-                <button
-                  onClick={() =>
-                    updateLibrary({
-                      ...library,
-                      layouts: [
-                        ...(library.layouts ?? []),
-                        { id: id(), name: job.name, job: structuredClone(job) },
-                      ],
-                    })
-                  }
-                >
-                  Save current layout
-                </button>
-                <label className="field">
-                  <span>Load saved layout</span>
-                  <select
-                    value=""
-                    onChange={async (e) => {
-                      const layout = library.layouts?.find(
-                        (l) => l.id === e.target.value,
-                      );
-                      if (layout && (await canReplaceJob())) {
-                        await window.jobFiles?.reset();
-                        activateJob(structuredClone(layout.job), null);
-                        setSavedSnapshot("");
-                      }
-                    }}
-                  >
-                    <option value="">Select a layout...</option>
-                    {library.layouts?.map((l) => (
-                      <option key={l.id} value={l.id}>
-                        {l.name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </section>
-            )}
-            {nestingBusy && (
-              <div className="nesting-progress" role="status">
-                <b>{nestingProgress?.phase ?? "Preparing nesting search"}</b>
-                <p>
-                  {nestingProgress?.placed ?? 0} /{" "}
-                  {nestingProgress?.total ??
-                    job.parts.reduce((n, p) => n + p.quantity, 0)}{" "}
-                  copies placed · Pass {nestingProgress?.pass ?? 1}
-                </p>
-                <p>
-                  {Math.floor((Date.now() - nestingStarted.current) / 1000)}s
-                  elapsed
-                  {nestingProgress
-                    ? ` / ${Math.ceil(nestingProgress.budgetMs / 1000)}s current budget`
-                    : ""}
-                  {nestingProgress?.extensions
-                    ? ` · ${nestingProgress.extensions} time extensions`
-                    : ""}
-                </p>
-                <div className="button-row">
-                  <button onClick={() => stopNest(true)}>
-                    Stop &amp; keep best
-                  </button>
-                  <button onClick={() => stopNest(false)}>Cancel search</button>
-                </div>
-              </div>
-            )}
-            {mode === "remnants" ? (
-              <p className="muted">
-                Remnant inventory and reusable offcuts will be added here.
-              </p>
-            ) : mode === "mcp" ? (
-              <>
-                <p className="muted">
-                  Use a local MCP client to create, edit, nest, and inspect
-                  saved project files.
-                </p>
-                <div className="notice">
-                  <Terminal size={18} />
-                  <div>
-                    <b>Local stdio server</b>
-                    <p>
-                      Starts on demand through your MCP client. No network
-                      listener.
-                    </p>
-                  </div>
-                </div>
-                <label className="field">
-                  <span>Run from this repository</span>
-                  <code>npm run mcp</code>
-                </label>
-                <p className="muted">
-                  Set WAM_PROJECT_DIR to your project folder. Available tools:
-                </p>
-                <ul className="tool-list">
-                  {[
-                    "create_project",
-                    "read_project",
-                    "write_project",
-                    "add_shape",
-                    "update_part",
-                    "nest_project",
-                    "inspect_toolpaths",
-                    "export_svg",
-                    "list_material_presets",
-                    "apply_material_preset",
-                    "create_job",
-                    "read_job",
-                    "write_job",
-                    "add_job_part",
-                    "update_job_part",
-                    "add_sheet",
-                    "update_sheet",
-                    "nest_job",
-                    "inspect_job",
-                    "read_material_library",
-                    "write_material_library",
-                  ].map((t) => (
-                    <li key={t}>
-                      <Check size={12} />
-                      <code>{t}</code>
-                    </li>
-                  ))}
-                </ul>
-                <p className="muted">
-                  Files are shared on disk. Reopen a project after MCP edits;
-                  unsaved editor changes are separate.
-                </p>
-              </>
-            ) : mode === "machine" ? (
-              <p className="muted">
-                Set machine geometry and consumable defaults. Saved jobs retain
-                a snapshot of their settings.
-              </p>
-            ) : mode === "job" ? (
-              <p className="muted">
-                Set up your parts, quantities and cutting settings, then arrange
-                them on sheets.
-              </p>
-            ) : mode === "sheets" ? (
-              <JobPanel
-                sheetsOnly
                 onSelectSheet={(id) => {
-                  openView({ kind: "sheet", id });
-                  setMode("sheets");
+                  setView({ kind: "sheet", id });
+                  setSelected(null);
+                  setControlsId(null);
                 }}
-                presets={[...job.materials, ...library.materials]}
+                renderSheetPreview={(sheet) => (
+                  <SheetPreview
+                    job={job}
+                    sheet={sheet}
+                    selectedId={selected}
+                    selectedIds={
+                      activeView.kind === "sheet" && activeView.id === sheet.id
+                        ? selectionIds
+                        : []
+                    }
+                    onSelectMany={(sheetId, ids) => {
+                      setView({ kind: "sheet", id: sheetId });
+                      setSheetSelection({ sheetId, ids });
+                      setSelected(ids.at(-1) ?? null);
+                    }}
+                    onTransformMany={(sheetId, changes) =>
+                      editJob({
+                        ...job,
+                        sheets: job.sheets.map((s) =>
+                          s.id === sheetId
+                            ? {
+                                ...s,
+                                placements: s.placements.map((p) => ({
+                                  ...p,
+                                  ...changes.find((c) => c.id === p.id)?.change,
+                                })),
+                              }
+                            : s,
+                        ),
+                      })
+                    }
+                    controlsId={controlsId}
+                    showLabels={showFileLabels}
+                    showPaths={!!sheetToolpaths[sheet.id]}
+                    onShowPaths={(show) =>
+                      setSheetToolpaths((p) => ({ ...p, [sheet.id]: show }))
+                    }
+                    disabled={nestingBusy || postingBusy}
+                    onPost={post}
+                    onSelect={(id, partId) => {
+                      setView({ kind: "sheet", id });
+                      setSelected(partId);
+                      setSheetSelection({
+                        sheetId: id,
+                        ids: partId ? [partId] : [],
+                      });
+                    }}
+                    onControls={setControlsId}
+                    onTransform={(sheetId, partId, change) =>
+                      editJob(
+                        updateSheetPlacement(job, sheetId, partId, change),
+                      )
+                    }
+                    onDuplicate={(sheetId, partId) => {
+                      const result = duplicateSheetPlacement(
+                        job,
+                        sheetId,
+                        partId,
+                      );
+                      editJob(result.job);
+                      setView({ kind: "sheet", id: sheetId });
+                      setSelected(result.placementId);
+                      setControlsId(result.placementId);
+                    }}
+                    onDelete={(sheetId, partId) => {
+                      editJob(removeSheetPlacement(job, sheetId, partId));
+                      setSelected(null);
+                      setControlsId(null);
+                    }}
+                    onEdit={(id) => openView({ kind: "part", id })}
+                    onNest={(id) => runNest(false, id)}
+                  />
+                )}
+                nestingPanel={
+                  <NestingSettings
+                    job={job}
+                    onChange={editJob}
+                    disabled={nestingBusy}
+                  />
+                }
+                nestingBusy={nestingBusy || postingBusy}
                 job={job}
-                view={activeView}
-                onChange={editJob}
-                onOpen={(next) => {
-                  openView(next);
-                  setMode("job");
-                }}
-                onNewPart={createPart}
+                library={library}
+                onChange={(next) =>
+                  editJob(
+                    next.machine !== job.machine
+                      ? {
+                          ...next,
+                          machineSettings:
+                            library.machines?.[next.machine] ??
+                            defaultMachineSettings(next.machine),
+                        }
+                      : next,
+                  )
+                }
+                onOpen={openView}
                 onUpload={() => importInput.current?.click()}
+                onNewPart={createPart}
                 onNest={() => runNest(true)}
-                onError={notify}
+                onPost={() => void post()}
+              />
+            ) : mode === "machine" ? (
+              <MachineSettingsEditor
+                importSettings={
+                  library.importSettings ?? defaultImportSettings()
+                }
+                onImportChange={(importSettings) =>
+                  updateLibrary({ ...library, importSettings })
+                }
+                active={job.machine}
+                preferred={library.defaultMachine ?? "desktop"}
+                onSelect={(machine, applyToJob) => {
+                  updateLibrary({ ...library, defaultMachine: machine });
+                  if (applyToJob)
+                    editJob(changeJobMachine(job, machine, library));
+                }}
+                profiles={{
+                  desktop:
+                    library.machines?.desktop ??
+                    defaultMachineSettings("desktop"),
+                  pro: library.machines?.pro ?? defaultMachineSettings("pro"),
+                  [job.machine]: job.machineSettings ?? {
+                    ...defaultMachineSettings(job.machine),
+                    kerf: project.material.kerf,
+                    abrasive: project.material.abrasive ?? 150,
+                  },
+                }}
+                onChange={(machine, settings) => {
+                  updateLibrary({
+                    ...library,
+                    machines: {
+                      desktop:
+                        library.machines?.desktop ??
+                        defaultMachineSettings("desktop"),
+                      pro:
+                        library.machines?.pro ?? defaultMachineSettings("pro"),
+                      [machine]: settings,
+                    },
+                  });
+                  if (machine === job.machine)
+                    editJob({ ...job, machineSettings: settings });
+                }}
               />
             ) : mode === "library" ? (
-              <>
-                {" "}
+              <main className="workspace full-page materials-page">
+                <header>
+                  <h1>Presets</h1>
+                  <p>Materials, thicknesses and cutting profiles</p>
+                </header>
                 <MaterialsDatabase
+                  initialId={
+                    matchingDefaultMaterial(
+                      library,
+                      job.materials.find(
+                        (m) => m.id === job.sheets[0].materialId,
+                      )!,
+                    )?.id
+                  }
                   machine={job.machine}
                   library={library}
                   onChange={updateLibrary}
                   onUse={useMaterial}
+                  onSave={savePresets}
                   onExport={() =>
                     download("materials.json", JSON.stringify(library, null, 2))
                   }
                   onImport={() => libraryInput.current?.click()}
                   onError={notify}
                 />
-                <MaterialPresets
-                  project={project}
-                  onApply={(p) => {
-                    const record = {
-                      ...p.material,
-                      id: id(),
-                      machine: p.machine,
-                      stockKey: p.material.name,
-                      name: `${p.material.name} - ${p.material.preset?.quality ?? "custom"}`,
-                      source: "WAM reference capture",
-                      requiresVerification: false,
-                    };
-                    updateLibrary({
-                      ...library,
-                      materials: [...library.materials, record],
-                    });
-                    notify("Reference preset saved to the database");
-                  }}
-                />
-              </>
+              </main>
+            ) : mode === "mcp" ? (
+              <McpPage machine={job.machine} onMessage={notify} />
             ) : (
-              <>
-                <section>
-                  <h3>{activeSheet ? "MACHINE & STOCK" : "PART WORKSPACE"}</h3>
-                  {activeSheet && (
-                    <p className="micro">
-                      {activeSheet.name} - {u.number(project.stock.width)} -{" "}
-                      {u.length(project.stock.height)}
-                      <br />
-                      Change stock and origin in Sheets.
-                    </p>
-                  )}
-                  {definition ? (
-                    <>
-                      <h3>PART DEFINITION</h3>
-                      <label className="field">
-                        <span>Requested quantity</span>
-                        <input
-                          type="number"
-                          min="1"
-                          max="2000"
-                          value={definition.quantity}
-                          onChange={(e) => {
-                            const n = e.target.valueAsNumber;
-                            if (Number.isInteger(n) && n > 0 && n <= 2000)
-                              editJob(setPartQuantity(job, definition.id, n));
+              <main className="workspace">
+                <div className="canvas-heading">
+                  <div>
+                    <span className="eyebrow">
+                      {mode === "part" ? "PART EDITOR" : "CUTTING BED"}
+                    </span>
+                    <b>
+                      {mode === "part" ? (
+                        <>
+                          {definition?.name}
+                          <span>Geometry, contours and cutting settings</span>
+                        </>
+                      ) : (
+                        <>
+                          {project.machine === "desktop"
+                            ? "WAZER Desktop"
+                            : "WAZER Pro"}
+                          <ChevronRight size={14} />
+                          <span>
+                            {activeSheet?.name} -{" "}
+                            {u.number(project.stock.width)} -{" "}
+                            {u.length(project.stock.height)} - Origin{" "}
+                            {originLabel(activeSheet?.workOrigin ?? "top-left")}
+                          </span>
+                        </>
+                      )}
+                    </b>
+                  </div>
+                  <div className="canvas-badges">
+                    <button
+                      onClick={() => setDetailsOpen((v) => !v)}
+                      aria-expanded={detailsOpen}
+                    >
+                      Parts & checks
+                    </button>
+                    {mode === "paths" && (
+                      <span>
+                        Abrasive: {preview.abrasiveGrams.toFixed(1)} g
+                      </span>
+                    )}
+                    <span>UNITS: {u.unit.toUpperCase()}</span>
+                  </div>
+                </div>
+                <div className="canvas-wrap">
+                  <div className="floating-tools">
+                    <Tool
+                      title="Select / move (V)"
+                      disabled={
+                        mode !== "nest" &&
+                        !(mode === "part" && partPanel !== "process")
+                      }
+                      active={tool === "select"}
+                      onClick={() => setTool("select")}
+                    >
+                      <MousePointer2 size={18} />
+                    </Tool>
+                    {mode === "part" && partPanel === "geometry" && (
+                      <>
+                        {" "}
+                        <Tool
+                          title="Edit nodes (N)"
+                          active={tool === "nodes"}
+                          onClick={activateNodes}
+                        >
+                          <ScanLine size={18} />
+                        </Tool>
+                        <Tool
+                          title="Draw polygon (P); Enter closes; Shift Enter leaves open"
+                          active={tool === "pen"}
+                          onClick={() => {
+                            setTool("pen");
+                            setMode("part");
+                          }}
+                        >
+                          <PenTool size={18} />
+                        </Tool>
+                        <span />
+                        <Tool title="Add rectangle" onClick={() => add("rect")}>
+                          <Square size={18} />
+                        </Tool>
+                        <Tool title="Add circle" onClick={() => add("circle")}>
+                          <Circle size={18} />
+                        </Tool>
+                        <span />
+                      </>
+                    )}
+                    <Tool
+                      title="Undo (Ctrl Z)"
+                      disabled={!history.length}
+                      onClick={undo}
+                    >
+                      <Undo2 size={18} />
+                    </Tool>
+                    <Tool
+                      title="Redo (Ctrl Shift Z)"
+                      disabled={!future.length}
+                      onClick={redo}
+                    >
+                      <Redo2 size={18} />
+                    </Tool>
+                  </div>
+                  <svg
+                    ref={svg}
+                    className={`bed tool-${tool}`}
+                    viewBox={`${-24 + pan.x} ${-22 + pan.y} ${(BED.width + 48) / zoom} ${(BED.height + 44) / zoom}`}
+                    onPointerDown={(e) => {
+                      if (e.button === 1 || e.altKey) {
+                        e.preventDefault();
+                        drag.current = {
+                          id: "",
+                          point: point(e),
+                          original: project,
+                          originalJob: job,
+                          pan: true,
+                          panOrigin: pan,
+                        };
+                        e.currentTarget.setPointerCapture(e.pointerId);
+                        return;
+                      }
+                      if (mode === "part" && tool === "pen") {
+                        setDraft((d) => [...d, point(e)]);
+                        return;
+                      }
+                      if (tool === "tabs" || tool === "entry") return;
+                      setSelected(null);
+                      setControlsId(null);
+                    }}
+                    onPointerMove={(e) => {
+                      const d = drag.current;
+                      if (!d) return;
+                      const at = point(e, !d.rotate);
+                      if (d.pan) {
+                        setPan({
+                          x: pan.x + d.point.x - at.x,
+                          y: pan.y + d.point.y - at.y,
+                        });
+                        return;
+                      }
+                      const original = d.original.parts.find(
+                        (p) => p.id === d.id,
+                      )!;
+                      if (
+                        !d.changed &&
+                        Math.hypot(at.x - d.point.x, at.y - d.point.y) < 1e-9
+                      )
+                        return;
+                      d.changed = true;
+                      if (d.rotate) {
+                        const rotated = rotatePartFromPointer(
+                          original,
+                          d.rotate.center,
+                          d.point,
+                          at,
+                          e.shiftKey,
+                        );
+                        setProject({
+                          ...d.original,
+                          parts: d.original.parts.map((p) =>
+                            p.id === d.id ? rotated : p,
+                          ),
+                        });
+                      } else if (d.node) {
+                        const [ci, ni] = d.node;
+                        const a = (-original.rotation * Math.PI) / 180;
+                        const dx = at.x - original.x,
+                          dy = at.y - original.y;
+                        const node = {
+                          x:
+                            (dx * Math.cos(a) - dy * Math.sin(a)) /
+                            original.scale,
+                          y:
+                            (dx * Math.sin(a) + dy * Math.cos(a)) /
+                            original.scale,
+                        };
+                        setProject({
+                          ...d.original,
+                          parts: d.original.parts.map((p) =>
+                            p.id !== d.id
+                              ? p
+                              : {
+                                  ...p,
+                                  contours: p.contours.map((c, i) =>
+                                    i !== ci
+                                      ? c
+                                      : {
+                                          ...c,
+                                          points: c.points.map((v, j) =>
+                                            j === ni ? node : v,
+                                          ),
+                                        },
+                                  ),
+                                },
+                          ),
+                        });
+                      } else
+                        setProject({
+                          ...d.original,
+                          parts: d.original.parts.map((p) =>
+                            p.id === d.id
+                              ? {
+                                  ...p,
+                                  x: original.x + at.x - d.point.x,
+                                  y: original.y + at.y - d.point.y,
+                                }
+                              : p,
+                          ),
+                        });
+                    }}
+                    onPointerUp={endDrag}
+                    onPointerCancel={endDrag}
+                  >
+                    <defs>
+                      <pattern
+                        id="minor"
+                        width="10"
+                        height="10"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <path
+                          d="M 10 0 L 0 0 0 10"
+                          fill="none"
+                          stroke="#303a40"
+                          strokeWidth="0.22"
+                        />
+                      </pattern>
+                      <pattern
+                        id="major"
+                        width="50"
+                        height="50"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <rect width="50" height="50" fill="url(#minor)" />
+                        <path
+                          d="M 50 0 L 0 0 0 50"
+                          fill="none"
+                          stroke="#465057"
+                          strokeWidth="0.35"
+                        />
+                      </pattern>
+                    </defs>
+                    {mode === "part" ? (
+                      <rect
+                        data-layer="part-editor-grid"
+                        x={-24 + pan.x}
+                        y={-22 + pan.y}
+                        width={(BED.width + 48) / zoom}
+                        height={(BED.height + 44) / zoom}
+                        fill="url(#major)"
+                      />
+                    ) : (
+                      <>
+                        <rect
+                          data-layer="wazer-bed"
+                          x="0"
+                          y="0"
+                          width={BED.width}
+                          height={BED.height}
+                          fill="#1c282e"
+                          stroke="#6c858f"
+                          strokeWidth="0.7"
+                        />
+                        <rect
+                          x="0"
+                          y="0"
+                          width={BED.width}
+                          height={BED.height}
+                          fill="url(#major)"
+                          pointerEvents="none"
+                        />
+                        <rect
+                          data-layer="machine-cutting-area"
+                          x={0}
+                          y={0}
+                          width={cuttingArea.width}
+                          height={cuttingArea.height}
+                          fill="none"
+                          stroke="#eaa577"
+                          strokeDasharray="3 2"
+                          strokeWidth="0.45"
+                          pointerEvents="none"
+                        />
+                        <rect
+                          data-layer="stock"
+                          x={origin.x}
+                          y={origin.y}
+                          width={project.stock.width}
+                          height={project.stock.height}
+                          fill="#42514b"
+                          fillOpacity="0.65"
+                          stroke="#a9b6ae"
+                          strokeWidth="0.5"
+                        />
+                        <rect
+                          x={origin.x}
+                          y={origin.y}
+                          width={project.stock.width}
+                          height={project.stock.height}
+                          fill="url(#major)"
+                        />
+                        <rect
+                          data-layer="sheet-layout"
+                          x={origin.x + project.stock.margin}
+                          y={origin.y + project.stock.margin}
+                          width={Math.max(
+                            0,
+                            project.stock.width - 2 * project.stock.margin,
+                          )}
+                          height={Math.max(
+                            0,
+                            project.stock.height - 2 * project.stock.margin,
+                          )}
+                          fill="#1a485030"
+                          stroke="#66745c"
+                          strokeWidth="0.35"
+                          strokeDasharray="2 2"
+                        />
+                        {Array.from(
+                          { length: Math.floor(BED.width / 50) + 1 },
+                          (_, i) => (
+                            <text
+                              className="ruler"
+                              key={`x${i}`}
+                              x={u.number(i * 50)}
+                              y="-5"
+                              textAnchor="middle"
+                            >
+                              {u.number(i * 50)}
+                            </text>
+                          ),
+                        )}
+                        {Array.from(
+                          { length: Math.floor(BED.height / 50) + 1 },
+                          (_, i) => (
+                            <text
+                              className="ruler"
+                              key={`y${i}`}
+                              x="-6"
+                              y={i * 50 + 1}
+                              textAnchor="end"
+                            >
+                              {u.number(i * 50)}
+                            </text>
+                          ),
+                        )}
+                        <path
+                          data-layer="work-origin"
+                          transform={`translate(${origin.x + workOrigin.x} ${origin.y + workOrigin.y})`}
+                          d="M -4 0 H 4 M 0 -4 V 4"
+                          stroke="#eaa577"
+                          strokeWidth="0.6"
+                        />
+                      </>
+                    )}
+                    <g
+                      data-layer="sheet-parts"
+                      transform={`translate(${origin.x} ${origin.y})`}
+                    >
+                      {project.parts.map((p, i) => {
+                        const contours = transformed(p);
+                        return (
+                          <g
+                            key={p.id}
+                            data-part-id={p.id}
+                            onDoubleClick={(e) => {
+                              if (
+                                mode !== "nest" &&
+                                !(mode === "part" && partPanel === "geometry")
+                              )
+                                return;
+                              e.stopPropagation();
+                              setSelected(p.id);
+                              setControlsId(p.id);
+                              setTool("select");
+                              if (definition) setMode("part");
+                            }}
+                            onPointerDown={(e) => {
+                              if (
+                                mode !== "nest" &&
+                                !(mode === "part" && partPanel !== "process")
+                              )
+                                return;
+                              if (
+                                definition &&
+                                (tool === "tabs" ||
+                                  tool === "entry" ||
+                                  partPanel === "cuts")
+                              ) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                const at = point(e, false);
+                                const nearest = contours
+                                  .map((c, index) => ({
+                                    ...closestOnPath(c.points, c.closed, at),
+                                    index,
+                                    closed: c.closed,
+                                  }))
+                                  .filter(
+                                    (c) =>
+                                      (partPanel === "cuts" &&
+                                        tool === "select") ||
+                                      c.closed,
+                                  )
+                                  .sort((a, b) => a.distance - b.distance)[0];
+                                if (!nearest)
+                                  return notify(
+                                    "Tabs and movable entry points require a closed contour",
+                                  );
+                                setContourIndex(nearest.index);
+                                if (tool !== "tabs" && tool !== "entry") return;
+                                const target = p.contours[nearest.index];
+                                const change =
+                                  tool === "tabs"
+                                    ? {
+                                        tabMode: "manual" as const,
+                                        tabs: [
+                                          ...(target.tabs ?? []),
+                                          {
+                                            position: nearest.fraction,
+                                            width: Math.max(
+                                              0.1,
+                                              job.tabRules?.width ??
+                                                project.material.tabWidth,
+                                            ),
+                                          },
+                                        ],
+                                      }
+                                    : { startPosition: nearest.fraction };
+                                edit({
+                                  ...project,
+                                  parts: project.parts.map((q) =>
+                                    q.id === p.id
+                                      ? {
+                                          ...q,
+                                          contours: q.contours.map((c, j) =>
+                                            j === nearest.index
+                                              ? { ...c, ...change }
+                                              : c,
+                                          ),
+                                        }
+                                      : q,
+                                  ),
+                                });
+                                setSelected(p.id);
+                                if (tool === "entry") setTool("select");
+                                return;
+                              }
+                              if (tool === "pen" || e.altKey || e.button === 1)
+                                return;
+                              e.stopPropagation();
+                              e.preventDefault();
+                              setSelected(p.id);
+                              if (p.id !== controlsId) setControlsId(null);
+                              drag.current = {
+                                id: p.id,
+                                point: point(e),
+                                original: structuredClone(project),
+                                originalJob: job,
+                              };
+                              e.currentTarget.setPointerCapture(e.pointerId);
+                            }}
+                          >
+                            <path
+                              d={contours
+                                .map(
+                                  (c) =>
+                                    `M${c.points.map((v) => `${v.x},${v.y}`).join(" L")}${c.closed ? " Z" : ""}`,
+                                )
+                                .join(" ")}
+                              fill={
+                                p.id === selected ? "#e7a66c22" : "#7d9ba014"
+                              }
+                              fillRule="evenodd"
+                              stroke={p.id === selected ? "#f5b174" : "#a9c6cb"}
+                              strokeWidth={p.id === selected ? 0.7 : 0.45}
+                              vectorEffect="non-scaling-stroke"
+                              style={{
+                                strokeWidth: p.id === selected ? 1.8 : 1.2,
+                              }}
+                            />
+                            {!showCutPreview && showFileLabels ? (
+                              <text
+                                className="part-label"
+                                x={partBounds(p).x}
+                                y={partBounds(p).y - 3}
+                              >
+                                {String(i + 1).padStart(2, "0")} / {p.name}
+                              </text>
+                            ) : null}
+                            {p.id === selected && controlsId !== p.id ? (
+                              <rect
+                                x={partBounds(p).x - 1.5}
+                                y={partBounds(p).y - 1.5}
+                                width={partBounds(p).width + 3}
+                                height={partBounds(p).height + 3}
+                                fill="none"
+                                stroke="#e5a56b"
+                                strokeWidth="0.3"
+                                strokeDasharray="2 1.5"
+                                pointerEvents="none"
+                              />
+                            ) : null}
+                            {tool === "nodes" && p.id === selected
+                              ? contours.map((c, ci) =>
+                                  c.points.map((v, ni) => (
+                                    <circle
+                                      key={`${ci}-${ni}`}
+                                      cx={v.x}
+                                      cy={v.y}
+                                      r={1.1 / Math.sqrt(zoom)}
+                                      fill="#f5b174"
+                                      stroke="#20282d"
+                                      strokeWidth="0.4"
+                                      onPointerDown={(e) => {
+                                        e.stopPropagation();
+                                        drag.current = {
+                                          id: p.id,
+                                          point: point(e),
+                                          original: structuredClone(project),
+                                          originalJob: job,
+                                          node: [ci, ni],
+                                        };
+                                        svg.current?.setPointerCapture(
+                                          e.pointerId,
+                                        );
+                                      }}
+                                    />
+                                  )),
+                                )
+                              : null}
+                          </g>
+                        );
+                      })}
+                      {current &&
+                      controlsId === current.id &&
+                      tool === "select" ? (
+                        <PartControls
+                          part={current}
+                          pixelsPerMm={pixelsPerMm}
+                          view={{
+                            x: -24 + pan.x - origin.x,
+                            y: -22 + pan.y - origin.y,
+                            width: (BED.width + 48) / zoom,
+                            height: (BED.height + 44) / zoom,
+                          }}
+                          onDuplicate={duplicate}
+                          onDelete={remove}
+                          onRotate={(e) => {
+                            if (e.button !== 0) return;
+                            e.stopPropagation();
+                            e.preventDefault();
+                            drag.current = {
+                              id: current.id,
+                              point: point(e, false),
+                              original: structuredClone(project),
+                              originalJob: job,
+                              rotate: { center: partCenter(current) },
+                            };
+                            svg.current?.setPointerCapture(e.pointerId);
                           }}
                         />
-                      </label>
-                      <PresetSelector
-                        records={[...job.materials, ...library.materials]}
-                        current={job.materials.find(
-                          (m) => m.id === definition.materialId,
-                        )!}
-                        machine={job.machine}
-                        labelSuffix="part editor"
-                        onChange={(selected) => {
-                          const record = materialForMachine(
-                            selected,
-                            job.machine,
-                          );
-                          const materials = job.materials.some(
-                            (m) => m.id === record.id,
-                          )
-                            ? job.materials
-                            : [...job.materials, record];
-                          editJob(
-                            setPartMaterial(
-                              { ...job, materials },
-                              definition.id,
-                              record.id,
-                            ),
-                          );
-                        }}
-                      />
-                    </>
-                  ) : null}
-                </section>
-                {mode === "nest" ? (
-                  <section>
-                    <h3>
-                      NESTING SETTINGS <span className="pill">SVGNEST</span>
-                    </h3>
-                    <div className="field-grid">
-                      <NumberField
-                        label="Edge margin"
-                        value={project.stock.margin}
-                        max={100}
-                        onChange={(margin) =>
-                          edit({
-                            ...project,
-                            stock: { ...project.stock, margin },
-                          })
-                        }
-                      />
-                      <NumberField
-                        label="Part spacing"
-                        value={project.stock.spacing}
-                        max={100}
-                        onChange={(spacing) =>
-                          edit({
-                            ...project,
-                            stock: { ...project.stock, spacing },
-                          })
-                        }
-                      />
-                    </div>
-                    <NestingSettings
-                      job={job}
-                      project={project}
-                      scope="sheet"
-                      onChange={editJob}
-                      disabled={nestingBusy}
-                    />
-                    <button
-                      disabled={nestingBusy}
-                      className="primary wide"
-                      onClick={() => runNest()}
-                    >
-                      <BoxSelect size={16} /> Nest all {project.parts.length}{" "}
-                      parts
-                    </button>
-                    <p className="micro">
-                      Nest this sheet, or use Job to fill all requested
-                      quantities across sheets.
-                    </p>
-                  </section>
-                ) : null}
-                {mode === "material" ? (
-                  <section>
-                    <button
-                      className="wide"
-                      onClick={() => {
-                        const materialId =
-                          activeSheet?.materialId ?? definition!.materialId;
-                        const m = job.materials.find(
-                          (m) => m.id === materialId,
-                        )!;
-                        updateLibrary({
-                          ...library,
-                          materials: [
-                            ...library.materials.filter((r) => r.id !== m.id),
-                            { ...m, source: "Saved job defaults" },
-                          ],
-                        });
-                        notify("Material defaults saved to database");
-                      }}
-                    >
-                      Save these defaults to database
-                    </button>
-                  </section>
-                ) : null}
-                {mode === "material" ? (
-                  <MaterialPresets
-                    project={project}
-                    onApply={(p) => {
-                      edit(p);
-                      notify("Material preset applied");
-                    }}
-                  />
-                ) : null}
-                {mode === "part" && definition && partPanel === "process" ? (
-                  <section>
-                    <h3>PROCESS PARAMETERS</h3>
-                    {definition ? (
-                      <>
-                        <NumberField
-                          label="Cut feed"
-                          value={project.material.feed}
-                          suffix="mm/min"
-                          min={0.01}
-                          onChange={(v) => material("feed", v)}
-                        />
-                        <NumberField
-                          label="Pierce time"
-                          value={project.material.pierce}
-                          suffix="sec"
-                          step={0.1}
-                          onChange={(v) => material("pierce", v)}
-                        />
-                        <NumberField
-                          label="Pierce diameter"
-                          value={project.material.pierceDiameter ?? 0}
-                          max={100}
-                          step={0.1}
-                          onChange={(v) => material("pierceDiameter", v)}
-                        />
-                        <p className="micro">
-                          Zero uses the kerf width automatically (
-                          {u.length(project.material.kerf)}). Enter a positive
-                          diameter to override it.
-                        </p>
-                      </>
-                    ) : null}
-                    <div className="notice">
-                      <AlertTriangle size={17} />
-                      <div>
-                        <b>Preview parameters</b>
-                        <p>
-                          Custom and recorded reference settings are editable.
-                          Post sheets from Jobs to generate WAZER cut files.
-                        </p>
-                      </div>
-                    </div>
-                  </section>
-                ) : null}
-                {mode === "part" && partPanel === "geometry" ? (
-                  <section>
-                    <h3>IMPORT & CREATE</h3>
-                    <button className="wide" onClick={createPart}>
-                      New part editor
-                    </button>
-                    <button
-                      className="import-button"
-                      onClick={() => importInput.current?.click()}
-                    >
-                      <Upload size={19} />
-                      <b>Import vectors</b>
-                      <small>SVG or DXF</small>
-                    </button>
-                    <label className="field">
-                      <span>DXF units if unspecified</span>
-                      <select
-                        value={dxfUnits}
-                        onChange={(e) =>
-                          setDxfUnits(e.target.value as "mm" | "in")
-                        }
-                      >
-                        <option value="mm">Millimetres</option>
-                        <option value="in">Inches</option>
-                      </select>
-                    </label>
-                    <div className="button-row">
-                      <button onClick={() => add("rect")}>
-                        <Square size={14} />
-                        Rectangle
-                      </button>
-                      <button onClick={() => add("circle")}>
-                        <Circle size={14} />
-                        Circle
-                      </button>
-                    </div>
-                  </section>
-                ) : null}
-                {mode === "part" &&
-                  partPanel === "cuts" &&
-                  !project.parts.length && (
-                    <p className="muted">
-                      Draw or import an outline in Geometry before placing tabs
-                      and entry points.
-                    </p>
-                  )}
-                {mode === "part" &&
-                definition &&
-                project.parts[0] &&
-                partPanel === "cuts" ? (
-                  <>
-                    <div className="field-grid">
-                      <NumberField
-                        label="Stock to leave"
-                        value={project.parts[0].stockToLeave ?? 0}
-                        min={-10}
-                        max={10}
-                        step={0.05}
-                        onChange={(stockToLeave) =>
-                          edit({
-                            ...project,
-                            parts: project.parts.map((p) => ({
-                              ...p,
-                              stockToLeave,
-                            })),
-                          })
-                        }
-                      />
-
-                      <NumberField
-                        label="Lead length"
-                        value={project.material.lead}
-                        max={30}
-                        step={0.5}
-                        onChange={(v) => material("lead", v)}
-                      />
-                      <NumberField
-                        label="Tab width"
-                        value={project.material.tabWidth}
-                        max={20}
-                        step={0.5}
-                        onChange={(v) => material("tabWidth", v)}
-                      />
-                      <NumberField
-                        label="Tabs / contour"
-                        value={project.material.tabCount}
-                        max={20}
-                        suffix=""
-                        onChange={(v) => material("tabCount", Math.round(v))}
-                      />
-                    </div>
-                    <p className="micro">
-                      Positive stock to leave enlarges the outside and reduces
-                      holes; negative values do the reverse. The allowance is
-                      per side. Tabs apply to closed outer contours. Leads are
-                      scrap-side entries: inside holes and outside outer
-                      profiles.
-                    </p>
-                    <label className="field">
-                      <span>Part cut default</span>
-                      <select
-                        value={project.parts[0].cut}
-                        onChange={(e) =>
-                          edit({
-                            ...project,
-                            parts: project.parts.map((p) => ({
-                              ...p,
-                              cut: e.target.value as Part["cut"],
-                            })),
-                          })
-                        }
-                      >
-                        <option value="outside">Outside</option>
-                        <option value="inside">Inside</option>
-                        <option value="centerline">Centerline</option>
-                      </select>
-                    </label>
-                    <PartProcessEditor
-                      part={project.parts[0]}
-                      defaultLead={project.material.lead}
-                      selected={Math.min(
-                        contourIndex,
-                        project.parts[0].contours.length - 1,
-                      )}
-                      onChange={(p) => edit({ ...project, parts: [p] })}
-                      onTabs={() => {
-                        setTool("tabs");
-                        setSelected(definition.id);
-                      }}
-                      onEntry={() => {
-                        setTool("entry");
-                        setSelected(definition.id);
-                      }}
-                    />
-                  </>
-                ) : null}
-                {(mode === "nest" ||
-                  (mode === "part" && partPanel === "geometry")) && (
-                  <section>
-                    <h3>
-                      SELECTION{" "}
-                      {current ? <span className="pill">1 PART</span> : null}
-                    </h3>
-                    {current ? (
-                      <>
-                        {activeSheet && (
-                          <label className="check">
-                            <input
-                              type="checkbox"
-                              checked={current.locked ?? false}
-                              onChange={(e) =>
-                                updatePart({ locked: e.target.checked })
-                              }
-                            />
-                            Lock placement for nesting
-                          </label>
-                        )}
-                        {definition && (
-                          <label className="field">
-                            <span>Nesting rotation / grain</span>
-                            <select
-                              value={definition.rotationPolicy ?? "free"}
-                              onChange={(e) =>
-                                editJob({
-                                  ...job,
-                                  parts: job.parts.map((p) =>
-                                    p.id === definition.id
-                                      ? {
-                                          ...p,
-                                          rotationPolicy: e.target.value as
-                                            | "free"
-                                            | "fixed"
-                                            | "grain-x"
-                                            | "grain-y",
-                                        }
-                                      : p,
+                      ) : null}
+                      {definition && partPanel === "cuts"
+                        ? project.parts.map((p) => (
+                            <PartCutHandles
+                              key={p.id}
+                              part={p}
+                              project={project}
+                              preview={preview as ReturnType<typeof plan>}
+                              pixelsPerMm={pixelsPerMm}
+                              onSelect={(index) => {
+                                setContourIndex(index);
+                                setSelected(p.id);
+                                setTool("select");
+                              }}
+                              onChange={(next) =>
+                                edit({
+                                  ...project,
+                                  parts: project.parts.map((q) =>
+                                    q.id === p.id ? next : q,
                                   ),
                                 })
                               }
-                            >
-                              <option value="free">Any allowed rotation</option>
-                              <option value="fixed">Do not rotate</option>
-                              <option value="grain-x">
-                                Grain along sheet X
-                              </option>
-                              <option value="grain-y">
-                                Grain along sheet Y
-                              </option>
-                            </select>
-                          </label>
-                        )}
-                        {activeSheet && current.definitionId ? (
-                          <button
-                            className="wide"
-                            onClick={() =>
-                              openView({
-                                kind: "part",
-                                id: current.definitionId!,
-                              })
-                            }
-                          >
-                            Edit source part · tabs & kerf
-                          </button>
-                        ) : null}
-                        <label className="field">
-                          <span>Part name</span>
-                          <input
-                            value={current.name}
-                            readOnly={mode !== "part"}
-                            onChange={(e) =>
-                              updatePart({ name: e.target.value || "Part" })
-                            }
-                          />
-                        </label>
-                        <div className="field-grid">
-                          <NumberField
-                            label="Position X"
-                            value={current.x - workOrigin.x}
-                            min={-10000}
-                            onChange={(x) =>
-                              updatePart({ x: x + workOrigin.x })
-                            }
-                          />
-                          <NumberField
-                            label="Position Y"
-                            value={current.y - workOrigin.y}
-                            min={-10000}
-                            onChange={(y) =>
-                              updatePart({ y: y + workOrigin.y })
-                            }
-                          />
-                          <NumberField
-                            label="Rotation"
-                            value={current.rotation}
-                            min={-36000}
-                            max={36000}
-                            suffix="deg"
-                            onChange={(rotation) => updatePart({ rotation })}
-                          />
-                          {mode === "part" && (
-                            <NumberField
-                              label="Scale"
-                              value={current.scale * 100}
-                              min={0.1}
-                              max={100000}
-                              suffix="%"
-                              onChange={(scale) =>
-                                updatePart({ scale: scale / 100 })
-                              }
                             />
-                          )}
+                          ))
+                        : null}
+                      {definition &&
+                      project.parts[0]?.contours[contourIndex] ? (
+                        <path
+                          d={(() => {
+                            const c = transformed(project.parts[0])[
+                              contourIndex
+                            ];
+                            return `M${c.points.map((v) => `${v.x},${v.y}`).join(" L")}${c.closed ? " Z" : ""}`;
+                          })()}
+                          fill="none"
+                          stroke="#8ed3d9"
+                          strokeWidth={1.5 / pixelsPerMm}
+                          pointerEvents="none"
+                        />
+                      ) : null}
+                      {showCutPreview
+                        ? preview.pierces
+                            .filter((p) => p.radius > 0)
+                            .map((p, i) => (
+                              <circle
+                                key={`pierce-${i}`}
+                                cx={p.point.x}
+                                cy={p.point.y}
+                                r={p.radius}
+                                fill={p.warning ? "#f47e6d44" : "#88cabb33"}
+                                stroke={p.warning ? "#f47e6d" : "#88cabb"}
+                                strokeWidth={1 / pixelsPerMm}
+                                pointerEvents="none"
+                              />
+                            ))
+                        : null}
+                      {showCutPreview
+                        ? visible.map((m, i) => (
+                            <line
+                              key={i}
+                              x1={m.from.x}
+                              y1={m.from.y}
+                              x2={m.to.x}
+                              y2={m.to.y}
+                              stroke={
+                                m.kind === "rapid"
+                                  ? "#75979f"
+                                  : m.kind === "tab"
+                                    ? "#f6ce6a"
+                                    : "#85c9a3"
+                              }
+                              strokeWidth={m.kind === "rapid" ? 0.3 : 0.65}
+                              strokeDasharray={
+                                m.kind === "rapid" ? "2 2" : undefined
+                              }
+                              pointerEvents="none"
+                            />
+                          ))
+                        : null}
+                      {draft.length ? (
+                        <polyline
+                          points={draft.map((p) => `${p.x},${p.y}`).join(" ")}
+                          fill="none"
+                          stroke="#f5b174"
+                          strokeWidth="0.8"
+                        />
+                      ) : null}
+                    </g>
+                  </svg>
+                  {tool === "pen" ? (
+                    <div className="canvas-help">
+                      Click to add vertices · Enter to close · Shift Enter for
+                      open path · Esc to cancel{" "}
+                      <button onClick={() => finishPen()}>Finish path</button>
+                    </div>
+                  ) : (
+                    <div className="canvas-help">
+                      <span className="green-dot" />
+                      Display units: {u.unit}{" "}
+                      <span>
+                        Double-click a part for rotate/actions · Alt + drag to
+                        pan
+                      </span>
+                    </div>
+                  )}
+                  <div className="view-controls">
+                    <Tool
+                      title={`Snap to ${u.length(1)} grid`}
+                      active={snap}
+                      onClick={() => setSnap((s) => !s)}
+                    >
+                      <Magnet size={16} />
+                    </Tool>
+                    <span />
+                    <Tool
+                      title="Zoom out"
+                      onClick={() => setZoom((z) => Math.max(0.6, z / 1.2))}
+                    >
+                      <ZoomOut size={16} />
+                    </Tool>
+                    <small>{Math.round(zoom * 100)}%</small>
+                    <Tool
+                      title="Zoom in"
+                      onClick={() =>
+                        setZoom((z) => Math.min(MAX_PART_ZOOM, z * 1.2))
+                      }
+                    >
+                      <ZoomIn size={16} />
+                    </Tool>
+                    <Tool
+                      title={mode === "part" ? "Fit part" : "Fit bed"}
+                      onClick={() => {
+                        if (mode === "part") fitPart(project.parts[0]);
+                        else {
+                          setZoom(1);
+                          setPan({ x: 0, y: 0 });
+                        }
+                      }}
+                    >
+                      <Maximize size={16} />
+                    </Tool>
+                    {activeSheet ? (
+                      <Tool
+                        title="Fit stock"
+                        onClick={() => {
+                          const fit = Math.min(
+                            5,
+                            (BED.width + 48) / (project.stock.width + 40),
+                            (BED.height + 44) / (project.stock.height + 40),
+                          );
+                          setZoom(fit);
+                          setPan({
+                            x:
+                              origin.x +
+                              project.stock.width / 2 -
+                              (BED.width + 48) / fit / 2 +
+                              24,
+                            y:
+                              origin.y +
+                              project.stock.height / 2 -
+                              (BED.height + 44) / fit / 2 +
+                              22,
+                          });
+                        }}
+                      >
+                        <ScanLine size={16} />
+                      </Tool>
+                    ) : null}
+                  </div>
+                </div>
+                {detailsOpen && (
+                  <section className="bottom-panel">
+                    <div className="bottom-tabs">
+                      <button
+                        className={tab === "parts" ? "active" : ""}
+                        onClick={() => setTab("parts")}
+                      >
+                        <Layers size={14} /> Parts{" "}
+                        <span>{project.parts.length}</span>
+                      </button>
+                      <button
+                        className={tab === "issues" ? "active" : ""}
+                        onClick={() => setTab("issues")}
+                      >
+                        <AlertTriangle size={14} /> Preflight{" "}
+                        <span>{preview.issues.length}</span>
+                      </button>
+                      <div className="simulation">
+                        <button
+                          title={
+                            playing ? "Pause simulation" : "Play simulation"
+                          }
+                          onClick={() => {
+                            if (activeView.kind === "part") {
+                              setPartPanel("cuts");
+                              setMode("part");
+                            } else setMode("job");
+                            if (progress >= 100) setProgress(0);
+                            setPlaying((v) => !v);
+                          }}
+                        >
+                          {playing ? <Pause size={14} /> : <Play size={14} />}
+                        </button>
+                        <input
+                          aria-label="Simulation progress"
+                          type="range"
+                          min="0"
+                          max="100"
+                          value={progress}
+                          onChange={(e) => {
+                            if (activeView.kind === "part") {
+                              setPartPanel("cuts");
+                              setMode("part");
+                            } else setMode("job");
+                            setProgress(Number(e.target.value));
+                            setPlaying(false);
+                          }}
+                        />
+                        <small>{Math.round(progress)}%</small>
+                      </div>
+                    </div>
+                    {tab === "parts" ? (
+                      <div className="parts-table">
+                        <div className="table-row table-header">
+                          <span>#</span>
+                          <span>PART NAME</span>
+                          <span>SIZE ({u.unit.toUpperCase()})</span>
+                          <span>CONTOURS</span>
+                          <span>CUT SIDE</span>
                         </div>
-                        <p className="micro">
-                          Bounds {u.number(partBounds(current).width)} ×{" "}
-                          {u.length(partBounds(current).height)}
-                        </p>
-
-                        <div className="button-row">
-                          <button onClick={duplicate}>
-                            <Copy size={14} />
-                            Duplicate
+                        {project.parts.map((p, i) => (
+                          <button
+                            className={`table-row ${selected === p.id ? "selected" : ""}`}
+                            key={p.id}
+                            onClick={() => setSelected(p.id)}
+                          >
+                            <span>{String(i + 1).padStart(2, "0")}</span>
+                            <span>
+                              <span className="part-dot" />
+                              {p.name}
+                            </span>
+                            <span>
+                              {u.number(partBounds(p).width)} ×{" "}
+                              {u.number(partBounds(p).height)}
+                            </span>
+                            <span>{p.contours.length}</span>
+                            <span>{p.cut}</span>
                           </button>
-                          <button onClick={remove}>
-                            <Trash2 size={14} />
-                            Delete
-                          </button>
-                        </div>
-                      </>
+                        ))}
+                        {!project.parts.length ? (
+                          <p className="muted empty-table">
+                            Your sheet is empty. Import a vector file or create
+                            a shape.
+                          </p>
+                        ) : null}
+                      </div>
                     ) : (
-                      <div className="empty-selection">
-                        <MousePointer2 size={24} />
+                      <div className="issues">
                         <p>
-                          Select a part to edit its geometry
-                          <br />
-                          and cutting properties.
+                          <AlertTriangle size={15} /> Review cutting settings
+                          and sheet placement before posting.
                         </p>
+                        {preview.issues.length ? (
+                          preview.issues.map((s, i) => (
+                            <p key={i}>
+                              <AlertTriangle size={15} />
+                              {s}
+                            </p>
+                          ))
+                        ) : (
+                          <p>
+                            <Check size={15} />
+                            No basic geometry warnings. Lead collisions,
+                            self-intersections, and machine behavior are not
+                            fully checked.
+                          </p>
+                        )}
                       </div>
                     )}
                   </section>
                 )}
-              </>
+              </main>
             )}
-            <div className="inspector-footer">
-              <button onClick={() => void documentAction("open")}>
-                <FolderOpen size={14} />
-                Open job
-              </button>
-              <button onClick={() => void documentAction("new")}>
-                New job <Plus size={14} />
+          </div>
+          <footer className="statusbar">
+            <span>
+              {current ? current.name : "No selection"} <i /> Grid {u.length(1)}{" "}
+              <i /> SVG / DXF / STEP
+            </span>
+          </footer>
+          <input
+            hidden
+            ref={importInput}
+            type="file"
+            accept=".svg,.dxf,.step,.stp,.png,.jpg,.jpeg,.gif,.webp,.bmp,.ttf,.otf,.woff,.woff2"
+            multiple
+            onChange={(e) => {
+              void onImport(Array.from(e.target.files ?? []));
+              e.target.value = "";
+            }}
+          />
+          <input
+            hidden
+            ref={openInput}
+            type="file"
+            accept=".wam,.json"
+            onChange={async (e) => {
+              const f = e.target.files?.[0];
+              e.target.value = "";
+              if (!f) return;
+              try {
+                if (f.size > 20_000_000) throw Error("Project exceeds 20 MB");
+                const loaded = readJob(JSON.parse(await f.text()));
+                openDocument(loaded, f.name);
+                notify("Job opened");
+              } catch (err) {
+                notify(`Could not open project: ${(err as Error).message}`);
+              }
+            }}
+          />
+          <input
+            hidden
+            ref={libraryInput}
+            type="file"
+            accept=".json"
+            onChange={async (e) => {
+              const file = e.target.files?.[0];
+              e.target.value = "";
+              if (!file) return;
+              try {
+                if (file.size > 20_000_000)
+                  throw Error("Database exceeds 20 MB");
+                updateLibrary(
+                  materialLibrarySchema.parse(JSON.parse(await file.text())),
+                );
+                notify("Material database imported");
+              } catch (error) {
+                notify((error as Error).message);
+              }
+            }}
+          />
+          {toast ? (
+            <div className="toast" role="status">
+              {toast}
+              <button title="Dismiss" onClick={() => setToast("")}>
+                <X size={14} />
               </button>
             </div>
-          </aside>
-          {mode === "job" ? (
-            <JobSetup
-              activeSheetId={
-                activeView.kind === "sheet" ? activeView.id : undefined
-              }
-              onClearSelection={() => {
-                setSelected(null);
-                setControlsId(null);
-              }}
-              onSelectSheet={(id) => {
-                setView({ kind: "sheet", id });
-                setSelected(null);
-                setControlsId(null);
-              }}
-              renderSheetPreview={(sheet) => (
-                <SheetPreview
-                  job={job}
-                  sheet={sheet}
-                  selectedId={selected}
-                  controlsId={controlsId}
-                  showLabels={showFileLabels}
-                  showPaths={!!sheetToolpaths[sheet.id]}
-                  onShowPaths={(show) =>
-                    setSheetToolpaths((p) => ({ ...p, [sheet.id]: show }))
-                  }
-                  disabled={nestingBusy || postingBusy}
-                  onPost={post}
-                  onSelect={(id, partId) => {
-                    setView({ kind: "sheet", id });
-                    setSelected(partId);
-                  }}
-                  onControls={setControlsId}
-                  onTransform={(sheetId, partId, change) =>
-                    editJob(updateSheetPlacement(job, sheetId, partId, change))
-                  }
-                  onDuplicate={(sheetId, partId) => {
-                    const result = duplicateSheetPlacement(
-                      job,
-                      sheetId,
-                      partId,
-                    );
-                    editJob(result.job);
-                    setView({ kind: "sheet", id: sheetId });
-                    setSelected(result.placementId);
-                    setControlsId(result.placementId);
-                  }}
-                  onDelete={(sheetId, partId) => {
-                    editJob(removeSheetPlacement(job, sheetId, partId));
-                    setSelected(null);
-                    setControlsId(null);
-                  }}
-                  onEdit={(id) => openView({ kind: "part", id })}
-                  onNest={(id) => runNest(false, id)}
-                />
-              )}
-              nestingPanel={
-                <NestingSettings
-                  job={job}
-                  onChange={editJob}
-                  disabled={nestingBusy}
-                />
-              }
-              nestingBusy={nestingBusy || postingBusy}
-              job={job}
-              library={library}
-              onChange={(next) =>
-                editJob(
-                  next.machine !== job.machine
-                    ? {
-                        ...next,
-                        machineSettings:
-                          library.machines?.[next.machine] ??
-                          defaultMachineSettings(next.machine),
-                      }
-                    : next,
-                )
-              }
-              onOpen={openView}
-              onUpload={() => importInput.current?.click()}
-              onNewPart={createPart}
-              onNest={() => runNest(true)}
-              onPost={() => void post()}
+          ) : null}
+          {postReport ? (
+            <PostReport
+              report={postReport}
+              onClose={() => setPostReport(null)}
             />
-          ) : mode === "machine" ? (
-            <MachineSettingsEditor
-              active={job.machine}
-              profiles={{
-                desktop:
-                  library.machines?.desktop ??
-                  defaultMachineSettings("desktop"),
-                pro: library.machines?.pro ?? defaultMachineSettings("pro"),
-                [job.machine]: job.machineSettings ?? {
-                  ...defaultMachineSettings(job.machine),
-                  kerf: project.material.kerf,
-                  abrasive: project.material.abrasive ?? 150,
-                },
-              }}
-              onChange={(machine, settings) => {
-                updateLibrary({
-                  ...library,
-                  machines: {
-                    desktop:
-                      library.machines?.desktop ??
-                      defaultMachineSettings("desktop"),
-                    pro: library.machines?.pro ?? defaultMachineSettings("pro"),
-                    [machine]: settings,
-                  },
-                });
-                if (machine === job.machine)
-                  editJob({ ...job, machineSettings: settings });
-              }}
-            />
-          ) : ["library", "remnants", "mcp"].includes(mode) ? (
-            <main className="workspace context-page">
-              <h1>
-                {mode === "library"
-                  ? "Presets"
-                  : mode === "remnants"
-                    ? "Remnants"
-                    : "MCP connection"}
-              </h1>
-              <p>
-                {mode === "library"
-                  ? "Manage material and cutting defaults in the preset database. Jobs keep their own saved settings."
-                  : mode === "remnants"
-                    ? "Remnant inventory will be available here."
-                    : "Use the connection details to access jobs, geometry and materials through MCP."}
-              </p>
-            </main>
-          ) : (
-            <main className="workspace">
-              <div className="canvas-heading">
+          ) : null}
+          {palette ? (
+            <div className="modal-backdrop" onClick={() => setPalette(false)}>
+              <div
+                className="command-palette"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <div>
-                  <span className="eyebrow">
-                    {mode === "part" ? "PART EDITOR" : "CUTTING BED"}
-                  </span>
-                  <b>
-                    {mode === "part" ? (
-                      <>
-                        {definition?.name}
-                        <span>Geometry, contours and cutting settings</span>
-                      </>
-                    ) : (
-                      <>
-                        {project.machine === "desktop"
-                          ? "WAZER Desktop"
-                          : "WAZER Pro"}
-                        <ChevronRight size={14} />
-                        <span>
-                          {activeSheet?.name} - {u.number(project.stock.width)}{" "}
-                          - {u.length(project.stock.height)} - Origin{" "}
-                          {originLabel(activeSheet?.workOrigin ?? "top-left")}
-                        </span>
-                      </>
-                    )}
-                  </b>
+                  <Command size={18} />
+                  <input
+                    autoFocus
+                    placeholder="Search commands…"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                  />
+                  <kbd>ESC</kbd>
                 </div>
-                <div className="canvas-badges">
-                  <button
-                    onClick={() => setDetailsOpen((v) => !v)}
-                    aria-expanded={detailsOpen}
-                  >
-                    Parts & checks
-                  </button>
-                  {mode === "paths" && (
-                    <span>Abrasive: {preview.abrasiveGrams.toFixed(1)} g</span>
-                  )}
-                  <span>UNITS: {u.unit.toUpperCase()}</span>
-                </div>
-              </div>
-              <div className="canvas-wrap">
-                <div className="floating-tools">
-                  <Tool
-                    title="Select / move (V)"
-                    disabled={
-                      mode !== "nest" &&
-                      !(mode === "part" && partPanel !== "process")
-                    }
-                    active={tool === "select"}
-                    onClick={() => setTool("select")}
-                  >
-                    <MousePointer2 size={18} />
-                  </Tool>
-                  {mode === "part" && partPanel === "geometry" && (
-                    <>
-                      {" "}
-                      <Tool
-                        title="Edit nodes (N)"
-                        active={tool === "nodes"}
-                        onClick={activateNodes}
-                      >
-                        <ScanLine size={18} />
-                      </Tool>
-                      <Tool
-                        title="Draw polygon (P); Enter closes; Shift Enter leaves open"
-                        active={tool === "pen"}
-                        onClick={() => {
-                          setTool("pen");
-                          setMode("part");
-                        }}
-                      >
-                        <PenTool size={18} />
-                      </Tool>
-                      <span />
-                      <Tool title="Add rectangle" onClick={() => add("rect")}>
-                        <Square size={18} />
-                      </Tool>
-                      <Tool title="Add circle" onClick={() => add("circle")}>
-                        <Circle size={18} />
-                      </Tool>
-                      <span />
-                    </>
-                  )}
-                  <Tool
-                    title="Undo (Ctrl Z)"
-                    disabled={!history.length}
-                    onClick={undo}
-                  >
-                    <Undo2 size={18} />
-                  </Tool>
-                  <Tool
-                    title="Redo (Ctrl Shift Z)"
-                    disabled={!future.length}
-                    onClick={redo}
-                  >
-                    <Redo2 size={18} />
-                  </Tool>
-                </div>
-                <svg
-                  ref={svg}
-                  className={`bed tool-${tool}`}
-                  viewBox={`${-24 + pan.x} ${-22 + pan.y} ${(BED.width + 48) / zoom} ${(BED.height + 44) / zoom}`}
-                  onWheel={(e) =>
-                    setZoom((z) =>
-                      Math.max(
-                        0.6,
-                        Math.min(5, z * (e.deltaY > 0 ? 0.9 : 1.1)),
-                      ),
-                    )
-                  }
-                  onPointerDown={(e) => {
-                    if (e.button === 1 || e.altKey) {
-                      e.preventDefault();
-                      drag.current = {
-                        id: "",
-                        point: point(e),
-                        original: project,
-                        originalJob: job,
-                        pan: true,
-                        panOrigin: pan,
-                      };
-                      e.currentTarget.setPointerCapture(e.pointerId);
-                      return;
-                    }
-                    if (mode === "part" && tool === "pen") {
-                      setDraft((d) => [...d, point(e)]);
-                      return;
-                    }
-                    if (tool === "tabs" || tool === "entry") return;
-                    setSelected(null);
-                    setControlsId(null);
-                  }}
-                  onPointerMove={(e) => {
-                    const d = drag.current;
-                    if (!d) return;
-                    const at = point(e, !d.rotate);
-                    if (d.pan) {
-                      setPan({
-                        x: pan.x + d.point.x - at.x,
-                        y: pan.y + d.point.y - at.y,
-                      });
-                      return;
-                    }
-                    const original = d.original.parts.find(
-                      (p) => p.id === d.id,
-                    )!;
-                    if (
-                      !d.changed &&
-                      Math.hypot(at.x - d.point.x, at.y - d.point.y) < 1e-9
-                    )
-                      return;
-                    d.changed = true;
-                    if (d.rotate) {
-                      const rotated = rotatePartFromPointer(
-                        original,
-                        d.rotate.center,
-                        d.point,
-                        at,
-                        e.shiftKey,
-                      );
-                      setProject({
-                        ...d.original,
-                        parts: d.original.parts.map((p) =>
-                          p.id === d.id ? rotated : p,
-                        ),
-                      });
-                    } else if (d.node) {
-                      const [ci, ni] = d.node;
-                      const a = (-original.rotation * Math.PI) / 180;
-                      const dx = at.x - original.x,
-                        dy = at.y - original.y;
-                      const node = {
-                        x:
-                          (dx * Math.cos(a) - dy * Math.sin(a)) /
-                          original.scale,
-                        y:
-                          (dx * Math.sin(a) + dy * Math.cos(a)) /
-                          original.scale,
-                      };
-                      setProject({
-                        ...d.original,
-                        parts: d.original.parts.map((p) =>
-                          p.id !== d.id
-                            ? p
-                            : {
-                                ...p,
-                                contours: p.contours.map((c, i) =>
-                                  i !== ci
-                                    ? c
-                                    : {
-                                        ...c,
-                                        points: c.points.map((v, j) =>
-                                          j === ni ? node : v,
-                                        ),
-                                      },
-                                ),
-                              },
-                        ),
-                      });
-                    } else
-                      setProject({
-                        ...d.original,
-                        parts: d.original.parts.map((p) =>
-                          p.id === d.id
-                            ? {
-                                ...p,
-                                x: original.x + at.x - d.point.x,
-                                y: original.y + at.y - d.point.y,
-                              }
-                            : p,
-                        ),
-                      });
-                  }}
-                  onPointerUp={endDrag}
-                  onPointerCancel={endDrag}
-                >
-                  <defs>
-                    <pattern
-                      id="minor"
-                      width="10"
-                      height="10"
-                      patternUnits="userSpaceOnUse"
-                    >
-                      <path
-                        d="M 10 0 L 0 0 0 10"
-                        fill="none"
-                        stroke="#303a40"
-                        strokeWidth="0.22"
-                      />
-                    </pattern>
-                    <pattern
-                      id="major"
-                      width="50"
-                      height="50"
-                      patternUnits="userSpaceOnUse"
-                    >
-                      <rect width="50" height="50" fill="url(#minor)" />
-                      <path
-                        d="M 50 0 L 0 0 0 50"
-                        fill="none"
-                        stroke="#465057"
-                        strokeWidth="0.35"
-                      />
-                    </pattern>
-                  </defs>
-                  {mode === "part" ? (
-                    <rect
-                      data-layer="part-editor-grid"
-                      x={-24 + pan.x}
-                      y={-22 + pan.y}
-                      width={(BED.width + 48) / zoom}
-                      height={(BED.height + 44) / zoom}
-                      fill="url(#major)"
-                    />
-                  ) : (
-                    <>
-                      <rect
-                        data-layer="wazer-bed"
-                        x="0"
-                        y="0"
-                        width={BED.width}
-                        height={BED.height}
-                        fill="#1c282e"
-                        stroke="#6c858f"
-                        strokeWidth="0.7"
-                      />
-                      <rect
-                        x="0"
-                        y="0"
-                        width={BED.width}
-                        height={BED.height}
-                        fill="url(#major)"
-                        pointerEvents="none"
-                      />
-                      <rect
-                        data-layer="machine-cutting-area"
-                        x={0}
-                        y={0}
-                        width={cuttingArea.width}
-                        height={cuttingArea.height}
-                        fill="none"
-                        stroke="#eaa577"
-                        strokeDasharray="3 2"
-                        strokeWidth="0.45"
-                        pointerEvents="none"
-                      />
-                      <rect
-                        data-layer="stock"
-                        x={origin.x}
-                        y={origin.y}
-                        width={project.stock.width}
-                        height={project.stock.height}
-                        fill="#42514b"
-                        fillOpacity="0.65"
-                        stroke="#a9b6ae"
-                        strokeWidth="0.5"
-                      />
-                      <rect
-                        x={origin.x}
-                        y={origin.y}
-                        width={project.stock.width}
-                        height={project.stock.height}
-                        fill="url(#major)"
-                      />
-                      <rect
-                        data-layer="sheet-layout"
-                        x={origin.x + project.stock.margin}
-                        y={origin.y + project.stock.margin}
-                        width={Math.max(
-                          0,
-                          project.stock.width - 2 * project.stock.margin,
-                        )}
-                        height={Math.max(
-                          0,
-                          project.stock.height - 2 * project.stock.margin,
-                        )}
-                        fill="#1a485030"
-                        stroke="#66745c"
-                        strokeWidth="0.35"
-                        strokeDasharray="2 2"
-                      />
-                      {Array.from(
-                        { length: Math.floor(BED.width / 50) + 1 },
-                        (_, i) => (
-                          <text
-                            className="ruler"
-                            key={`x${i}`}
-                            x={u.number(i * 50)}
-                            y="-5"
-                            textAnchor="middle"
-                          >
-                            {u.number(i * 50)}
-                          </text>
-                        ),
-                      )}
-                      {Array.from(
-                        { length: Math.floor(BED.height / 50) + 1 },
-                        (_, i) => (
-                          <text
-                            className="ruler"
-                            key={`y${i}`}
-                            x="-6"
-                            y={i * 50 + 1}
-                            textAnchor="end"
-                          >
-                            {u.number(i * 50)}
-                          </text>
-                        ),
-                      )}
-                      <path
-                        data-layer="work-origin"
-                        transform={`translate(${origin.x + workOrigin.x} ${origin.y + workOrigin.y})`}
-                        d="M -4 0 H 4 M 0 -4 V 4"
-                        stroke="#eaa577"
-                        strokeWidth="0.6"
-                      />
-                    </>
-                  )}
-                  <g
-                    data-layer="sheet-parts"
-                    transform={`translate(${origin.x} ${origin.y})`}
-                  >
-                    {project.parts.map((p, i) => {
-                      const contours = transformed(p);
-                      return (
-                        <g
-                          key={p.id}
-                          data-part-id={p.id}
-                          onDoubleClick={(e) => {
-                            if (
-                              mode !== "nest" &&
-                              !(mode === "part" && partPanel === "geometry")
-                            )
-                              return;
-                            e.stopPropagation();
-                            setSelected(p.id);
-                            setControlsId(p.id);
-                            setTool("select");
-                            if (definition) setMode("part");
-                          }}
-                          onPointerDown={(e) => {
-                            if (
-                              mode !== "nest" &&
-                              !(mode === "part" && partPanel !== "process")
-                            )
-                              return;
-                            if (
-                              definition &&
-                              (tool === "tabs" ||
-                                tool === "entry" ||
-                                partPanel === "cuts")
-                            ) {
-                              e.stopPropagation();
-                              e.preventDefault();
-                              const at = point(e, false);
-                              const nearest = contours
-                                .map((c, index) => ({
-                                  ...closestOnPath(c.points, c.closed, at),
-                                  index,
-                                  closed: c.closed,
-                                }))
-                                .filter(
-                                  (c) =>
-                                    (partPanel === "cuts" &&
-                                      tool === "select") ||
-                                    c.closed,
-                                )
-                                .sort((a, b) => a.distance - b.distance)[0];
-                              if (!nearest)
-                                return notify(
-                                  "Tabs and movable entry points require a closed contour",
-                                );
-                              setContourIndex(nearest.index);
-                              if (tool !== "tabs" && tool !== "entry") return;
-                              const target = p.contours[nearest.index];
-                              const change =
-                                tool === "tabs"
-                                  ? {
-                                      tabMode: "manual" as const,
-                                      tabs: [
-                                        ...(target.tabs ?? []),
-                                        {
-                                          position: nearest.fraction,
-                                          width: Math.max(
-                                            0.1,
-                                            project.material.tabWidth,
-                                          ),
-                                        },
-                                      ],
-                                    }
-                                  : { startPosition: nearest.fraction };
-                              edit({
-                                ...project,
-                                parts: project.parts.map((q) =>
-                                  q.id === p.id
-                                    ? {
-                                        ...q,
-                                        contours: q.contours.map((c, j) =>
-                                          j === nearest.index
-                                            ? { ...c, ...change }
-                                            : c,
-                                        ),
-                                      }
-                                    : q,
-                                ),
-                              });
-                              setSelected(p.id);
-                              if (tool === "entry") setTool("select");
-                              return;
-                            }
-                            if (tool === "pen" || e.altKey || e.button === 1)
-                              return;
-                            e.stopPropagation();
-                            e.preventDefault();
-                            setSelected(p.id);
-                            if (p.id !== controlsId) setControlsId(null);
-                            drag.current = {
-                              id: p.id,
-                              point: point(e),
-                              original: structuredClone(project),
-                              originalJob: job,
-                            };
-                            e.currentTarget.setPointerCapture(e.pointerId);
-                          }}
-                        >
-                          <path
-                            d={contours
-                              .map(
-                                (c) =>
-                                  `M${c.points.map((v) => `${v.x},${v.y}`).join(" L")}${c.closed ? " Z" : ""}`,
-                              )
-                              .join(" ")}
-                            fill={p.id === selected ? "#e7a66c22" : "#7d9ba014"}
-                            fillRule="evenodd"
-                            stroke={p.id === selected ? "#f5b174" : "#a9c6cb"}
-                            strokeWidth={p.id === selected ? 0.7 : 0.45}
-                            vectorEffect="non-scaling-stroke"
-                            style={{
-                              strokeWidth: p.id === selected ? 1.8 : 1.2,
-                            }}
-                          />
-                          {!showCutPreview && showFileLabels ? (
-                            <text
-                              className="part-label"
-                              x={partBounds(p).x}
-                              y={partBounds(p).y - 3}
-                            >
-                              {String(i + 1).padStart(2, "0")} / {p.name}
-                            </text>
-                          ) : null}
-                          {p.id === selected && controlsId !== p.id ? (
-                            <rect
-                              x={partBounds(p).x - 1.5}
-                              y={partBounds(p).y - 1.5}
-                              width={partBounds(p).width + 3}
-                              height={partBounds(p).height + 3}
-                              fill="none"
-                              stroke="#e5a56b"
-                              strokeWidth="0.3"
-                              strokeDasharray="2 1.5"
-                              pointerEvents="none"
-                            />
-                          ) : null}
-                          {tool === "nodes" && p.id === selected
-                            ? contours.map((c, ci) =>
-                                c.points.map((v, ni) => (
-                                  <circle
-                                    key={`${ci}-${ni}`}
-                                    cx={v.x}
-                                    cy={v.y}
-                                    r={1.1 / Math.sqrt(zoom)}
-                                    fill="#f5b174"
-                                    stroke="#20282d"
-                                    strokeWidth="0.4"
-                                    onPointerDown={(e) => {
-                                      e.stopPropagation();
-                                      drag.current = {
-                                        id: p.id,
-                                        point: point(e),
-                                        original: structuredClone(project),
-                                        originalJob: job,
-                                        node: [ci, ni],
-                                      };
-                                      svg.current?.setPointerCapture(
-                                        e.pointerId,
-                                      );
-                                    }}
-                                  />
-                                )),
-                              )
-                            : null}
-                        </g>
-                      );
-                    })}
-                    {current &&
-                    controlsId === current.id &&
-                    tool === "select" ? (
-                      <PartControls
-                        part={current}
-                        pixelsPerMm={pixelsPerMm}
-                        view={{
-                          x: -24 + pan.x - origin.x,
-                          y: -22 + pan.y - origin.y,
-                          width: (BED.width + 48) / zoom,
-                          height: (BED.height + 44) / zoom,
-                        }}
-                        onDuplicate={duplicate}
-                        onDelete={remove}
-                        onRotate={(e) => {
-                          if (e.button !== 0) return;
-                          e.stopPropagation();
-                          e.preventDefault();
-                          drag.current = {
-                            id: current.id,
-                            point: point(e, false),
-                            original: structuredClone(project),
-                            originalJob: job,
-                            rotate: { center: partCenter(current) },
-                          };
-                          svg.current?.setPointerCapture(e.pointerId);
-                        }}
-                      />
-                    ) : null}
-                    {definition
-                      ? project.parts.flatMap((p) =>
-                          transformed(p).flatMap((c, ci) =>
-                            (c.tabs ?? []).map((t, ti) => {
-                              const at = pointOnPath(
-                                c.points,
-                                c.closed,
-                                t.position,
-                              );
-                              return (
-                                <g
-                                  key={`${p.id}-${ci}-${ti}`}
-                                  pointerEvents="none"
-                                >
-                                  <circle
-                                    cx={at.x}
-                                    cy={at.y}
-                                    r={4 / pixelsPerMm}
-                                    fill="#f5ce6c"
-                                    stroke="#1a242a"
-                                    strokeWidth={1 / pixelsPerMm}
-                                  />
-                                  <text
-                                    x={at.x + 5 / pixelsPerMm}
-                                    y={at.y - 4 / pixelsPerMm}
-                                    fill="#f5ce6c"
-                                    fontSize={9 / pixelsPerMm}
-                                  >
-                                    {u.length(t.width)}
-                                  </text>
-                                </g>
-                              );
-                            }),
-                          ),
-                        )
-                      : null}
-                    {definition && project.parts[0]?.contours[contourIndex] ? (
-                      <path
-                        d={(() => {
-                          const c = transformed(project.parts[0])[contourIndex];
-                          return `M${c.points.map((v) => `${v.x},${v.y}`).join(" L")}${c.closed ? " Z" : ""}`;
-                        })()}
-                        fill="none"
-                        stroke="#8ed3d9"
-                        strokeWidth={1.5 / pixelsPerMm}
-                        pointerEvents="none"
-                      />
-                    ) : null}
-                    {showCutPreview
-                      ? preview.pierces
-                          .filter((p) => p.radius > 0)
-                          .map((p, i) => (
-                            <circle
-                              key={`pierce-${i}`}
-                              cx={p.point.x}
-                              cy={p.point.y}
-                              r={p.radius}
-                              fill={p.warning ? "#f47e6d44" : "#88cabb33"}
-                              stroke={p.warning ? "#f47e6d" : "#88cabb"}
-                              strokeWidth={1 / pixelsPerMm}
-                              pointerEvents="none"
-                            />
-                          ))
-                      : null}
-                    {showCutPreview
-                      ? visible.map((m, i) => (
-                          <line
-                            key={i}
-                            x1={m.from.x}
-                            y1={m.from.y}
-                            x2={m.to.x}
-                            y2={m.to.y}
-                            stroke={
-                              m.kind === "rapid"
-                                ? "#75979f"
-                                : m.kind === "tab"
-                                  ? "#f6ce6a"
-                                  : "#85c9a3"
-                            }
-                            strokeWidth={m.kind === "rapid" ? 0.3 : 0.65}
-                            strokeDasharray={
-                              m.kind === "rapid" ? "2 2" : undefined
-                            }
-                            pointerEvents="none"
-                          />
-                        ))
-                      : null}
-                    {showCutPreview && visible.length ? (
-                      <circle
-                        cx={visible[visible.length - 1].to.x}
-                        cy={visible[visible.length - 1].to.y}
-                        r="2.3"
-                        fill="#f5b174"
-                        stroke="#fff"
-                        strokeWidth="0.5"
-                      />
-                    ) : null}
-                    {draft.length ? (
-                      <polyline
-                        points={draft.map((p) => `${p.x},${p.y}`).join(" ")}
-                        fill="none"
-                        stroke="#f5b174"
-                        strokeWidth="0.8"
-                      />
-                    ) : null}
-                  </g>
-                </svg>
-                {tool === "pen" ? (
-                  <div className="canvas-help">
-                    Click to add vertices · Enter to close · Shift Enter for
-                    open path · Esc to cancel{" "}
-                    <button onClick={() => finishPen()}>Finish path</button>
-                  </div>
-                ) : (
-                  <div className="canvas-help">
-                    <span className="green-dot" />
-                    Display units: {u.unit}{" "}
-                    <span>
-                      Double-click a part for rotate/actions · Alt + drag to pan
-                    </span>
-                  </div>
-                )}
-                <div className="view-controls">
-                  <Tool
-                    title={`Snap to ${u.length(1)} grid`}
-                    active={snap}
-                    onClick={() => setSnap((s) => !s)}
-                  >
-                    <Magnet size={16} />
-                  </Tool>
-                  <span />
-                  <Tool
-                    title="Zoom out"
-                    onClick={() => setZoom((z) => Math.max(0.6, z / 1.2))}
-                  >
-                    <ZoomOut size={16} />
-                  </Tool>
-                  <small>{Math.round(zoom * 100)}%</small>
-                  <Tool
-                    title="Zoom in"
-                    onClick={() => setZoom((z) => Math.min(5, z * 1.2))}
-                  >
-                    <ZoomIn size={16} />
-                  </Tool>
-                  <Tool
-                    title={mode === "part" ? "Fit part" : "Fit bed"}
-                    onClick={() => {
-                      if (mode === "part") fitPart(project.parts[0]);
-                      else {
-                        setZoom(1);
-                        setPan({ x: 0, y: 0 });
-                      }
-                    }}
-                  >
-                    <Maximize size={16} />
-                  </Tool>
-                  {activeSheet ? (
-                    <Tool
-                      title="Fit stock"
+                {commands
+                  .filter((c) =>
+                    c.name.toLowerCase().includes(query.toLowerCase()),
+                  )
+                  .map((c) => (
+                    <button
+                      key={c.name}
                       onClick={() => {
-                        const fit = Math.min(
-                          5,
-                          (BED.width + 48) / (project.stock.width + 40),
-                          (BED.height + 44) / (project.stock.height + 40),
-                        );
-                        setZoom(fit);
-                        setPan({
-                          x:
-                            origin.x +
-                            project.stock.width / 2 -
-                            (BED.width + 48) / fit / 2 +
-                            24,
-                          y:
-                            origin.y +
-                            project.stock.height / 2 -
-                            (BED.height + 44) / fit / 2 +
-                            22,
-                        });
+                        setPalette(false);
+                        setQuery("");
+                        c.action();
                       }}
                     >
-                      <ScanLine size={16} />
-                    </Tool>
-                  ) : null}
-                </div>
-              </div>
-              {detailsOpen && (
-                <section className="bottom-panel">
-                  <div className="bottom-tabs">
-                    <button
-                      className={tab === "parts" ? "active" : ""}
-                      onClick={() => setTab("parts")}
-                    >
-                      <Layers size={14} /> Parts{" "}
-                      <span>{project.parts.length}</span>
+                      {c.name}
+                      <ChevronRight size={15} />
                     </button>
-                    <button
-                      className={tab === "issues" ? "active" : ""}
-                      onClick={() => setTab("issues")}
-                    >
-                      <AlertTriangle size={14} /> Preflight{" "}
-                      <span>{preview.issues.length}</span>
-                    </button>
-                    <div className="simulation">
-                      <button
-                        title={playing ? "Pause simulation" : "Play simulation"}
-                        onClick={() => {
-                          if (activeView.kind === "part") {
-                            setPartPanel("cuts");
-                            setMode("part");
-                          } else setMode("job");
-                          if (progress >= 100) setProgress(0);
-                          setPlaying((v) => !v);
-                        }}
-                      >
-                        {playing ? <Pause size={14} /> : <Play size={14} />}
-                      </button>
-                      <input
-                        aria-label="Simulation progress"
-                        type="range"
-                        min="0"
-                        max="100"
-                        value={progress}
-                        onChange={(e) => {
-                          if (activeView.kind === "part") {
-                            setPartPanel("cuts");
-                            setMode("part");
-                          } else setMode("job");
-                          setProgress(Number(e.target.value));
-                          setPlaying(false);
-                        }}
-                      />
-                      <small>{Math.round(progress)}%</small>
-                    </div>
-                  </div>
-                  {tab === "parts" ? (
-                    <div className="parts-table">
-                      <div className="table-row table-header">
-                        <span>#</span>
-                        <span>PART NAME</span>
-                        <span>SIZE ({u.unit.toUpperCase()})</span>
-                        <span>CONTOURS</span>
-                        <span>CUT SIDE</span>
-                      </div>
-                      {project.parts.map((p, i) => (
-                        <button
-                          className={`table-row ${selected === p.id ? "selected" : ""}`}
-                          key={p.id}
-                          onClick={() => setSelected(p.id)}
-                        >
-                          <span>{String(i + 1).padStart(2, "0")}</span>
-                          <span>
-                            <span className="part-dot" />
-                            {p.name}
-                          </span>
-                          <span>
-                            {u.number(partBounds(p).width)} ×{" "}
-                            {u.number(partBounds(p).height)}
-                          </span>
-                          <span>{p.contours.length}</span>
-                          <span>{p.cut}</span>
-                        </button>
-                      ))}
-                      {!project.parts.length ? (
-                        <p className="muted empty-table">
-                          Your sheet is empty. Import a vector file or create a
-                          shape.
-                        </p>
-                      ) : null}
-                    </div>
-                  ) : (
-                    <div className="issues">
-                      <p>
-                        <AlertTriangle size={15} /> Review cutting settings and
-                        sheet placement before posting.
-                      </p>
-                      {preview.issues.length ? (
-                        preview.issues.map((s, i) => (
-                          <p key={i}>
-                            <AlertTriangle size={15} />
-                            {s}
-                          </p>
-                        ))
-                      ) : (
-                        <p>
-                          <Check size={15} />
-                          No basic geometry warnings. Lead collisions,
-                          self-intersections, and machine behavior are not fully
-                          checked.
-                        </p>
-                      )}
-                    </div>
-                  )}
-                </section>
-              )}
-            </main>
-          )}
-        </div>
-        <footer className="statusbar">
-          <span>
-            {current ? current.name : "No selection"} <i /> Grid {u.length(1)}{" "}
-            <i /> SVG / DXF
-          </span>
-        </footer>
-        <input
-          hidden
-          ref={importInput}
-          type="file"
-          accept=".svg,.dxf"
-          multiple
-          onChange={(e) => {
-            void onImport(Array.from(e.target.files ?? []));
-            e.target.value = "";
-          }}
-        />
-        <input
-          hidden
-          ref={openInput}
-          type="file"
-          accept=".wam,.json"
-          onChange={async (e) => {
-            const f = e.target.files?.[0];
-            e.target.value = "";
-            if (!f) return;
-            try {
-              if (f.size > 20_000_000) throw Error("Project exceeds 20 MB");
-              const loaded = readJob(JSON.parse(await f.text()));
-              if (!(await canReplaceJob())) return;
-              activateJob(loaded, f.name);
-              notify("Job opened");
-            } catch (err) {
-              notify(`Could not open project: ${(err as Error).message}`);
-            }
-          }}
-        />
-        <input
-          hidden
-          ref={libraryInput}
-          type="file"
-          accept=".json"
-          onChange={async (e) => {
-            const file = e.target.files?.[0];
-            e.target.value = "";
-            if (!file) return;
-            try {
-              if (file.size > 20_000_000) throw Error("Database exceeds 20 MB");
-              updateLibrary(
-                materialLibrarySchema.parse(JSON.parse(await file.text())),
-              );
-              notify("Material database imported");
-            } catch (error) {
-              notify((error as Error).message);
-            }
-          }}
-        />
-        {toast ? (
-          <div className="toast" role="status">
-            {toast}
-            <button title="Dismiss" onClick={() => setToast("")}>
-              <X size={14} />
-            </button>
-          </div>
-        ) : null}
-        {postReport ? (
-          <PostReport report={postReport} onClose={() => setPostReport(null)} />
-        ) : null}
-        {palette ? (
-          <div className="modal-backdrop" onClick={() => setPalette(false)}>
-            <div
-              className="command-palette"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div>
-                <Command size={18} />
-                <input
-                  autoFocus
-                  placeholder="Search commands…"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                />
-                <kbd>ESC</kbd>
+                  ))}
               </div>
-              {commands
-                .filter((c) =>
-                  c.name.toLowerCase().includes(query.toLowerCase()),
-                )
-                .map((c) => (
-                  <button
-                    key={c.name}
-                    onClick={() => {
-                      setPalette(false);
-                      setQuery("");
-                      c.action();
-                    }}
-                  >
-                    {c.name}
-                    <ChevronRight size={15} />
-                  </button>
-                ))}
             </div>
-          </div>
-        ) : null}
-      </div>
+          ) : null}
+        </div>
+      </SettingDefaultsProvider>
     </DisplayUnitsContext.Provider>
   );
 }

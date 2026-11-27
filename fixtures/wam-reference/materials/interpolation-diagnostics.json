@@ -1,0 +1,3728 @@
+{
+  "date": "2026-11-17",
+  "method": "Leave-one-out shape-preserving cubic diagnostics; each predicted thickness excluded from the curve references. Endpoints and brackets over 2.01:1 excluded. Not independent fresh capture validation.",
+  "machine": "pro",
+  "productionValidated": false,
+  "results": [
+    {
+      "name": "Acrylic - Acrylic",
+      "checks": 15,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 0.02066895022194759,
+          "pierceRelative": 0.1406687138713647,
+          "pierceSeconds": 0.2799307406040157,
+          "tabRelative": 0.003359149470276268,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.021910215607688466,
+          "pierceRelative": 0.042422526132305904,
+          "pierceSeconds": 0.08696617857122702,
+          "tabRelative": 0.0056597129431499305,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.0035928491818548736,
+          "pierceRelative": 0.007733967981086609,
+          "pierceSeconds": 0.018561523154607684,
+          "tabRelative": 0.008750987166779245,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.002237047015634208,
+          "pierceRelative": 0.010564341475198136,
+          "pierceSeconds": 0.03127045076658641,
+          "tabRelative": 0.008094560581137666,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.0005154628364776315,
+          "pierceRelative": 0.00792689230399879,
+          "pierceSeconds": 0.04280521844159324,
+          "tabRelative": 0.00045080914313366804,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.0005101830415663589,
+          "pierceRelative": 0.0036556810886870794,
+          "pierceSeconds": 0.02218998420833085,
+          "tabRelative": 0.0004324321437663148,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.0005330460189377773,
+          "pierceRelative": 0.007296606097452196,
+          "pierceSeconds": 0.06785843670630598,
+          "tabRelative": 0.005354892367004371,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.00008165342497812311,
+          "pierceRelative": 0.0048830699075606,
+          "pierceSeconds": 0.058303854696273305,
+          "tabRelative": 0.004145153421185821,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.0005609241267117149,
+          "pierceRelative": 0.001972477545167939,
+          "pierceSeconds": 0.036589458462866986,
+          "tabRelative": 0.008644573183946402,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0007278384798901083,
+          "pierceRelative": 0.0016215984063268074,
+          "pierceSeconds": 0.034734637863522266,
+          "tabRelative": 0.010610673912232693,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.0002387725729755541,
+          "pierceRelative": 0.003586532655087238,
+          "pierceSeconds": 0.10931751532706002,
+          "tabRelative": 0.001764295322554732,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.0004733182921603518,
+          "pierceRelative": 0.0051582759613095774,
+          "pierceSeconds": 0.20323607287559753,
+          "tabRelative": 0.0069052326676662945,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 0.000527615360133904,
+          "pierceRelative": 0.009605164887738216,
+          "pierceSeconds": 0.6073345758516808,
+          "tabRelative": 0.06111078865347741,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 0.0008797805601604702,
+          "pierceRelative": 0.0048137736524747066,
+          "pierceSeconds": 0.4466700572131259,
+          "tabRelative": 0.06846920959594072,
+          "leadMm": 0.009960146950063864
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 0.002471680402862164,
+          "pierceRelative": 0.01256261639344669,
+          "pierceSeconds": 1.6098992908201808,
+          "tabRelative": 0.046324964381940115,
+          "leadMm": 0.008720379760494223
+        }
+      ]
+    },
+    {
+      "name": "Aluminum - 6061",
+      "checks": 34,
+      "errors": [
+        {
+          "thicknessMm": 0.4064,
+          "feedRelative": 0.012033630593268452,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.005492784204250034,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.45719999999999994,
+          "feedRelative": 0.0006936619906177111,
+          "pierceRelative": 0.09719008264462814,
+          "pierceSeconds": 0.09719008264462814,
+          "tabRelative": 0.0009197696432491353,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.508,
+          "feedRelative": 0.0025752046339867496,
+          "pierceRelative": 0.07851239669421473,
+          "pierceSeconds": 0.09499999999999975,
+          "tabRelative": 0.0029260427635880992,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.5588,
+          "feedRelative": 0.006190920240513043,
+          "pierceRelative": 0.005232423279810439,
+          "pierceSeconds": 0.006435880634166891,
+          "tabRelative": 0.0077240711260038175,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.5841999999999999,
+          "feedRelative": 0.008660515445090389,
+          "pierceRelative": 0.007871983481739564,
+          "pierceSeconds": 0.009682539682539737,
+          "tabRelative": 0.011145638147500359,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.635,
+          "feedRelative": 0.012792542488058167,
+          "pierceRelative": 0.009778264929159897,
+          "pierceSeconds": 0.012320613810741454,
+          "tabRelative": 0.017388494951040556,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.7111999999999999,
+          "feedRelative": 0.0060049634520710216,
+          "pierceRelative": 0.0005029105292075897,
+          "pierceSeconds": 0.0006537836879698666,
+          "tabRelative": 0.009351752568000915,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.8128,
+          "feedRelative": 0.002161655328467127,
+          "pierceRelative": 0.005455609269118478,
+          "pierceSeconds": 0.007419628606001094,
+          "tabRelative": 0.0048806464650597015,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.9143999999999999,
+          "feedRelative": 0.004764356006340065,
+          "pierceRelative": 0.001181124826445057,
+          "pierceSeconds": 0.001712630998345288,
+          "tabRelative": 0.007960180911464443,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 1.016,
+          "feedRelative": 0.006443958639636316,
+          "pierceRelative": 0.004370673918527412,
+          "pierceSeconds": 0.006818251312902701,
+          "tabRelative": 0.009893372164226033,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 1.1429999999999998,
+          "feedRelative": 0.004624209869247942,
+          "pierceRelative": 0.0063708413193952484,
+          "pierceSeconds": 0.010830430242971811,
+          "tabRelative": 0.007099554442575817,
+          "leadMm": 0.006679857458374849
+        },
+        {
+          "thicknessMm": 1.27,
+          "feedRelative": 0.0027237666847304,
+          "pierceRelative": 0.0006604732851916983,
+          "pierceSeconds": 0.0012416897761604595,
+          "tabRelative": 0.005031810599837483,
+          "leadMm": 0.0016331403778602205
+        },
+        {
+          "thicknessMm": 1.4223999999999999,
+          "feedRelative": 0.005903591746329484,
+          "pierceRelative": 0.00917572987054216,
+          "pierceSeconds": 0.019544304624254938,
+          "tabRelative": 0.006488309171098883,
+          "leadMm": 0.0011764091200034965
+        },
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 0.0014124660060319538,
+          "pierceRelative": 0.0023187693754002092,
+          "pierceSeconds": 0.005680984969730574,
+          "tabRelative": 0.00097807390678617,
+          "leadMm": 0.0015604023657092014
+        },
+        {
+          "thicknessMm": 1.6001999999999998,
+          "feedRelative": 0.0013840564576906855,
+          "pierceRelative": 0.0023414531927794524,
+          "pierceSeconds": 0.005783389386165183,
+          "tabRelative": 0.0009604611470410696,
+          "leadMm": 0.001770163224020238
+        },
+        {
+          "thicknessMm": 1.8033999999999997,
+          "feedRelative": 0.0006965390698341345,
+          "pierceRelative": 0.0008954546167602162,
+          "pierceSeconds": 0.0026057729347721548,
+          "tabRelative": 0.0034618246450364154,
+          "leadMm": 0.006663357387466151
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.0003350952990587297,
+          "pierceRelative": 0.0007451159558753417,
+          "pierceSeconds": 0.002257701346302543,
+          "tabRelative": 0.0035298015545400796,
+          "leadMm": 0.005028986474931885
+        },
+        {
+          "thicknessMm": 2.032,
+          "feedRelative": 0.0003890750032352619,
+          "pierceRelative": 0.0028231348741312168,
+          "pierceSeconds": 0.00988097205945948,
+          "tabRelative": 0.005283220548875978,
+          "leadMm": 0.004378423513660801
+        },
+        {
+          "thicknessMm": 2.2859999999999996,
+          "feedRelative": 0.0013802466290384618,
+          "pierceRelative": 0.001153012108589202,
+          "pierceSeconds": 0.004923361703675688,
+          "tabRelative": 0.0008660819964374511,
+          "leadMm": 0.00283821292753228
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.0004628255161318595,
+          "pierceRelative": 0.00323277333213956,
+          "pierceSeconds": 0.016519471727233004,
+          "tabRelative": 0.0009358052476931,
+          "leadMm": 0.00023228610259762306
+        },
+        {
+          "thicknessMm": 2.8447999999999998,
+          "feedRelative": 0.00035937472883096344,
+          "pierceRelative": 0.002152052451430908,
+          "pierceSeconds": 0.01347184834595705,
+          "tabRelative": 0.0023641673756077397,
+          "leadMm": 0.0006336751704373311
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.0009262198061740223,
+          "pierceRelative": 0.002963817086447662,
+          "pierceSeconds": 0.022791753394782788,
+          "tabRelative": 0.002942572830259005,
+          "leadMm": 0.004036994775825531
+        },
+        {
+          "thicknessMm": 3.556,
+          "feedRelative": 0.001614329829899841,
+          "pierceRelative": 0.0035833235397977337,
+          "pierceSeconds": 0.03443573921745724,
+          "tabRelative": 0.0016288382621906239,
+          "leadMm": 0.005277671620998903
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.0008764320811845971,
+          "pierceRelative": 0.005027620849123782,
+          "pierceSeconds": 0.08587176410303599,
+          "tabRelative": 0.006099621697004398,
+          "leadMm": 0.002939175230654234
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.0003635207309475863,
+          "pierceRelative": 0.0010539818835857417,
+          "pierceSeconds": 0.020521027273414205,
+          "tabRelative": 0.0056651376825733735,
+          "leadMm": 0.0031997197634103802
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.0008470447085123789,
+          "pierceRelative": 0.006546043578332883,
+          "pierceSeconds": 0.20030893349698786,
+          "tabRelative": 0.003866251246817276,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.0009103170787376769,
+          "pierceRelative": 0.0038493711608973413,
+          "pierceSeconds": 0.1517037174509639,
+          "tabRelative": 0.006900928603931211,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.00037439085760193613,
+          "pierceRelative": 0.0017727564991714129,
+          "pierceSeconds": 0.10771268488965546,
+          "tabRelative": 0.0036779200734380346,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0010319559589133664,
+          "pierceRelative": 0.001449172161995138,
+          "pierceSeconds": 0.10126815068022665,
+          "tabRelative": 0.004698386168176416,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.0003651525101877606,
+          "pierceRelative": 0.0031234511248101615,
+          "pierceSeconds": 0.3068478385013549,
+          "tabRelative": 0.0056426746362014946,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.0020127138217073126,
+          "pierceRelative": 0.004583356099105984,
+          "pierceSeconds": 0.5764486965845634,
+          "tabRelative": 0.000627557241591914,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 0.00406977565726141,
+          "pierceRelative": 0.008734787839583591,
+          "pierceSeconds": 1.7310602540486855,
+          "tabRelative": 0.0006555543448838463,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 0.005448694591984826,
+          "pierceRelative": 0.004983089384577477,
+          "pierceSeconds": 1.429199866390661,
+          "tabRelative": 0.013637613927810599,
+          "leadMm": 0.011065767613817945
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 0.01333066247453496,
+          "pierceRelative": 0.0085102894582898,
+          "pierceSeconds": 3.3346718213363147,
+          "tabRelative": 0.017393466194240537,
+          "leadMm": 0.007906036018513252
+        }
+      ]
+    },
+    {
+      "name": "Brass - 260",
+      "checks": 14,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 0.001846818622669888,
+          "pierceRelative": 1.1750759197908613,
+          "pierceSeconds": 1.1750759197908613,
+          "tabRelative": 0.00004239722090659814,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.002759597711306516,
+          "pierceRelative": 0.4786568467079245,
+          "pierceSeconds": 1.450330245525011,
+          "tabRelative": 0.0008198770430919433,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.001934221665117919,
+          "pierceRelative": 0.15483062122102353,
+          "pierceSeconds": 0.8716963974743619,
+          "tabRelative": 0.0024258507802294993,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.002458310119325735,
+          "pierceRelative": 0.0035517794539052794,
+          "pierceSeconds": 0.03509158100458443,
+          "tabRelative": 0.0025722519874623595,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.0006576758612322209,
+          "pierceRelative": 0.0069093876952981415,
+          "pierceSeconds": 0.18192417801719785,
+          "tabRelative": 0.0005549139781995116,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.00041999425203043117,
+          "pierceRelative": 0.004483469236981064,
+          "pierceSeconds": 0.1360284566500063,
+          "tabRelative": 0.0003741288298897416,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.0007989605824955115,
+          "pierceRelative": 0.0032730510845329075,
+          "pierceSeconds": 0.15563357906954423,
+          "tabRelative": 0.0009498343692195821,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.0007234873834157662,
+          "pierceRelative": 0.0018749611339025085,
+          "pierceSeconds": 0.11167268513523254,
+          "tabRelative": 0.0012889001831931646,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.0002469653231134128,
+          "pierceRelative": 0.0009903077997338583,
+          "pierceSeconds": 0.08318585517764632,
+          "tabRelative": 0.0021321784735386373,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0007746894514264469,
+          "pierceRelative": 0.00003179683467324779,
+          "pierceSeconds": 0.0029532900044557664,
+          "tabRelative": 0.00342915893093676,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.00032615548326797583,
+          "pierceRelative": 0.0044316996471222,
+          "pierceSeconds": 0.5170907148262245,
+          "tabRelative": 0.006221700429671073,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.001404463137802292,
+          "pierceRelative": 0.0037251883825932808,
+          "pierceSeconds": 0.5093077556681465,
+          "tabRelative": 0.006195367115314321,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 0.003841233256467902,
+          "pierceRelative": 0.03498205059772852,
+          "pierceSeconds": 6.665479920891187,
+          "tabRelative": 0.005132736130032511,
+          "leadMm": 0.005798690131266548
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 0.007036703975806247,
+          "pierceRelative": 0.06148635312684547,
+          "pierceSeconds": 17.624448260278996,
+          "tabRelative": 0.001166112107533701,
+          "leadMm": 0.004215062471809361
+        }
+      ]
+    },
+    {
+      "name": "Carbon Fiber - Carbon Fiber",
+      "checks": 15,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 0.02078598031980894,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.003787488084556756,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.0028410140014571983,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.003124239360979164,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.0019098363225598103,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0011495321847551088,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.0030258352846125325,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0065047855838289426,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.0007115259894164838,
+          "pierceRelative": 2.4553528775361086,
+          "pierceSeconds": 2.4553528775361086,
+          "tabRelative": 0.011894615950902021,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.00034667191487725013,
+          "pierceRelative": 0.6625259457434783,
+          "pierceSeconds": 2.4977228154529136,
+          "tabRelative": 0.009491059120857459,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.0009525147301112646,
+          "pierceRelative": 0.0798834547978835,
+          "pierceSeconds": 0.3331140065071745,
+          "tabRelative": 0.009013336820230755,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.000975598772744557,
+          "pierceRelative": 0.004286410851541911,
+          "pierceSeconds": 0.02087482084700909,
+          "tabRelative": 0.011035084574850917,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.000046870163020074074,
+          "pierceRelative": 0.007666292185956047,
+          "pierceSeconds": 0.05596393295747859,
+          "tabRelative": 0.003895705629376245,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0009000212677215957,
+          "pierceRelative": 0.00023860150402355007,
+          "pierceSeconds": 0.002042428874441171,
+          "tabRelative": 0.008252417047919347,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.000501547621603704,
+          "pierceRelative": 0.008543491367035028,
+          "pierceSeconds": 0.11089451794411431,
+          "tabRelative": 0.02975601636928249,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.0024141284858880674,
+          "pierceRelative": 0.007858526256690368,
+          "pierceSeconds": 0.13980318210652243,
+          "tabRelative": 0.03166929015015907,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 0.005825530642965759,
+          "pierceRelative": 0.015862842186114223,
+          "pierceSeconds": 0.5055487804714609,
+          "tabRelative": 0.01602773281517722,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 0.005733470072932567,
+          "pierceRelative": 0.006907341266582767,
+          "pierceSeconds": 0.35034034904107614,
+          "tabRelative": 0.0089905176931393,
+          "leadMm": 0.009960146950063864
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 0.04524340514415626,
+          "pierceRelative": 0.017581880764481417,
+          "pierceSeconds": 1.3077402912621352,
+          "tabRelative": 0.017675488114338944,
+          "leadMm": 0.008720379760494223
+        }
+      ]
+    },
+    {
+      "name": "Copper - 110",
+      "checks": 12,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 0.001575659685693509,
+          "pierceRelative": 0.0527801943209989,
+          "pierceSeconds": 0.25809515022968466,
+          "tabRelative": 0.0010358197948691084,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.002702182258941921,
+          "pierceRelative": 0.0016973751854922892,
+          "pierceSeconds": 0.009912671083275093,
+          "tabRelative": 0.0006692443092870537,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.0017553141011215079,
+          "pierceRelative": 0.017563527787079813,
+          "pierceSeconds": 0.17510837203718488,
+          "tabRelative": 0.002303943557472876,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.0033548323427184945,
+          "pierceRelative": 0.025390282828793964,
+          "pierceSeconds": 0.4042133026344015,
+          "tabRelative": 0.005968219754563409,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.0007291669440965265,
+          "pierceRelative": 0.010252274129949557,
+          "pierceSeconds": 0.4178826935367468,
+          "tabRelative": 0.007391305176599583,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.0003207290276168173,
+          "pierceRelative": 0.004261857840909711,
+          "pierceSeconds": 0.2024382474432116,
+          "tabRelative": 0.007712356439275148,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.0010567630523714566,
+          "pierceRelative": 0.009127331806884742,
+          "pierceSeconds": 0.7281785315532687,
+          "tabRelative": 0.012221378405470107,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.0013656280508577145,
+          "pierceRelative": 0.0024710532650844552,
+          "pierceSeconds": 0.2610173563908802,
+          "tabRelative": 0.012330938501887934,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.0005285478586514181,
+          "pierceRelative": 0.002113930407817266,
+          "pierceSeconds": 0.35232878107089505,
+          "tabRelative": 0.007143242210909895,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0014955951423094582,
+          "pierceRelative": 0.00007365716438467729,
+          "pierceSeconds": 0.01409282526171296,
+          "tabRelative": 0.005398573240081195,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.0020930391130498105,
+          "pierceRelative": 0.0019832551852174696,
+          "pierceSeconds": 0.5164991478861793,
+          "tabRelative": 0.007177449710951578,
+          "leadMm": 0.007082368622895796
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.005748943700058073,
+          "pierceRelative": 0.01673693703906043,
+          "pierceSeconds": 5.255565599635361,
+          "tabRelative": 0.008808092471005224,
+          "leadMm": 0.005398677786877082
+        }
+      ]
+    },
+    {
+      "name": "EPDM - EPDM",
+      "checks": 15,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0.009960146950063864
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0.008720379760494223
+        }
+      ]
+    },
+    {
+      "name": "Garolite - G-10/FR4",
+      "checks": 15,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 0.01134033533586376,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.00018695553643577334,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.013463879499499232,
+          "pierceRelative": 0.20889251018867916,
+          "pierceSeconds": 0.20889251018867916,
+          "tabRelative": 0.0003968020931344185,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.0024249083965171003,
+          "pierceRelative": 0.2149652297832898,
+          "pierceSeconds": 0.5008689853950652,
+          "tabRelative": 0.0008052976075632046,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.003095932494819875,
+          "pierceRelative": 0.006841685652611673,
+          "pierceSeconds": 0.018677801831629814,
+          "tabRelative": 0.003915839024194345,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.0007029674498038041,
+          "pierceRelative": 0.007551856167452464,
+          "pierceSeconds": 0.024241458297522556,
+          "tabRelative": 0.004275686883824736,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.0003789434992989005,
+          "pierceRelative": 0.008200001946208957,
+          "pierceSeconds": 0.026896006383565485,
+          "tabRelative": 0.0040845026187720235,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.0009231003740250987,
+          "pierceRelative": 0.014412011895750254,
+          "pierceSeconds": 0.05404504460906345,
+          "tabRelative": 0.004564647324157622,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.0009279857468993402,
+          "pierceRelative": 0.01231826672223768,
+          "pierceSeconds": 0.05358446024173347,
+          "tabRelative": 0.0036345830172748173,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.0001880311574848914,
+          "pierceRelative": 0.01246122834460528,
+          "pierceSeconds": 0.08336561762540917,
+          "tabRelative": 0.002418955159348979,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0010085056148034788,
+          "pierceRelative": 0.001772423155632863,
+          "pierceSeconds": 0.014250282171287765,
+          "tabRelative": 0.002273137088939281,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.0003993171657387107,
+          "pierceRelative": 0.016952073693848435,
+          "pierceSeconds": 0.2263101838128776,
+          "tabRelative": 0.0024737663762961493,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.0022898870237895164,
+          "pierceRelative": 0.013100614102406594,
+          "pierceSeconds": 0.2584751162404828,
+          "tabRelative": 0.0012251299353196465,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 0.005585572942863326,
+          "pierceRelative": 0.022659744006281013,
+          "pierceSeconds": 0.9007248242496715,
+          "tabRelative": 0.0005920715400140608,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 0.005795368795587175,
+          "pierceRelative": 0.008358081029594011,
+          "pierceSeconds": 0.5494602468855163,
+          "tabRelative": 0.0010600767693609292,
+          "leadMm": 0.009960146950063864
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 0.04631127049347594,
+          "pierceRelative": 0.038002905457281355,
+          "pierceSeconds": 3.5107084061436495,
+          "tabRelative": 0.00023460444409217907,
+          "leadMm": 0.008720379760494223
+        }
+      ]
+    },
+    {
+      "name": "Glass - Borosilicate",
+      "checks": 15,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.003490751558276939,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.004855463905764079,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.031389455237919583,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.005761079614507558,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.05361542589225721,
+          "pierceRelative": 0.24348024924255451,
+          "pierceSeconds": 0.24348024924255451,
+          "tabRelative": 0.00349181170880819,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.007424776494095564,
+          "pierceRelative": 0.056213198891190586,
+          "pierceSeconds": 0.148964977061655,
+          "tabRelative": 0.0010723385985238476,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.0006510714949088392,
+          "pierceRelative": 0.028635009658740662,
+          "pierceSeconds": 0.08132342743082344,
+          "tabRelative": 0.0008959199536540119,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.000546869640595693,
+          "pierceRelative": 0.012275592267976698,
+          "pierceSeconds": 0.04861134538118783,
+          "tabRelative": 0.0026254785901311806,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.00016905217473683898,
+          "pierceRelative": 0.003033343509527331,
+          "pierceSeconds": 0.015227384417826784,
+          "tabRelative": 0.006946740466563739,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.0006879772029575459,
+          "pierceRelative": 0.004717132569016957,
+          "pierceSeconds": 0.037312518620923996,
+          "tabRelative": 0.008530576459811812,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0007433514926433737,
+          "pierceRelative": 0.0006468524417957422,
+          "pierceSeconds": 0.005983385086610227,
+          "tabRelative": 0.005349740880676523,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.0003503784444347513,
+          "pierceRelative": 0.006130089854967213,
+          "pierceSeconds": 0.08355312472320442,
+          "tabRelative": 0.009143164163024742,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.0001377252002533469,
+          "pierceRelative": 0.005763422982940636,
+          "pierceSeconds": 0.1044908586807125,
+          "tabRelative": 0.006199844700083279,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 0.0004027630995058207,
+          "pierceRelative": 0.012573001867300926,
+          "pierceSeconds": 0.38448239710206167,
+          "tabRelative": 0.035411936586009496,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 0.00017352845074847245,
+          "pierceRelative": 0.005673032053122196,
+          "pierceSeconds": 0.2641363723933665,
+          "tabRelative": 0.05232451220105916,
+          "leadMm": 0.009960146950063864
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 0.0004392552781810055,
+          "pierceRelative": 0.014770068403654912,
+          "pierceSeconds": 0.9761538207975491,
+          "tabRelative": 0.04299188497017159,
+          "leadMm": 0.008720379760494223
+        }
+      ]
+    },
+    {
+      "name": "Glass - Soda Lime",
+      "checks": 15,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.00009871255662541323,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.013874962310613914,
+          "pierceRelative": 0.3252055446728972,
+          "pierceSeconds": 0.3252055446728972,
+          "tabRelative": 0.0006019688396889933,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.06548428666030381,
+          "pierceRelative": 0.3256705256618657,
+          "pierceSeconds": 0.8923372403135121,
+          "tabRelative": 0.0010599427393558347,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.07493603167561025,
+          "pierceRelative": 0.07465869586308704,
+          "pierceSeconds": 0.2082977614580126,
+          "tabRelative": 0.0010677599518238434,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.0006529030378079614,
+          "pierceRelative": 0.005688959456078946,
+          "pierceSeconds": 0.019114903772424974,
+          "tabRelative": 0.00015693989589582458,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.0004773798705024479,
+          "pierceRelative": 0.003291141780067064,
+          "pierceSeconds": 0.011683553319238094,
+          "tabRelative": 0.00006136326969641281,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.0008453202101843527,
+          "pierceRelative": 0.005699723816387836,
+          "pierceSeconds": 0.025990740602728657,
+          "tabRelative": 0.003127229005034371,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.0006614621086494799,
+          "pierceRelative": 0.005034759235059916,
+          "pierceSeconds": 0.027389090238726155,
+          "tabRelative": 0.0021278057351400426,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.00042610340263560254,
+          "pierceRelative": 0.001396806815434637,
+          "pierceSeconds": 0.010867157024081031,
+          "tabRelative": 0.0027169965142962438,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0010663392317045162,
+          "pierceRelative": 0.002206267054716715,
+          "pierceSeconds": 0.019459275422601507,
+          "tabRelative": 0.002467472766664036,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.00009737525002295744,
+          "pierceRelative": 0.003643327368307414,
+          "pierceSeconds": 0.04448502716703473,
+          "tabRelative": 0.0016768568177654153,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.0018612387901764116,
+          "pierceRelative": 0.005367586455447659,
+          "pierceSeconds": 0.08384170043409078,
+          "tabRelative": 0.0036572453802175,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 0.004213931156561546,
+          "pierceRelative": 0.010685859807487486,
+          "pierceSeconds": 0.26639848500066066,
+          "tabRelative": 0.003843896817001813,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 0.004298666182148803,
+          "pierceRelative": 0.005094105046040021,
+          "pierceSeconds": 0.18705553729058977,
+          "tabRelative": 0.0017619341645098707,
+          "leadMm": 0.009960146950063864
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 0.033066012949021784,
+          "pierceRelative": 0.013637546905411968,
+          "pierceSeconds": 0.6956512676450615,
+          "tabRelative": 0.0002169473689757062,
+          "leadMm": 0.008720379760494223
+        }
+      ]
+    },
+    {
+      "name": "Granite - Granite",
+      "checks": 15,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.009819910892553851,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.012034417027951716,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.11463482947078996,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.012737226335384433,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.06738657947617543,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.028891772033589946,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.003638845432503368,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.025361143357932825,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.0010006600233818386,
+          "pierceRelative": 1.6975810295362272,
+          "pierceSeconds": 1.6975810295362272,
+          "tabRelative": 0.013666329734428828,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.0006933283276957525,
+          "pierceRelative": 0.34310806498868773,
+          "pierceSeconds": 6.093599234199095,
+          "tabRelative": 0.029800669072946318,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.0008518861750510531,
+          "pierceRelative": 0.03140373771005489,
+          "pierceSeconds": 0.5712339889458988,
+          "tabRelative": 0.15408169822815143,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.001026525525409605,
+          "pierceRelative": 0.0023314433274950197,
+          "pierceSeconds": 0.046419036650426904,
+          "tabRelative": 0.1210879609944604,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0007191351656410383,
+          "pierceRelative": 0.00037882251498344566,
+          "pierceSeconds": 0.007894661212255016,
+          "tabRelative": 4.440892098500626e-16,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.0006059405645126859,
+          "pierceRelative": 0.004081522073482002,
+          "pierceSeconds": 0.09860957329532738,
+          "tabRelative": 0.9999527170692446,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.0012463380497875765,
+          "pierceRelative": 0.0036720122465370153,
+          "pierceSeconds": 0.1022655410660569,
+          "tabRelative": null,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 0.0033644032563289183,
+          "pierceRelative": 0.010708805857881698,
+          "pierceSeconds": 0.41539457922723244,
+          "tabRelative": null,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 0.0024069001222892794,
+          "pierceRelative": 0.005299125459806708,
+          "pierceSeconds": 0.28408611590023725,
+          "tabRelative": null,
+          "leadMm": 0.009960146950063864
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 0.007505191964280344,
+          "pierceRelative": 0.014540014600340267,
+          "pierceSeconds": 1.0518246561886144,
+          "tabRelative": null,
+          "leadMm": 0.008720379760494223
+        }
+      ]
+    },
+    {
+      "name": "Graphite - Graphite",
+      "checks": 15,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0015555076119653233,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0020158327104761176,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0018034372031789925,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0010379763383973062,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.00017882508586075652,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.006649816275456133,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0000656175350246535,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.01581239342919638,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0007616199106068589,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.017264073711342753,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.000467187865776042,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.00001721173517665875,
+          "pierceRelative": 1.8697313073778519,
+          "pierceSeconds": 1.8697313073778519,
+          "tabRelative": 0.0026784573282829793,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0008760662468634273,
+          "pierceRelative": 0.583578152090447,
+          "pierceSeconds": 1.9666583725448066,
+          "tabRelative": 0.002000883837305345,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.000513568609630477,
+          "pierceRelative": 0.05531735660378945,
+          "pierceSeconds": 0.19803613664156616,
+          "tabRelative": 0.0028631853734941703,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.0023359694351609006,
+          "pierceRelative": 0.0006791167892734595,
+          "pierceSeconds": 0.002723258324986766,
+          "tabRelative": 0.005560102777224962,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 0.005863087893514862,
+          "pierceRelative": 0.01825604897157085,
+          "pierceSeconds": 0.10442460011738586,
+          "tabRelative": 0.006431037284660546,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 0.005791927104205619,
+          "pierceRelative": 0.007941252518579356,
+          "pierceSeconds": 0.0673418213575534,
+          "tabRelative": 0.0037805218633525373,
+          "leadMm": 0.009960146950063864
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 0.04563510790528236,
+          "pierceRelative": 0.022314647019795464,
+          "pierceSeconds": 0.2744701583434832,
+          "tabRelative": 0.0018391496096183957,
+          "leadMm": 0.008720379760494223
+        }
+      ]
+    },
+    {
+      "name": "HDPE - HDPE",
+      "checks": 15,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 0.06926935365443299,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.004999492444041298,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.03098036823717787,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.005939357656455813,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.021348814705035135,
+          "pierceRelative": 0.6579603231288536,
+          "pierceSeconds": 0.6579603231288536,
+          "tabRelative": 0.005723260002220121,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.002895899562434745,
+          "pierceRelative": 0.31370109400952106,
+          "pierceSeconds": 0.9034591507474206,
+          "tabRelative": 0.0039065120440201495,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.0006525981236038536,
+          "pierceRelative": 0.000897475279643789,
+          "pierceSeconds": 0.007278524517911222,
+          "tabRelative": 0.00019063818014108946,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.0005075119320965271,
+          "pierceRelative": 0.0005252810609019942,
+          "pierceSeconds": 0.0048325857602975475,
+          "tabRelative": 0.0008762847996210965,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.000804293000363665,
+          "pierceRelative": 0.002467396173004399,
+          "pierceSeconds": 0.03405006718746151,
+          "tabRelative": 0.01171179038189496,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.000501848976074637,
+          "pierceRelative": 0.005485439273082537,
+          "pierceSeconds": 0.0943495554970184,
+          "tabRelative": 0.01287074213937145,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.0004472768840697583,
+          "pierceRelative": 0.0015565131948673816,
+          "pierceSeconds": 0.03944204435794063,
+          "tabRelative": 0.004419913229443351,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0009836144133151814,
+          "pierceRelative": 0.0021320662939388058,
+          "pierceSeconds": 0.06153143324307564,
+          "tabRelative": 0.003835886425386459,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.00008421176317330303,
+          "pierceRelative": 0.004784703024895975,
+          "pierceSeconds": 0.19210582644957697,
+          "tabRelative": 0.0011252382096235136,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.0015061252968102679,
+          "pierceRelative": 0.006836657348871844,
+          "pierceSeconds": 0.3530449854957425,
+          "tabRelative": 0.0076791918287114624,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 0.003267259029115843,
+          "pierceRelative": 0.013106095157691788,
+          "pierceSeconds": 1.096193798989347,
+          "tabRelative": 0.01528720784345916,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 0.0034775903770519756,
+          "pierceRelative": 0.004919302843561679,
+          "pierceSeconds": 0.6114201504262695,
+          "tabRelative": 0.008168216802607042,
+          "leadMm": 0.009960146950063864
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 0.020289919180635607,
+          "pierceRelative": 0.00009322601979389056,
+          "pierceSeconds": 0.015971481711090973,
+          "tabRelative": 0.008128137941929126,
+          "leadMm": 0.008720379760494223
+        }
+      ]
+    },
+    {
+      "name": "Marble - Marble",
+      "checks": 15,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.004771549197210012,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.006057795257251253,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.005101774346552679,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.10117271879798329,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0030543533731433037,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.006896732282837048,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0001960501471816034,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.012240073617372893,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.000324472285337718,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.000644385704517747,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0002866655193997092,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.0005395327481874101,
+          "pierceRelative": 0.35085683167630033,
+          "pierceSeconds": 0.35085683167630033,
+          "tabRelative": 0.000873007557351646,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.0008925533942871766,
+          "pierceRelative": 0.2024774856620135,
+          "pierceSeconds": 0.7815630946553722,
+          "tabRelative": 0.0023229533166699845,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0007762452672965825,
+          "pierceRelative": 0.11957790187512984,
+          "pierceSeconds": 0.798780384525867,
+          "tabRelative": 0.0018604345463255623,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.000472139804133187,
+          "pierceRelative": 0.009445111966585928,
+          "pierceSeconds": 0.12486438019826629,
+          "tabRelative": 0.0002601729042472911,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.0006509788283337592,
+          "pierceRelative": 0.008741443808320315,
+          "pierceSeconds": 0.15454872653110385,
+          "tabRelative": 0.0003680764000431047,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 0.002022075556659786,
+          "pierceRelative": 0.004201381055504272,
+          "pierceSeconds": 0.10772341026313015,
+          "tabRelative": 0.0029590772577411384,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 0.0012155314125137373,
+          "pierceRelative": 0.010833282060931149,
+          "pierceSeconds": 0.36085662544961394,
+          "tabRelative": 0.006053758454461544,
+          "leadMm": 0.009960146950063864
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 0.004700055298155759,
+          "pierceRelative": 0.02957330440124495,
+          "pierceSeconds": 1.2710606231655035,
+          "tabRelative": 0.0075668040892507005,
+          "leadMm": 0.008720379760494223
+        }
+      ]
+    },
+    {
+      "name": "Neoprene - 50A",
+      "checks": 15,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.00423963430422436,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.005395386030298321,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0043663456041524995,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0018391294991343399,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.001262534016428174,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0013512484245357115,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.059282426757720885,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.001859477118256958,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.013185209016601807,
+          "pierceRelative": 0.7705428923076922,
+          "pierceSeconds": 0.7705428923076922,
+          "tabRelative": 0.0009941378644851007,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.009924504228502773,
+          "pierceRelative": 0.1603225129574487,
+          "pierceSeconds": 0.6733545544212847,
+          "tabRelative": 0.0004987038014374612,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0013020236387584205,
+          "pierceRelative": 0.03378567153904388,
+          "pierceSeconds": 0.14527838761788825,
+          "tabRelative": 0.0007644281279265419,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.0003156708142038056,
+          "pierceRelative": 0.0073281491464660675,
+          "pierceSeconds": 0.03568808634329024,
+          "tabRelative": 0.004269313408529207,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.001838535382634232,
+          "pierceRelative": 0.003939165964621738,
+          "pierceSeconds": 0.022374462679051632,
+          "tabRelative": 0.008800922460970861,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 0.003463968013686647,
+          "pierceRelative": 0.017187083166309458,
+          "pierceSeconds": 0.14626207774529298,
+          "tabRelative": 0.014282732885331217,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 0.004262209577818532,
+          "pierceRelative": 0.007597697771659417,
+          "pierceSeconds": 0.09702260054408995,
+          "tabRelative": 0.004871382609481945,
+          "leadMm": 0.009960146950063864
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 0.05129228584134782,
+          "pierceRelative": 0.020326390944233275,
+          "pierceSeconds": 0.37542844073998793,
+          "tabRelative": 0.0016168092874778717,
+          "leadMm": 0.008720379760494223
+        }
+      ]
+    },
+    {
+      "name": "Polycarbonate - Polycarbonate",
+      "checks": 15,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 0.041727254103424594,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0012391204907127307,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.0045146759910627,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.002493967650482931,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.0037232539830402978,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.005134419109395383,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.002583550492755493,
+          "pierceRelative": 0.3460629902819694,
+          "pierceSeconds": 0.3460629902819694,
+          "tabRelative": 0.003667572444604583,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.0006082952430042088,
+          "pierceRelative": 0.1494708740695212,
+          "pierceSeconds": 0.7398808266441295,
+          "tabRelative": 0.002984784873698798,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.0005473367406361174,
+          "pierceRelative": 0.07662535009790972,
+          "pierceSeconds": 0.5570662952118033,
+          "tabRelative": 0.0029650474078408706,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.0007103493753130019,
+          "pierceRelative": 0.017331731018246588,
+          "pierceSeconds": 0.33623558175398216,
+          "tabRelative": 0.0018968182673086975,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.00022945916179095693,
+          "pierceRelative": 0.00043241246081315854,
+          "pierceSeconds": 0.012747519344770808,
+          "tabRelative": 0.0033243169544728834,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.0005126587921091552,
+          "pierceRelative": 0.0012891694458609937,
+          "pierceSeconds": 0.06845489757522216,
+          "tabRelative": 0.0031898040526696647,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0008357274382386759,
+          "pierceRelative": 0.00005577833912040475,
+          "pierceSeconds": 0.003487261761804916,
+          "tabRelative": 0.003471074689076925,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.0001589626036406777,
+          "pierceRelative": 0.00024645777323728524,
+          "pierceSeconds": 0.021951993862245445,
+          "tabRelative": 0.00007128864433481041,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.0009411917057514652,
+          "pierceRelative": 0.00396632107756123,
+          "pierceSeconds": 0.44081692456015276,
+          "tabRelative": 0.0004958079625885237,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 0.0016637481702693746,
+          "pierceRelative": 0.009579745027270659,
+          "pierceSeconds": 1.499038501867318,
+          "tabRelative": 0.0075471591457020315,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 0.0014917067735100709,
+          "pierceRelative": 0.0006987724359266423,
+          "pierceSeconds": 0.13894391115965732,
+          "tabRelative": 0.005567703574363536,
+          "leadMm": 0.009960146950063864
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 0.007776172753362065,
+          "pierceRelative": 0.03843911866259164,
+          "pierceSeconds": 9.523676039843679,
+          "tabRelative": 0.00023314485341052738,
+          "leadMm": 0.008720379760494223
+        }
+      ]
+    },
+    {
+      "name": "Polyethylene Foam - 4lb",
+      "checks": 15,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0017712966931426877,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0016106748750779332,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.001713998125511318,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.002332056036488561,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0024296988441793177,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0025226627568193383,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.004057289681937748,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0028151435748340337,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0007255653419555586,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.001377472973740912,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0024565865170709245,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0026626032313084025,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.002885855345776678,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0012196319611320616,
+          "leadMm": 0.009960146950063864
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 2.220446049250313e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.00029278404625210364,
+          "leadMm": 0.008720379760494223
+        }
+      ]
+    },
+    {
+      "name": "Silicone - 50A",
+      "checks": 15,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.00243764525252832,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.003180993323067205,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0026561878109772064,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0031924966276548616,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0009649762897183667,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0006537786183379302,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0017447107242820614,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.00015421394653203357,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.003556754964676223,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.021178986225491192,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.003399253570198102,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.03944047612254631,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0052420228555424275,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.06120842707953944,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0031169251655425168,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 0.001893992500602515,
+          "pierceRelative": 1.3318794326241155,
+          "pierceSeconds": 1.3318794326241155,
+          "tabRelative": 0.011053031507699318,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 0.0030727667627999944,
+          "pierceRelative": 2.342452355453944,
+          "pierceSeconds": 15.647581734432343,
+          "tabRelative": 0.012259383327271056,
+          "leadMm": 0.009960146950063864
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 0.03737720651363252,
+          "pierceRelative": 0.14746474190718173,
+          "pierceSeconds": 9.818202516180158,
+          "tabRelative": 0.008341559464710713,
+          "leadMm": 0.008720379760494223
+        }
+      ]
+    },
+    {
+      "name": "Stainless Steel - 304",
+      "checks": 29,
+      "errors": [
+        {
+          "thicknessMm": 0.55626,
+          "feedRelative": 0.013823073913193706,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.009660664888942794,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.5841999999999999,
+          "feedRelative": 0.012666061512930704,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.008928911164388875,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.635,
+          "feedRelative": 0.01609945560748316,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.011118064752750012,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.7137399999999999,
+          "feedRelative": 0.007885965368622294,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0045723024285379,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.79248,
+          "feedRelative": 0.0028302694320014865,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.00040738537091056237,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.87376,
+          "feedRelative": 0.00029310995132536544,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.001985128459934149,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.9524999999999999,
+          "feedRelative": 0.003022894694180156,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.00408452082333155,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 1.016,
+          "feedRelative": 0.004355324831800678,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.004349152193574346,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 1.10998,
+          "feedRelative": 0.003476845486247604,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0031748686309204244,
+          "leadMm": 0.003977134552588857
+        },
+        {
+          "thicknessMm": 1.27,
+          "feedRelative": 0.0002695850917122655,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.002316031039559574,
+          "leadMm": 0.0011924996487531203
+        },
+        {
+          "thicknessMm": 1.4274799999999999,
+          "feedRelative": 0.0008886135974544018,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.002585248523344963,
+          "leadMm": 0.004115782038639271
+        },
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 0.002500473367128997,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0009660858445040832,
+          "leadMm": 0.001156766178067481
+        },
+        {
+          "thicknessMm": 1.78562,
+          "feedRelative": 0.0033442564864065716,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.004297934792545588,
+          "leadMm": 0.0016786161646511477
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.0027603298205327587,
+          "pierceRelative": 0.04035493939846657,
+          "pierceSeconds": 0.04035493939846657,
+          "tabRelative": 0.0037202201618183883,
+          "leadMm": 0.00025904060411163776
+        },
+        {
+          "thicknessMm": 1.98374,
+          "feedRelative": 0.002369622702784513,
+          "pierceRelative": 0.3080331603997697,
+          "pierceSeconds": 0.3942824453117053,
+          "tabRelative": 0.004390327156950535,
+          "leadMm": 0.005878878647275765
+        },
+        {
+          "thicknessMm": 2.37998,
+          "feedRelative": 0.00033831141973883483,
+          "pierceRelative": 0.033211860491286105,
+          "pierceSeconds": 0.2706766630039814,
+          "tabRelative": 0.0010393040118953367,
+          "leadMm": 0.00703264356558897
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.0003790642824054169,
+          "pierceRelative": 0.0002998848051667391,
+          "pierceSeconds": 0.0034576718035719267,
+          "tabRelative": 0.00033932634023869923,
+          "leadMm": 0.003315972934697875
+        },
+        {
+          "thicknessMm": 2.7787599999999997,
+          "feedRelative": 0.0009154842043126443,
+          "pierceRelative": 0.0006355297514419878,
+          "pierceSeconds": 0.01088662464220036,
+          "tabRelative": 0.003019420652754734,
+          "leadMm": 0.0027752635184141727
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.0014131613166711299,
+          "pierceRelative": 0.007418530842331128,
+          "pierceSeconds": 0.20170985360298133,
+          "tabRelative": 0.004027574771608644,
+          "leadMm": 0.007118054695090081
+        },
+        {
+          "thicknessMm": 3.57124,
+          "feedRelative": 0.00022684088307345363,
+          "pierceRelative": 0.0008806318499964272,
+          "pierceSeconds": 0.03364894298836418,
+          "tabRelative": 0.0038558412787161878,
+          "leadMm": 0.004589436417691051
+        },
+        {
+          "thicknessMm": 3.96748,
+          "feedRelative": 0.00023761724654025596,
+          "pierceRelative": 0.0006734593714156079,
+          "pierceSeconds": 0.033255423760500946,
+          "tabRelative": 0.005335341035398566,
+          "leadMm": 0.0011505354938369239
+        },
+        {
+          "thicknessMm": 4.36626,
+          "feedRelative": 0.0006829675409678604,
+          "pierceRelative": 0.002771623564052139,
+          "pierceSeconds": 0.1669903197341398,
+          "tabRelative": 0.005394747172735803,
+          "leadMm": 0.0016237050131198139
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.000730858765807918,
+          "pierceRelative": 0.0026995347691600724,
+          "pierceSeconds": 0.18956133149042387,
+          "tabRelative": 0.0029491930189979865,
+          "leadMm": 0.0029406270024734393
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.00042337180089679904,
+          "pierceRelative": 0.006763750800202972,
+          "pierceSeconds": 0.5260168997317862,
+          "tabRelative": 0.003087974235631119,
+          "leadMm": 0.0037375241133041914
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.0007675721346669384,
+          "pierceRelative": 0.017744869395675655,
+          "pierceSeconds": 1.792231808963237,
+          "tabRelative": 0.008578968277045074,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.0007292262501443769,
+          "pierceRelative": 0.004836467102822706,
+          "pierceSeconds": 0.5382020592021206,
+          "tabRelative": 0.009449202563230452,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.0010408930950369655,
+          "pierceRelative": 0.014891363647953071,
+          "pierceSeconds": 1.997378606099943,
+          "tabRelative": 0.0022876142546474076,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.001584963837136244,
+          "pierceRelative": 0.01672634553355956,
+          "pierceSeconds": 2.5223329064607753,
+          "tabRelative": 0.00019654646392885944,
+          "leadMm": 0.006286678545652791
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.0029453851238293582,
+          "pierceRelative": 0.15897501099763311,
+          "pierceSeconds": 41.269912854985535,
+          "tabRelative": 0.0015366612238774113,
+          "leadMm": 0.007501260255716513
+        }
+      ]
+    },
+    {
+      "name": "Stainless Steel - 316",
+      "checks": 29,
+      "errors": [
+        {
+          "thicknessMm": 0.55626,
+          "feedRelative": 0.013924431662191594,
+          "pierceRelative": 0.0142726017102357,
+          "pierceSeconds": 0.02640431316393599,
+          "tabRelative": 0.021350477543903734,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.5841999999999999,
+          "feedRelative": 0.012772878181121272,
+          "pierceRelative": 0.01264731719839296,
+          "pierceSeconds": 0.024029902676946824,
+          "tabRelative": 0.018907935288535516,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.635,
+          "feedRelative": 0.01626096156100698,
+          "pierceRelative": 0.01479236860499411,
+          "pierceSeconds": 0.030324355640237943,
+          "tabRelative": 0.02331739611462913,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.7137399999999999,
+          "feedRelative": 0.007989534369990614,
+          "pierceRelative": 0.007410045455270131,
+          "pierceSeconds": 0.016524401365252572,
+          "tabRelative": 0.012520158176639873,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.79248,
+          "feedRelative": 0.002776009537531987,
+          "pierceRelative": 0.004510014467190682,
+          "pierceSeconds": 0.010959335155273475,
+          "tabRelative": 0.006426668628736865,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.87376,
+          "feedRelative": 0.00030224771825893004,
+          "pierceRelative": 0.0018641834284038872,
+          "pierceSeconds": 0.00488416058241814,
+          "tabRelative": 0.0038460118534151544,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.9524999999999999,
+          "feedRelative": 0.0030947030020027633,
+          "pierceRelative": 0.0038909772933763964,
+          "pierceSeconds": 0.010972555967321718,
+          "tabRelative": 0.0014504814275171363,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 1.016,
+          "feedRelative": 0.004413004845543744,
+          "pierceRelative": 0.006448072070985522,
+          "pierceSeconds": 0.019344216212956677,
+          "tabRelative": 0.0004733057364463278,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 1.10998,
+          "feedRelative": 0.003559996283290845,
+          "pierceRelative": 0.006135363907906477,
+          "pierceSeconds": 0.019755871783458723,
+          "tabRelative": 0.002803007405703939,
+          "leadMm": 0.003977134552588857
+        },
+        {
+          "thicknessMm": 1.27,
+          "feedRelative": 0.0003342668185827291,
+          "pierceRelative": 0.00015840930350785598,
+          "pierceSeconds": 0.0005766098647685958,
+          "tabRelative": 0.008243939299077963,
+          "leadMm": 0.0011924996487531203
+        },
+        {
+          "thicknessMm": 1.4274799999999999,
+          "feedRelative": 0.0008246206428574876,
+          "pierceRelative": 0.0007091009715178842,
+          "pierceSeconds": 0.0029002229735084484,
+          "tabRelative": 0.006502256367278969,
+          "leadMm": 0.004115782038639271
+        },
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 0.0026122235848149433,
+          "pierceRelative": 0.003758023279910816,
+          "pierceSeconds": 0.01724932685479086,
+          "tabRelative": 0.00523696337537205,
+          "leadMm": 0.001156766178067481
+        },
+        {
+          "thicknessMm": 1.78562,
+          "feedRelative": 0.0034893132262978632,
+          "pierceRelative": 0.004071537315609941,
+          "pierceSeconds": 0.02149771702642056,
+          "tabRelative": 0.005040408813638431,
+          "leadMm": 0.0016786161646511477
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.0028546297382375796,
+          "pierceRelative": 0.0037966241649325383,
+          "pierceSeconds": 0.02091939914877816,
+          "tabRelative": 0.0038384462068988823,
+          "leadMm": 0.00025904060411163776
+        },
+        {
+          "thicknessMm": 1.98374,
+          "feedRelative": 0.002293439630143057,
+          "pierceRelative": 0.00044621780592957183,
+          "pierceSeconds": 0.0026951555478147426,
+          "tabRelative": 0.0015457093995496773,
+          "leadMm": 0.005878878647275765
+        },
+        {
+          "thicknessMm": 2.37998,
+          "feedRelative": 0.0004380362236378055,
+          "pierceRelative": 0.0029339406189610173,
+          "pierceSeconds": 0.023500864357878015,
+          "tabRelative": 0.003775025083446515,
+          "leadMm": 0.00703264356558897
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.0005505465394398668,
+          "pierceRelative": 0.0011163092353450033,
+          "pierceSeconds": 0.010013293841044657,
+          "tabRelative": 0.008198965428263483,
+          "leadMm": 0.003315972934697875
+        },
+        {
+          "thicknessMm": 2.7787599999999997,
+          "feedRelative": 0.0011266610037663494,
+          "pierceRelative": 0.0012823988657948426,
+          "pierceSeconds": 0.013631899943398196,
+          "tabRelative": 0.011952871944130528,
+          "leadMm": 0.0027752635184141727
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.0018330312611237742,
+          "pierceRelative": 0.010003585329969367,
+          "pierceSeconds": 0.13914987193987471,
+          "tabRelative": 0.0010373744188310052,
+          "leadMm": 0.007118054695090081
+        },
+        {
+          "thicknessMm": 3.57124,
+          "feedRelative": 0.00010588655730847663,
+          "pierceRelative": 0.0038106347882227443,
+          "pierceSeconds": 0.06912491505836016,
+          "tabRelative": 0.006783660113235612,
+          "leadMm": 0.004589436417691051
+        },
+        {
+          "thicknessMm": 3.96748,
+          "feedRelative": 0.00032997708001658577,
+          "pierceRelative": 0.004067633979084606,
+          "pierceSeconds": 0.09489790073204318,
+          "tabRelative": 0.012977410995060112,
+          "leadMm": 0.0011505354938369239
+        },
+        {
+          "thicknessMm": 4.36626,
+          "feedRelative": 0.0008229788322489107,
+          "pierceRelative": 0.0009571014508311659,
+          "pierceSeconds": 0.028301489901078725,
+          "tabRelative": 0.005534975228062677,
+          "leadMm": 0.0016237050131198139
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.0009472170167466043,
+          "pierceRelative": 0.0022912421852896436,
+          "pierceSeconds": 0.08411150062197947,
+          "tabRelative": 0.011285994431168955,
+          "leadMm": 0.0029406270024734393
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.0003965024686192198,
+          "pierceRelative": 0.004266521414842073,
+          "pierceSeconds": 0.18508169897584992,
+          "tabRelative": 0.02840436349671349,
+          "leadMm": 0.0037375241133041914
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.001168528807884539,
+          "pierceRelative": 0.013379298117135674,
+          "pierceSeconds": 1.033416986567559,
+          "tabRelative": 0.06879001184876854,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.0013762758432021016,
+          "pierceRelative": 0.0038056300163626933,
+          "pierceSeconds": 0.4033587254342734,
+          "tabRelative": 0.045627361564234525,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.0004180512787995694,
+          "pierceRelative": 0.003510284277970843,
+          "pierceSeconds": 0.6222329911131226,
+          "tabRelative": 0.0039218263371936235,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0034988997841283176,
+          "pierceRelative": 0.004442114591717727,
+          "pierceSeconds": 0.9188958244427283,
+          "tabRelative": 0.013027997507485067,
+          "leadMm": 0.0027738371100654025
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.00152115999097846,
+          "pierceRelative": 0.000585258779492559,
+          "pierceSeconds": 0.16990647627449107,
+          "tabRelative": 0.00298240005385364,
+          "leadMm": 0.00039900512102986063
+        }
+      ]
+    },
+    {
+      "name": "Steel - 1018",
+      "checks": 32,
+      "errors": [
+        {
+          "thicknessMm": 0.5308599999999999,
+          "feedRelative": 0.00556287933532329,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.017548677402325463,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.5841999999999999,
+          "feedRelative": 0.005091990883032693,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.015225601747428374,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.60706,
+          "feedRelative": 0.0055197521660401705,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.016628732474581076,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.68326,
+          "feedRelative": 0.005130313637154105,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.014358481280827395,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.7594599999999999,
+          "feedRelative": 0.0001641540792783891,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0010017295352457989,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.83566,
+          "feedRelative": 0.002776079040925028,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.008953299773960532,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.91186,
+          "feedRelative": 0.004427870285539259,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.013095450236391692,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 1.016,
+          "feedRelative": 0.002875441792149047,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.00945584330897864,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 1.0617199999999998,
+          "feedRelative": 0.0022942931793830112,
+          "pierceRelative": 0.3645743589878385,
+          "pierceSeconds": 0.3645743589878385,
+          "tabRelative": 0.007826053825458534,
+          "leadMm": 0.0007432665054267762
+        },
+        {
+          "thicknessMm": 1.21412,
+          "feedRelative": 0.0012458134681725408,
+          "pierceRelative": 0.3808621799633528,
+          "pierceSeconds": 1.451084905660374,
+          "tabRelative": 0.00023701191258196364,
+          "leadMm": 0.006054624700865596
+        },
+        {
+          "thicknessMm": 1.36652,
+          "feedRelative": 0.0019428811797959078,
+          "pierceRelative": 0.031056367757244185,
+          "pierceSeconds": 0.12329377999625946,
+          "tabRelative": 0.0035008574892028133,
+          "leadMm": 0.006715576961676795
+        },
+        {
+          "thicknessMm": 1.5189199999999998,
+          "feedRelative": 0.0007877864811839386,
+          "pierceRelative": 0.002663602917701624,
+          "pierceSeconds": 0.011453492546117161,
+          "tabRelative": 0.00022712889944220827,
+          "leadMm": 0.0023163706585386246
+        },
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 0.0004792197276652921,
+          "pierceRelative": 0.0018184358782851184,
+          "pierceSeconds": 0.008201145811066013,
+          "tabRelative": 0.0010733167817905676,
+          "leadMm": 0.0027062212379224126
+        },
+        {
+          "thicknessMm": 1.70942,
+          "feedRelative": 0.0012122679607482478,
+          "pierceRelative": 0.0009903043764822872,
+          "pierceSeconds": 0.004892103619822841,
+          "tabRelative": 0.0027977746415885907,
+          "leadMm": 0.002779206648692134
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.0020192719599598785,
+          "pierceRelative": 0.00531286684379495,
+          "pierceSeconds": 0.029645796988375217,
+          "tabRelative": 0.0011599245426467952,
+          "leadMm": 0.003458920419722733
+        },
+        {
+          "thicknessMm": 1.89738,
+          "feedRelative": 0.0021931512055866076,
+          "pierceRelative": 0.005123114667461515,
+          "pierceSeconds": 0.02991898965797546,
+          "tabRelative": 0.0009367122689647456,
+          "leadMm": 0.004295671137245716
+        },
+        {
+          "thicknessMm": 2.27838,
+          "feedRelative": 0.0017579372599321186,
+          "pierceRelative": 0.014489272179591728,
+          "pierceSeconds": 0.12156499358677486,
+          "tabRelative": 0.001744269168379775,
+          "leadMm": 0.00011878328517356262
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.0006061211337407002,
+          "pierceRelative": 0.0030998219650986147,
+          "pierceSeconds": 0.03316809502655538,
+          "tabRelative": 0.00022016745993513887,
+          "leadMm": 0.0010122274768814554
+        },
+        {
+          "thicknessMm": 2.65684,
+          "feedRelative": 0.00034441212862978965,
+          "pierceRelative": 0.0008177760705161408,
+          "pierceSeconds": 0.00974789076055238,
+          "tabRelative": 0.00030824214336888645,
+          "leadMm": 0.0013558845912575723
+        },
+        {
+          "thicknessMm": 3.0378399999999997,
+          "feedRelative": 0.0013096835844195187,
+          "pierceRelative": 0.0031217168898061143,
+          "pierceSeconds": 0.05113372265502392,
+          "tabRelative": 0.003976645132049095,
+          "leadMm": 0.008374490966977732
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.00168235658699456,
+          "pierceRelative": 0.005975971599822438,
+          "pierceSeconds": 0.10822484567278323,
+          "tabRelative": 0.00348830495413166,
+          "leadMm": 0.00781597238799403
+        },
+        {
+          "thicknessMm": 3.4163,
+          "feedRelative": 0.0017755087398521052,
+          "pierceRelative": 0.003962508946179666,
+          "pierceSeconds": 0.08618456957940879,
+          "tabRelative": 0.00222832247328808,
+          "leadMm": 0.009212443462577435
+        },
+        {
+          "thicknessMm": 3.7972999999999995,
+          "feedRelative": 0.0015983224874440705,
+          "pierceRelative": 0.006025931584519917,
+          "pierceSeconds": 0.16866582505071293,
+          "tabRelative": 0.001777771691211294,
+          "leadMm": 0.001504561915743774
+        },
+        {
+          "thicknessMm": 4.1757599999999995,
+          "feedRelative": 0.0010702016710548712,
+          "pierceRelative": 0.0011198759874382347,
+          "pierceSeconds": 0.039296448399205985,
+          "tabRelative": 0.00990445372603821,
+          "leadMm": 0.00046836268046623886
+        },
+        {
+          "thicknessMm": 4.554219999999999,
+          "feedRelative": 0.0009886330771455842,
+          "pierceRelative": 0.002405909365321701,
+          "pierceSeconds": 0.1029488617421137,
+          "tabRelative": 0.01488237399571024,
+          "leadMm": 0.0006250688990558917
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.00046683072486319865,
+          "pierceRelative": 0.0006823590354543274,
+          "pierceSeconds": 0.032405230593724355,
+          "tabRelative": 0.014273027982079078,
+          "leadMm": 0.001646784765721554
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.0009593382546050355,
+          "pierceRelative": 0.003800701425094921,
+          "pierceSeconds": 0.20953266956548333,
+          "tabRelative": 0.01806188271670983,
+          "leadMm": 0.003615682967776479
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.0017405074601771764,
+          "pierceRelative": 0.006834969149982051,
+          "pierceSeconds": 0.6196583031373706,
+          "tabRelative": 0.007108299168005594,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.002870378634212911,
+          "pierceRelative": 0.0031998721796346885,
+          "pierceSeconds": 0.379248850730292,
+          "tabRelative": 0.003878153447247512,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.0005987144610885009,
+          "pierceRelative": 0.0013092870262956247,
+          "pierceSeconds": 0.241969335329685,
+          "tabRelative": 0.021085599901506824,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.002521228188306135,
+          "pierceRelative": 0.001556930805544976,
+          "pierceSeconds": 0.3310346278749705,
+          "tabRelative": 0.023913563140327332,
+          "leadMm": 0.0055307674633771065
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.010934480430617621,
+          "pierceRelative": 0.006726395135740804,
+          "pierceSeconds": 2.0031204714235855,
+          "tabRelative": 0.010869552486753031,
+          "leadMm": 0.0006138673437907638
+        }
+      ]
+    },
+    {
+      "name": "Steel - 1095",
+      "checks": 32,
+      "errors": [
+        {
+          "thicknessMm": 0.5308599999999999,
+          "feedRelative": 0.007691980586546743,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.5841999999999999,
+          "feedRelative": 0.006934912382566272,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.60706,
+          "feedRelative": 0.007528594040120851,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.68326,
+          "feedRelative": 0.006873946959760069,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.7594599999999999,
+          "feedRelative": 0.00014293544646559742,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.83566,
+          "feedRelative": 0.0037781493089796836,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.91186,
+          "feedRelative": 0.005875418412586653,
+          "pierceRelative": 1.0320572274320612,
+          "pierceSeconds": 1.0320572274320612,
+          "tabRelative": 0,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 1.016,
+          "feedRelative": 0.0038670343553226516,
+          "pierceRelative": 0.16996423633859548,
+          "pierceSeconds": 0.6288676744528034,
+          "tabRelative": 0,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 1.0617199999999998,
+          "feedRelative": 0.003046684191111315,
+          "pierceRelative": 0.011359824624722847,
+          "pierceSeconds": 0.04214494935772173,
+          "tabRelative": 0,
+          "leadMm": 0.0007432665054267762
+        },
+        {
+          "thicknessMm": 1.21412,
+          "feedRelative": 0.0014889181951458497,
+          "pierceRelative": 0.0015292734821670262,
+          "pierceSeconds": 0.005872410171521292,
+          "tabRelative": 0,
+          "leadMm": 0.006054624700865596
+        },
+        {
+          "thicknessMm": 1.36652,
+          "feedRelative": 0.00284484866197543,
+          "pierceRelative": 0.00039070290963238996,
+          "pierceSeconds": 0.001594067871300453,
+          "tabRelative": 0,
+          "leadMm": 0.006715576961676795
+        },
+        {
+          "thicknessMm": 1.5189199999999998,
+          "feedRelative": 0.0012175875413160675,
+          "pierceRelative": 0.0008246614922629014,
+          "pierceSeconds": 0.00363675718087908,
+          "tabRelative": 0,
+          "leadMm": 0.0023163706585386246
+        },
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 0.0007464339083695926,
+          "pierceRelative": 0.0004908093801745395,
+          "pierceSeconds": 0.0022528150550007453,
+          "tabRelative": 0,
+          "leadMm": 0.0027062212379224126
+        },
+        {
+          "thicknessMm": 1.70942,
+          "feedRelative": 0.0013944779292687226,
+          "pierceRelative": 0.0027118576751805623,
+          "pierceSeconds": 0.013450814068895589,
+          "tabRelative": 0,
+          "leadMm": 0.002779206648692134
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.00251207077153226,
+          "pierceRelative": 0.0052400069404230365,
+          "pierceSeconds": 0.02855803782530586,
+          "tabRelative": 0,
+          "leadMm": 0.003458920419722733
+        },
+        {
+          "thicknessMm": 1.89738,
+          "feedRelative": 0.002742182131694415,
+          "pierceRelative": 0.005265916170310581,
+          "pierceSeconds": 0.029752426362255058,
+          "tabRelative": 0,
+          "leadMm": 0.004295671137245716
+        },
+        {
+          "thicknessMm": 2.27838,
+          "feedRelative": 0.0016669962639361824,
+          "pierceRelative": 0.011162952452058672,
+          "pierceSeconds": 0.08305236624331602,
+          "tabRelative": 0,
+          "leadMm": 0.00011878328517356262
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.0008084108579596849,
+          "pierceRelative": 0.0018641755199695353,
+          "pierceSeconds": 0.016758937924526762,
+          "tabRelative": 0,
+          "leadMm": 0.0010122274768814554
+        },
+        {
+          "thicknessMm": 2.65684,
+          "feedRelative": 0.0005371303765979718,
+          "pierceRelative": 0.00005570780672115028,
+          "pierceSeconds": 0.0005453794278000856,
+          "tabRelative": 0,
+          "leadMm": 0.0013558845912575723
+        },
+        {
+          "thicknessMm": 3.0378399999999997,
+          "feedRelative": 0.0015593402341493867,
+          "pierceRelative": 0.0030686961971094773,
+          "pierceSeconds": 0.03900312866526079,
+          "tabRelative": 0,
+          "leadMm": 0.008374490966977732
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.001910837914408603,
+          "pierceRelative": 0.0054099124489350725,
+          "pierceSeconds": 0.07487318829326206,
+          "tabRelative": 0,
+          "leadMm": 0.00781597238799403
+        },
+        {
+          "thicknessMm": 3.4163,
+          "feedRelative": 0.0019595875734232937,
+          "pierceRelative": 0.0029772299749547537,
+          "pierceSeconds": 0.048379987093014165,
+          "tabRelative": 0,
+          "leadMm": 0.009212443462577435
+        },
+        {
+          "thicknessMm": 3.7972999999999995,
+          "feedRelative": 0.0012254925530541527,
+          "pierceRelative": 0.006492071073730843,
+          "pierceSeconds": 0.13315237772221877,
+          "tabRelative": 0,
+          "leadMm": 0.001504561915743774
+        },
+        {
+          "thicknessMm": 4.1757599999999995,
+          "feedRelative": 0.0008999901218704753,
+          "pierceRelative": 0.0005219510305032316,
+          "pierceSeconds": 0.013356726870576097,
+          "tabRelative": 0,
+          "leadMm": 0.00046836268046623886
+        },
+        {
+          "thicknessMm": 4.554219999999999,
+          "feedRelative": 0.00072533816905751,
+          "pierceRelative": 0.00345424198083899,
+          "pierceSeconds": 0.10870499513700338,
+          "tabRelative": 0,
+          "leadMm": 0.0006250688990558917
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.0001971515794116918,
+          "pierceRelative": 0.0016892800453119916,
+          "pierceSeconds": 0.05959779999860615,
+          "tabRelative": 0,
+          "leadMm": 0.001646784765721554
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.0003033776168152036,
+          "pierceRelative": 0.011787686249871365,
+          "pierceSeconds": 0.49296103896962506,
+          "tabRelative": 0,
+          "leadMm": 0.003615682967776479
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.0018481214096737197,
+          "pierceRelative": 0.024522810846043575,
+          "pierceSeconds": 1.9466207249589331,
+          "tabRelative": 0,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.0015388093922019674,
+          "pierceRelative": 0.023551882021602077,
+          "pierceSeconds": 2.784539011414026,
+          "tabRelative": 0,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.0004964125920949858,
+          "pierceRelative": 0.014558937198768662,
+          "pierceSeconds": 3.6381328166003186,
+          "tabRelative": 0,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0021601330685349085,
+          "pierceRelative": 0.007855222293312814,
+          "pierceSeconds": 2.539829024096832,
+          "tabRelative": 0,
+          "leadMm": 0.006627208899273818
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.003885385371083072,
+          "pierceRelative": 0.026321335783880295,
+          "pierceSeconds": 16.3731869243627,
+          "tabRelative": 0,
+          "leadMm": 0.003884232869291626
+        }
+      ]
+    },
+    {
+      "name": "Steel - A2",
+      "checks": 29,
+      "errors": [
+        {
+          "thicknessMm": 0.5308599999999999,
+          "feedRelative": 0.007146987879425248,
+          "pierceRelative": 0.01645446473335832,
+          "pierceSeconds": 0.04343978689606587,
+          "tabRelative": 0.004029605637701605,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.5841999999999999,
+          "feedRelative": 0.006446045595609684,
+          "pierceRelative": 0.011146771848227877,
+          "pierceSeconds": 0.03266004151530799,
+          "tabRelative": 0.005550363399574376,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.60706,
+          "feedRelative": 0.006983217262370056,
+          "pierceRelative": 0.01173396777865876,
+          "pierceSeconds": 0.03625796043605556,
+          "tabRelative": 0.006588711246720891,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.68326,
+          "feedRelative": 0.006407560337077234,
+          "pierceRelative": 0.008208957816285611,
+          "pierceSeconds": 0.028402994044347984,
+          "tabRelative": 0.007074611995353419,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.7594599999999999,
+          "feedRelative": 0.00011736570845133354,
+          "pierceRelative": 0.001045612373737459,
+          "pierceSeconds": 0.00401515151515186,
+          "tabRelative": 0.0004195719549437982,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.83566,
+          "feedRelative": 0.003489289598222367,
+          "pierceRelative": 0.0075212513688016625,
+          "pierceSeconds": 0.031589255748967204,
+          "tabRelative": 0.0028230139269138643,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 0.91186,
+          "feedRelative": 0.00550206903561723,
+          "pierceRelative": 0.00918626392228239,
+          "pierceSeconds": 0.04115446237182496,
+          "tabRelative": 0.003519864662440586,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 1.016,
+          "feedRelative": 0.0035750149395648023,
+          "pierceRelative": 0.0059567459514456855,
+          "pierceSeconds": 0.029247622621598524,
+          "tabRelative": 0.0021748121762490413,
+          "leadMm": 0
+        },
+        {
+          "thicknessMm": 1.0617199999999998,
+          "feedRelative": 0.002836460283922815,
+          "pierceRelative": 0.004227282010802025,
+          "pierceSeconds": 0.02134777415455069,
+          "tabRelative": 0.0015831391840458453,
+          "leadMm": 0.0007432665054267762
+        },
+        {
+          "thicknessMm": 1.21412,
+          "feedRelative": 0.0014626767838703536,
+          "pierceRelative": 0.0011029617771067812,
+          "pierceSeconds": 0.006132467480713721,
+          "tabRelative": 0.001333238680994553,
+          "leadMm": 0.006054624700865596
+        },
+        {
+          "thicknessMm": 1.36652,
+          "feedRelative": 0.0025562214628516156,
+          "pierceRelative": 0.0020119325243302955,
+          "pierceSeconds": 0.012192311097441788,
+          "tabRelative": 0.0009234760572149892,
+          "leadMm": 0.006715576961676795
+        },
+        {
+          "thicknessMm": 1.5189199999999998,
+          "feedRelative": 0.001156408528720898,
+          "pierceRelative": 0.0010977304242310026,
+          "pierceSeconds": 0.00716817967022898,
+          "tabRelative": 0.00041733014504030663,
+          "leadMm": 0.0023163706585386246
+        },
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 0.0007177809385094935,
+          "pierceRelative": 0.0010130997923430973,
+          "pierceSeconds": 0.006838423598315657,
+          "tabRelative": 0.0005556401702337954,
+          "leadMm": 0.0027062212379224126
+        },
+        {
+          "thicknessMm": 1.70942,
+          "feedRelative": 0.0014715571038330655,
+          "pierceRelative": 0.00016197514887839048,
+          "pierceSeconds": 0.0011548828115035548,
+          "tabRelative": 0.0030722134674940893,
+          "leadMm": 0.002779206648692134
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.002610475055653705,
+          "pierceRelative": 0.0021160452774364735,
+          "pierceSeconds": 0.016124265014066275,
+          "tabRelative": 0.005598444995140062,
+          "leadMm": 0.003458920419722733
+        },
+        {
+          "thicknessMm": 1.89738,
+          "feedRelative": 0.0028429643498786294,
+          "pierceRelative": 0.002131343002702124,
+          "pierceSeconds": 0.016624475421076923,
+          "tabRelative": 0.006245410887880665,
+          "leadMm": 0.004295671137245716
+        },
+        {
+          "thicknessMm": 2.27838,
+          "feedRelative": 0.001847233970857065,
+          "pierceRelative": 0.00860508606663557,
+          "pierceSeconds": 0.08140411419037186,
+          "tabRelative": 0.00477683316145372,
+          "leadMm": 0.00011878328517356262
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.0008829763564027759,
+          "pierceRelative": 0.002313643874082061,
+          "pierceSeconds": 0.025380673298679213,
+          "tabRelative": 0.0008763627067531754,
+          "leadMm": 0.0010122274768814554
+        },
+        {
+          "thicknessMm": 2.65684,
+          "feedRelative": 0.000550107877821171,
+          "pierceRelative": 0.0002604065814948431,
+          "pierceSeconds": 0.0030727976616393704,
+          "tabRelative": 0.0006759515550769368,
+          "leadMm": 0.0013558845912575723
+        },
+        {
+          "thicknessMm": 3.0378399999999997,
+          "feedRelative": 0.0017070801822489656,
+          "pierceRelative": 0.0010380938581149302,
+          "pierceSeconds": 0.015633693503211532,
+          "tabRelative": 0.0015609651098011934,
+          "leadMm": 0.008374490966977732
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.0021479648973884435,
+          "pierceRelative": 0.004828980408075889,
+          "pierceSeconds": 0.07934014810468781,
+          "tabRelative": 0.00228744477132925,
+          "leadMm": 0.00781597238799403
+        },
+        {
+          "thicknessMm": 3.4163,
+          "feedRelative": 0.0021838126546591674,
+          "pierceRelative": 0.0010757608541369645,
+          "pierceSeconds": 0.020934306221505494,
+          "tabRelative": 0.004880160669156419,
+          "leadMm": 0.009212443462577435
+        },
+        {
+          "thicknessMm": 3.7972999999999995,
+          "feedRelative": 0.0017051993518378827,
+          "pierceRelative": 0.008943629437990985,
+          "pierceSeconds": 0.2252005892486153,
+          "tabRelative": 0.00497914144888667,
+          "leadMm": 0.001504561915743774
+        },
+        {
+          "thicknessMm": 4.1757599999999995,
+          "feedRelative": 0.0009657173452874979,
+          "pierceRelative": 0.0008021076726241194,
+          "pierceSeconds": 0.025964225362841375,
+          "tabRelative": 0.0015105914442979929,
+          "leadMm": 0.00046836268046623886
+        },
+        {
+          "thicknessMm": 4.554219999999999,
+          "feedRelative": 0.0009272044921667666,
+          "pierceRelative": 0.003989861835884234,
+          "pierceSeconds": 0.16314545046930817,
+          "tabRelative": 0.003240885144716543,
+          "leadMm": 0.0006250688990558917
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.00040042664184403165,
+          "pierceRelative": 0.001319118027366173,
+          "pierceSeconds": 0.06124665001060947,
+          "tabRelative": 0.003946353864098251,
+          "leadMm": 0.001646784765721554
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.001187122166746657,
+          "pierceRelative": 0.00918176214064026,
+          "pierceSeconds": 0.5128014155547547,
+          "tabRelative": 0.004647368659216666,
+          "leadMm": 0.003615682967776479
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.0021885140559431138,
+          "pierceRelative": 0.01660257379845631,
+          "pierceSeconds": 1.7445984547417908,
+          "tabRelative": 0.0008990427328543493,
+          "leadMm": 0.001023501090103407
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.00919609933594201,
+          "pierceRelative": 0.006075833865765823,
+          "pierceSeconds": 0.8949703284273198,
+          "tabRelative": 0.001549419553518172,
+          "leadMm": 0.003446967533485612
+        }
+      ]
+    },
+    {
+      "name": "Tile - Ceramic",
+      "checks": 15,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 4.440892098500626e-16,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0017749930504091793,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.03917878683109177,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.0016583565219034924,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.021675160698258145,
+          "pierceRelative": 0,
+          "pierceSeconds": 0,
+          "tabRelative": 0.001898393152443667,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.0529164501552708,
+          "pierceRelative": 0.5078070530568775,
+          "pierceSeconds": 0.5078070530568775,
+          "tabRelative": 0.003009488586598552,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.0006352473797658353,
+          "pierceRelative": 0.07415225131297487,
+          "pierceSeconds": 0.3114394555144946,
+          "tabRelative": 0.0006032513672502571,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.0007049717513896159,
+          "pierceRelative": 0.03338824100227433,
+          "pierceSeconds": 0.14891155487014363,
+          "tabRelative": 0.00014625254719646819,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.0006141148674584374,
+          "pierceRelative": 0.011335223682097384,
+          "pierceSeconds": 0.0678979898557639,
+          "tabRelative": 0.0009685864338118133,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.0002104816787706909,
+          "pierceRelative": 0.004235849619929066,
+          "pierceSeconds": 0.0315570796684721,
+          "tabRelative": 0.0019073030350216236,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.0007284399642741857,
+          "pierceRelative": 0.0034650997788363558,
+          "pierceSeconds": 0.039848647456617314,
+          "tabRelative": 0.00351443757941583,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0008034573918541676,
+          "pierceRelative": 0.0017277181758617033,
+          "pierceSeconds": 0.023099592011272208,
+          "tabRelative": 0.002804263867381085,
+          "leadMm": 0.006067556276250663
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.00037020072909577095,
+          "pierceRelative": 0.005119579734965685,
+          "pierceSeconds": 0.10013897961592733,
+          "tabRelative": 0.0019149187278428847,
+          "leadMm": 0.0056895413922828375
+        },
+        {
+          "thicknessMm": 12.7,
+          "feedRelative": 0.0001335433326670188,
+          "pierceRelative": 0.006377128654313502,
+          "pierceSeconds": 0.16523140343326048,
+          "tabRelative": 0.004275686235441389,
+          "leadMm": 0.0023302557032043314
+        },
+        {
+          "thicknessMm": 15.875,
+          "feedRelative": 0.00044975801586333297,
+          "pierceRelative": 0.012408203773268234,
+          "pierceSeconds": 0.5406254384012925,
+          "tabRelative": 0.004408146625110465,
+          "leadMm": 0.006495631003583968
+        },
+        {
+          "thicknessMm": 19.049999999999997,
+          "feedRelative": 0.00014901607369777192,
+          "pierceRelative": 0.0057118168086174315,
+          "pierceSeconds": 0.37857921807515993,
+          "tabRelative": 0.0021270074954914397,
+          "leadMm": 0.009960146950063864
+        },
+        {
+          "thicknessMm": 22.224999999999998,
+          "feedRelative": 0.0004612236621441834,
+          "pierceRelative": 0.014933494729564512,
+          "pierceSeconds": 1.4049431841574318,
+          "tabRelative": 0.00010199717052916668,
+          "leadMm": 0.008720379760494223
+        }
+      ]
+    },
+    {
+      "name": "Titanium - Grade 2",
+      "checks": 11,
+      "errors": [
+        {
+          "thicknessMm": 1.5875,
+          "feedRelative": 0.0013445972954533314,
+          "pierceRelative": 0.00395697712255072,
+          "pierceSeconds": 0.01938918790049904,
+          "tabRelative": 0.00034456631485202394,
+          "leadMm": 0.0030610855352849464
+        },
+        {
+          "thicknessMm": 1.8541999999999998,
+          "feedRelative": 0.0026600712190937292,
+          "pierceRelative": 0.005858576205723276,
+          "pierceSeconds": 0.03491711418611132,
+          "tabRelative": 0.0005536506382813888,
+          "leadMm": 0.0014753200900461394
+        },
+        {
+          "thicknessMm": 2.54,
+          "feedRelative": 0.0014102229819918932,
+          "pierceRelative": 0.007203479454843453,
+          "pierceSeconds": 0.06958561153378717,
+          "tabRelative": 0.0023271868751524316,
+          "leadMm": 0.006678850778012335
+        },
+        {
+          "thicknessMm": 3.175,
+          "feedRelative": 0.003989867434278538,
+          "pierceRelative": 0.022988024284525954,
+          "pierceSeconds": 0.32826898678303174,
+          "tabRelative": 0.002109042542009054,
+          "leadMm": 0.008780339481796462
+        },
+        {
+          "thicknessMm": 4.762499999999999,
+          "feedRelative": 0.0011844362714863443,
+          "pierceRelative": 0.007898785527117758,
+          "pierceSeconds": 0.2524451854466818,
+          "tabRelative": 0.0009808952061660658,
+          "leadMm": 0.0041822929300110445
+        },
+        {
+          "thicknessMm": 5.08,
+          "feedRelative": 0.0005192526053821034,
+          "pierceRelative": 0.0026050705182044664,
+          "pierceSeconds": 0.09555398660774017,
+          "tabRelative": 0.0011808554670464932,
+          "leadMm": 0.0034992053680922286
+        },
+        {
+          "thicknessMm": 6.35,
+          "feedRelative": 0.0018910618010012925,
+          "pierceRelative": 0.009090636842180588,
+          "pierceSeconds": 0.5426201131097557,
+          "tabRelative": 0.001056952704978853,
+          "leadMm": 0.0011897646776128923
+        },
+        {
+          "thicknessMm": 7.188199999999999,
+          "feedRelative": 0.0018829971563846248,
+          "pierceRelative": 0.006700551963893409,
+          "pierceSeconds": 0.529209594108309,
+          "tabRelative": 0.0007566162973725588,
+          "leadMm": 0.005046147100278953
+        },
+        {
+          "thicknessMm": 8.889999999999999,
+          "feedRelative": 0.000270001018751298,
+          "pierceRelative": 0.0031843817418601983,
+          "pierceSeconds": 0.41123105814381233,
+          "tabRelative": 0.0026632074876460354,
+          "leadMm": 0.006250733892045002
+        },
+        {
+          "thicknessMm": 9.524999999999999,
+          "feedRelative": 0.0022754709086718616,
+          "pierceRelative": 0.0025041857361258746,
+          "pierceSeconds": 0.380210520315984,
+          "tabRelative": 0.0030663611361302356,
+          "leadMm": 0.006244147198016359
+        },
+        {
+          "thicknessMm": 11.2522,
+          "feedRelative": 0.010880793891611451,
+          "pierceRelative": 0.01662141467188949,
+          "pierceSeconds": 3.7680747061173463,
+          "tabRelative": 0.0027914463791196553,
+          "leadMm": 0.005291419295959887
+        }
+      ]
+    }
+  ]
+}

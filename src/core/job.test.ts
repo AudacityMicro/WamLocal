@@ -26,9 +26,51 @@ import {
 } from "./nesting";
 
 describe("job hierarchy and migration", () => {
+  it("honors explicit part process overrides in part and sheet plans while retaining machine kerf and abrasive rates", () => {
+    let job = newJob("desktop");
+    job.machineSettings = { kerf: 0.8, abrasive: 160, width: 460, height: 305 };
+    job.tabRules = {
+      width: 0.5,
+      count: 0,
+      automaticWidth: false,
+      minHoleArea: 0,
+    };
+    const material = job.materials[0];
+    const p = {
+      ...makePart("Override", [rectangle(30, 20)]),
+      materialId: material.id,
+      quantity: 1,
+      process: {
+        ...material,
+        feed: 222,
+        pierce: 1.5,
+        lead: 0,
+        kerf: 4,
+        abrasive: 5,
+      },
+    };
+    job.parts = [p];
+    job = placeDefinition(job, p.id, job.sheets[0].id);
+    for (const project of [
+      sheetProject(job, job.sheets[0].id),
+      viewProject(job, { kind: "part", id: p.id }),
+    ]) {
+      expect(project.parts[0].process).toMatchObject({
+        feed: 222,
+        pierce: 1.5,
+        kerf: 0.8,
+        abrasive: 160,
+      });
+      expect(
+        plan(project).moves.some((m) => m.kind === "cut" && m.feed === 222),
+      ).toBe(true);
+    }
+  });
   it("allows different process presets on the same physical stock and uses per-part feeds", () => {
     const job = newJob("pro"),
       base = job.materials[0];
+    job.sharedSetup = false;
+    job.tabRules = undefined;
     Object.assign(base, {
       id: "coarse",
       name: "Coarse preset",
@@ -215,7 +257,7 @@ describe("SVGnest regression and process settings", () => {
           (sum, m) => sum + Math.hypot(m.to.x - m.from.x, m.to.y - m.from.y),
           0,
         ),
-    ).toBeCloseTo(4, 8);
+    ).toBeCloseTo(4 + p.material.kerf, 8);
   });
   it("fits the circular-part example despite overlapping bounding rectangles", () => {
     const p = newProject();
@@ -259,7 +301,7 @@ describe("SVGnest regression and process settings", () => {
         (sum, m) => sum + Math.hypot(m.to.x - m.from.x, m.to.y - m.from.y),
         0,
       ),
-    ).toBeCloseTo(3, 6);
+    ).toBeCloseTo(3 + p.material.kerf, 6);
     const center = {
       x: (tabs[0].from.x + tabs[0].to.x) / 2,
       y: (tabs[0].from.y + tabs[0].to.y) / 2,

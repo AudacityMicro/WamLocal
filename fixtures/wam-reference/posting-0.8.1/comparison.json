@@ -1,0 +1,1416 @@
+{
+  "localVersion": "0.8.1",
+  "machine": "pro",
+  "sourceWamVersion": "2.5.0",
+  "referenceCaptureDates": [
+    "2026-11-08",
+    "2026-11-16"
+  ],
+  "physicalCutTested": false,
+  "results": [
+    {
+      "name": "sq-centerline",
+      "captureDate": "2026-11-08",
+      "importedSvg": false,
+      "cutMode": "centerline",
+      "rotation": 0,
+      "scale": 1,
+      "quality": "mediumRate",
+      "tabCountPerContour": 0,
+      "leadMm": 0,
+      "material": "Aluminum - 6061",
+      "thicknessMm": 2.999994,
+      "nominalFeed": 131.22000000000003,
+      "pierceSeconds": 6.93,
+      "kerfMm": 0.9652,
+      "nominalTabWidthMm": 1.35,
+      "wamGaps": [],
+      "localGaps": [
+        {
+          "contour": 0,
+          "hole": false,
+          "gapMm": 0
+        }
+      ],
+      "wam": {
+        "cutLengthMm": 200,
+        "operations": 1,
+        "linearSeconds": 112.68757876843537,
+        "dwellSeconds": 9.93,
+        "programmedSeconds": 122.61757876843538,
+        "declaredSeconds": 117,
+        "pierceDwells": [
+          6.93
+        ],
+        "feedMinimum": 59.05,
+        "feedMaximum": 131.22,
+        "feedLevels": 6,
+        "bounds": {
+          "x": 20,
+          "y": 20,
+          "width": 50,
+          "height": 50
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 1,
+          "M3": 1,
+          "M8": 1,
+          "G4": 4,
+          "G1": 46,
+          "M9": 1,
+          "M5": 1,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "local": {
+        "cutLengthMm": 200,
+        "operations": 1,
+        "linearSeconds": 116.47258560334471,
+        "dwellSeconds": 9.93,
+        "programmedSeconds": 126.4025856033447,
+        "declaredSeconds": 127,
+        "pierceDwells": [
+          6.93
+        ],
+        "feedMinimum": 59.049,
+        "feedMaximum": 131.22,
+        "feedLevels": 15,
+        "bounds": {
+          "x": 20,
+          "y": 20,
+          "width": 50,
+          "height": 50
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 1,
+          "M3": 1,
+          "M8": 1,
+          "G4": 4,
+          "G1": 200,
+          "M9": 1,
+          "M5": 1,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "deltas": {
+        "lengthMm": 0,
+        "programmedSeconds": 3.785006834909332,
+        "operationCount": 0
+      },
+      "hashes": {
+        "wam": "3b3fd698097826f98dcf44293d1ba4e500586f875d3fb17f3289c1de7ad42480",
+        "local": "fcc9cb9bca9ce8217da681dfea2c02d3ea43c76129cdcf3c3b4198089a233149"
+      },
+      "warnings": [
+        "sq-centerline: pierce or stop footprint may alter a finished cut profile. Increase lead length or move the entry."
+      ]
+    },
+    {
+      "name": "sq-outside",
+      "captureDate": "2026-11-08",
+      "importedSvg": false,
+      "cutMode": "outside",
+      "rotation": 0,
+      "scale": 1,
+      "quality": "mediumRate",
+      "tabCountPerContour": 0,
+      "leadMm": 0,
+      "material": "Aluminum - 6061",
+      "thicknessMm": 2.999994,
+      "nominalFeed": 131.22000000000003,
+      "pierceSeconds": 6.93,
+      "kerfMm": 0.9652,
+      "nominalTabWidthMm": 1.35,
+      "wamGaps": [],
+      "localGaps": [
+        {
+          "contour": 0,
+          "hole": false,
+          "gapMm": 0
+        }
+      ],
+      "wam": {
+        "cutLengthMm": 203.18391918985782,
+        "operations": 1,
+        "linearSeconds": 100.23874308701582,
+        "dwellSeconds": 9.93,
+        "programmedSeconds": 110.16874308701583,
+        "declaredSeconds": 104,
+        "pierceDwells": [
+          6.93
+        ],
+        "feedMinimum": 65.61,
+        "feedMaximum": 131.22,
+        "feedLevels": 5,
+        "bounds": {
+          "x": 19.52,
+          "y": 19.52,
+          "width": 50.96000000000001,
+          "height": 50.96000000000001
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 1,
+          "M3": 1,
+          "M8": 1,
+          "G4": 4,
+          "G1": 57,
+          "M9": 1,
+          "M5": 1,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "local": {
+        "cutLengthMm": 203.03014830303528,
+        "operations": 1,
+        "linearSeconds": 118.05496428138814,
+        "dwellSeconds": 9.93,
+        "programmedSeconds": 127.98496428138813,
+        "declaredSeconds": 128,
+        "pierceDwells": [
+          6.93
+        ],
+        "feedMinimum": 59.307,
+        "feedMaximum": 131.22,
+        "feedLevels": 64,
+        "bounds": {
+          "x": 19.5174,
+          "y": 19.5174,
+          "width": 50.96520000000001,
+          "height": 50.96520000000001
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 1,
+          "M3": 1,
+          "M8": 1,
+          "G4": 4,
+          "G1": 248,
+          "M9": 1,
+          "M5": 1,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "deltas": {
+        "lengthMm": -0.15377088682254225,
+        "programmedSeconds": 17.81622119437231,
+        "operationCount": 0
+      },
+      "hashes": {
+        "wam": "03edfd299935d066c78c57514de73bffec4e05fbc935f6572c72935ac2240a78",
+        "local": "ad500f0ea3a4ae020ea11a4e3d4040b6c13f520f874a0b7ed5cc54b7b797fab1"
+      },
+      "warnings": []
+    },
+    {
+      "name": "sq-tabs-leads",
+      "captureDate": "2026-11-08",
+      "importedSvg": false,
+      "cutMode": "outside",
+      "rotation": 0,
+      "scale": 1,
+      "quality": "mediumRate",
+      "tabCountPerContour": 1,
+      "leadMm": 0.92,
+      "material": "Aluminum - 6061",
+      "thicknessMm": 2.999994,
+      "nominalFeed": 131.22000000000003,
+      "pierceSeconds": 6.93,
+      "kerfMm": 0.9652,
+      "nominalTabWidthMm": 1.35,
+      "wamGaps": [
+        {
+          "contour": 0,
+          "gapMm": 2.3152
+        }
+      ],
+      "localGaps": [
+        {
+          "contour": 0,
+          "hole": false,
+          "gapMm": 2.3151999999999875
+        }
+      ],
+      "wam": {
+        "cutLengthMm": 201.78986137865974,
+        "operations": 1,
+        "linearSeconds": 100.41927686785114,
+        "dwellSeconds": 9.93,
+        "programmedSeconds": 110.34927686785113,
+        "declaredSeconds": 107,
+        "pierceDwells": [
+          6.93
+        ],
+        "feedMinimum": 65.61,
+        "feedMaximum": 131.22,
+        "feedLevels": 8,
+        "bounds": {
+          "x": 19.52,
+          "y": 19.52,
+          "width": 51.55,
+          "height": 50.96000000000001
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 1,
+          "M3": 1,
+          "M8": 1,
+          "G4": 4,
+          "G1": 67,
+          "M9": 1,
+          "M5": 1,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "local": {
+        "cutLengthMm": 202.55396788430627,
+        "operations": 1,
+        "linearSeconds": 117.92273242272553,
+        "dwellSeconds": 9.93,
+        "programmedSeconds": 127.85273242272552,
+        "declaredSeconds": 128,
+        "pierceDwells": [
+          6.93
+        ],
+        "feedMinimum": 59.307,
+        "feedMaximum": 131.22,
+        "feedLevels": 152,
+        "bounds": {
+          "x": 18.9317,
+          "y": 19.5174,
+          "width": 51.550900000000006,
+          "height": 51.5509
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 1,
+          "M3": 1,
+          "M8": 1,
+          "G4": 4,
+          "G1": 263,
+          "M9": 1,
+          "M5": 1,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "deltas": {
+        "lengthMm": 0.7641065056465379,
+        "programmedSeconds": 17.503455554874385,
+        "operationCount": 0
+      },
+      "hashes": {
+        "wam": "d7963f5002de2f7286c348e6d440d2c8170f11bf4eb18fead64586dc701fdd5a",
+        "local": "c3e6f24abe723a1098000d8624c8a7cb12054c5de1d6de4cfd64d13525d565a2"
+      },
+      "warnings": []
+    },
+    {
+      "name": "plate-hole-valid",
+      "captureDate": "2026-11-08",
+      "importedSvg": false,
+      "cutMode": "outside",
+      "rotation": 0,
+      "scale": 1,
+      "quality": "mediumRate",
+      "tabCountPerContour": 1,
+      "leadMm": 0.92,
+      "material": "Aluminum - 6061",
+      "thicknessMm": 2.999994,
+      "nominalFeed": 131.22000000000003,
+      "pierceSeconds": 6.93,
+      "kerfMm": 0.9652,
+      "nominalTabWidthMm": 1.35,
+      "wamGaps": [
+        {
+          "contour": 0,
+          "gapMm": 2.3152
+        },
+        {
+          "contour": 1,
+          "gapMm": 2.3152
+        }
+      ],
+      "localGaps": [
+        {
+          "contour": 0,
+          "hole": true,
+          "gapMm": 2.315199999999999
+        },
+        {
+          "contour": 1,
+          "hole": false,
+          "gapMm": 2.315200000000008
+        }
+      ],
+      "wam": {
+        "cutLengthMm": 260.18243055458134,
+        "operations": 2,
+        "linearSeconds": 138.60962794960614,
+        "dwellSeconds": 19.86,
+        "programmedSeconds": 158.46962794960615,
+        "declaredSeconds": 153,
+        "pierceDwells": [
+          6.93,
+          6.93
+        ],
+        "feedMinimum": 65.61,
+        "feedMaximum": 131.22,
+        "feedLevels": 8,
+        "bounds": {
+          "x": 19.52,
+          "y": 19.52,
+          "width": 61.55,
+          "height": 40.959999999999994
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 2,
+          "M3": 2,
+          "M8": 2,
+          "G4": 8,
+          "G1": 201,
+          "M9": 2,
+          "M5": 2,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "local": {
+        "cutLengthMm": 261.86506587081584,
+        "operations": 2,
+        "linearSeconds": 147.86250711030627,
+        "dwellSeconds": 19.86,
+        "programmedSeconds": 167.72250711030625,
+        "declaredSeconds": 168,
+        "pierceDwells": [
+          6.93,
+          6.93
+        ],
+        "feedMinimum": 59.3056,
+        "feedMaximum": 131.22,
+        "feedLevels": 226,
+        "bounds": {
+          "x": 18.9317,
+          "y": 19.5174,
+          "width": 61.550900000000006,
+          "height": 41.5509
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 2,
+          "M3": 2,
+          "M8": 2,
+          "G4": 8,
+          "G1": 385,
+          "M9": 2,
+          "M5": 2,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "deltas": {
+        "lengthMm": 1.6826353162344958,
+        "programmedSeconds": 9.252879160700118,
+        "operationCount": 0
+      },
+      "hashes": {
+        "wam": "f7d77f9b1d41e50fc8c98b7626d9301efa85dbc22f98542c0cc48d031dd32f10",
+        "local": "811879edf36a69aba341b669a87044925843857f872704d94cb77a61bed3996a"
+      },
+      "warnings": []
+    },
+    {
+      "name": "open-centerline",
+      "captureDate": "2026-11-08",
+      "importedSvg": false,
+      "cutMode": "centerline",
+      "rotation": 0,
+      "scale": 1,
+      "quality": "mediumRate",
+      "tabCountPerContour": 0,
+      "leadMm": 0,
+      "material": "Aluminum - 6061",
+      "thicknessMm": 2.999994,
+      "nominalFeed": 131.22000000000003,
+      "pierceSeconds": 6.93,
+      "kerfMm": 0.9652,
+      "nominalTabWidthMm": 1.35,
+      "wamGaps": [],
+      "localGaps": [
+        {
+          "contour": 0,
+          "hole": false,
+          "gapMm": 0
+        }
+      ],
+      "wam": {
+        "cutLengthMm": 70,
+        "operations": 1,
+        "linearSeconds": 43.00164708821178,
+        "dwellSeconds": 9.93,
+        "programmedSeconds": 52.93164708821178,
+        "declaredSeconds": 47,
+        "pierceDwells": [
+          6.93
+        ],
+        "feedMinimum": 59.05,
+        "feedMaximum": 131.22,
+        "feedLevels": 6,
+        "bounds": {
+          "x": 20,
+          "y": 20,
+          "width": 50,
+          "height": 20
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 1,
+          "M3": 1,
+          "M8": 1,
+          "G4": 4,
+          "G1": 16,
+          "M9": 1,
+          "M5": 1,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "local": {
+        "cutLengthMm": 70,
+        "operations": 1,
+        "linearSeconds": 38.26309381738855,
+        "dwellSeconds": 9.93,
+        "programmedSeconds": 48.19309381738855,
+        "declaredSeconds": 49,
+        "pierceDwells": [
+          6.93
+        ],
+        "feedMinimum": 59.049,
+        "feedMaximum": 131.22,
+        "feedLevels": 15,
+        "bounds": {
+          "x": 20,
+          "y": 20,
+          "width": 50,
+          "height": 20
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 1,
+          "M3": 1,
+          "M8": 1,
+          "G4": 4,
+          "G1": 70,
+          "M9": 1,
+          "M5": 1,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "deltas": {
+        "lengthMm": 0,
+        "programmedSeconds": -4.738553270823232,
+        "operationCount": 0
+      },
+      "hashes": {
+        "wam": "c1c156dfee1dc61a1d61ca1584fefd3bdeafaa67b80298b42c89dae3f169eac5",
+        "local": "c4a806297fb4e86bb88123347b036ef97b0628fc0b1ca019f136bb70f0d9bdaa"
+      },
+      "warnings": [
+        "open-centerline: pierce or stop footprint may alter a finished cut profile. Increase lead length or move the entry."
+      ]
+    },
+    {
+      "name": "cmp020c",
+      "captureDate": "2026-11-16",
+      "importedSvg": true,
+      "cutMode": "centerline",
+      "rotation": 0,
+      "scale": 1,
+      "quality": "roughRate",
+      "tabCountPerContour": 0,
+      "leadMm": 0,
+      "material": "Aluminum - 6061",
+      "thicknessMm": 0.508,
+      "nominalFeed": 604.9999999999999,
+      "pierceSeconds": 1.21,
+      "kerfMm": 0.9652,
+      "nominalTabWidthMm": 8.84,
+      "wamGaps": [],
+      "localGaps": [
+        {
+          "contour": 0,
+          "hole": true,
+          "gapMm": 0
+        },
+        {
+          "contour": 1,
+          "hole": false,
+          "gapMm": 0
+        }
+      ],
+      "wam": {
+        "cutLengthMm": 262.8192579516066,
+        "operations": 2,
+        "linearSeconds": 33.33130044519141,
+        "dwellSeconds": 8.42,
+        "programmedSeconds": 41.75130044519141,
+        "declaredSeconds": 36,
+        "pierceDwells": [
+          1.21,
+          1.21
+        ],
+        "feedMinimum": 272.25,
+        "feedMaximum": 605,
+        "feedLevels": 9,
+        "bounds": {
+          "x": 20,
+          "y": 20,
+          "width": 60,
+          "height": 40
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 2,
+          "M3": 2,
+          "M8": 2,
+          "G4": 8,
+          "G1": 174,
+          "M9": 2,
+          "M5": 2,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "local": {
+        "cutLengthMm": 262.7395994759926,
+        "operations": 2,
+        "linearSeconds": 31.48414653129005,
+        "dwellSeconds": 8.42,
+        "programmedSeconds": 39.90414653129005,
+        "declaredSeconds": 40,
+        "pierceDwells": [
+          1.21,
+          1.21
+        ],
+        "feedMinimum": 272.25,
+        "feedMaximum": 605,
+        "feedLevels": 15,
+        "bounds": {
+          "x": 20,
+          "y": 20,
+          "width": 60,
+          "height": 40
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 2,
+          "M3": 2,
+          "M8": 2,
+          "G4": 8,
+          "G1": 232,
+          "M9": 2,
+          "M5": 2,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "deltas": {
+        "lengthMm": -0.07965847561399642,
+        "programmedSeconds": -1.8471539139013569,
+        "operationCount": 0
+      },
+      "hashes": {
+        "wam": "8c68508666bb448d82ec9d73c60df5e06fc6d620874584a12a8debbcd6d3f1e3",
+        "local": "8bcc2bd834f90c9af84bdefd5c824bf2783b35a89eac3be8e1bef09a07cd6d36"
+      },
+      "warnings": [
+        "cmp020c: pierce or stop footprint may alter a finished cut profile. Increase lead length or move the entry."
+      ]
+    },
+    {
+      "name": "cmp020m",
+      "captureDate": "2026-11-16",
+      "importedSvg": true,
+      "cutMode": "centerline",
+      "rotation": 0,
+      "scale": 1,
+      "quality": "mediumRate",
+      "tabCountPerContour": 0,
+      "leadMm": 0,
+      "material": "Aluminum - 6061",
+      "thicknessMm": 0.508,
+      "nominalFeed": 537.7800000000001,
+      "pierceSeconds": 1.21,
+      "kerfMm": 0.9652,
+      "nominalTabWidthMm": 8.84,
+      "wamGaps": [],
+      "localGaps": [
+        {
+          "contour": 0,
+          "hole": true,
+          "gapMm": 0
+        },
+        {
+          "contour": 1,
+          "hole": false,
+          "gapMm": 0
+        }
+      ],
+      "wam": {
+        "cutLengthMm": 262.8192579516066,
+        "operations": 2,
+        "linearSeconds": 37.497445689066545,
+        "dwellSeconds": 8.42,
+        "programmedSeconds": 45.91744568906655,
+        "declaredSeconds": 41,
+        "pierceDwells": [
+          1.21,
+          1.21
+        ],
+        "feedMinimum": 242,
+        "feedMaximum": 537.78,
+        "feedLevels": 9,
+        "bounds": {
+          "x": 20,
+          "y": 20,
+          "width": 60,
+          "height": 40
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 2,
+          "M3": 2,
+          "M8": 2,
+          "G4": 8,
+          "G1": 174,
+          "M9": 2,
+          "M5": 2,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "local": {
+        "cutLengthMm": 262.7395994759926,
+        "operations": 2,
+        "linearSeconds": 35.41951848605464,
+        "dwellSeconds": 8.42,
+        "programmedSeconds": 43.839518486054644,
+        "declaredSeconds": 44,
+        "pierceDwells": [
+          1.21,
+          1.21
+        ],
+        "feedMinimum": 242.001,
+        "feedMaximum": 537.78,
+        "feedLevels": 15,
+        "bounds": {
+          "x": 20,
+          "y": 20,
+          "width": 60,
+          "height": 40
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 2,
+          "M3": 2,
+          "M8": 2,
+          "G4": 8,
+          "G1": 232,
+          "M9": 2,
+          "M5": 2,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "deltas": {
+        "lengthMm": -0.07965847561399642,
+        "programmedSeconds": -2.0779272030119014,
+        "operationCount": 0
+      },
+      "hashes": {
+        "wam": "1ef0d921d77fc63ad26c652ad63db201ef2a069ec70022348161f85dc8c8e39f",
+        "local": "4b839e27f003bf3b6360328d2a30f4260151be6d0eeeb386b6f87b651ab8d025"
+      },
+      "warnings": [
+        "cmp020m: pierce or stop footprint may alter a finished cut profile. Increase lead length or move the entry."
+      ]
+    },
+    {
+      "name": "cmp020f",
+      "captureDate": "2026-11-16",
+      "importedSvg": true,
+      "cutMode": "centerline",
+      "rotation": 0,
+      "scale": 1,
+      "quality": "fineRate",
+      "tabCountPerContour": 0,
+      "leadMm": 0,
+      "material": "Aluminum - 6061",
+      "thicknessMm": 0.508,
+      "nominalFeed": 470.55,
+      "pierceSeconds": 1.21,
+      "kerfMm": 0.9652,
+      "nominalTabWidthMm": 8.84,
+      "wamGaps": [],
+      "localGaps": [
+        {
+          "contour": 0,
+          "hole": true,
+          "gapMm": 0
+        },
+        {
+          "contour": 1,
+          "hole": false,
+          "gapMm": 0
+        }
+      ],
+      "wam": {
+        "cutLengthMm": 262.8192579516066,
+        "operations": 2,
+        "linearSeconds": 42.85471947272865,
+        "dwellSeconds": 8.42,
+        "programmedSeconds": 51.27471947272865,
+        "declaredSeconds": 46,
+        "pierceDwells": [
+          1.21,
+          1.21
+        ],
+        "feedMinimum": 211.75,
+        "feedMaximum": 470.55,
+        "feedLevels": 9,
+        "bounds": {
+          "x": 20,
+          "y": 20,
+          "width": 60,
+          "height": 40
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 2,
+          "M3": 2,
+          "M8": 2,
+          "G4": 8,
+          "G1": 174,
+          "M9": 2,
+          "M5": 2,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "local": {
+        "cutLengthMm": 262.7395994759926,
+        "operations": 2,
+        "linearSeconds": 40.48009489199967,
+        "dwellSeconds": 8.42,
+        "programmedSeconds": 48.90009489199967,
+        "declaredSeconds": 49,
+        "pierceDwells": [
+          1.21,
+          1.21
+        ],
+        "feedMinimum": 211.7475,
+        "feedMaximum": 470.55,
+        "feedLevels": 15,
+        "bounds": {
+          "x": 20,
+          "y": 20,
+          "width": 60,
+          "height": 40
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 2,
+          "M3": 2,
+          "M8": 2,
+          "G4": 8,
+          "G1": 232,
+          "M9": 2,
+          "M5": 2,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "deltas": {
+        "lengthMm": -0.07965847561399642,
+        "programmedSeconds": -2.374624580728975,
+        "operationCount": 0
+      },
+      "hashes": {
+        "wam": "1b0aefad3632a40edff5748e235052ccaca5aff489f9c07f1bd1b06abea5a827",
+        "local": "43b0a4f5176dc7eaa12d0a0d79b0807434fd64e7449673101c28d1bc66d2a0e0"
+      },
+      "warnings": [
+        "cmp020f: pierce or stop footprint may alter a finished cut profile. Increase lead length or move the entry."
+      ]
+    },
+    {
+      "name": "cmp020t",
+      "captureDate": "2026-11-16",
+      "importedSvg": true,
+      "cutMode": "outside",
+      "rotation": 0,
+      "scale": 1,
+      "quality": "fineRate",
+      "tabCountPerContour": 2,
+      "leadMm": 0.72,
+      "material": "Aluminum - 6061",
+      "thicknessMm": 0.508,
+      "nominalFeed": 470.55,
+      "pierceSeconds": 1.21,
+      "kerfMm": 0.9652,
+      "nominalTabWidthMm": 8.84,
+      "wamGaps": [
+        {
+          "contour": 0,
+          "gapMm": 9.8052
+        },
+        {
+          "contour": 0,
+          "gapMm": 9.805200000000003
+        },
+        {
+          "contour": 1,
+          "gapMm": 9.8052
+        },
+        {
+          "contour": 1,
+          "gapMm": 9.805200000000008
+        }
+      ],
+      "localGaps": [
+        {
+          "contour": 0,
+          "hole": true,
+          "gapMm": 19.610399999999984
+        },
+        {
+          "contour": 1,
+          "hole": false,
+          "gapMm": 19.610400000000013
+        }
+      ],
+      "wam": {
+        "cutLengthMm": 226.64135936662137,
+        "operations": 4,
+        "linearSeconds": 34.123022842581925,
+        "dwellSeconds": 16.84,
+        "programmedSeconds": 50.96302284258192,
+        "declaredSeconds": 43,
+        "pierceDwells": [
+          1.21,
+          1.21,
+          1.21,
+          1.21
+        ],
+        "feedMinimum": 235.28,
+        "feedMaximum": 470.55,
+        "feedLevels": 8,
+        "bounds": {
+          "x": 19.06,
+          "y": 19.52,
+          "width": 61.879999999999995,
+          "height": 40.959999999999994
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 4,
+          "M3": 4,
+          "M8": 4,
+          "G4": 16,
+          "G1": 216,
+          "M9": 4,
+          "M5": 4,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "local": {
+        "cutLengthMm": 229.2628706629295,
+        "operations": 4,
+        "linearSeconds": 39.37575533743026,
+        "dwellSeconds": 16.84,
+        "programmedSeconds": 56.21575533743027,
+        "declaredSeconds": 57,
+        "pierceDwells": [
+          1.21,
+          1.21,
+          1.21,
+          1.21
+        ],
+        "feedMinimum": 212.8265,
+        "feedMaximum": 470.55,
+        "feedLevels": 182,
+        "bounds": {
+          "x": 19.5174,
+          "y": 19.059,
+          "width": 60.96520000000001,
+          "height": 41.882000000000005
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 4,
+          "M3": 4,
+          "M8": 4,
+          "G4": 16,
+          "G1": 370,
+          "M9": 4,
+          "M5": 4,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "deltas": {
+        "lengthMm": 2.621511296308114,
+        "programmedSeconds": 5.252732494848342,
+        "operationCount": 0
+      },
+      "hashes": {
+        "wam": "f26631bb15512959d7a7ac849fe5306fd114251300d26c8cf84b5f5519355a25",
+        "local": "40a061b772da6a271d2a7194faf1fed2545334815ddea3a9f8cd0583a07657df"
+      },
+      "warnings": []
+    },
+    {
+      "name": "cmp020i",
+      "captureDate": "2026-11-16",
+      "importedSvg": true,
+      "cutMode": "inside",
+      "rotation": 0,
+      "scale": 1,
+      "quality": "mediumRate",
+      "tabCountPerContour": 2,
+      "leadMm": 0,
+      "material": "Aluminum - 6061",
+      "thicknessMm": 0.508,
+      "nominalFeed": 537.7800000000001,
+      "pierceSeconds": 1.21,
+      "kerfMm": 0.9652,
+      "nominalTabWidthMm": 8.84,
+      "wamGaps": [
+        {
+          "contour": 0,
+          "gapMm": 9.8052
+        },
+        {
+          "contour": 0,
+          "gapMm": 9.805200000000003
+        },
+        {
+          "contour": 1,
+          "gapMm": 9.8052
+        },
+        {
+          "contour": 1,
+          "gapMm": 9.805200000000008
+        }
+      ],
+      "localGaps": [
+        {
+          "contour": 0,
+          "hole": true,
+          "gapMm": 19.610399999999995
+        },
+        {
+          "contour": 1,
+          "hole": false,
+          "gapMm": 19.610400000000013
+        }
+      ],
+      "wam": {
+        "cutLengthMm": 222.76753355134645,
+        "operations": 4,
+        "linearSeconds": 33.43172068231646,
+        "dwellSeconds": 16.84,
+        "programmedSeconds": 50.271720682316456,
+        "declaredSeconds": 41,
+        "pierceDwells": [
+          1.21,
+          1.21,
+          1.21,
+          1.21
+        ],
+        "feedMinimum": 242,
+        "feedMaximum": 537.78,
+        "feedLevels": 9,
+        "bounds": {
+          "x": 20.48,
+          "y": 20.48,
+          "width": 59.03999999999999,
+          "height": 39.040000000000006
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 4,
+          "M3": 4,
+          "M8": 4,
+          "G4": 16,
+          "G1": 129,
+          "M9": 4,
+          "M5": 4,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "local": {
+        "cutLengthMm": 222.68750433257975,
+        "operations": 4,
+        "linearSeconds": 30.42745880489592,
+        "dwellSeconds": 16.84,
+        "programmedSeconds": 47.267458804895924,
+        "declaredSeconds": 48,
+        "pierceDwells": [
+          1.21,
+          1.21,
+          1.21,
+          1.21
+        ],
+        "feedMinimum": 242.001,
+        "feedMaximum": 537.78,
+        "feedLevels": 35,
+        "bounds": {
+          "x": 20.4826,
+          "y": 20.4826,
+          "width": 59.03479999999999,
+          "height": 39.034800000000004
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 4,
+          "M3": 4,
+          "M8": 4,
+          "G4": 16,
+          "G1": 238,
+          "M9": 4,
+          "M5": 4,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "deltas": {
+        "lengthMm": -0.08002921876669689,
+        "programmedSeconds": -3.004261877420536,
+        "operationCount": 0
+      },
+      "hashes": {
+        "wam": "468961d1095e5b914edcf55c620e09e7d74653f4e7d99cfa01ae6acca3533900",
+        "local": "9b932181454347ce3aba2592435768948adfc27d7fe2c8896aaa1ea8149fdb70"
+      },
+      "warnings": [
+        "cmp020i: pierce or stop footprint may alter a finished cut profile. Increase lead length or move the entry."
+      ]
+    },
+    {
+      "name": "cmp020r",
+      "captureDate": "2026-11-16",
+      "importedSvg": true,
+      "cutMode": "outside",
+      "rotation": 30,
+      "scale": 0.75,
+      "quality": "mediumRate",
+      "tabCountPerContour": 0,
+      "leadMm": 0,
+      "material": "Aluminum - 6061",
+      "thicknessMm": 0.508,
+      "nominalFeed": 537.7800000000001,
+      "pierceSeconds": 1.21,
+      "kerfMm": 0.9652,
+      "nominalTabWidthMm": 8.84,
+      "wamGaps": [],
+      "localGaps": [
+        {
+          "contour": 0,
+          "hole": true,
+          "gapMm": 0
+        },
+        {
+          "contour": 1,
+          "hole": false,
+          "gapMm": 0
+        }
+      ],
+      "wam": {
+        "cutLengthMm": 197.28550178566852,
+        "operations": 2,
+        "linearSeconds": 25.664305010448388,
+        "dwellSeconds": 8.42,
+        "programmedSeconds": 34.08430501044839,
+        "declaredSeconds": 28,
+        "pierceDwells": [
+          1.21,
+          1.21
+        ],
+        "feedMinimum": 268.89,
+        "feedMaximum": 537.78,
+        "feedLevels": 8,
+        "bounds": {
+          "x": 19.48,
+          "y": 19.48,
+          "width": 55.00999999999999,
+          "height": 49.519999999999996
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 2,
+          "M3": 2,
+          "M8": 2,
+          "G4": 8,
+          "G1": 174,
+          "M9": 2,
+          "M5": 2,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "local": {
+        "cutLengthMm": 197.0426509312398,
+        "operations": 2,
+        "linearSeconds": 27.38226425253827,
+        "dwellSeconds": 8.42,
+        "programmedSeconds": 35.80226425253827,
+        "declaredSeconds": 36,
+        "pierceDwells": [
+          1.21,
+          1.21
+        ],
+        "feedMinimum": 243.4003,
+        "feedMaximum": 537.78,
+        "feedLevels": 100,
+        "bounds": {
+          "x": 19.5175,
+          "y": 19.5175,
+          "width": 54.936099999999996,
+          "height": 49.4457
+        },
+        "processErrors": [],
+        "counts": {
+          "G90": 1,
+          "G21": 1,
+          "M1403": 1,
+          "M1405": 1,
+          "M1406": 1,
+          "M1407": 1,
+          "M1410": 1,
+          "M1411": 1,
+          "M1412": 1,
+          "G0": 2,
+          "M3": 2,
+          "M8": 2,
+          "G4": 8,
+          "G1": 230,
+          "M9": 2,
+          "M5": 2,
+          "M1413": 1,
+          "M1404": 1
+        }
+      },
+      "deltas": {
+        "lengthMm": -0.242850854428724,
+        "programmedSeconds": 1.7179592420898846,
+        "operationCount": 0
+      },
+      "hashes": {
+        "wam": "42a0725c7bfeb1d398e730e3769cee23724635e81823953b87f5892b88072633",
+        "local": "e8b3733087d850f8e936d0b3360ca95a048cbcdebf575967c63bb8c48ddff449"
+      },
+      "warnings": []
+    }
+  ]
+}

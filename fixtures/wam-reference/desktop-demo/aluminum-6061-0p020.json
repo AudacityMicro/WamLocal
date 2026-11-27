@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-17",
+  "machine": "desktop",
+  "name": "Aluminum - 6061",
+  "thicknessMm": 0.508,
+  "feeds": {
+    "coarse": 209.92,
+    "medium": 186.59,
+    "fine": 163.27
+  },
+  "pierce": null,
+  "lead": null,
+  "abrasive": null,
+  "status": "feed-only",
+  "source": "WAM 2.5.0 demo simulation, copied through its visible editor. Export disabled; no water/abrasive/dwell commands are present.",
+  "hashes": {
+    "aluminum-6061-0p020-coarse.simulation.txt": "6b43114a60bb33034da55fc8316b706135c650941cc42212868832e8366a97e6",
+    "aluminum-6061-0p020-medium.simulation.txt": "124b2e7b10539017f81c82cf3f12057fb7160d7723e7443e622eb8da84e41d14",
+    "aluminum-6061-0p020-fine.simulation.txt": "3e59f9bb4f036df485062650b9c0bf67744b556dad3dffa3f3152703cd9d2bb9"
+  }
+}

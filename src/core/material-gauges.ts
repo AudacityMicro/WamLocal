@@ -1,5 +1,9 @@
 import type { JobMaterial, MaterialLibrary } from "./job";
 import { defaultMaterial } from "./job";
+import {
+  outsideReferenceCatalog,
+  referenceThicknessLimit,
+} from "./material-coverage";
 export const GAUGE_SOURCE =
   "https://assets.mcnichols.com/content/dam/mcnichols/resources/PDF/DPM-GA-WGTS-PRIMARY-MATL.pdf";
 export type GaugeFamily = "steel" | "stainless" | "aluminum";
@@ -116,7 +120,11 @@ export function extendGaugeLibrary(library: MaterialLibrary): MaterialLibrary {
       )
       .filter(
         (m) =>
-          !m.id.startsWith("gauge-") || m.source === "User-edited defaults",
+          !m.id.startsWith("gauge-") ||
+          m.source?.startsWith("User-edited defaults") ||
+          m.source?.startsWith("Estimated") ||
+          m.source?.startsWith("Exact WAM reference") ||
+          m.source?.includes("demo feed capture"),
       ),
   };
   const stockName = (m: JobMaterial) =>
@@ -128,17 +136,34 @@ export function extendGaugeLibrary(library: MaterialLibrary): MaterialLibrary {
       .filter((m) => gaugeFamily(m.stockKey ?? m.name))
       .map((m) => [stockName(m), m]),
   );
+  // Index the original records once instead of scanning the entire catalog for
+  // every machine/gauge/quality combination. Keep candidate order and the exact
+  // thickness comparison so edited and duplicate records retain precedence.
+  const ids = new Set(library.materials.map((m) => m.id));
+  const profiles = new Map<string, JobMaterial[]>();
+  for (const m of library.materials) {
+    const key = `${m.machine}|${stockName(m)}|${m.quality ?? m.preset?.quality}`;
+    const group = profiles.get(key);
+    if (group) group.push(m);
+    else profiles.set(key, [m]);
+  }
   for (const [stock, base] of stocks)
     for (const machine of ["desktop", "pro"] as const)
       for (const g of gaugesFor(stock))
         for (const quality of ["coarse", "medium", "fine"] as const) {
+          if (
+            referenceThicknessLimit(machine, stock) === undefined ||
+            outsideReferenceCatalog(machine, stock, g.mm)
+          )
+            continue;
           const legacyId = `gauge-${machine}-${stock.replace(/[^a-z0-9]/gi, "_")}-${g.gauge}`;
           const id =
-            quality === "medium" &&
-            !library.materials.some((m) => m.id === legacyId)
+            quality === "medium" && !ids.has(legacyId)
               ? legacyId
               : `${legacyId}-${quality}`;
-          const edited = library.materials.find(
+          const candidates =
+            profiles.get(`${machine}|${stock}|${quality}`) ?? [];
+          const edited = candidates.find(
             (m) =>
               m.machine === machine &&
               stockName(m) === stock &&
@@ -146,8 +171,8 @@ export function extendGaugeLibrary(library: MaterialLibrary): MaterialLibrary {
               (m.quality ?? m.preset?.quality) === quality &&
               m.source === "User-edited defaults",
           );
-          if (edited || library.materials.some((m) => m.id === id)) continue;
-          const exact = library.materials.find(
+          if (edited || ids.has(id)) continue;
+          const exact = candidates.find(
             (m) =>
               m.machine === machine &&
               stockName(m) === stock &&
@@ -185,6 +210,10 @@ export function materialForMachine(
     name: m.name,
     stockKey: m.stockKey ?? m.name,
     thickness: m.thickness,
+    family: m.family,
+    materialClass: m.materialClass,
+    grade: m.grade,
+    organizationRevision: m.organizationRevision,
     quality: m.quality ?? m.preset?.quality,
     requiresVerification: true,
     source:

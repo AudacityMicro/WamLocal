@@ -1,3 +1,6 @@
+import {NumericInput} from "./NumericInput";
+import { boxSelectParts } from "../core/box-selection";
+import { GcodeSimulator } from "./GcodeSimulator";
 import {
   useMemo,
   useState,
@@ -25,11 +28,13 @@ import { partCenter, rotatePartFromPointer } from "../core/part-transform";
 import { workOriginPoint } from "../core/work-origin";
 import { LengthInput, useDisplayUnits } from "./display-units";
 import { PartControls } from "./PartControls";
-
 export function SheetPreview({
   job,
   sheet,
   selectedId,
+  selectedIds,
+  onSelectMany,
+  onTransformMany,
   controlsId,
   showLabels,
   onSelect,
@@ -49,6 +54,12 @@ export function SheetPreview({
   job: Job;
   sheet: Sheet;
   selectedId: string | null;
+  selectedIds: string[];
+  onSelectMany: (sheetId: string, ids: string[]) => void;
+  onTransformMany: (
+    sheetId: string,
+    changes: { id: string; change: PlacementChange }[],
+  ) => void;
   controlsId: string | null;
   showLabels: boolean;
   onSelect: (sheetId: string, partId: string | null) => void;
@@ -64,6 +75,7 @@ export function SheetPreview({
   const u = useDisplayUnits(),
     svg = useRef<SVGSVGElement>(null),
     patternId = useId().replace(/:/g, "");
+  const [simulating, setSimulating] = useState(false);
   const [snap, setSnap] = useState(true),
     [zoom, setZoom] = useState(1),
     [fit, setFit] = useState<"stock" | "bed">("stock"),
@@ -75,12 +87,17 @@ export function SheetPreview({
     } | null>(null),
     draftRef = useRef<typeof draft>(null);
   const drag = useRef<{
-    kind: "move" | "rotate" | "pan";
+    kind: "move" | "rotate" | "pan" | "box";
+    members?: Part[];
+    initialSelection?: string[];
     part?: Part;
     start: Point;
     client: Point;
     pan: Point;
   } | null>(null);
+  const [box, setBox] = useState<{ start: Point; end: Point } | null>(null);
+  const boxRef = useRef<typeof box>(null);
+  const selectedSet = new Set(selectedIds);
   const project = useMemo(() => sheetProject(job, sheet.id), [job, sheet.id]);
   const paths = useMemo(
     () => (showPaths ? plan(project) : null),
@@ -89,13 +106,25 @@ export function SheetPreview({
   const parts = useMemo(
     () =>
       project.parts.map((p) =>
-        draft?.id === p.id ? { ...p, ...draft.change } : p,
+        draft?.id === p.id
+          ? { ...p, ...draft.change }
+          : draft &&
+              drag.current?.kind === "move" &&
+              drag.current.members?.some((m) => m.id === p.id)
+            ? {
+                ...p,
+                x:
+                  p.x + (draft.change.x ?? p.x) - (drag.current.part?.x ?? p.x),
+                y:
+                  p.y + (draft.change.y ?? p.y) - (drag.current.part?.y ?? p.y),
+              }
+            : p,
       ),
     [project, draft],
   );
   const selected = parts.find((p) => p.id === selectedId),
     origin = sheet.wcs,
-    workOrigin = workOriginPoint(sheet),
+    workOrigin = workOriginPoint(sheet,project.parts),
     machine = job.machineSettings ?? BED;
   const base =
     fit === "bed"
@@ -145,7 +174,7 @@ export function SheetPreview({
   };
   const begin = (
     e: PointerEvent,
-    kind: "move" | "rotate" | "pan",
+    kind: "move" | "rotate" | "pan" | "box",
     part?: Part,
   ) => {
     e.preventDefault();
@@ -153,6 +182,15 @@ export function SheetPreview({
     drag.current = {
       kind,
       part,
+      members:
+        kind === "move"
+          ? project.parts.filter(
+              (p) =>
+                p.id === part?.id ||
+                (selectedSet.has(part?.id ?? "") && selectedSet.has(p.id)),
+            )
+          : undefined,
+      initialSelection: e.ctrlKey || e.metaKey ? selectedIds : [],
       start: point(e),
       client: { x: e.clientX, y: e.clientY },
       pan,
@@ -162,7 +200,29 @@ export function SheetPreview({
   };
   const end = (e: PointerEvent) => {
     const change = draftRef.current;
-    if (change) onTransform(sheet.id, change.id, change.change);
+    const d = drag.current;
+    if (d?.kind === "box") {
+      const end = point(e);
+      const hits =
+        Math.hypot(e.clientX - d.client.x, e.clientY - d.client.y) > 3
+          ? boxSelectParts(project.parts, d.start, end)
+          : [];
+      onSelectMany(sheet.id, [
+        ...new Set([...(d.initialSelection ?? []), ...hits]),
+      ]);
+    } else if (change && d?.kind === "move" && d.members?.length) {
+      const dx = (change.change.x ?? d.part!.x) - d.part!.x,
+        dy = (change.change.y ?? d.part!.y) - d.part!.y;
+      onTransformMany(
+        sheet.id,
+        d.members.map((p) => ({
+          id: p.id,
+          change: { x: p.x + dx, y: p.y + dy },
+        })),
+      );
+    } else if (change) onTransform(sheet.id, change.id, change.change);
+    setBox(null);
+    boxRef.current = null;
     drag.current = null;
     draftRef.current = null;
     setDraft(null);
@@ -177,6 +237,13 @@ export function SheetPreview({
   };
   return (
     <div className="sheet-preview" data-sheet-preview={sheet.id}>
+      {simulating && (
+        <GcodeSimulator
+          job={job}
+          sheet={sheet}
+          onClose={() => setSimulating(false)}
+        />
+      )}
       <div className="sheet-preview-toolbar">
         <button
           onClick={() => onPost(sheet.id)}
@@ -191,6 +258,13 @@ export function SheetPreview({
           aria-label={`Post all sheets from ${sheet.name}`}
         >
           Post all
+        </button>
+        <button
+          aria-label={`Simulate ${sheet.name}`}
+          disabled={disabled || !project.parts.length}
+          onClick={() => setSimulating(true)}
+        >
+          Simulate
         </button>
         <label className="check">
           <input
@@ -250,12 +324,30 @@ export function SheetPreview({
           ref={svg}
           className="sheet-preview-svg"
           aria-label={`${sheet.name} layout preview`}
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "a") {
+              e.preventDefault();
+              e.stopPropagation();
+              onSelectMany(
+                sheet.id,
+                project.parts.map((p) => p.id),
+              );
+              onControls(null);
+            } else if (e.key === "Escape") {
+              onSelectMany(sheet.id, []);
+              onControls(null);
+            }
+          }}
           viewBox={`${view.x} ${view.y} ${view.width} ${view.height}`}
           onPointerDown={(e) => {
             if (e.altKey || e.button === 1) begin(e, "pan");
-            else {
-              onSelect(sheet.id, null);
+            else if (e.button === 0) {
+              svg.current?.focus();
               onControls(null);
+              begin(e, "box");
+              boxRef.current = { start: point(e), end: point(e) };
+              setBox(boxRef.current);
             }
           }}
           onPointerMove={(e) => {
@@ -266,6 +358,11 @@ export function SheetPreview({
                 x: d.pan.x - (e.clientX - d.client.x) / pixelsPerMm,
                 y: d.pan.y - (e.clientY - d.client.y) / pixelsPerMm,
               });
+              return;
+            }
+            if (d.kind === "box") {
+              boxRef.current = { start: d.start, end: point(e) };
+              setBox(boxRef.current);
               return;
             }
             if (!d.part) return;
@@ -293,6 +390,8 @@ export function SheetPreview({
           }}
           onPointerUp={end}
           onPointerCancel={() => {
+            setBox(null);
+            boxRef.current = null;
             drag.current = null;
             draftRef.current = null;
             setDraft(null);
@@ -397,7 +496,21 @@ export function SheetPreview({
                     begin(e, "pan");
                     return;
                   }
-                  onSelect(sheet.id, p.id);
+                  if (e.button !== 0) return;
+                  svg.current?.focus();
+                  if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onSelectMany(
+                      sheet.id,
+                      selectedSet.has(p.id)
+                        ? selectedIds.filter((id) => id !== p.id)
+                        : [...selectedIds, p.id],
+                    );
+                    onControls(null);
+                    return;
+                  }
+                  if (!selectedSet.has(p.id)) onSelectMany(sheet.id, [p.id]);
                   if (controlsId !== p.id) onControls(null);
                   begin(e, "move", p);
                 }}
@@ -414,10 +527,10 @@ export function SheetPreview({
                         `M${c.points.map((v) => `${v.x},${v.y}`).join(" L")}${c.closed ? " Z" : ""}`,
                     )
                     .join(" ")}
-                  fill={p.id === selectedId ? "#e7a66c25" : "#a0bfba14"}
+                  fill={selectedSet.has(p.id) ? "#e7a66c25" : "#a0bfba14"}
                   fillRule="evenodd"
-                  stroke={p.id === selectedId ? "#f5b174" : "#aec7c8"}
-                  strokeWidth={p.id === selectedId ? 1.5 : 1}
+                  stroke={selectedSet.has(p.id) ? "#f5b174" : "#aec7c8"}
+                  strokeWidth={selectedSet.has(p.id) ? 1.5 : 1}
                   vectorEffect="non-scaling-stroke"
                 />
                 {showLabels && (
@@ -474,23 +587,50 @@ export function SheetPreview({
               strokeWidth=".6"
               pointerEvents="none"
             />
-            {selected && controlsId === selected.id && (
-              <PartControls
-                part={selected}
-                pixelsPerMm={pixelsPerMm}
-                view={{ ...view, x: view.x - origin.x, y: view.y - origin.y }}
-                onRotate={(e) => begin(e, "rotate", selected)}
-                onDuplicate={() => onDuplicate(sheet.id, selected.id)}
-                onDelete={() => onDelete(sheet.id, selected.id)}
+            {box && (
+              <rect
+                data-layer="selection-box"
+                data-selection-mode={
+                  box.end.x >= box.start.x ? "window" : "crossing"
+                }
+                x={Math.min(box.start.x, box.end.x)}
+                y={Math.min(box.start.y, box.end.y)}
+                width={Math.abs(box.end.x - box.start.x)}
+                height={Math.abs(box.end.y - box.start.y)}
+                fill={box.end.x >= box.start.x ? "#f39a382e" : "#52c4872e"}
+                stroke={box.end.x >= box.start.x ? "#f5a34c" : "#64d69b"}
+                strokeDasharray={box.end.x >= box.start.x ? undefined : "5 3"}
+                strokeWidth={1}
+                vectorEffect="non-scaling-stroke"
+                pointerEvents="none"
               />
             )}
+            {selectedIds.length === 1 &&
+              selected &&
+              controlsId === selected.id && (
+                <PartControls
+                  part={selected}
+                  pixelsPerMm={pixelsPerMm}
+                  view={{ ...view, x: view.x - origin.x, y: view.y - origin.y }}
+                  onRotate={(e) => begin(e, "rotate", selected)}
+                  onDuplicate={() => onDuplicate(sheet.id, selected.id)}
+                  onDelete={() => onDelete(sheet.id, selected.id)}
+                />
+              )}
           </g>
         </svg>
       </div>
       <div className="sheet-preview-help">
-        Drag to move / Double-click for rotation handles / Alt + drag to pan
+        Ctrl+click to select parts / Ctrl+A selects all / Box right: enclosed ·
+        left: touching / Alt + drag to pan
       </div>
-      {selected && (
+      {selectedIds.length > 1 && (
+        <div className="sheet-placement-controls">
+          <b>{selectedIds.length} parts selected</b>
+          <span>Drag to move together · Ctrl+C to copy · Delete to remove</span>
+        </div>
+      )}
+      {selectedIds.length === 1 && selected && (
         <div className="sheet-placement-controls">
           <b>{selected.name}</b>
           <label>
@@ -519,12 +659,12 @@ export function SheetPreview({
           </label>
           <label>
             Rotation
-            <input
-              aria-label={`${sheet.name} selected part rotation`}
-              type="number"
+            <NumericInput
+              aria-label={`${sheet.name} selected part rotation`} unit="deg"
+
               value={Number(selected.rotation.toFixed(3))}
               onChange={(e) => {
-                const rotation = e.target.valueAsNumber;
+                const rotation = e;
                 if (Number.isFinite(rotation))
                   onTransform(sheet.id, selected.id, { rotation });
               }}
